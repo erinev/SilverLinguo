@@ -28,25 +28,45 @@ namespace Silverio.Žodynas
         {
             Bitmap languageIcon;
 
-            switch (_currentLanguage)
+            if (_currentLanguage == CurrentLanguage.Lithuanian)
             {
-                case CurrentLanguage.Lithuanian:
-                    languageIcon = _lithuanianFlagBitmap;
-                    _currentLanguage = CurrentLanguage.English;
-                    LtWordLabel.Visible = false;
-                    EnWordLabel.Visible = true;
-                    break;
-                case CurrentLanguage.English:
-                    languageIcon = _englishFlagBitmap;
-                    _currentLanguage = CurrentLanguage.Lithuanian;
-                    LtWordLabel.Visible = true;
-                    EnWordLabel.Visible = false;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                languageIcon = _lithuanianFlagBitmap;
+                _currentLanguage = CurrentLanguage.English;
+                EnWordLabel.Visible = true;
+            }
+            else if (_currentLanguage == CurrentLanguage.English)
+            {
+                languageIcon = _englishFlagBitmap;
+                _currentLanguage = CurrentLanguage.Lithuanian;
+                LtWordLabel.Visible = true;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
             }
 
             ChangeLanguageButton.Image = languageIcon;
+        }
+
+        private void NextWordButton_Click(object sender, EventArgs e)
+        {
+            if (_currentLanguage == CurrentLanguage.Lithuanian)
+            {
+                EnWordLabel.Visible = false;
+            }
+            else if (_currentLanguage == CurrentLanguage.English)
+            {
+                LtWordLabel.Visible = false;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void EndTestButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

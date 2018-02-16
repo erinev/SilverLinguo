@@ -99,6 +99,7 @@
             this.NextWordButton.TabIndex = 5;
             this.NextWordButton.Text = "Kitas žodis";
             this.NextWordButton.UseVisualStyleBackColor = true;
+            this.NextWordButton.Click += new System.EventHandler(this.NextWordButton_Click);
             // 
             // EndTestButton
             // 
@@ -110,6 +111,7 @@
             this.EndTestButton.TabIndex = 6;
             this.EndTestButton.Text = "Baigtį pamoką";
             this.EndTestButton.UseVisualStyleBackColor = true;
+            this.EndTestButton.Click += new System.EventHandler(this.EndTestButton_Click);
             // 
             // UnknownWordButton
             // 
