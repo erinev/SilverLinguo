@@ -93,50 +93,58 @@
             // 
             // NextWordButton
             // 
+            this.NextWordButton.BackColor = System.Drawing.Color.YellowGreen;
             this.NextWordButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.NextWordButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.NextWordButton.Location = new System.Drawing.Point(25, 102);
+            this.NextWordButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.NextWordButton.Location = new System.Drawing.Point(25, 99);
             this.NextWordButton.Name = "NextWordButton";
-            this.NextWordButton.Size = new System.Drawing.Size(90, 26);
+            this.NextWordButton.Padding = new System.Windows.Forms.Padding(2);
+            this.NextWordButton.Size = new System.Drawing.Size(92, 33);
             this.NextWordButton.TabIndex = 5;
             this.NextWordButton.Text = "Kitas žodis";
-            this.NextWordButton.UseVisualStyleBackColor = true;
+            this.NextWordButton.UseVisualStyleBackColor = false;
             this.NextWordButton.Click += new System.EventHandler(this.NextWordButton_Click);
             // 
             // EndTestButton
             // 
+            this.EndTestButton.BackColor = System.Drawing.Color.Red;
             this.EndTestButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.EndTestButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.EndTestButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.EndTestButton.Location = new System.Drawing.Point(228, 221);
+            this.EndTestButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.EndTestButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.EndTestButton.Location = new System.Drawing.Point(297, 211);
             this.EndTestButton.Name = "EndTestButton";
-            this.EndTestButton.Size = new System.Drawing.Size(98, 28);
+            this.EndTestButton.Padding = new System.Windows.Forms.Padding(4);
+            this.EndTestButton.Size = new System.Drawing.Size(124, 38);
             this.EndTestButton.TabIndex = 6;
             this.EndTestButton.Text = "Baigtį pamoką";
-            this.EndTestButton.UseVisualStyleBackColor = true;
+            this.EndTestButton.UseVisualStyleBackColor = false;
             this.EndTestButton.Click += new System.EventHandler(this.EndTestButton_Click);
             // 
             // UnknownWordButton
             // 
+            this.UnknownWordButton.BackColor = System.Drawing.Color.Yellow;
             this.UnknownWordButton.Cursor = System.Windows.Forms.Cursors.Help;
-            this.UnknownWordButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.UnknownWordButton.Location = new System.Drawing.Point(423, 102);
+            this.UnknownWordButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.UnknownWordButton.Location = new System.Drawing.Point(414, 99);
             this.UnknownWordButton.Name = "UnknownWordButton";
-            this.UnknownWordButton.Size = new System.Drawing.Size(105, 26);
+            this.UnknownWordButton.Padding = new System.Windows.Forms.Padding(2);
+            this.UnknownWordButton.Size = new System.Drawing.Size(114, 33);
             this.UnknownWordButton.TabIndex = 7;
             this.UnknownWordButton.Text = "Nežinau žodžio";
-            this.UnknownWordButton.UseVisualStyleBackColor = true;
+            this.UnknownWordButton.UseVisualStyleBackColor = false;
             this.UnknownWordButton.Click += new System.EventHandler(this.UnknownWordButton_Click);
             // 
             // ChangeLanguageButton
             // 
             this.ChangeLanguageButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ChangeLanguageButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.ChangeLanguageButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.ChangeLanguageButton.Image = global::Silverio.Žodynas.Properties.Resources.EnglishFlag;
             this.ChangeLanguageButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.ChangeLanguageButton.Location = new System.Drawing.Point(211, 99);
+            this.ChangeLanguageButton.Location = new System.Drawing.Point(199, 99);
             this.ChangeLanguageButton.Name = "ChangeLanguageButton";
-            this.ChangeLanguageButton.Size = new System.Drawing.Size(128, 29);
+            this.ChangeLanguageButton.Padding = new System.Windows.Forms.Padding(2);
+            this.ChangeLanguageButton.Size = new System.Drawing.Size(140, 29);
             this.ChangeLanguageButton.TabIndex = 2;
             this.ChangeLanguageButton.Text = "Pakeisti kalbą";
             this.ChangeLanguageButton.UseVisualStyleBackColor = true;
