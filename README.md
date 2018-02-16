@@ -1,2 +1,2 @@
 # silverio-zodynas
-Enlish words learning app
+English words learning app
