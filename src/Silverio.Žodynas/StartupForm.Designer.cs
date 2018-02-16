@@ -1,0 +1,147 @@
+﻿namespace Silverio.Žodynas
+{
+    partial class StartupForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.TestSelectionLabel = new System.Windows.Forms.Label();
+            this.WordListLabel = new System.Windows.Forms.Label();
+            this.WordListSelectionButton = new System.Windows.Forms.Button();
+            this.UnknownWordListLabel = new System.Windows.Forms.Label();
+            this.UnknownWordsListSelectionButton = new System.Windows.Forms.Button();
+            this.UnknownWordsPanel = new System.Windows.Forms.Panel();
+            this.UnknownWordsCountLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.UnknownWordsPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // TestSelectionLabel
+            // 
+            this.TestSelectionLabel.AutoSize = true;
+            this.TestSelectionLabel.Location = new System.Drawing.Point(309, 9);
+            this.TestSelectionLabel.Name = "TestSelectionLabel";
+            this.TestSelectionLabel.Size = new System.Drawing.Size(129, 17);
+            this.TestSelectionLabel.TabIndex = 0;
+            this.TestSelectionLabel.Text = "Testo pasirinkimas:";
+            // 
+            // WordListLabel
+            // 
+            this.WordListLabel.AutoSize = true;
+            this.WordListLabel.Location = new System.Drawing.Point(3, 9);
+            this.WordListLabel.Name = "WordListLabel";
+            this.WordListLabel.Size = new System.Drawing.Size(101, 17);
+            this.WordListLabel.TabIndex = 1;
+            this.WordListLabel.Text = "Žodžių sąrašas:";
+            // 
+            // WordListSelectionButton
+            // 
+            this.WordListSelectionButton.Location = new System.Drawing.Point(6, 38);
+            this.WordListSelectionButton.Name = "WordListSelectionButton";
+            this.WordListSelectionButton.Size = new System.Drawing.Size(75, 23);
+            this.WordListSelectionButton.TabIndex = 2;
+            this.WordListSelectionButton.Text = "Pradėti";
+            this.WordListSelectionButton.UseVisualStyleBackColor = true;
+            // 
+            // UnknownWordListLabel
+            // 
+            this.UnknownWordListLabel.AutoSize = true;
+            this.UnknownWordListLabel.Location = new System.Drawing.Point(3, 9);
+            this.UnknownWordListLabel.Name = "UnknownWordListLabel";
+            this.UnknownWordListLabel.Size = new System.Drawing.Size(164, 17);
+            this.UnknownWordListLabel.TabIndex = 3;
+            this.UnknownWordListLabel.Text = "Nežinomų žodžių sąrašas:";
+            // 
+            // UnknownWordsListSelectionButton
+            // 
+            this.UnknownWordsListSelectionButton.Location = new System.Drawing.Point(6, 38);
+            this.UnknownWordsListSelectionButton.Name = "UnknownWordsListSelectionButton";
+            this.UnknownWordsListSelectionButton.Size = new System.Drawing.Size(75, 23);
+            this.UnknownWordsListSelectionButton.TabIndex = 4;
+            this.UnknownWordsListSelectionButton.Text = "Pradėti";
+            this.UnknownWordsListSelectionButton.UseVisualStyleBackColor = true;
+            // 
+            // UnknownWordsPanel
+            // 
+            this.UnknownWordsPanel.Controls.Add(this.UnknownWordsCountLabel);
+            this.UnknownWordsPanel.Controls.Add(this.UnknownWordListLabel);
+            this.UnknownWordsPanel.Controls.Add(this.UnknownWordsListSelectionButton);
+            this.UnknownWordsPanel.Location = new System.Drawing.Point(432, 76);
+            this.UnknownWordsPanel.Name = "UnknownWordsPanel";
+            this.UnknownWordsPanel.Size = new System.Drawing.Size(236, 100);
+            this.UnknownWordsPanel.TabIndex = 5;
+            // 
+            // UnknownWordsCountLabel
+            // 
+            this.UnknownWordsCountLabel.AutoSize = true;
+            this.UnknownWordsCountLabel.Location = new System.Drawing.Point(174, 9);
+            this.UnknownWordsCountLabel.Name = "UnknownWordsCountLabel";
+            this.UnknownWordsCountLabel.Size = new System.Drawing.Size(25, 17);
+            this.UnknownWordsCountLabel.TabIndex = 5;
+            this.UnknownWordsCountLabel.Text = "(1)";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.WordListLabel);
+            this.panel1.Controls.Add(this.WordListSelectionButton);
+            this.panel1.Location = new System.Drawing.Point(90, 76);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(236, 100);
+            this.panel1.TabIndex = 6;
+            // 
+            // StartupForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(814, 301);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.UnknownWordsPanel);
+            this.Controls.Add(this.TestSelectionLabel);
+            this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.Name = "StartupForm";
+            this.Text = "Testo pradžia";
+            this.UnknownWordsPanel.ResumeLayout(false);
+            this.UnknownWordsPanel.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label TestSelectionLabel;
+        private System.Windows.Forms.Label WordListLabel;
+        private System.Windows.Forms.Button WordListSelectionButton;
+        private System.Windows.Forms.Label UnknownWordListLabel;
+        private System.Windows.Forms.Button UnknownWordsListSelectionButton;
+        private System.Windows.Forms.Panel UnknownWordsPanel;
+        private System.Windows.Forms.Label UnknownWordsCountLabel;
+        private System.Windows.Forms.Panel panel1;
+    }
+}

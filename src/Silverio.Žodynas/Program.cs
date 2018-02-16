@@ -10,7 +10,7 @@ namespace Silverio.Žodynas
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new VocabularyForm());
+            Application.Run(new StartupForm());
         }
     }
 }

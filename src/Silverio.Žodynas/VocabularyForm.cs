@@ -12,6 +12,7 @@ namespace Silverio.Žodynas
     public partial class VocabularyForm : Form
     {
         private static CurrentLanguage _currentLanguage;
+        private static TestType _selectedTestType;
         private static int _currentWordPairIndex;
         private static int _currentWordPairIndexForProgress = 1;
 
@@ -21,8 +22,22 @@ namespace Silverio.Žodynas
         private static IList<WordPair> _unknownWords = new List<WordPair>();
         private readonly string _progressLabelText = "{0} / {1}";
 
-        public VocabularyForm()
+        public VocabularyForm(TestType testType)
         {
+            _selectedTestType = testType;
+
+            if (_selectedTestType == TestType.Words)
+            {
+                _words = WordsRepository.GetWordsForTest();
+            } else if (_selectedTestType == TestType.UnknownWords)
+            {
+                _words = WordsRepository.GetUnknownWordsForTest();
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            
             InitializeComponent();
 
             _currentLanguage = CurrentLanguage.Lithuanian;
@@ -35,8 +50,6 @@ namespace Silverio.Žodynas
 
         private void VocabularyForm_Load(object sender, EventArgs e)
         {
-            _words = WordsRepository.GetWordsForTest();
-
             ProgressLabel.Text = string.Format(_progressLabelText, _currentWordPairIndexForProgress, _words.Length);
 
             LtWordLabel.Text = _words[_currentWordPairIndex].LithuanianWord;

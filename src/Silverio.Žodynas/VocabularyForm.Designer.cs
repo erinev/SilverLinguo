@@ -46,7 +46,7 @@
             // 
             this.LtHeaderLabel.AutoSize = true;
             this.LtHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.LtHeaderLabel.Location = new System.Drawing.Point(22, 13);
+            this.LtHeaderLabel.Location = new System.Drawing.Point(26, 15);
             this.LtHeaderLabel.Name = "LtHeaderLabel";
             this.LtHeaderLabel.Size = new System.Drawing.Size(106, 16);
             this.LtHeaderLabel.TabIndex = 0;
@@ -56,7 +56,7 @@
             // 
             this.EnHeaderLabel.AutoSize = true;
             this.EnHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.EnHeaderLabel.Location = new System.Drawing.Point(305, 13);
+            this.EnHeaderLabel.Location = new System.Drawing.Point(356, 15);
             this.EnHeaderLabel.Name = "EnHeaderLabel";
             this.EnHeaderLabel.Size = new System.Drawing.Size(97, 16);
             this.EnHeaderLabel.TabIndex = 1;
@@ -69,11 +69,11 @@
             this.LtWordLabel.CausesValidation = false;
             this.LtWordLabel.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.LtWordLabel.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.LtWordLabel.Location = new System.Drawing.Point(25, 48);
+            this.LtWordLabel.Location = new System.Drawing.Point(29, 56);
             this.LtWordLabel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.LtWordLabel.Name = "LtWordLabel";
-            this.LtWordLabel.Padding = new System.Windows.Forms.Padding(5);
-            this.LtWordLabel.Size = new System.Drawing.Size(220, 37);
+            this.LtWordLabel.Padding = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.LtWordLabel.Size = new System.Drawing.Size(257, 43);
             this.LtWordLabel.TabIndex = 3;
             // 
             // EnWordLabel
@@ -83,11 +83,11 @@
             this.EnWordLabel.CausesValidation = false;
             this.EnWordLabel.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.EnWordLabel.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.EnWordLabel.Location = new System.Drawing.Point(308, 48);
+            this.EnWordLabel.Location = new System.Drawing.Point(359, 56);
             this.EnWordLabel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.EnWordLabel.Name = "EnWordLabel";
-            this.EnWordLabel.Padding = new System.Windows.Forms.Padding(5);
-            this.EnWordLabel.Size = new System.Drawing.Size(220, 37);
+            this.EnWordLabel.Padding = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.EnWordLabel.Size = new System.Drawing.Size(257, 43);
             this.EnWordLabel.TabIndex = 4;
             this.EnWordLabel.Visible = false;
             // 
@@ -96,10 +96,10 @@
             this.NextWordButton.BackColor = System.Drawing.Color.YellowGreen;
             this.NextWordButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.NextWordButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.NextWordButton.Location = new System.Drawing.Point(25, 99);
+            this.NextWordButton.Location = new System.Drawing.Point(29, 115);
             this.NextWordButton.Name = "NextWordButton";
             this.NextWordButton.Padding = new System.Windows.Forms.Padding(2);
-            this.NextWordButton.Size = new System.Drawing.Size(92, 33);
+            this.NextWordButton.Size = new System.Drawing.Size(107, 39);
             this.NextWordButton.TabIndex = 5;
             this.NextWordButton.Text = "Kitas žodis";
             this.NextWordButton.UseVisualStyleBackColor = false;
@@ -112,10 +112,10 @@
             this.EndTestButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.EndTestButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.EndTestButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.EndTestButton.Location = new System.Drawing.Point(297, 211);
+            this.EndTestButton.Location = new System.Drawing.Point(346, 243);
             this.EndTestButton.Name = "EndTestButton";
-            this.EndTestButton.Padding = new System.Windows.Forms.Padding(4);
-            this.EndTestButton.Size = new System.Drawing.Size(124, 38);
+            this.EndTestButton.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.EndTestButton.Size = new System.Drawing.Size(145, 44);
             this.EndTestButton.TabIndex = 6;
             this.EndTestButton.Text = "Baigtį pamoką";
             this.EndTestButton.UseVisualStyleBackColor = false;
@@ -126,10 +126,10 @@
             this.UnknownWordButton.BackColor = System.Drawing.Color.Yellow;
             this.UnknownWordButton.Cursor = System.Windows.Forms.Cursors.Help;
             this.UnknownWordButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.UnknownWordButton.Location = new System.Drawing.Point(414, 99);
+            this.UnknownWordButton.Location = new System.Drawing.Point(483, 115);
             this.UnknownWordButton.Name = "UnknownWordButton";
             this.UnknownWordButton.Padding = new System.Windows.Forms.Padding(2);
-            this.UnknownWordButton.Size = new System.Drawing.Size(114, 33);
+            this.UnknownWordButton.Size = new System.Drawing.Size(133, 39);
             this.UnknownWordButton.TabIndex = 7;
             this.UnknownWordButton.Text = "Nežinau žodžio";
             this.UnknownWordButton.UseVisualStyleBackColor = false;
@@ -141,10 +141,10 @@
             this.ChangeLanguageButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.ChangeLanguageButton.Image = global::Silverio.Žodynas.Properties.Resources.EnglishFlag;
             this.ChangeLanguageButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.ChangeLanguageButton.Location = new System.Drawing.Point(199, 99);
+            this.ChangeLanguageButton.Location = new System.Drawing.Point(232, 115);
             this.ChangeLanguageButton.Name = "ChangeLanguageButton";
             this.ChangeLanguageButton.Padding = new System.Windows.Forms.Padding(2);
-            this.ChangeLanguageButton.Size = new System.Drawing.Size(140, 29);
+            this.ChangeLanguageButton.Size = new System.Drawing.Size(163, 33);
             this.ChangeLanguageButton.TabIndex = 2;
             this.ChangeLanguageButton.Text = "Pakeisti kalbą";
             this.ChangeLanguageButton.UseVisualStyleBackColor = true;
@@ -154,7 +154,7 @@
             // 
             this.ProgressHeaderLabel.AutoSize = true;
             this.ProgressHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.ProgressHeaderLabel.Location = new System.Drawing.Point(575, 13);
+            this.ProgressHeaderLabel.Location = new System.Drawing.Point(671, 15);
             this.ProgressHeaderLabel.Name = "ProgressHeaderLabel";
             this.ProgressHeaderLabel.Size = new System.Drawing.Size(67, 16);
             this.ProgressHeaderLabel.TabIndex = 8;
@@ -164,7 +164,7 @@
             // 
             this.ProgressLabel.AutoSize = true;
             this.ProgressLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.ProgressLabel.Location = new System.Drawing.Point(575, 29);
+            this.ProgressLabel.Location = new System.Drawing.Point(671, 33);
             this.ProgressLabel.Name = "ProgressLabel";
             this.ProgressLabel.Size = new System.Drawing.Size(34, 17);
             this.ProgressLabel.TabIndex = 9;
@@ -174,7 +174,7 @@
             // 
             this.UnknownWordsCountHeaderLabel.AutoSize = true;
             this.UnknownWordsCountHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.UnknownWordsCountHeaderLabel.Location = new System.Drawing.Point(575, 78);
+            this.UnknownWordsCountHeaderLabel.Location = new System.Drawing.Point(671, 90);
             this.UnknownWordsCountHeaderLabel.Name = "UnknownWordsCountHeaderLabel";
             this.UnknownWordsCountHeaderLabel.Size = new System.Drawing.Size(110, 16);
             this.UnknownWordsCountHeaderLabel.TabIndex = 10;
@@ -184,7 +184,7 @@
             // 
             this.UnknownWordsCountLabel.AutoSize = true;
             this.UnknownWordsCountLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.UnknownWordsCountLabel.Location = new System.Drawing.Point(575, 94);
+            this.UnknownWordsCountLabel.Location = new System.Drawing.Point(671, 108);
             this.UnknownWordsCountLabel.Name = "UnknownWordsCountLabel";
             this.UnknownWordsCountLabel.Size = new System.Drawing.Size(15, 17);
             this.UnknownWordsCountLabel.TabIndex = 11;
@@ -192,10 +192,10 @@
             // 
             // VocabularyForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.EndTestButton;
-            this.ClientSize = new System.Drawing.Size(707, 261);
+            this.ClientSize = new System.Drawing.Size(804, 301);
             this.Controls.Add(this.UnknownWordsCountLabel);
             this.Controls.Add(this.UnknownWordsCountHeaderLabel);
             this.Controls.Add(this.ProgressLabel);
@@ -208,6 +208,7 @@
             this.Controls.Add(this.ChangeLanguageButton);
             this.Controls.Add(this.EnHeaderLabel);
             this.Controls.Add(this.LtHeaderLabel);
+            this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.Name = "VocabularyForm";
             this.Text = "Žodžių testas";
             this.Load += new System.EventHandler(this.VocabularyForm_Load);
