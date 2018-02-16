@@ -38,6 +38,8 @@
             this.ChangeLanguageButton = new System.Windows.Forms.Button();
             this.ProgressHeaderLabel = new System.Windows.Forms.Label();
             this.ProgressLabel = new System.Windows.Forms.Label();
+            this.UnknownWordsCountHeaderLabel = new System.Windows.Forms.Label();
+            this.UnknownWordsCountLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LtHeaderLabel
@@ -124,6 +126,7 @@
             this.UnknownWordButton.TabIndex = 7;
             this.UnknownWordButton.Text = "Nežinau žodžio";
             this.UnknownWordButton.UseVisualStyleBackColor = true;
+            this.UnknownWordButton.Click += new System.EventHandler(this.UnknownWordButton_Click);
             // 
             // ChangeLanguageButton
             // 
@@ -153,18 +156,40 @@
             // 
             this.ProgressLabel.AutoSize = true;
             this.ProgressLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.ProgressLabel.Location = new System.Drawing.Point(575, 38);
+            this.ProgressLabel.Location = new System.Drawing.Point(575, 29);
             this.ProgressLabel.Name = "ProgressLabel";
             this.ProgressLabel.Size = new System.Drawing.Size(34, 17);
             this.ProgressLabel.TabIndex = 9;
             this.ProgressLabel.Text = "1 / 5";
+            // 
+            // UnknownWordsCountHeaderLabel
+            // 
+            this.UnknownWordsCountHeaderLabel.AutoSize = true;
+            this.UnknownWordsCountHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.UnknownWordsCountHeaderLabel.Location = new System.Drawing.Point(575, 78);
+            this.UnknownWordsCountHeaderLabel.Name = "UnknownWordsCountHeaderLabel";
+            this.UnknownWordsCountHeaderLabel.Size = new System.Drawing.Size(110, 16);
+            this.UnknownWordsCountHeaderLabel.TabIndex = 10;
+            this.UnknownWordsCountHeaderLabel.Text = "Nežinomi žodžiai: ";
+            // 
+            // UnknownWordsCountLabel
+            // 
+            this.UnknownWordsCountLabel.AutoSize = true;
+            this.UnknownWordsCountLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.UnknownWordsCountLabel.Location = new System.Drawing.Point(575, 94);
+            this.UnknownWordsCountLabel.Name = "UnknownWordsCountLabel";
+            this.UnknownWordsCountLabel.Size = new System.Drawing.Size(15, 17);
+            this.UnknownWordsCountLabel.TabIndex = 11;
+            this.UnknownWordsCountLabel.Text = "0";
             // 
             // VocabularyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.EndTestButton;
-            this.ClientSize = new System.Drawing.Size(674, 261);
+            this.ClientSize = new System.Drawing.Size(707, 261);
+            this.Controls.Add(this.UnknownWordsCountLabel);
+            this.Controls.Add(this.UnknownWordsCountHeaderLabel);
             this.Controls.Add(this.ProgressLabel);
             this.Controls.Add(this.ProgressHeaderLabel);
             this.Controls.Add(this.UnknownWordButton);
@@ -195,6 +220,8 @@
         private System.Windows.Forms.Button UnknownWordButton;
         private System.Windows.Forms.Label ProgressHeaderLabel;
         private System.Windows.Forms.Label ProgressLabel;
+        private System.Windows.Forms.Label UnknownWordsCountHeaderLabel;
+        private System.Windows.Forms.Label UnknownWordsCountLabel;
     }
 }
 

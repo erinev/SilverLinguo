@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Silverio.Žodynas.Enums;
 using Silverio.Žodynas.Models;
+using Silverio.Žodynas.Repositories;
 
 namespace Silverio.Žodynas
 {
@@ -15,6 +18,7 @@ namespace Silverio.Žodynas
         private readonly Bitmap _englishFlagBitmap = Properties.Resources.EnglishFlag;
         private readonly Bitmap _lithuanianFlagBitmap = Properties.Resources.LithuanianFlag;
         private static WordPair[] _words;
+        private static IList<WordPair> _unknownWords = new List<WordPair>();
         private readonly string _progressLabelText = "{0} / {1}";
 
         public VocabularyForm()
@@ -31,24 +35,12 @@ namespace Silverio.Žodynas
 
         private void VocabularyForm_Load(object sender, EventArgs e)
         {
-            InitializeMockWords();
+            _words = WordsRepository.GetWordsForTest();
 
             ProgressLabel.Text = string.Format(_progressLabelText, _currentWordPairIndexForProgress, _words.Length);
 
             LtWordLabel.Text = _words[_currentWordPairIndex].LithuanianWord;
             EnWordLabel.Text = _words[_currentWordPairIndex].EnglishWord;
-        }
-
-        private void InitializeMockWords()
-        {
-            _words = new[]
-            {
-                new WordPair {Id = 1, LithuanianWord = "Šuo", EnglishWord = "Dog"},
-                new WordPair {Id = 2, LithuanianWord = "Katė", EnglishWord = "Cat"},
-                new WordPair {Id = 3, LithuanianWord = "Namas", EnglishWord = "House"},
-                new WordPair {Id = 4, LithuanianWord = "Kalnas", EnglishWord = "Mountain"},
-                new WordPair {Id = 5, LithuanianWord = "Spalva", EnglishWord = "Color"},
-            };
         }
 
         private void ChangeLanguageButton_Click(object sender, EventArgs e)
@@ -105,6 +97,30 @@ namespace Silverio.Žodynas
         private void EndTestButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void UnknownWordButton_Click(object sender, EventArgs e)
+        {
+            WordPair unknownWordCandidate = _words[_currentWordPairIndex];
+
+            WordPair existingUnknownWord =
+                _unknownWords.FirstOrDefault(unknownWord =>
+                    unknownWord.LithuanianWord == unknownWordCandidate.LithuanianWord &&
+                    unknownWord.EnglishWord == unknownWordCandidate.EnglishWord);
+
+            if (existingUnknownWord == null)
+            {
+                _unknownWords.Add(
+                    new WordPair
+                    {
+                        Id = _unknownWords.Count + 1,
+                        LithuanianWord = unknownWordCandidate.LithuanianWord,
+                        EnglishWord = unknownWordCandidate.EnglishWord
+                    }
+                );
+            }
+
+            UnknownWordsCountLabel.Text = _unknownWords.Count.ToString();
         }
 
         private const int CpNocloseButton = 0x200;
