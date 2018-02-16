@@ -38,6 +38,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\CurrentLanguage.cs" />
     <Compile Include="VocabularyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +55,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="VocabularyForm.resx">
       <DependentUpon>VocabularyForm.cs</DependentUpon>
@@ -70,6 +72,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EnglishFlag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LithuanianFlag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

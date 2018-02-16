@@ -30,12 +30,12 @@
         {
             this.LtHeaderLabel = new System.Windows.Forms.Label();
             this.EnHeaderLabel = new System.Windows.Forms.Label();
-            this.ChangeLanguageButton = new System.Windows.Forms.Button();
             this.LtWordLabel = new System.Windows.Forms.Label();
             this.EnWordLabel = new System.Windows.Forms.Label();
             this.NextWordButton = new System.Windows.Forms.Button();
             this.EndTestButton = new System.Windows.Forms.Button();
             this.UnknownWordButton = new System.Windows.Forms.Button();
+            this.ChangeLanguageButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LtHeaderLabel
@@ -58,20 +58,9 @@
             this.EnHeaderLabel.TabIndex = 1;
             this.EnHeaderLabel.Text = "Angliškas žodis:";
             // 
-            // ChangeLanguageButton
-            // 
-            this.ChangeLanguageButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ChangeLanguageButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.ChangeLanguageButton.Location = new System.Drawing.Point(230, 97);
-            this.ChangeLanguageButton.Name = "ChangeLanguageButton";
-            this.ChangeLanguageButton.Size = new System.Drawing.Size(98, 29);
-            this.ChangeLanguageButton.TabIndex = 2;
-            this.ChangeLanguageButton.Text = "Pakeisti kalbą";
-            this.ChangeLanguageButton.UseVisualStyleBackColor = true;
-            // 
             // LtWordLabel
             // 
-            this.LtWordLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.LtWordLabel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LtWordLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.LtWordLabel.CausesValidation = false;
             this.LtWordLabel.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -86,7 +75,7 @@
             // 
             // EnWordLabel
             // 
-            this.EnWordLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.EnWordLabel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.EnWordLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.EnWordLabel.CausesValidation = false;
             this.EnWordLabel.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -132,6 +121,20 @@
             this.UnknownWordButton.TabIndex = 7;
             this.UnknownWordButton.Text = "Nežinau žodžio";
             this.UnknownWordButton.UseVisualStyleBackColor = true;
+            // 
+            // ChangeLanguageButton
+            // 
+            this.ChangeLanguageButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ChangeLanguageButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.ChangeLanguageButton.Image = global::Silverio.Žodynas.Properties.Resources.EnglishFlag;
+            this.ChangeLanguageButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ChangeLanguageButton.Location = new System.Drawing.Point(209, 88);
+            this.ChangeLanguageButton.Name = "ChangeLanguageButton";
+            this.ChangeLanguageButton.Size = new System.Drawing.Size(128, 29);
+            this.ChangeLanguageButton.TabIndex = 2;
+            this.ChangeLanguageButton.Text = "Pakeisti kalbą";
+            this.ChangeLanguageButton.UseVisualStyleBackColor = true;
+            this.ChangeLanguageButton.Click += new System.EventHandler(this.ChangeLanguageButton_Click);
             // 
             // VocabularyForm
             // 
