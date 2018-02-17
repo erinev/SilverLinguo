@@ -30,13 +30,15 @@
         {
             this.SuspendLayout();
             // 
-            // UnknownWordsVocabularyForm
+            // UnknownWordsTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 301);
+            this.ControlBox = false;
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.Name = "UnknownWordsVocabularyForm";
+            this.Name = "UnknownWordsTestForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nežinomų žodžių testas";
             this.ResumeLayout(false);
 

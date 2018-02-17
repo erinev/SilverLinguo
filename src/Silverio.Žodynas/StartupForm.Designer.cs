@@ -155,12 +155,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.EndProgramButton;
             this.ClientSize = new System.Drawing.Size(814, 301);
+            this.ControlBox = false;
             this.Controls.Add(this.EndProgramButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.UnknownWordsPanel);
             this.Controls.Add(this.TestSelectionLabel);
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.Name = "StartupForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Testo pasirinkimas";
             this.Load += new System.EventHandler(this.StartupForm_Load);
             this.UnknownWordsPanel.ResumeLayout(false);

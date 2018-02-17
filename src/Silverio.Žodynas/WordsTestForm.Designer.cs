@@ -194,8 +194,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.CancelButton = this.EndTestButton;
             this.ClientSize = new System.Drawing.Size(804, 301);
+            this.ControlBox = false;
             this.Controls.Add(this.UnknownWordsCountLabel);
             this.Controls.Add(this.UnknownWordsCountHeaderLabel);
             this.Controls.Add(this.ProgressLabel);
@@ -210,6 +212,7 @@
             this.Controls.Add(this.LtHeaderLabel);
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.Name = "WordsTestForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Žodžių testas";
             this.Load += new System.EventHandler(this.VocabularyForm_Load);
             this.ResumeLayout(false);
