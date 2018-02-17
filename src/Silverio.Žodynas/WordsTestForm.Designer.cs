@@ -40,6 +40,7 @@
             this.ProgressLabel = new System.Windows.Forms.Label();
             this.UnknownWordsCountHeaderLabel = new System.Windows.Forms.Label();
             this.UnknownWordsCountLabel = new System.Windows.Forms.Label();
+            this.PreviousWordButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LtHeaderLabel
@@ -96,7 +97,7 @@
             this.NextWordButton.BackColor = System.Drawing.Color.YellowGreen;
             this.NextWordButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.NextWordButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.NextWordButton.Location = new System.Drawing.Point(29, 115);
+            this.NextWordButton.Location = new System.Drawing.Point(159, 160);
             this.NextWordButton.Name = "NextWordButton";
             this.NextWordButton.Padding = new System.Windows.Forms.Padding(2);
             this.NextWordButton.Size = new System.Drawing.Size(107, 39);
@@ -126,7 +127,7 @@
             this.UnknownWordButton.BackColor = System.Drawing.Color.Yellow;
             this.UnknownWordButton.Cursor = System.Windows.Forms.Cursors.Help;
             this.UnknownWordButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.UnknownWordButton.Location = new System.Drawing.Point(483, 115);
+            this.UnknownWordButton.Location = new System.Drawing.Point(483, 157);
             this.UnknownWordButton.Name = "UnknownWordButton";
             this.UnknownWordButton.Padding = new System.Windows.Forms.Padding(2);
             this.UnknownWordButton.Size = new System.Drawing.Size(133, 39);
@@ -190,6 +191,19 @@
             this.UnknownWordsCountLabel.TabIndex = 11;
             this.UnknownWordsCountLabel.Text = "0";
             // 
+            // PreviousWordButton
+            // 
+            this.PreviousWordButton.BackColor = System.Drawing.Color.YellowGreen;
+            this.PreviousWordButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PreviousWordButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.PreviousWordButton.Location = new System.Drawing.Point(29, 160);
+            this.PreviousWordButton.Name = "PreviousWordButton";
+            this.PreviousWordButton.Padding = new System.Windows.Forms.Padding(2);
+            this.PreviousWordButton.Size = new System.Drawing.Size(124, 39);
+            this.PreviousWordButton.TabIndex = 12;
+            this.PreviousWordButton.Text = "Ankstesnis žodis";
+            this.PreviousWordButton.UseVisualStyleBackColor = false;
+            // 
             // WordsTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -198,6 +212,7 @@
             this.CancelButton = this.EndTestButton;
             this.ClientSize = new System.Drawing.Size(804, 301);
             this.ControlBox = false;
+            this.Controls.Add(this.PreviousWordButton);
             this.Controls.Add(this.UnknownWordsCountLabel);
             this.Controls.Add(this.UnknownWordsCountHeaderLabel);
             this.Controls.Add(this.ProgressLabel);
@@ -234,6 +249,7 @@
         private System.Windows.Forms.Label ProgressLabel;
         private System.Windows.Forms.Label UnknownWordsCountHeaderLabel;
         private System.Windows.Forms.Label UnknownWordsCountLabel;
+        private System.Windows.Forms.Button PreviousWordButton;
     }
 }
 

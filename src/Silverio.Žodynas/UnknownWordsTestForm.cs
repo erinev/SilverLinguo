@@ -43,7 +43,7 @@ namespace Silverio.Žodynas
             EnWordLabel.Text = _unknownWords[_currentUnknownWordPairIndex].EnglishWord;
         }
 
-        private void ChangeLanguageButton_Click(object sender, System.EventArgs e)
+        private void ChangeLanguageButton_Click(object sender, EventArgs e)
         {
             Bitmap languageIcon;
 
@@ -67,7 +67,7 @@ namespace Silverio.Žodynas
             ChangeLanguageButton.Image = languageIcon;
         }
 
-        private void NextWordButton_Click(object sender, System.EventArgs e)
+        private void NextWordButton_Click(object sender, EventArgs e)
         {
             if (_currentUnknownWordPairIndex + 1 < _unknownWords.Length)
             {
@@ -94,7 +94,7 @@ namespace Silverio.Žodynas
             }
         }
 
-        private void LearnedWordButton_Click(object sender, System.EventArgs e)
+        private void LearnedWordButton_Click(object sender, EventArgs e)
         {
             WordPair learnedWordCandidate = _unknownWords[_currentUnknownWordPairIndex];
 
@@ -118,7 +118,7 @@ namespace Silverio.Žodynas
             UnknownWordsCountLabel.Text = _learnedWords.Count.ToString();
         }
 
-        private void EndTestButton_Click(object sender, System.EventArgs e)
+        private void EndTestButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
