@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-using Silverio.Žodynas.Enums;
 
 namespace Silverio.Žodynas
 {
@@ -22,7 +21,12 @@ namespace Silverio.Žodynas
 
         private void UnknownWordsListSelectionButton_Click(object sender, System.EventArgs e)
         {
+            this.Hide();
 
+            var unknownWordsVocabularyForm = new UnknownWordsVocabularyForm();
+            unknownWordsVocabularyForm.Closed += (s, args) => this.Close();
+
+            unknownWordsVocabularyForm.Show();
         }
     }
 }

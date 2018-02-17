@@ -117,7 +117,7 @@
             this.EndTestButton.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.EndTestButton.Size = new System.Drawing.Size(145, 44);
             this.EndTestButton.TabIndex = 6;
-            this.EndTestButton.Text = "Baigtį pamoką";
+            this.EndTestButton.Text = "Baigtį testą";
             this.EndTestButton.UseVisualStyleBackColor = false;
             this.EndTestButton.Click += new System.EventHandler(this.EndTestButton_Click);
             // 

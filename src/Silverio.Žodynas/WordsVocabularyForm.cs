@@ -21,12 +21,6 @@ namespace Silverio.Žodynas
         private static IList<WordPair> _unknownWords = new List<WordPair>();
         private readonly string _progressLabelText = "{0} / {1}";
 
-        public sealed override string Text
-        {
-            get => base.Text;
-            set => base.Text = value;
-        }
-
         public WordsVocabularyForm()
         {
             _words = WordsRepository.GetWordsForTest();
