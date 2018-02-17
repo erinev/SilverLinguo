@@ -114,7 +114,7 @@
             this.EndTestButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.EndTestButton.Location = new System.Drawing.Point(346, 243);
             this.EndTestButton.Name = "EndTestButton";
-            this.EndTestButton.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.EndTestButton.Padding = new System.Windows.Forms.Padding(4);
             this.EndTestButton.Size = new System.Drawing.Size(145, 44);
             this.EndTestButton.TabIndex = 6;
             this.EndTestButton.Text = "Baigtį testą";
@@ -190,7 +190,7 @@
             this.UnknownWordsCountLabel.TabIndex = 11;
             this.UnknownWordsCountLabel.Text = "0";
             // 
-            // WordsVocabularyForm
+            // WordsTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -209,7 +209,7 @@
             this.Controls.Add(this.EnHeaderLabel);
             this.Controls.Add(this.LtHeaderLabel);
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.Name = "WordsVocabularyForm";
+            this.Name = "WordsTestForm";
             this.Text = "Žodžių testas";
             this.Load += new System.EventHandler(this.VocabularyForm_Load);
             this.ResumeLayout(false);

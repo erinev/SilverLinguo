@@ -9,6 +9,11 @@ namespace Silverio.Žodynas
             InitializeComponent();
         }
 
+        private void StartupForm_Load(object sender, System.EventArgs e)
+        {
+
+        }
+
         private void WordListSelectionButton_Click(object sender, System.EventArgs e)
         {
             this.Hide();
@@ -27,6 +32,11 @@ namespace Silverio.Žodynas
             unknownWordsVocabularyForm.Closed += (s, args) => this.Close();
 
             unknownWordsVocabularyForm.Show();
+        }
+
+        private void EndProgramButton_Click(object sender, System.EventArgs e)
+        {
+            this.Close();
         }
     }
 }

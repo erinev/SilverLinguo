@@ -37,6 +37,7 @@
             this.UnknownWordsCountLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.WordsCountLabel = new System.Windows.Forms.Label();
+            this.EndProgramButton = new System.Windows.Forms.Button();
             this.UnknownWordsPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -61,12 +62,15 @@
             // 
             // WordListSelectionButton
             // 
+            this.WordListSelectionButton.BackColor = System.Drawing.Color.YellowGreen;
+            this.WordListSelectionButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.WordListSelectionButton.Location = new System.Drawing.Point(6, 38);
             this.WordListSelectionButton.Name = "WordListSelectionButton";
-            this.WordListSelectionButton.Size = new System.Drawing.Size(75, 23);
+            this.WordListSelectionButton.Padding = new System.Windows.Forms.Padding(2);
+            this.WordListSelectionButton.Size = new System.Drawing.Size(75, 32);
             this.WordListSelectionButton.TabIndex = 2;
             this.WordListSelectionButton.Text = "Pradėti";
-            this.WordListSelectionButton.UseVisualStyleBackColor = true;
+            this.WordListSelectionButton.UseVisualStyleBackColor = false;
             this.WordListSelectionButton.Click += new System.EventHandler(this.WordListSelectionButton_Click);
             // 
             // UnknownWordListLabel
@@ -80,12 +84,15 @@
             // 
             // UnknownWordsListSelectionButton
             // 
+            this.UnknownWordsListSelectionButton.BackColor = System.Drawing.Color.Yellow;
+            this.UnknownWordsListSelectionButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.UnknownWordsListSelectionButton.Location = new System.Drawing.Point(6, 38);
             this.UnknownWordsListSelectionButton.Name = "UnknownWordsListSelectionButton";
-            this.UnknownWordsListSelectionButton.Size = new System.Drawing.Size(75, 23);
+            this.UnknownWordsListSelectionButton.Padding = new System.Windows.Forms.Padding(2);
+            this.UnknownWordsListSelectionButton.Size = new System.Drawing.Size(75, 32);
             this.UnknownWordsListSelectionButton.TabIndex = 4;
             this.UnknownWordsListSelectionButton.Text = "Pradėti";
-            this.UnknownWordsListSelectionButton.UseVisualStyleBackColor = true;
+            this.UnknownWordsListSelectionButton.UseVisualStyleBackColor = false;
             this.UnknownWordsListSelectionButton.Click += new System.EventHandler(this.UnknownWordsListSelectionButton_Click);
             // 
             // UnknownWordsPanel
@@ -93,7 +100,7 @@
             this.UnknownWordsPanel.Controls.Add(this.UnknownWordsCountLabel);
             this.UnknownWordsPanel.Controls.Add(this.UnknownWordListLabel);
             this.UnknownWordsPanel.Controls.Add(this.UnknownWordsListSelectionButton);
-            this.UnknownWordsPanel.Location = new System.Drawing.Point(432, 76);
+            this.UnknownWordsPanel.Location = new System.Drawing.Point(457, 76);
             this.UnknownWordsPanel.Name = "UnknownWordsPanel";
             this.UnknownWordsPanel.Size = new System.Drawing.Size(236, 100);
             this.UnknownWordsPanel.TabIndex = 5;
@@ -101,7 +108,7 @@
             // UnknownWordsCountLabel
             // 
             this.UnknownWordsCountLabel.AutoSize = true;
-            this.UnknownWordsCountLabel.Location = new System.Drawing.Point(173, 9);
+            this.UnknownWordsCountLabel.Location = new System.Drawing.Point(164, 9);
             this.UnknownWordsCountLabel.Name = "UnknownWordsCountLabel";
             this.UnknownWordsCountLabel.Size = new System.Drawing.Size(25, 17);
             this.UnknownWordsCountLabel.TabIndex = 5;
@@ -112,7 +119,7 @@
             this.panel1.Controls.Add(this.WordsCountLabel);
             this.panel1.Controls.Add(this.WordListLabel);
             this.panel1.Controls.Add(this.WordListSelectionButton);
-            this.panel1.Location = new System.Drawing.Point(90, 76);
+            this.panel1.Location = new System.Drawing.Point(132, 76);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(236, 100);
             this.panel1.TabIndex = 6;
@@ -120,23 +127,42 @@
             // WordsCountLabel
             // 
             this.WordsCountLabel.AutoSize = true;
-            this.WordsCountLabel.Location = new System.Drawing.Point(110, 9);
+            this.WordsCountLabel.Location = new System.Drawing.Point(101, 9);
             this.WordsCountLabel.Name = "WordsCountLabel";
             this.WordsCountLabel.Size = new System.Drawing.Size(25, 17);
             this.WordsCountLabel.TabIndex = 6;
             this.WordsCountLabel.Text = "(1)";
             // 
+            // EndProgramButton
+            // 
+            this.EndProgramButton.BackColor = System.Drawing.Color.Red;
+            this.EndProgramButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EndProgramButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.EndProgramButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.EndProgramButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.EndProgramButton.Location = new System.Drawing.Point(326, 245);
+            this.EndProgramButton.Name = "EndProgramButton";
+            this.EndProgramButton.Padding = new System.Windows.Forms.Padding(4);
+            this.EndProgramButton.Size = new System.Drawing.Size(145, 44);
+            this.EndProgramButton.TabIndex = 7;
+            this.EndProgramButton.Text = "Uždaryti programą";
+            this.EndProgramButton.UseVisualStyleBackColor = false;
+            this.EndProgramButton.Click += new System.EventHandler(this.EndProgramButton_Click);
+            // 
             // StartupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.EndProgramButton;
             this.ClientSize = new System.Drawing.Size(814, 301);
+            this.Controls.Add(this.EndProgramButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.UnknownWordsPanel);
             this.Controls.Add(this.TestSelectionLabel);
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.Name = "StartupForm";
-            this.Text = "Testo pradžia";
+            this.Text = "Testo pasirinkimas";
+            this.Load += new System.EventHandler(this.StartupForm_Load);
             this.UnknownWordsPanel.ResumeLayout(false);
             this.UnknownWordsPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -157,5 +183,6 @@
         private System.Windows.Forms.Label UnknownWordsCountLabel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label WordsCountLabel;
+        private System.Windows.Forms.Button EndProgramButton;
     }
 }
