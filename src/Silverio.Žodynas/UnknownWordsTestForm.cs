@@ -2,9 +2,9 @@
 
 namespace Silverio.Žodynas
 {
-    public partial class UnknownWordsVocabularyForm : Form
+    public partial class UnknownWordsTestForm : Form
     {
-        public UnknownWordsVocabularyForm()
+        public UnknownWordsTestForm()
         {
             InitializeComponent();
         }

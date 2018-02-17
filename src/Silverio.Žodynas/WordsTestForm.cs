@@ -9,7 +9,7 @@ using Silverio.Žodynas.Repositories;
 
 namespace Silverio.Žodynas
 {
-    public partial class WordsVocabularyForm : Form
+    public partial class WordsTestForm : Form
     {
         private static CurrentLanguage _currentLanguage;
         private static int _currentWordPairIndex;
@@ -21,7 +21,7 @@ namespace Silverio.Žodynas
         private static IList<WordPair> _unknownWords = new List<WordPair>();
         private readonly string _progressLabelText = "{0} / {1}";
 
-        public WordsVocabularyForm()
+        public WordsTestForm()
         {
             _words = WordsRepository.GetWordsForTest();
 

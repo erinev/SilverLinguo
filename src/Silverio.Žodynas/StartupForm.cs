@@ -13,7 +13,7 @@ namespace Silverio.Žodynas
         {
             this.Hide();
             
-            var wordsVocabularyForm = new WordsVocabularyForm();
+            var wordsVocabularyForm = new WordsTestForm();
             wordsVocabularyForm.Closed += (s, args) => this.Close();
 
             wordsVocabularyForm.Show();
@@ -23,7 +23,7 @@ namespace Silverio.Žodynas
         {
             this.Hide();
 
-            var unknownWordsVocabularyForm = new UnknownWordsVocabularyForm();
+            var unknownWordsVocabularyForm = new UnknownWordsTestForm();
             unknownWordsVocabularyForm.Closed += (s, args) => this.Close();
 
             unknownWordsVocabularyForm.Show();

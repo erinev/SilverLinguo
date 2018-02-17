@@ -1,6 +1,6 @@
 ﻿namespace Silverio.Žodynas
 {
-    partial class WordsVocabularyForm
+    partial class WordsTestForm
     {
         /// <summary>
         /// Required designer variable.
