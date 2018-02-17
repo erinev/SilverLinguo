@@ -122,16 +122,5 @@ namespace Silverio.Žodynas
         {
             this.Close();
         }
-
-        private const int CpNocloseButton = 0x200;
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams myCp = base.CreateParams;
-                myCp.ClassStyle = myCp.ClassStyle | CpNocloseButton;
-                return myCp;
-            }
-        }
     }
 }

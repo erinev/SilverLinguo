@@ -25,10 +25,20 @@ namespace Silverio.Žodynas.Repositories
 
         public static WordPair[] GetUnknownWordsForTest()
         {
-            throw new NotImplementedException();
+            return new[]
+            {
+                new WordPair {Id = 1, LithuanianWord = "Medis", EnglishWord = "Tree"},
+                new WordPair {Id = 2, LithuanianWord = "Žiema", EnglishWord = "Winter"},
+                new WordPair {Id = 3, LithuanianWord = "Bulvė", EnglishWord = "Potato"},
+            };
         }
 
         public static void AddNewUnknownWords(IList<WordPair> newUnknownWords)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void RemoveLearnedUnknownWords(IList<WordPair> newUnknownWords)
         {
             throw new NotImplementedException();
         }
