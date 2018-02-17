@@ -50,11 +50,11 @@
     <Compile Include="StartupForm.Designer.cs">
       <DependentUpon>StartupForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="VocabularyForm.cs">
+    <Compile Include="WordsVocabularyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="VocabularyForm.Designer.cs">
-      <DependentUpon>VocabularyForm.cs</DependentUpon>
+    <Compile Include="WordsVocabularyForm.Designer.cs">
+      <DependentUpon>WordsVocabularyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,8 +71,8 @@
     <EmbeddedResource Include="StartupForm.resx">
       <DependentUpon>StartupForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="VocabularyForm.resx">
-      <DependentUpon>VocabularyForm.cs</DependentUpon>
+    <EmbeddedResource Include="WordsVocabularyForm.resx">
+      <DependentUpon>WordsVocabularyForm.cs</DependentUpon>
     </EmbeddedResource>
     <Content Include="Files\UnknownWords.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

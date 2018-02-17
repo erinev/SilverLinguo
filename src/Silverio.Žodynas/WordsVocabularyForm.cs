@@ -9,10 +9,9 @@ using Silverio.Žodynas.Repositories;
 
 namespace Silverio.Žodynas
 {
-    public partial class VocabularyForm : Form
+    public partial class WordsVocabularyForm : Form
     {
         private static CurrentLanguage _currentLanguage;
-        private static TestType _selectedTestType;
         private static int _currentWordPairIndex;
         private static int _currentWordPairIndexForProgress = 1;
 
@@ -22,22 +21,16 @@ namespace Silverio.Žodynas
         private static IList<WordPair> _unknownWords = new List<WordPair>();
         private readonly string _progressLabelText = "{0} / {1}";
 
-        public VocabularyForm(TestType testType)
+        public sealed override string Text
         {
-            _selectedTestType = testType;
+            get => base.Text;
+            set => base.Text = value;
+        }
 
-            if (_selectedTestType == TestType.Words)
-            {
-                _words = WordsRepository.GetWordsForTest();
-            } else if (_selectedTestType == TestType.UnknownWords)
-            {
-                _words = WordsRepository.GetUnknownWordsForTest();
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-            
+        public WordsVocabularyForm()
+        {
+            _words = WordsRepository.GetWordsForTest();
+
             InitializeComponent();
 
             _currentLanguage = CurrentLanguage.Lithuanian;
@@ -107,11 +100,6 @@ namespace Silverio.Žodynas
             }
         }
 
-        private void EndTestButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void UnknownWordButton_Click(object sender, EventArgs e)
         {
             WordPair unknownWordCandidate = _words[_currentWordPairIndex];
@@ -134,6 +122,11 @@ namespace Silverio.Žodynas
             }
 
             UnknownWordsCountLabel.Text = _unknownWords.Count.ToString();
+        }
+
+        private void EndTestButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private const int CpNocloseButton = 0x200;

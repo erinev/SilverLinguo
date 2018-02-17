@@ -36,6 +36,7 @@
             this.UnknownWordsPanel = new System.Windows.Forms.Panel();
             this.UnknownWordsCountLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.WordsCountLabel = new System.Windows.Forms.Label();
             this.UnknownWordsPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -66,6 +67,7 @@
             this.WordListSelectionButton.TabIndex = 2;
             this.WordListSelectionButton.Text = "Pradėti";
             this.WordListSelectionButton.UseVisualStyleBackColor = true;
+            this.WordListSelectionButton.Click += new System.EventHandler(this.WordListSelectionButton_Click);
             // 
             // UnknownWordListLabel
             // 
@@ -84,6 +86,7 @@
             this.UnknownWordsListSelectionButton.TabIndex = 4;
             this.UnknownWordsListSelectionButton.Text = "Pradėti";
             this.UnknownWordsListSelectionButton.UseVisualStyleBackColor = true;
+            this.UnknownWordsListSelectionButton.Click += new System.EventHandler(this.UnknownWordsListSelectionButton_Click);
             // 
             // UnknownWordsPanel
             // 
@@ -98,7 +101,7 @@
             // UnknownWordsCountLabel
             // 
             this.UnknownWordsCountLabel.AutoSize = true;
-            this.UnknownWordsCountLabel.Location = new System.Drawing.Point(174, 9);
+            this.UnknownWordsCountLabel.Location = new System.Drawing.Point(173, 9);
             this.UnknownWordsCountLabel.Name = "UnknownWordsCountLabel";
             this.UnknownWordsCountLabel.Size = new System.Drawing.Size(25, 17);
             this.UnknownWordsCountLabel.TabIndex = 5;
@@ -106,12 +109,22 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.WordsCountLabel);
             this.panel1.Controls.Add(this.WordListLabel);
             this.panel1.Controls.Add(this.WordListSelectionButton);
             this.panel1.Location = new System.Drawing.Point(90, 76);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(236, 100);
             this.panel1.TabIndex = 6;
+            // 
+            // WordsCountLabel
+            // 
+            this.WordsCountLabel.AutoSize = true;
+            this.WordsCountLabel.Location = new System.Drawing.Point(110, 9);
+            this.WordsCountLabel.Name = "WordsCountLabel";
+            this.WordsCountLabel.Size = new System.Drawing.Size(25, 17);
+            this.WordsCountLabel.TabIndex = 6;
+            this.WordsCountLabel.Text = "(1)";
             // 
             // StartupForm
             // 
@@ -143,5 +156,6 @@
         private System.Windows.Forms.Panel UnknownWordsPanel;
         private System.Windows.Forms.Label UnknownWordsCountLabel;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label WordsCountLabel;
     }
 }
