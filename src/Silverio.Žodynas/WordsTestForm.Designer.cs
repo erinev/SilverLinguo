@@ -203,6 +203,7 @@
             this.PreviousWordButton.TabIndex = 12;
             this.PreviousWordButton.Text = "Ankstesnis žodis";
             this.PreviousWordButton.UseVisualStyleBackColor = false;
+            this.PreviousWordButton.Click += new System.EventHandler(this.PreviousWordButton_Click);
             // 
             // WordsTestForm
             // 

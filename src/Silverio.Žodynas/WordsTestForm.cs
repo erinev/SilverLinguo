@@ -32,6 +32,9 @@ namespace Silverio.Žodynas
             LtWordLabel.Visible = true;
             EnWordLabel.Visible = false;
 
+            NextWordButton.Visible = true;
+            PreviousWordButton.Visible = false;
+
             ChangeLanguageButton.Image = _englishFlagBitmap;
         }
 
@@ -67,8 +70,31 @@ namespace Silverio.Žodynas
             ChangeLanguageButton.Image = languageIcon;
         }
 
+        private void PreviousWordButton_Click(object sender, EventArgs e)
+        {
+            //TODO
+            if (_currentWordPairIndex - 1 == _words.Length)
+            {
+                PreviousWordButton.Visible = false;
+            }
+            else if (_currentWordPairIndex < _words.Length)
+            {
+                NextWordButton.Visible = true;
+            }
+
+
+        }
+
         private void NextWordButton_Click(object sender, EventArgs e)
         {
+            if (_currentWordPairIndex + 2 == _words.Length)
+            {
+                NextWordButton.Visible = false;
+            } else if (_currentWordPairIndex >= 0)
+            {
+                PreviousWordButton.Visible = true;
+            }
+
             if (_currentWordPairIndex + 1 < _words.Length)
             {
                 ++_currentWordPairIndexForProgress;
