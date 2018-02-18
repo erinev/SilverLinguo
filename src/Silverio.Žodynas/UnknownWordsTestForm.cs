@@ -104,6 +104,8 @@ namespace Silverio.Žodynas
             {
                 throw new ArgumentOutOfRangeException();
             }
+
+            HandleUnknownButtonVisibility();
         }
 
         private void NextWordButton_Click(object sender, EventArgs e)
@@ -140,6 +142,8 @@ namespace Silverio.Žodynas
             {
                 throw new ArgumentOutOfRangeException();
             }
+
+            HandleUnknownButtonVisibility();
         }
 
         private void LearnedWordButton_Click(object sender, EventArgs e)
@@ -163,12 +167,25 @@ namespace Silverio.Žodynas
                 );
             }
 
-            UnknownWordsCountLabel.Text = _learnedWords.Count.ToString();
+            LearnedWordsCountLabel.Text = _learnedWords.Count.ToString();
+
+            LearnedWordButton.Visible = false;
         }
 
         private void EndTestButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void HandleUnknownButtonVisibility()
+        {
+            WordPair currentUnknownWord = _unknownWords[_currentUnknownWordPairIndex];
+
+            WordPair alreadyExistingLearnedWord = _learnedWords.FirstOrDefault(learnedWord =>
+                learnedWord.LithuanianWord == currentUnknownWord.LithuanianWord &&
+                learnedWord.EnglishWord == currentUnknownWord.EnglishWord);
+
+            LearnedWordButton.Visible = alreadyExistingLearnedWord == null;
         }
     }
 }

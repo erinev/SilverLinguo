@@ -145,17 +145,6 @@ namespace Silverio.Žodynas
             HandleUnknownButtonVisibility();
         }
 
-        private void HandleUnknownButtonVisibility()
-        {
-            WordPair currentWord = _words[_currentWordPairIndex];
-
-            WordPair alreadyExistingUnknownWord = _unknownWords.FirstOrDefault(unknownWord =>
-                unknownWord.LithuanianWord == currentWord.LithuanianWord &&
-                unknownWord.EnglishWord == currentWord.EnglishWord);
-
-            UnknownWordButton.Visible = alreadyExistingUnknownWord == null;
-        }
-
         private void UnknownWordButton_Click(object sender, EventArgs e)
         {
             WordPair unknownWordCandidate = _words[_currentWordPairIndex];
@@ -185,6 +174,17 @@ namespace Silverio.Žodynas
         private void EndTestButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void HandleUnknownButtonVisibility()
+        {
+            WordPair currentWord = _words[_currentWordPairIndex];
+
+            WordPair alreadyExistingUnknownWord = _unknownWords.FirstOrDefault(unknownWord =>
+                unknownWord.LithuanianWord == currentWord.LithuanianWord &&
+                unknownWord.EnglishWord == currentWord.EnglishWord);
+
+            UnknownWordButton.Visible = alreadyExistingUnknownWord == null;
         }
     }
 }

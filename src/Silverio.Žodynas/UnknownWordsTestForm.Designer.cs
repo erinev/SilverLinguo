@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.UnknownWordsCountLabel = new System.Windows.Forms.Label();
+            this.LearnedWordsCountLabel = new System.Windows.Forms.Label();
             this.LearnedWordsCountHeaderLabel = new System.Windows.Forms.Label();
             this.ProgressLabel = new System.Windows.Forms.Label();
             this.ProgressHeaderLabel = new System.Windows.Forms.Label();
@@ -43,15 +43,15 @@
             this.NextWordButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // UnknownWordsCountLabel
+            // LearnedWordsCountLabel
             // 
-            this.UnknownWordsCountLabel.AutoSize = true;
-            this.UnknownWordsCountLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.UnknownWordsCountLabel.Location = new System.Drawing.Point(670, 107);
-            this.UnknownWordsCountLabel.Name = "UnknownWordsCountLabel";
-            this.UnknownWordsCountLabel.Size = new System.Drawing.Size(15, 17);
-            this.UnknownWordsCountLabel.TabIndex = 23;
-            this.UnknownWordsCountLabel.Text = "0";
+            this.LearnedWordsCountLabel.AutoSize = true;
+            this.LearnedWordsCountLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.LearnedWordsCountLabel.Location = new System.Drawing.Point(670, 107);
+            this.LearnedWordsCountLabel.Name = "LearnedWordsCountLabel";
+            this.LearnedWordsCountLabel.Size = new System.Drawing.Size(15, 17);
+            this.LearnedWordsCountLabel.TabIndex = 23;
+            this.LearnedWordsCountLabel.Text = "0";
             // 
             // LearnedWordsCountHeaderLabel
             // 
@@ -215,7 +215,7 @@
             this.Controls.Add(this.PreviousWordButton);
             this.Controls.Add(this.LearnedWordButton);
             this.Controls.Add(this.NextWordButton);
-            this.Controls.Add(this.UnknownWordsCountLabel);
+            this.Controls.Add(this.LearnedWordsCountLabel);
             this.Controls.Add(this.LearnedWordsCountHeaderLabel);
             this.Controls.Add(this.ProgressLabel);
             this.Controls.Add(this.ProgressHeaderLabel);
@@ -237,7 +237,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label UnknownWordsCountLabel;
+        private System.Windows.Forms.Label LearnedWordsCountLabel;
         private System.Windows.Forms.Label LearnedWordsCountHeaderLabel;
         private System.Windows.Forms.Label ProgressLabel;
         private System.Windows.Forms.Label ProgressHeaderLabel;
