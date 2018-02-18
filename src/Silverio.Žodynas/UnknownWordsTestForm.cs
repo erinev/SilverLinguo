@@ -32,6 +32,9 @@ namespace Silverio.Žodynas
             LtWordLabel.Visible = true;
             EnWordLabel.Visible = false;
 
+            NextWordButton.Visible = true;
+            PreviousWordButton.Visible = false;
+
             ChangeLanguageButton.Image = _englishFlagBitmap;
         }
 
@@ -67,8 +70,53 @@ namespace Silverio.Žodynas
             ChangeLanguageButton.Image = languageIcon;
         }
 
+        private void PreviousWordButton_Click(object sender, EventArgs e)
+        {
+            if (_currentUnknownWordPairIndex - 1 == 0)
+            {
+                PreviousWordButton.Visible = false;
+            }
+            else if (_currentUnknownWordPairIndex < _unknownWords.Length)
+            {
+                NextWordButton.Visible = true;
+            }
+
+            if (_currentUnknownWordPairIndex > 0)
+            {
+                --_currentUnknownWordPairIndexForProgress;
+                ProgressLabel.Text = string.Format(_progressLabelText, _currentUnknownWordPairIndexForProgress, _unknownWords.Length);
+
+                int previousWordIndex = --_currentUnknownWordPairIndex;
+
+                LtWordLabel.Text = _unknownWords[previousWordIndex].LithuanianWord;
+                EnWordLabel.Text = _unknownWords[previousWordIndex].EnglishWord;
+            }
+
+            if (_currentLanguage == CurrentLanguage.Lithuanian)
+            {
+                EnWordLabel.Visible = false;
+            }
+            else if (_currentLanguage == CurrentLanguage.English)
+            {
+                LtWordLabel.Visible = false;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
+
         private void NextWordButton_Click(object sender, EventArgs e)
         {
+            if (_currentUnknownWordPairIndex + 2 == _unknownWords.Length)
+            {
+                NextWordButton.Visible = false;
+            }
+            else if (_currentUnknownWordPairIndex >= 0)
+            {
+                PreviousWordButton.Visible = true;
+            }
+
             if (_currentUnknownWordPairIndex + 1 < _unknownWords.Length)
             {
                 ++_currentUnknownWordPairIndexForProgress;

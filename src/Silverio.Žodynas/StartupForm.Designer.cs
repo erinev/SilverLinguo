@@ -112,7 +112,7 @@
             this.UnknownWordsCountLabel.Name = "UnknownWordsCountLabel";
             this.UnknownWordsCountLabel.Size = new System.Drawing.Size(25, 17);
             this.UnknownWordsCountLabel.TabIndex = 5;
-            this.UnknownWordsCountLabel.Text = "(1)";
+            this.UnknownWordsCountLabel.Text = "(3)";
             // 
             // panel1
             // 
@@ -129,9 +129,9 @@
             this.WordsCountLabel.AutoSize = true;
             this.WordsCountLabel.Location = new System.Drawing.Point(101, 9);
             this.WordsCountLabel.Name = "WordsCountLabel";
-            this.WordsCountLabel.Size = new System.Drawing.Size(25, 17);
+            this.WordsCountLabel.Size = new System.Drawing.Size(32, 17);
             this.WordsCountLabel.TabIndex = 6;
-            this.WordsCountLabel.Text = "(1)";
+            this.WordsCountLabel.Text = "(10)";
             // 
             // EndProgramButton
             // 

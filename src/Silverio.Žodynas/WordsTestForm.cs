@@ -72,8 +72,7 @@ namespace Silverio.Žodynas
 
         private void PreviousWordButton_Click(object sender, EventArgs e)
         {
-            //TODO
-            if (_currentWordPairIndex - 1 == _words.Length)
+            if (_currentWordPairIndex - 1 == 0)
             {
                 PreviousWordButton.Visible = false;
             }
@@ -82,7 +81,31 @@ namespace Silverio.Žodynas
                 NextWordButton.Visible = true;
             }
 
+            if (_currentWordPairIndex > 0)
+            {
+                --_currentWordPairIndexForProgress;
+                ProgressLabel.Text = string.Format(_progressLabelText, _currentWordPairIndexForProgress, _words.Length);
 
+                int previousWordIndex = --_currentWordPairIndex;
+
+                LtWordLabel.Text = _words[previousWordIndex].LithuanianWord;
+                EnWordLabel.Text = _words[previousWordIndex].EnglishWord;
+            }
+
+            if (_currentLanguage == CurrentLanguage.Lithuanian)
+            {
+                EnWordLabel.Visible = false;
+            }
+            else if (_currentLanguage == CurrentLanguage.English)
+            {
+                LtWordLabel.Visible = false;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            HandleUnknownButtonVisibility();
         }
 
         private void NextWordButton_Click(object sender, EventArgs e)
@@ -118,6 +141,19 @@ namespace Silverio.Žodynas
             {
                 throw new ArgumentOutOfRangeException();
             }
+
+            HandleUnknownButtonVisibility();
+        }
+
+        private void HandleUnknownButtonVisibility()
+        {
+            WordPair currentWord = _words[_currentWordPairIndex];
+
+            WordPair alreadyExistingUnknownWord = _unknownWords.FirstOrDefault(unknownWord =>
+                unknownWord.LithuanianWord == currentWord.LithuanianWord &&
+                unknownWord.EnglishWord == currentWord.EnglishWord);
+
+            UnknownWordButton.Visible = alreadyExistingUnknownWord == null;
         }
 
         private void UnknownWordButton_Click(object sender, EventArgs e)
@@ -142,6 +178,8 @@ namespace Silverio.Žodynas
             }
 
             UnknownWordsCountLabel.Text = _unknownWords.Count.ToString();
+
+            UnknownWordButton.Visible = false;
         }
 
         private void EndTestButton_Click(object sender, EventArgs e)
