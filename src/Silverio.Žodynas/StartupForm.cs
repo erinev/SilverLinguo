@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using Silverio.Žodynas.Enums;
 using Silverio.Žodynas.Services;
 
@@ -21,6 +22,7 @@ namespace Silverio.Žodynas
             int _unknownWordsCount = _wordsService.GetUnknownWordsCount();
 
             LithuanianLanguageRadioButton.Select();
+            ShouldCheckGrammarCheckBox.Checked = false;
 
             WordsCountLabel.Text = $"({_wordsCount})";
             UnknownWordsCountLabel.Text = $"({_unknownWordsCount})";
@@ -40,7 +42,9 @@ namespace Silverio.Žodynas
         {
             this.Hide();
 
-            var unknownWordsVocabularyForm = new UnknownWordsTestForm(SelectedLanguage.Lithuanian);
+            SelectedLanguage selectedLanguage = GetSelectedLanguage();
+
+            var unknownWordsVocabularyForm = new UnknownWordsTestForm(selectedLanguage, ShouldCheckGrammarCheckBox.Checked);
             unknownWordsVocabularyForm.Closed += (s, args) => this.Close();
 
             unknownWordsVocabularyForm.Show();
@@ -49,6 +53,30 @@ namespace Silverio.Žodynas
         private void EndProgramButton_Click(object sender, System.EventArgs e)
         {
             this.Close();
+        }
+
+        private SelectedLanguage GetSelectedLanguage()
+        {
+            SelectedLanguage selectedLanguage;
+
+            if (LithuanianLanguageRadioButton.Checked)
+            {
+                selectedLanguage = SelectedLanguage.Lithuanian;
+            } 
+            else if (EnglishRadioButton.Checked)
+            {
+                selectedLanguage = SelectedLanguage.English;
+            }
+            else if (RandomRadioButton.Checked)
+            {
+                selectedLanguage = SelectedLanguage.Random;
+            }
+            else
+            {
+                throw new InvalidOperationException("Unknown language selected");
+            }
+
+            return selectedLanguage;
         }
     }
 }

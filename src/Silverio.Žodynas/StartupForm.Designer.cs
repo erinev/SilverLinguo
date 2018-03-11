@@ -41,6 +41,7 @@
             this.LithuanianLanguageRadioButton = new System.Windows.Forms.RadioButton();
             this.EnglishRadioButton = new System.Windows.Forms.RadioButton();
             this.RandomRadioButton = new System.Windows.Forms.RadioButton();
+            this.ShouldCheckGrammarCheckBox = new System.Windows.Forms.CheckBox();
             this.UnknownWordsPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -103,9 +104,9 @@
             this.UnknownWordsPanel.Controls.Add(this.UnknownWordsCountLabel);
             this.UnknownWordsPanel.Controls.Add(this.UnknownWordListLabel);
             this.UnknownWordsPanel.Controls.Add(this.UnknownWordsListSelectionButton);
-            this.UnknownWordsPanel.Location = new System.Drawing.Point(469, 114);
+            this.UnknownWordsPanel.Location = new System.Drawing.Point(466, 152);
             this.UnknownWordsPanel.Name = "UnknownWordsPanel";
-            this.UnknownWordsPanel.Size = new System.Drawing.Size(236, 100);
+            this.UnknownWordsPanel.Size = new System.Drawing.Size(236, 77);
             this.UnknownWordsPanel.TabIndex = 5;
             // 
             // UnknownWordsCountLabel
@@ -122,9 +123,9 @@
             this.panel1.Controls.Add(this.WordsCountLabel);
             this.panel1.Controls.Add(this.WordListLabel);
             this.panel1.Controls.Add(this.WordListSelectionButton);
-            this.panel1.Location = new System.Drawing.Point(179, 114);
+            this.panel1.Location = new System.Drawing.Point(202, 152);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(236, 100);
+            this.panel1.Size = new System.Drawing.Size(236, 77);
             this.panel1.TabIndex = 6;
             // 
             // WordsCountLabel
@@ -190,6 +191,16 @@
             this.RandomRadioButton.Text = "Atsitiktinis";
             this.RandomRadioButton.UseVisualStyleBackColor = true;
             // 
+            // ShouldCheckGrammarCheckBox
+            // 
+            this.ShouldCheckGrammarCheckBox.AutoSize = true;
+            this.ShouldCheckGrammarCheckBox.Location = new System.Drawing.Point(341, 98);
+            this.ShouldCheckGrammarCheckBox.Name = "ShouldCheckGrammarCheckBox";
+            this.ShouldCheckGrammarCheckBox.Size = new System.Drawing.Size(145, 21);
+            this.ShouldCheckGrammarCheckBox.TabIndex = 11;
+            this.ShouldCheckGrammarCheckBox.Text = "Rašybos tikrinimas";
+            this.ShouldCheckGrammarCheckBox.UseVisualStyleBackColor = true;
+            // 
             // StartupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -197,6 +208,7 @@
             this.CancelButton = this.EndProgramButton;
             this.ClientSize = new System.Drawing.Size(814, 301);
             this.ControlBox = false;
+            this.Controls.Add(this.ShouldCheckGrammarCheckBox);
             this.Controls.Add(this.RandomRadioButton);
             this.Controls.Add(this.EnglishRadioButton);
             this.Controls.Add(this.LithuanianLanguageRadioButton);
@@ -233,5 +245,6 @@
         private System.Windows.Forms.RadioButton LithuanianLanguageRadioButton;
         private System.Windows.Forms.RadioButton EnglishRadioButton;
         private System.Windows.Forms.RadioButton RandomRadioButton;
+        private System.Windows.Forms.CheckBox ShouldCheckGrammarCheckBox;
     }
 }

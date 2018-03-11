@@ -2,7 +2,7 @@
 
 namespace Silverio.Žodynas.Helpers
 {
-    static class RandomExtensions
+    static class ArrayExtensions
     {
         public static void Shuffle<T> (this Random rng, T[] array)
         {

@@ -39,6 +39,8 @@
             this.LtHeaderLabel = new System.Windows.Forms.Label();
             this.IDontKnowTheWordButton = new System.Windows.Forms.Button();
             this.NextWordButton = new System.Windows.Forms.Button();
+            this.EnWordTextBox = new System.Windows.Forms.TextBox();
+            this.LtWordTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // LearnedWordsCountLabel
@@ -106,7 +108,7 @@
             this.EnWordLabel.CausesValidation = false;
             this.EnWordLabel.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.EnWordLabel.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.EnWordLabel.Location = new System.Drawing.Point(413, 55);
+            this.EnWordLabel.Location = new System.Drawing.Point(562, 213);
             this.EnWordLabel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.EnWordLabel.Name = "EnWordLabel";
             this.EnWordLabel.Padding = new System.Windows.Forms.Padding(6, 5, 6, 5);
@@ -121,7 +123,7 @@
             this.LtWordLabel.CausesValidation = false;
             this.LtWordLabel.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.LtWordLabel.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.LtWordLabel.Location = new System.Drawing.Point(28, 55);
+            this.LtWordLabel.Location = new System.Drawing.Point(12, 213);
             this.LtWordLabel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.LtWordLabel.Name = "LtWordLabel";
             this.LtWordLabel.Padding = new System.Windows.Forms.Padding(6, 5, 6, 5);
@@ -176,6 +178,28 @@
             this.NextWordButton.UseVisualStyleBackColor = false;
             this.NextWordButton.Click += new System.EventHandler(this.NextWordButton_Click);
             // 
+            // EnWordTextBox
+            // 
+            this.EnWordTextBox.AcceptsReturn = true;
+            this.EnWordTextBox.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.EnWordTextBox.Location = new System.Drawing.Point(413, 55);
+            this.EnWordTextBox.Multiline = true;
+            this.EnWordTextBox.Name = "EnWordTextBox";
+            this.EnWordTextBox.ReadOnly = true;
+            this.EnWordTextBox.Size = new System.Drawing.Size(356, 69);
+            this.EnWordTextBox.TabIndex = 26;
+            // 
+            // LtWordTextBox
+            // 
+            this.LtWordTextBox.AcceptsReturn = true;
+            this.LtWordTextBox.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.LtWordTextBox.Location = new System.Drawing.Point(28, 55);
+            this.LtWordTextBox.Multiline = true;
+            this.LtWordTextBox.Name = "LtWordTextBox";
+            this.LtWordTextBox.ReadOnly = true;
+            this.LtWordTextBox.Size = new System.Drawing.Size(356, 69);
+            this.LtWordTextBox.TabIndex = 27;
+            // 
             // UnknownWordsTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -183,6 +207,8 @@
             this.CancelButton = this.EndTestButton;
             this.ClientSize = new System.Drawing.Size(930, 291);
             this.ControlBox = false;
+            this.Controls.Add(this.LtWordTextBox);
+            this.Controls.Add(this.EnWordTextBox);
             this.Controls.Add(this.IDontKnowTheWordButton);
             this.Controls.Add(this.NextWordButton);
             this.Controls.Add(this.LearnedWordsCountLabel);
@@ -217,5 +243,7 @@
         private System.Windows.Forms.Label LtHeaderLabel;
         private System.Windows.Forms.Button IDontKnowTheWordButton;
         private System.Windows.Forms.Button NextWordButton;
+        private System.Windows.Forms.TextBox EnWordTextBox;
+        private System.Windows.Forms.TextBox LtWordTextBox;
     }
 }

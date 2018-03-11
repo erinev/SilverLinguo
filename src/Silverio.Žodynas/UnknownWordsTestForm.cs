@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Forms;
 using Silverio.Žodynas.Enums;
 using Silverio.Žodynas.Models;
-using Silverio.Žodynas.Repositories;
 using Silverio.Žodynas.Services;
 
 namespace Silverio.Žodynas
@@ -14,47 +13,51 @@ namespace Silverio.Žodynas
     {
         private readonly IWordsService _wordsService;
         private static SelectedLanguage _selectedLanguage;
+        private static bool _shouldCheckGrammar;
 
-        private static int _currentUnknownWordPairIndex;
         private static int _currentUnknownWordPairId;
-
-        private readonly Bitmap _englishFlagBitmap = Properties.Resources.EnglishFlag;
-        private readonly Bitmap _lithuanianFlagBitmap = Properties.Resources.LithuanianFlag;
 
         private static WordPair[] _unknownWords;
         private static IList<WordPair> _learnedWords = new List<WordPair>();
 
-        public UnknownWordsTestForm(SelectedLanguage selectedLanguage)
+        public UnknownWordsTestForm(SelectedLanguage selectedLanguage, bool shouldCheckGrammar)
         {
             _wordsService = new WordsService();
 
             _selectedLanguage = selectedLanguage;
+            _shouldCheckGrammar = shouldCheckGrammar;
 
             InitializeComponent();
+
+            SetSelectedLanguage(_selectedLanguage);
+            ConfigureGrammarChecking(_shouldCheckGrammar);
         }
 
         private void UnknownWordsTestForm_Load(object sender, EventArgs e)
         {
             _unknownWords = _wordsService.GetRandomlySortedUnknownWords();
 
-            LtWordLabel.Visible = true;
-            EnWordLabel.Visible = false;
-
-            NextWordButton.Visible = true;
-
             _currentUnknownWordPairId = _unknownWords[0].Id;
 
             ProgressLabel.Text = _unknownWords.Length.ToString();
 
-            LtWordLabel.Text = _unknownWords[_currentUnknownWordPairIndex].LithuanianWord;
-            EnWordLabel.Text = _unknownWords[_currentUnknownWordPairIndex].EnglishWord;
+            WordPair firstUnknownWord = _unknownWords.First();
+            LtWordTextBox.Text = LtWordTextBox.ReadOnly ? firstUnknownWord.LithuanianWord : String.Empty;
+            EnWordTextBox.Text = EnWordTextBox.ReadOnly ? firstUnknownWord.EnglishWord : String.Empty;
         }
 
         private void NextWordButton_Click(object sender, EventArgs e)
         {
             if (IDontKnowTheWordButton.Visible)
             {
+                _learnedWords.Add(_unknownWords.First(uw => uw.Id == _currentUnknownWordPairId));
+                LearnedWordsCountLabel.Text = _learnedWords.Count.ToString();
+                
                 _unknownWords = _unknownWords.Where(unknownWord => unknownWord.Id != _currentUnknownWordPairId).ToArray();
+            }
+            else
+            {
+                SetSelectedLanguage(_selectedLanguage);
             }
             
             IDontKnowTheWordButton.Visible = true;
@@ -82,6 +85,12 @@ namespace Silverio.Žodynas
                 case SelectedLanguage.English:
                     LtWordLabel.Visible = false;
                     break;
+                case SelectedLanguage.Random:
+                    bool currentEnLabelVisibleState = EnWordLabel.Visible;
+                    bool currentLtLabelVisibleState = LtWordLabel.Visible;
+                    EnWordLabel.Visible = !currentEnLabelVisibleState;
+                    LtWordLabel.Visible = !currentLtLabelVisibleState;
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -97,37 +106,49 @@ namespace Silverio.Žodynas
             var unknownWordToMove = _unknownWords[0];
 
             _unknownWords = _unknownWords.Where(unknownWord => unknownWord.Id != _currentUnknownWordPairId).ToArray();
+
             var unknownWordsWithoutUnknownWord = _unknownWords.ToList();
             unknownWordsWithoutUnknownWord.Add(unknownWordToMove);
+
             _unknownWords = unknownWordsWithoutUnknownWord.ToArray();
-
-            /*WordPair learnedWordCandidate = _unknownWords[_currentUnknownWordPairIndex];
-
-            WordPair existingLearnedWord =
-                _learnedWords.FirstOrDefault(learnedWord =>
-                    learnedWord.LithuanianWord == learnedWordCandidate.LithuanianWord &&
-                    learnedWord.EnglishWord == learnedWordCandidate.EnglishWord);
-
-            if (existingLearnedWord == null)
-            {
-                _learnedWords.Add(
-                    new WordPair
-                    {
-                        Id = _learnedWords.Count + 1,
-                        LithuanianWord = learnedWordCandidate.LithuanianWord,
-                        EnglishWord = learnedWordCandidate.EnglishWord
-                    }
-                );
-            }
-
-            LearnedWordsCountLabel.Text = _learnedWords.Count.ToString();
-
-            IDontKnowTheWordButton.Visible = false;*/
         }
 
         private void EndTestButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void SetSelectedLanguage(SelectedLanguage selectedLanguage)
+        {
+            if (selectedLanguage == SelectedLanguage.Lithuanian)
+            {
+                LtWordTextBox.ReadOnly = true;
+                EnWordTextBox.ReadOnly = false;
+            }
+            else if (selectedLanguage == SelectedLanguage.English)
+            {
+                LtWordTextBox.ReadOnly = false;
+                EnWordTextBox.ReadOnly = true;
+            }
+            else
+            {
+                LtWordTextBox.ReadOnly = true;
+                EnWordTextBox.ReadOnly = false;
+            }
+        }
+
+        private void ConfigureGrammarChecking(bool shouldCheckGrammar)
+        {
+            if (shouldCheckGrammar)
+            {
+                NextWordButton.Visible = false;
+                IDontKnowTheWordButton.Visible = false;
+            }
+            else
+            {
+                NextWordButton.Visible = true;
+                IDontKnowTheWordButton.Visible = true;
+            }
         }
 
         private void OpenStartupForm()
