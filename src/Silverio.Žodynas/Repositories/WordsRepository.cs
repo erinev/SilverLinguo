@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using Silverio.Žodynas.Models;
+﻿using Silverio.Žodynas.Models;
 
 namespace Silverio.Žodynas.Repositories
 {
-    public class WordsRepository
+    public interface IWordsRepository
     {
-        public static WordPair[] GetWordsForTest()
+        WordPair[] GetWordsForTest();
+        WordPair[] GetUnknownWordsForTest();
+    }
+
+    public class WordsRepository : IWordsRepository
+    {
+        public WordPair[] GetWordsForTest()
         {
             return new[]
             {
@@ -24,7 +28,7 @@ namespace Silverio.Žodynas.Repositories
             };
         }
 
-        public static WordPair[] GetUnknownWordsForTest()
+        public WordPair[] GetUnknownWordsForTest()
         {
             return new[]
             {
@@ -33,16 +37,6 @@ namespace Silverio.Žodynas.Repositories
                 new WordPair {Id = 3, LithuanianWord = "Parduotuvė", EnglishWord = "Shop, Store"},
                 new WordPair {Id = 4, LithuanianWord = "Aitvaras", EnglishWord = "Kite"},
             };
-        }
-
-        public static void AddNewUnknownWords(IList<WordPair> newUnknownWords)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void RemoveLearnedUnknownWords(IList<WordPair> newUnknownWords)
-        {
-            throw new NotImplementedException();
         }
     }
 }

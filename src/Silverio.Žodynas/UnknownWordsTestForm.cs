@@ -11,6 +11,8 @@ namespace Silverio.Žodynas
 {
     public partial class UnknownWordsTestForm : Form
     {
+        private readonly IWordsRepository _wordsRepository;
+
         private static CurrentLanguage _currentLanguage;
         private static int _currentUnknownWordPairIndex;
         private static int _currentUnknownWordPairIndexForProgress = 1;
@@ -23,9 +25,14 @@ namespace Silverio.Žodynas
 
         public UnknownWordsTestForm()
         {
-            _unknownWords = WordsRepository.GetUnknownWordsForTest();
+            _wordsRepository = new WordsRepository();
 
             InitializeComponent();
+        }
+
+        private void UnknownWordsTestForm_Load(object sender, EventArgs e)
+        {
+            _unknownWords = _wordsRepository.GetUnknownWordsForTest();
 
             _currentLanguage = CurrentLanguage.Lithuanian;
 
@@ -36,10 +43,7 @@ namespace Silverio.Žodynas
             PreviousWordButton.Visible = false;
 
             ChangeLanguageButton.Image = _englishFlagBitmap;
-        }
 
-        private void UnknownWordsTestForm_Load(object sender, EventArgs e)
-        {
             ProgressLabel.Text = string.Format(_progressLabelText, _currentUnknownWordPairIndexForProgress, _unknownWords.Length);
 
             LtWordLabel.Text = _unknownWords[_currentUnknownWordPairIndex].LithuanianWord;

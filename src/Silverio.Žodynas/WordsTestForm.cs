@@ -11,6 +11,8 @@ namespace Silverio.Žodynas
 {
     public partial class WordsTestForm : Form
     {
+        private readonly IWordsRepository _wordsRepository;
+
         private static CurrentLanguage _currentLanguage;
         private static int _currentWordPairIndex;
         private static int _currentWordPairIndexForProgress = 1;
@@ -23,9 +25,14 @@ namespace Silverio.Žodynas
 
         public WordsTestForm()
         {
-            _words = WordsRepository.GetWordsForTest();
+            _wordsRepository = new WordsRepository();
 
             InitializeComponent();
+        }
+
+        private void VocabularyForm_Load(object sender, EventArgs e)
+        {
+            _words = _wordsRepository.GetWordsForTest();
 
             _currentLanguage = CurrentLanguage.Lithuanian;
 
@@ -36,10 +43,7 @@ namespace Silverio.Žodynas
             PreviousWordButton.Visible = false;
 
             ChangeLanguageButton.Image = _englishFlagBitmap;
-        }
 
-        private void VocabularyForm_Load(object sender, EventArgs e)
-        {
             ProgressLabel.Text = string.Format(_progressLabelText, _currentWordPairIndexForProgress, _words.Length);
 
             LtWordLabel.Text = _words[_currentWordPairIndex].LithuanianWord;
