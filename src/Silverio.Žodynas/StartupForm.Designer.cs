@@ -38,6 +38,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.WordsCountLabel = new System.Windows.Forms.Label();
             this.EndProgramButton = new System.Windows.Forms.Button();
+            this.LithuanianLanguageRadioButton = new System.Windows.Forms.RadioButton();
+            this.EnglishRadioButton = new System.Windows.Forms.RadioButton();
+            this.RandomRadioButton = new System.Windows.Forms.RadioButton();
             this.UnknownWordsPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -100,7 +103,7 @@
             this.UnknownWordsPanel.Controls.Add(this.UnknownWordsCountLabel);
             this.UnknownWordsPanel.Controls.Add(this.UnknownWordListLabel);
             this.UnknownWordsPanel.Controls.Add(this.UnknownWordsListSelectionButton);
-            this.UnknownWordsPanel.Location = new System.Drawing.Point(457, 76);
+            this.UnknownWordsPanel.Location = new System.Drawing.Point(469, 114);
             this.UnknownWordsPanel.Name = "UnknownWordsPanel";
             this.UnknownWordsPanel.Size = new System.Drawing.Size(236, 100);
             this.UnknownWordsPanel.TabIndex = 5;
@@ -119,7 +122,7 @@
             this.panel1.Controls.Add(this.WordsCountLabel);
             this.panel1.Controls.Add(this.WordListLabel);
             this.panel1.Controls.Add(this.WordListSelectionButton);
-            this.panel1.Location = new System.Drawing.Point(132, 76);
+            this.panel1.Location = new System.Drawing.Point(179, 114);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(236, 100);
             this.panel1.TabIndex = 6;
@@ -149,6 +152,44 @@
             this.EndProgramButton.UseVisualStyleBackColor = false;
             this.EndProgramButton.Click += new System.EventHandler(this.EndProgramButton_Click);
             // 
+            // LithuanianLanguageRadioButton
+            // 
+            this.LithuanianLanguageRadioButton.Image = global::Silverio.Žodynas.Properties.Resources.LithuanianFlag;
+            this.LithuanianLanguageRadioButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.LithuanianLanguageRadioButton.Location = new System.Drawing.Point(208, 55);
+            this.LithuanianLanguageRadioButton.Name = "LithuanianLanguageRadioButton";
+            this.LithuanianLanguageRadioButton.Size = new System.Drawing.Size(132, 21);
+            this.LithuanianLanguageRadioButton.TabIndex = 8;
+            this.LithuanianLanguageRadioButton.TabStop = true;
+            this.LithuanianLanguageRadioButton.Tag = "SelectLanguage";
+            this.LithuanianLanguageRadioButton.Text = "Lietuvių kalba";
+            this.LithuanianLanguageRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // EnglishRadioButton
+            // 
+            this.EnglishRadioButton.Image = global::Silverio.Žodynas.Properties.Resources.EnglishFlag;
+            this.EnglishRadioButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.EnglishRadioButton.Location = new System.Drawing.Point(371, 55);
+            this.EnglishRadioButton.Name = "EnglishRadioButton";
+            this.EnglishRadioButton.Size = new System.Drawing.Size(115, 21);
+            this.EnglishRadioButton.TabIndex = 9;
+            this.EnglishRadioButton.TabStop = true;
+            this.EnglishRadioButton.Tag = "SelectLanguage";
+            this.EnglishRadioButton.Text = "Anglų kalba";
+            this.EnglishRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // RandomRadioButton
+            // 
+            this.RandomRadioButton.AutoSize = true;
+            this.RandomRadioButton.Location = new System.Drawing.Point(509, 55);
+            this.RandomRadioButton.Name = "RandomRadioButton";
+            this.RandomRadioButton.Size = new System.Drawing.Size(96, 21);
+            this.RandomRadioButton.TabIndex = 10;
+            this.RandomRadioButton.TabStop = true;
+            this.RandomRadioButton.Tag = "SelectLanguage";
+            this.RandomRadioButton.Text = "Atsitiktinis";
+            this.RandomRadioButton.UseVisualStyleBackColor = true;
+            // 
             // StartupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -156,6 +197,9 @@
             this.CancelButton = this.EndProgramButton;
             this.ClientSize = new System.Drawing.Size(814, 301);
             this.ControlBox = false;
+            this.Controls.Add(this.RandomRadioButton);
+            this.Controls.Add(this.EnglishRadioButton);
+            this.Controls.Add(this.LithuanianLanguageRadioButton);
             this.Controls.Add(this.EndProgramButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.UnknownWordsPanel);
@@ -186,5 +230,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label WordsCountLabel;
         private System.Windows.Forms.Button EndProgramButton;
+        private System.Windows.Forms.RadioButton LithuanianLanguageRadioButton;
+        private System.Windows.Forms.RadioButton EnglishRadioButton;
+        private System.Windows.Forms.RadioButton RandomRadioButton;
     }
 }

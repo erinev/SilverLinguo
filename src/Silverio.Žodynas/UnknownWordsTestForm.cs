@@ -6,153 +6,102 @@ using System.Windows.Forms;
 using Silverio.Žodynas.Enums;
 using Silverio.Žodynas.Models;
 using Silverio.Žodynas.Repositories;
+using Silverio.Žodynas.Services;
 
 namespace Silverio.Žodynas
 {
     public partial class UnknownWordsTestForm : Form
     {
-        private readonly IWordsRepository _wordsRepository;
+        private readonly IWordsService _wordsService;
+        private static SelectedLanguage _selectedLanguage;
 
-        private static CurrentLanguage _currentLanguage;
         private static int _currentUnknownWordPairIndex;
-        private static int _currentUnknownWordPairIndexForProgress = 1;
+        private static int _currentUnknownWordPairId;
 
         private readonly Bitmap _englishFlagBitmap = Properties.Resources.EnglishFlag;
         private readonly Bitmap _lithuanianFlagBitmap = Properties.Resources.LithuanianFlag;
+
         private static WordPair[] _unknownWords;
         private static IList<WordPair> _learnedWords = new List<WordPair>();
-        private readonly string _progressLabelText = "{0} / {1}";
 
-        public UnknownWordsTestForm()
+        public UnknownWordsTestForm(SelectedLanguage selectedLanguage)
         {
-            _wordsRepository = new WordsRepository();
+            _wordsService = new WordsService();
+
+            _selectedLanguage = selectedLanguage;
 
             InitializeComponent();
         }
 
         private void UnknownWordsTestForm_Load(object sender, EventArgs e)
         {
-            _unknownWords = _wordsRepository.GetUnknownWordsForTest();
-
-            _currentLanguage = CurrentLanguage.Lithuanian;
+            _unknownWords = _wordsService.GetRandomlySortedUnknownWords();
 
             LtWordLabel.Visible = true;
             EnWordLabel.Visible = false;
 
             NextWordButton.Visible = true;
-            PreviousWordButton.Visible = false;
 
-            ChangeLanguageButton.Image = _englishFlagBitmap;
+            _currentUnknownWordPairId = _unknownWords[0].Id;
 
-            ProgressLabel.Text = string.Format(_progressLabelText, _currentUnknownWordPairIndexForProgress, _unknownWords.Length);
+            ProgressLabel.Text = _unknownWords.Length.ToString();
 
             LtWordLabel.Text = _unknownWords[_currentUnknownWordPairIndex].LithuanianWord;
             EnWordLabel.Text = _unknownWords[_currentUnknownWordPairIndex].EnglishWord;
         }
 
-        private void ChangeLanguageButton_Click(object sender, EventArgs e)
-        {
-            Bitmap languageIcon;
-
-            if (_currentLanguage == CurrentLanguage.Lithuanian)
-            {
-                languageIcon = _lithuanianFlagBitmap;
-                _currentLanguage = CurrentLanguage.English;
-                EnWordLabel.Visible = true;
-            }
-            else if (_currentLanguage == CurrentLanguage.English)
-            {
-                languageIcon = _englishFlagBitmap;
-                _currentLanguage = CurrentLanguage.Lithuanian;
-                LtWordLabel.Visible = true;
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
-            ChangeLanguageButton.Image = languageIcon;
-        }
-
-        private void PreviousWordButton_Click(object sender, EventArgs e)
-        {
-            if (_currentUnknownWordPairIndex - 1 == 0)
-            {
-                PreviousWordButton.Visible = false;
-            }
-            else if (_currentUnknownWordPairIndex < _unknownWords.Length)
-            {
-                NextWordButton.Visible = true;
-            }
-
-            if (_currentUnknownWordPairIndex > 0)
-            {
-                --_currentUnknownWordPairIndexForProgress;
-                ProgressLabel.Text = string.Format(_progressLabelText, _currentUnknownWordPairIndexForProgress, _unknownWords.Length);
-
-                int previousWordIndex = --_currentUnknownWordPairIndex;
-
-                LtWordLabel.Text = _unknownWords[previousWordIndex].LithuanianWord;
-                EnWordLabel.Text = _unknownWords[previousWordIndex].EnglishWord;
-            }
-
-            if (_currentLanguage == CurrentLanguage.Lithuanian)
-            {
-                EnWordLabel.Visible = false;
-            }
-            else if (_currentLanguage == CurrentLanguage.English)
-            {
-                LtWordLabel.Visible = false;
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
-            HandleUnknownButtonVisibility();
-        }
-
         private void NextWordButton_Click(object sender, EventArgs e)
         {
-            if (_currentUnknownWordPairIndex + 2 == _unknownWords.Length)
+            if (IDontKnowTheWordButton.Visible)
             {
-                NextWordButton.Visible = false;
+                _unknownWords = _unknownWords.Where(unknownWord => unknownWord.Id != _currentUnknownWordPairId).ToArray();
             }
-            else if (_currentUnknownWordPairIndex >= 0)
-            {
-                PreviousWordButton.Visible = true;
-            }
+            
+            IDontKnowTheWordButton.Visible = true;
 
-            if (_currentUnknownWordPairIndex + 1 < _unknownWords.Length)
+            if (_unknownWords.Length > 0)
             {
-                ++_currentUnknownWordPairIndexForProgress;
-                ProgressLabel.Text = string.Format(_progressLabelText, _currentUnknownWordPairIndexForProgress, _unknownWords.Length);
+                ProgressLabel.Text = _unknownWords.Length.ToString();
 
-                int nextWordIndex = ++_currentUnknownWordPairIndex;
+                WordPair nextUnknownWord = _unknownWords.First();
 
-                LtWordLabel.Text = _unknownWords[nextWordIndex].LithuanianWord;
-                EnWordLabel.Text = _unknownWords[nextWordIndex].EnglishWord;
-            }
-
-            if (_currentLanguage == CurrentLanguage.Lithuanian)
-            {
-                EnWordLabel.Visible = false;
-            }
-            else if (_currentLanguage == CurrentLanguage.English)
-            {
-                LtWordLabel.Visible = false;
+                LtWordLabel.Text = nextUnknownWord.LithuanianWord;
+                EnWordLabel.Text = nextUnknownWord.EnglishWord;
+                _currentUnknownWordPairId = nextUnknownWord.Id;
             }
             else
             {
-                throw new ArgumentOutOfRangeException();
+                OpenStartupForm();
             }
 
-            HandleUnknownButtonVisibility();
+            switch (_selectedLanguage)
+            {
+                case SelectedLanguage.Lithuanian:
+                    EnWordLabel.Visible = false;
+                    break;
+                case SelectedLanguage.English:
+                    LtWordLabel.Visible = false;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
-        private void LearnedWordButton_Click(object sender, EventArgs e)
+        private void IDontKnowTheWordButton_Click(object sender, EventArgs e)
         {
-            WordPair learnedWordCandidate = _unknownWords[_currentUnknownWordPairIndex];
+            IDontKnowTheWordButton.Visible = false;
+
+            EnWordLabel.Visible = true;
+            LtWordLabel.Visible = true;
+
+            var unknownWordToMove = _unknownWords[0];
+
+            _unknownWords = _unknownWords.Where(unknownWord => unknownWord.Id != _currentUnknownWordPairId).ToArray();
+            var unknownWordsWithoutUnknownWord = _unknownWords.ToList();
+            unknownWordsWithoutUnknownWord.Add(unknownWordToMove);
+            _unknownWords = unknownWordsWithoutUnknownWord.ToArray();
+
+            /*WordPair learnedWordCandidate = _unknownWords[_currentUnknownWordPairIndex];
 
             WordPair existingLearnedWord =
                 _learnedWords.FirstOrDefault(learnedWord =>
@@ -173,7 +122,7 @@ namespace Silverio.Žodynas
 
             LearnedWordsCountLabel.Text = _learnedWords.Count.ToString();
 
-            LearnedWordButton.Visible = false;
+            IDontKnowTheWordButton.Visible = false;*/
         }
 
         private void EndTestButton_Click(object sender, EventArgs e)
@@ -181,15 +130,14 @@ namespace Silverio.Žodynas
             this.Close();
         }
 
-        private void HandleUnknownButtonVisibility()
+        private void OpenStartupForm()
         {
-            WordPair currentUnknownWord = _unknownWords[_currentUnknownWordPairIndex];
+            this.Hide();
+            
+            var startupForm = new StartupForm();
+            startupForm.Closed += (s, args) => this.Close();
 
-            WordPair alreadyExistingLearnedWord = _learnedWords.FirstOrDefault(learnedWord =>
-                learnedWord.LithuanianWord == currentUnknownWord.LithuanianWord &&
-                learnedWord.EnglishWord == currentUnknownWord.EnglishWord);
-
-            LearnedWordButton.Visible = alreadyExistingLearnedWord == null;
+            startupForm.Show();
         }
     }
 }

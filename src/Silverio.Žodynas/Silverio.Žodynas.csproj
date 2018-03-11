@@ -39,10 +39,12 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\CurrentLanguage.cs" />
+    <Compile Include="Enums\SelectedLanguage.cs" />
     <Compile Include="Enums\TestType.cs" />
     <Compile Include="Models\WordPair.cs" />
     <Compile Include="Repositories\WordsRepository.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Services\WordsService.cs" />
     <Compile Include="StartupForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +116,7 @@
       <Version>11.0.1</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions />
 </Project>

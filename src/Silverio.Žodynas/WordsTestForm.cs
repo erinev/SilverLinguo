@@ -13,7 +13,7 @@ namespace Silverio.Žodynas
     {
         private readonly IWordsRepository _wordsRepository;
 
-        private static CurrentLanguage _currentLanguage;
+        private static SelectedLanguage _selectedLanguage;
         private static int _currentWordPairIndex;
         private static int _currentWordPairIndexForProgress = 1;
 
@@ -34,7 +34,7 @@ namespace Silverio.Žodynas
         {
             _words = _wordsRepository.GetWordsForTest();
 
-            _currentLanguage = CurrentLanguage.Lithuanian;
+            _selectedLanguage = SelectedLanguage.Lithuanian;
 
             LtWordLabel.Visible = true;
             EnWordLabel.Visible = false;
@@ -54,16 +54,16 @@ namespace Silverio.Žodynas
         {
             Bitmap languageIcon;
 
-            if (_currentLanguage == CurrentLanguage.Lithuanian)
+            if (_selectedLanguage == SelectedLanguage.Lithuanian)
             {
                 languageIcon = _lithuanianFlagBitmap;
-                _currentLanguage = CurrentLanguage.English;
+                _selectedLanguage = SelectedLanguage.English;
                 EnWordLabel.Visible = true;
             }
-            else if (_currentLanguage == CurrentLanguage.English)
+            else if (_selectedLanguage == SelectedLanguage.English)
             {
                 languageIcon = _englishFlagBitmap;
-                _currentLanguage = CurrentLanguage.Lithuanian;
+                _selectedLanguage = SelectedLanguage.Lithuanian;
                 LtWordLabel.Visible = true;
             }
             else
@@ -96,11 +96,11 @@ namespace Silverio.Žodynas
                 EnWordLabel.Text = _words[previousWordIndex].EnglishWord;
             }
 
-            if (_currentLanguage == CurrentLanguage.Lithuanian)
+            if (_selectedLanguage == SelectedLanguage.Lithuanian)
             {
                 EnWordLabel.Visible = false;
             }
-            else if (_currentLanguage == CurrentLanguage.English)
+            else if (_selectedLanguage == SelectedLanguage.English)
             {
                 LtWordLabel.Visible = false;
             }
@@ -133,11 +133,11 @@ namespace Silverio.Žodynas
                 EnWordLabel.Text = _words[nextWordIndex].EnglishWord;
             }
             
-            if (_currentLanguage == CurrentLanguage.Lithuanian)
+            if (_selectedLanguage == SelectedLanguage.Lithuanian)
             {
                 EnWordLabel.Visible = false;
             }
-            else if (_currentLanguage == CurrentLanguage.English)
+            else if (_selectedLanguage == SelectedLanguage.English)
             {
                 LtWordLabel.Visible = false;
             }

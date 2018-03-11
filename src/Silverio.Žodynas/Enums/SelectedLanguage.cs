@@ -1,8 +1,9 @@
 ﻿namespace Silverio.Žodynas.Enums
 {
-    public enum CurrentLanguage
+    public enum SelectedLanguage
     {
         Lithuanian,
-        English
+        English,
+        Random
     }
 }

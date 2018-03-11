@@ -1,17 +1,29 @@
 ﻿using System.Windows.Forms;
+using Silverio.Žodynas.Enums;
+using Silverio.Žodynas.Services;
 
 namespace Silverio.Žodynas
 {
     public partial class StartupForm : Form
     {
+        private readonly IWordsService _wordsService;
+
         public StartupForm()
         {
+            _wordsService = new WordsService();
+
             InitializeComponent();
         }
 
         private void StartupForm_Load(object sender, System.EventArgs e)
         {
+            int _wordsCount = _wordsService.GetWordsCount();
+            int _unknownWordsCount = _wordsService.GetUnknownWordsCount();
 
+            LithuanianLanguageRadioButton.Select();
+
+            WordsCountLabel.Text = $"({_wordsCount})";
+            UnknownWordsCountLabel.Text = $"({_unknownWordsCount})";
         }
 
         private void WordListSelectionButton_Click(object sender, System.EventArgs e)
@@ -28,7 +40,7 @@ namespace Silverio.Žodynas
         {
             this.Hide();
 
-            var unknownWordsVocabularyForm = new UnknownWordsTestForm();
+            var unknownWordsVocabularyForm = new UnknownWordsTestForm(SelectedLanguage.Lithuanian);
             unknownWordsVocabularyForm.Closed += (s, args) => this.Close();
 
             unknownWordsVocabularyForm.Show();
