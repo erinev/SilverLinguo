@@ -19,6 +19,7 @@ namespace Silverio.Žodynas.Forms
 
         private static WordPair[] _unknownWords;
         private static IList<WordPair> _learnedWords = new List<WordPair>();
+        private readonly Color _textBoxBackColorForIncorrectWord = Color.LightCoral;
 
         public UnknownWordsGrammarTestForm(SelectedLanguage selectedLanguage)
         {
@@ -46,7 +47,7 @@ namespace Silverio.Žodynas.Forms
 
         private void UnknownWordsGrammarTestForm_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == KeyCodes.Space)
+            if (e.KeyChar == KeyCodes.Plus)
             {
                 if (NextWordButton.Visible)
                 {
@@ -57,7 +58,10 @@ namespace Silverio.Žodynas.Forms
             }
             else if (e.KeyChar == KeyCodes.Enter)
             {
-                AssertAndHandleEnteredWord();
+                if (!NextWordButton.Visible)
+                {
+                    AssertAndHandleEnteredWord();
+                }
 
                 e.Handled = true;
             }
@@ -69,36 +73,70 @@ namespace Silverio.Žodynas.Forms
 
         private void AssertAndHandleEnteredWord()
         {
-            bool isLtWordReadOnly = LtWordTextBox.ReadOnly;
-            bool isEnWordReadOnly = EnWordTextBox.ReadOnly;
+            WordPair currentWordPair = _unknownWords.First(unknownWord => unknownWord.Id == _currentUnknownWordPairId);
 
-            var currentWordPair = _unknownWords.First(unknownWord => unknownWord.Id == _currentUnknownWordPairId);
-
-            if (!isEnWordReadOnly)
+            if (!EnWordTextBox.ReadOnly)
             {
-                bool isEqual = EnWordTextBox.Text == currentWordPair.EnglishWord;
-                EnWordTextBox.BackColor = isEqual ? Color.LightGreen : Color.LightCoral;
-
-            }
-            else if (!isLtWordReadOnly)
-            {
-                bool isEqual = LtWordTextBox.Text == currentWordPair.LithuanianWord;
+                bool isEqual = String.Equals(EnWordTextBox.Text.Trim(), currentWordPair.EnglishWord.Trim(),
+                    StringComparison.InvariantCultureIgnoreCase);
                 if (isEqual)
                 {
-                    LtWordTextBox.BackColor = Color.LightGreen;
-                    _learnedWords.Add(_unknownWords.First(uw => uw.Id == _currentUnknownWordPairId));
-                    LearnedWordsCountLabel.Text = _learnedWords.Count.ToString();
-                
-                    _unknownWords = _unknownWords.Where(unknownWord => unknownWord.Id != _currentUnknownWordPairId).ToArray();
+                    HandleCorrectlyEnteredWord();
                 }
                 else
                 {
-                    LtWordTextBox.BackColor = Color.LightCoral;
+                    HandleIncorrectlyEnteredWord(EnWordTextBox, currentWordPair.EnglishWord);
                 }
-                
             }
+            else if (!LtWordTextBox.ReadOnly)
+            {
+                bool isEqual = String.Equals(LtWordTextBox.Text.Trim(), currentWordPair.LithuanianWord.Trim(), StringComparison.InvariantCultureIgnoreCase);
+                if (isEqual)
+                {
+                    HandleCorrectlyEnteredWord();
+                }
+                else
+                {
+                    HandleIncorrectlyEnteredWord(LtWordTextBox, currentWordPair.LithuanianWord);
+                }
+            }
+        }
 
+        private void HandleIncorrectlyEnteredWord(TextBox textBox, string correctValueForTextBox)
+        {
             NextWordButton.Visible = true;
+
+            textBox.BackColor = _textBoxBackColorForIncorrectWord;
+            textBox.Text = correctValueForTextBox;
+
+            WordPair unknownWordToMove = _unknownWords.First();
+
+            _unknownWords = _unknownWords.Where(unknownWord => unknownWord.Id != _currentUnknownWordPairId).ToArray();
+
+            List<WordPair> unknownWordsWithoutUnknownWord = _unknownWords.ToList();
+            unknownWordsWithoutUnknownWord.Add(unknownWordToMove);
+
+            _unknownWords = unknownWordsWithoutUnknownWord.ToArray();
+            _currentUnknownWordPairId = _unknownWords.First().Id;
+        }
+
+        private void HandleCorrectlyEnteredWord()
+        {
+            _learnedWords.Add(_unknownWords.First(uw => uw.Id == _currentUnknownWordPairId));
+            LearnedWordsCountLabel.Text = _learnedWords.Count.ToString();
+
+            _unknownWords = _unknownWords.Where(unknownWord => unknownWord.Id != _currentUnknownWordPairId).ToArray();
+
+            if (_unknownWords.Length > 0)
+            {
+                _currentUnknownWordPairId = _unknownWords.First().Id;
+
+                HandleNextWordEvent();
+            }
+            else
+            {
+                OpenStartupForm();
+            }
         }
 
         private void NextWordButton_Click(object sender, EventArgs e)
@@ -108,8 +146,15 @@ namespace Silverio.Žodynas.Forms
 
         private void HandleNextWordEvent()
         {
-            LtWordTextBox.BackColor = Color.White;
-            EnWordTextBox.BackColor = Color.White;
+            if (LtWordTextBox.BackColor == _textBoxBackColorForIncorrectWord)
+            {
+                LtWordTextBox.BackColor = Color.White;
+            }
+
+            if (EnWordTextBox.BackColor == _textBoxBackColorForIncorrectWord)
+            {
+                EnWordTextBox.BackColor = Color.White;
+            }
 
             NextWordButton.Visible = false;
 
@@ -152,6 +197,16 @@ namespace Silverio.Žodynas.Forms
                     EnWordTextBox.ReadOnly = true;
                     break;
             }
+        }
+
+        private void OpenStartupForm()
+        {
+            this.Hide();
+            
+            var startupForm = new StartupForm();
+            startupForm.Closed += (s, args) => this.Close();
+
+            startupForm.Show();
         }
     }
 }

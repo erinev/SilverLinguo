@@ -185,11 +185,11 @@
             this.RandomRadioButton.AutoSize = true;
             this.RandomRadioButton.Location = new System.Drawing.Point(509, 55);
             this.RandomRadioButton.Name = "RandomRadioButton";
-            this.RandomRadioButton.Size = new System.Drawing.Size(96, 21);
+            this.RandomRadioButton.Size = new System.Drawing.Size(79, 21);
             this.RandomRadioButton.TabIndex = 10;
             this.RandomRadioButton.TabStop = true;
             this.RandomRadioButton.Tag = "SelectLanguage";
-            this.RandomRadioButton.Text = "Atsitiktinis";
+            this.RandomRadioButton.Text = "Maišytas";
             this.RandomRadioButton.UseVisualStyleBackColor = true;
             // 
             // ShouldCheckGrammarCheckBox
