@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Silverio.Žodynas.Constants;
@@ -47,13 +48,17 @@ namespace Silverio.Žodynas.Forms
         {
             if (e.KeyChar == KeyCodes.Space)
             {
-
+                if (NextWordButton.Visible)
+                {
+                    HandleNextWordEvent();
+                }
 
                 e.Handled = true;
             }
-            else if (e.KeyChar == KeyCodes.Enter || e.KeyChar == KeyCodes.KeypadEnter)
+            else if (e.KeyChar == KeyCodes.Enter)
             {
                 AssertAndHandleEnteredWord();
+
                 e.Handled = true;
             }
             /*else if (e.KeyChar == KeyCodes.Backspace)
@@ -64,10 +69,53 @@ namespace Silverio.Žodynas.Forms
 
         private void AssertAndHandleEnteredWord()
         {
-            if (_selectedLanguage == SelectedLanguage.Lithuanian)
+            bool isLtWordReadOnly = LtWordTextBox.ReadOnly;
+            bool isEnWordReadOnly = EnWordTextBox.ReadOnly;
+
+            var currentWordPair = _unknownWords.First(unknownWord => unknownWord.Id == _currentUnknownWordPairId);
+
+            if (!isEnWordReadOnly)
             {
+                bool isEqual = EnWordTextBox.Text == currentWordPair.EnglishWord;
+                EnWordTextBox.BackColor = isEqual ? Color.LightGreen : Color.LightCoral;
+
+            }
+            else if (!isLtWordReadOnly)
+            {
+                bool isEqual = LtWordTextBox.Text == currentWordPair.LithuanianWord;
+                if (isEqual)
+                {
+                    LtWordTextBox.BackColor = Color.LightGreen;
+                    _learnedWords.Add(_unknownWords.First(uw => uw.Id == _currentUnknownWordPairId));
+                    LearnedWordsCountLabel.Text = _learnedWords.Count.ToString();
+                
+                    _unknownWords = _unknownWords.Where(unknownWord => unknownWord.Id != _currentUnknownWordPairId).ToArray();
+                }
+                else
+                {
+                    LtWordTextBox.BackColor = Color.LightCoral;
+                }
                 
             }
+
+            NextWordButton.Visible = true;
+        }
+
+        private void NextWordButton_Click(object sender, EventArgs e)
+        {
+            HandleNextWordEvent();
+        }
+
+        private void HandleNextWordEvent()
+        {
+            LtWordTextBox.BackColor = Color.White;
+            EnWordTextBox.BackColor = Color.White;
+
+            NextWordButton.Visible = false;
+
+            WordPair currentUnknownWord = _unknownWords.First();
+            LtWordTextBox.Text = LtWordTextBox.ReadOnly ? currentUnknownWord.LithuanianWord : String.Empty;
+            EnWordTextBox.Text = EnWordTextBox.ReadOnly ? currentUnknownWord.EnglishWord : String.Empty;
         }
 
         private void ShowLearnedWordsButton_Click(object sender, EventArgs e)

@@ -164,6 +164,8 @@
             this.NextWordButton.TabIndex = 40;
             this.NextWordButton.Text = "Kitas žodis";
             this.NextWordButton.UseVisualStyleBackColor = false;
+            this.NextWordButton.Visible = false;
+            this.NextWordButton.Click += new System.EventHandler(this.NextWordButton_Click);
             // 
             // UnknownWordsGrammarTestForm
             // 
