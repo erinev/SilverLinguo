@@ -8,7 +8,7 @@ using Silverio.Žodynas.Services;
 
 namespace Silverio.Žodynas
 {
-    public partial class UnknownWordsTestForm : Form
+    public partial class UnknownWordsVerbalTestForm : Form
     {
         private readonly IWordsService _wordsService;
         private static SelectedLanguage _selectedLanguage;
@@ -18,7 +18,7 @@ namespace Silverio.Žodynas
         private static WordPair[] _unknownWords;
         private static IList<WordPair> _learnedWords = new List<WordPair>();
 
-        public UnknownWordsTestForm(SelectedLanguage selectedLanguage)
+        public UnknownWordsVerbalTestForm(SelectedLanguage selectedLanguage)
         {
             _wordsService = new WordsService();
 
@@ -151,7 +151,8 @@ namespace Silverio.Žodynas
             List<string> learnedWordsToDisplay =
                 _learnedWords.Select(learnedWord => learnedWord.LithuanianWord + " - " + learnedWord.EnglishWord).ToList();
 
-            var showWordsListByTypeForm = new ShowWordsListByTypeForm(learnedWordsToDisplay);
+            string showWordsFormName = "Išmokti žodžiai:";
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, learnedWordsToDisplay);
 
             showWordsListByTypeForm.Activate();
             showWordsListByTypeForm.ShowDialog(this);

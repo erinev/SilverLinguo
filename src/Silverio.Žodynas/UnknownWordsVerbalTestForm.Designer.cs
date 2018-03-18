@@ -2,7 +2,7 @@
 
 namespace Silverio.Žodynas
 {
-    partial class UnknownWordsTestForm
+    partial class UnknownWordsVerbalTestForm
     {
         /// <summary>
         /// Required designer variable.
@@ -184,7 +184,7 @@ namespace Silverio.Žodynas
             this.ShowLearnedWordsButton.UseVisualStyleBackColor = true;
             this.ShowLearnedWordsButton.Click += new System.EventHandler(this.ShowLearnedWordsButton_Click);
             // 
-            // UnknownWordsTestForm
+            // UnknownWordsVerbalTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -204,9 +204,9 @@ namespace Silverio.Žodynas
             this.Controls.Add(this.EnHeaderLabel);
             this.Controls.Add(this.LtHeaderLabel);
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.Name = "UnknownWordsTestForm";
+            this.Name = "UnknownWordsVerbalTestForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Nežinomu žodžiu testas";
+            this.Text = "Nežinomu žodžiu testas (žodžiu):";
             this.Load += new System.EventHandler(this.UnknownWordsTestForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

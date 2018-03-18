@@ -16,19 +16,19 @@ namespace Silverio.Žodynas
             InitializeComponent();
         }
 
-        private void StartupForm_Load(object sender, System.EventArgs e)
+        private void StartupForm_Load(object sender, EventArgs e)
         {
-            int _wordsCount = _wordsService.GetWordsCount();
-            int _unknownWordsCount = _wordsService.GetUnknownWordsCount();
+            int wordsCount = _wordsService.GetWordsCount();
+            int unknownWordsCount = _wordsService.GetUnknownWordsCount();
 
             LithuanianLanguageRadioButton.Select();
             ShouldCheckGrammarCheckBox.Checked = false;
 
-            WordsCountLabel.Text = $"({_wordsCount})";
-            UnknownWordsCountLabel.Text = $"({_unknownWordsCount})";
+            WordsCountLabel.Text = $@"({wordsCount})";
+            UnknownWordsCountLabel.Text = $@"({unknownWordsCount})";
         }
 
-        private void WordListSelectionButton_Click(object sender, System.EventArgs e)
+        private void WordListSelectionButton_Click(object sender, EventArgs e)
         {
             this.Hide();
             
@@ -38,7 +38,7 @@ namespace Silverio.Žodynas
             wordsVocabularyForm.Show();
         }
 
-        private void UnknownWordsListSelectionButton_Click(object sender, System.EventArgs e)
+        private void UnknownWordsListSelectionButton_Click(object sender, EventArgs e)
         {
             this.Hide();
 
@@ -53,14 +53,14 @@ namespace Silverio.Žodynas
             }
             else
             {
-                var unknownWordsTestForm = new UnknownWordsTestForm(selectedLanguage);
-                unknownWordsTestForm.Closed += (s, args) => this.Close();
+                var unknownWordsVerbalTestForm = new UnknownWordsVerbalTestForm(selectedLanguage);
+                unknownWordsVerbalTestForm.Closed += (s, args) => this.Close();
 
-                unknownWordsTestForm.Show();
+                unknownWordsVerbalTestForm.Show();
             }
         }
 
-        private void EndProgramButton_Click(object sender, System.EventArgs e)
+        private void EndProgramButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }

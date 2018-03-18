@@ -67,7 +67,8 @@ namespace Silverio.Žodynas
             List<string> learnedWordsToDisplay =
                 _learnedWords.Select(learnedWord => learnedWord.LithuanianWord + " - " + learnedWord.EnglishWord).ToList();
 
-            var showWordsListByTypeForm = new ShowWordsListByTypeForm(learnedWordsToDisplay);
+            string showWordsFormName = "Išmokti žodžiai:";
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, learnedWordsToDisplay);
 
             showWordsListByTypeForm.Activate();
             showWordsListByTypeForm.ShowDialog(this);

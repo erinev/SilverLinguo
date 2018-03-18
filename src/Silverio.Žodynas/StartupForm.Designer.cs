@@ -75,6 +75,7 @@
             this.WordListSelectionButton.TabIndex = 2;
             this.WordListSelectionButton.Text = "Pradėti";
             this.WordListSelectionButton.UseVisualStyleBackColor = false;
+            this.WordListSelectionButton.Visible = false;
             this.WordListSelectionButton.Click += new System.EventHandler(this.WordListSelectionButton_Click);
             // 
             // UnknownWordListLabel
@@ -219,7 +220,7 @@
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.Name = "StartupForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Testo pasirinkimas";
+            this.Text = "Testo pasirinkimas:";
             this.Load += new System.EventHandler(this.StartupForm_Load);
             this.UnknownWordsPanel.ResumeLayout(false);
             this.UnknownWordsPanel.PerformLayout();

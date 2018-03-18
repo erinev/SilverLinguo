@@ -35,7 +35,7 @@ namespace Silverio.Žodynas.Repositories
                 new WordPair {Id = 1, LithuanianWord = "Stogas", EnglishWord = "Roof"},
                 new WordPair {Id = 2, LithuanianWord = "Šiukšlės", EnglishWord = "Recycle"},
                 new WordPair {Id = 3, LithuanianWord = "Parduotuvė", EnglishWord = "Shop, Store"},
-                new WordPair {Id = 4, LithuanianWord = "Senelis", EnglishWord = "Grandfather, Grandpa, Grandad, old papa, oldman, santy"},
+                new WordPair {Id = 4, LithuanianWord = "Senelis", EnglishWord = "Grandfather, Grandpa, Grandad"},
                 new WordPair {Id = 5, LithuanianWord = "Aitvaras", EnglishWord = "Kite"},
                 new WordPair {Id = 6, LithuanianWord = "Man patinka mėlynas dangus", EnglishWord = "I like blue sky"},
             };

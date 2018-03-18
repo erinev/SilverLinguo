@@ -33,19 +33,21 @@
             // 
             // WordsListBox
             // 
+            this.WordsListBox.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.WordsListBox.FormattingEnabled = true;
-            this.WordsListBox.ItemHeight = 15;
+            this.WordsListBox.ItemHeight = 21;
             this.WordsListBox.Location = new System.Drawing.Point(12, 12);
             this.WordsListBox.Name = "WordsListBox";
             this.WordsListBox.ScrollAlwaysVisible = true;
-            this.WordsListBox.Size = new System.Drawing.Size(624, 214);
+            this.WordsListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.WordsListBox.Size = new System.Drawing.Size(945, 256);
             this.WordsListBox.TabIndex = 0;
             // 
             // ShowWordsListByTypeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(648, 241);
+            this.ClientSize = new System.Drawing.Size(969, 302);
             this.Controls.Add(this.WordsListBox);
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

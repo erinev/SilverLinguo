@@ -8,15 +8,20 @@ namespace Silverio.Žodynas
     public partial class ShowWordsListByTypeForm : Form
     {
         private readonly List<string> _words;
-        public ShowWordsListByTypeForm(List<string> words)
+        private readonly string _wordsListFormName;
+
+        public ShowWordsListByTypeForm(string wordsListFormName, List<string> words)
         {
             _words = words ?? Enumerable.Empty<string>().ToList();
+            _wordsListFormName = wordsListFormName;
 
             InitializeComponent();
         }
 
         private void ShowWordsListByTypeForm_Load(object sender, EventArgs e)
         {
+            this.Text = _wordsListFormName;
+
             WordsListBox.DataSource = _words;
         }
     }
