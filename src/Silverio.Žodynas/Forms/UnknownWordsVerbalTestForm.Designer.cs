@@ -48,7 +48,7 @@ namespace Silverio.Žodynas.Forms
             // 
             this.LearnedWordsCountLabel.AutoSize = true;
             this.LearnedWordsCountLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.LearnedWordsCountLabel.Location = new System.Drawing.Point(818, 123);
+            this.LearnedWordsCountLabel.Location = new System.Drawing.Point(819, 113);
             this.LearnedWordsCountLabel.Name = "LearnedWordsCountLabel";
             this.LearnedWordsCountLabel.Size = new System.Drawing.Size(15, 17);
             this.LearnedWordsCountLabel.TabIndex = 23;
@@ -58,7 +58,7 @@ namespace Silverio.Žodynas.Forms
             // 
             this.LearnedWordsCountHeaderLabel.AutoSize = true;
             this.LearnedWordsCountHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.LearnedWordsCountHeaderLabel.Location = new System.Drawing.Point(818, 105);
+            this.LearnedWordsCountHeaderLabel.Location = new System.Drawing.Point(819, 95);
             this.LearnedWordsCountHeaderLabel.Name = "LearnedWordsCountHeaderLabel";
             this.LearnedWordsCountHeaderLabel.Size = new System.Drawing.Size(99, 16);
             this.LearnedWordsCountHeaderLabel.TabIndex = 22;
@@ -68,7 +68,7 @@ namespace Silverio.Žodynas.Forms
             // 
             this.ProgressLabel.AutoSize = true;
             this.ProgressLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.ProgressLabel.Location = new System.Drawing.Point(818, 48);
+            this.ProgressLabel.Location = new System.Drawing.Point(819, 38);
             this.ProgressLabel.Name = "ProgressLabel";
             this.ProgressLabel.Size = new System.Drawing.Size(15, 17);
             this.ProgressLabel.TabIndex = 21;
@@ -78,7 +78,7 @@ namespace Silverio.Žodynas.Forms
             // 
             this.ProgressHeaderLabel.AutoSize = true;
             this.ProgressHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.ProgressHeaderLabel.Location = new System.Drawing.Point(818, 32);
+            this.ProgressHeaderLabel.Location = new System.Drawing.Point(819, 22);
             this.ProgressHeaderLabel.Name = "ProgressHeaderLabel";
             this.ProgressHeaderLabel.Size = new System.Drawing.Size(100, 16);
             this.ProgressHeaderLabel.TabIndex = 20;
@@ -106,7 +106,7 @@ namespace Silverio.Žodynas.Forms
             // 
             this.EnHeaderLabel.AutoSize = true;
             this.EnHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.EnHeaderLabel.Location = new System.Drawing.Point(410, 32);
+            this.EnHeaderLabel.Location = new System.Drawing.Point(411, 22);
             this.EnHeaderLabel.Name = "EnHeaderLabel";
             this.EnHeaderLabel.Size = new System.Drawing.Size(97, 16);
             this.EnHeaderLabel.TabIndex = 13;
@@ -116,7 +116,7 @@ namespace Silverio.Žodynas.Forms
             // 
             this.LtHeaderLabel.AutoSize = true;
             this.LtHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.LtHeaderLabel.Location = new System.Drawing.Point(25, 32);
+            this.LtHeaderLabel.Location = new System.Drawing.Point(26, 22);
             this.LtHeaderLabel.Name = "LtHeaderLabel";
             this.LtHeaderLabel.Size = new System.Drawing.Size(106, 16);
             this.LtHeaderLabel.TabIndex = 12;
@@ -127,7 +127,7 @@ namespace Silverio.Žodynas.Forms
             this.IDontKnowTheWordButton.BackColor = System.Drawing.Color.Yellow;
             this.IDontKnowTheWordButton.Cursor = System.Windows.Forms.Cursors.Help;
             this.IDontKnowTheWordButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.IDontKnowTheWordButton.Location = new System.Drawing.Point(636, 138);
+            this.IDontKnowTheWordButton.Location = new System.Drawing.Point(637, 128);
             this.IDontKnowTheWordButton.Name = "IDontKnowTheWordButton";
             this.IDontKnowTheWordButton.Padding = new System.Windows.Forms.Padding(2);
             this.IDontKnowTheWordButton.Size = new System.Drawing.Size(133, 39);
@@ -141,7 +141,7 @@ namespace Silverio.Žodynas.Forms
             this.NextWordButton.BackColor = System.Drawing.Color.YellowGreen;
             this.NextWordButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.NextWordButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.NextWordButton.Location = new System.Drawing.Point(28, 138);
+            this.NextWordButton.Location = new System.Drawing.Point(29, 128);
             this.NextWordButton.Name = "NextWordButton";
             this.NextWordButton.Padding = new System.Windows.Forms.Padding(2);
             this.NextWordButton.Size = new System.Drawing.Size(107, 39);
@@ -154,7 +154,7 @@ namespace Silverio.Žodynas.Forms
             // 
             this.EnWordTextBox.AcceptsReturn = true;
             this.EnWordTextBox.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.EnWordTextBox.Location = new System.Drawing.Point(413, 55);
+            this.EnWordTextBox.Location = new System.Drawing.Point(414, 45);
             this.EnWordTextBox.Multiline = true;
             this.EnWordTextBox.Name = "EnWordTextBox";
             this.EnWordTextBox.ReadOnly = true;
@@ -166,7 +166,7 @@ namespace Silverio.Žodynas.Forms
             // 
             this.LtWordTextBox.AcceptsReturn = true;
             this.LtWordTextBox.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.LtWordTextBox.Location = new System.Drawing.Point(28, 55);
+            this.LtWordTextBox.Location = new System.Drawing.Point(29, 45);
             this.LtWordTextBox.Multiline = true;
             this.LtWordTextBox.Name = "LtWordTextBox";
             this.LtWordTextBox.ReadOnly = true;
@@ -176,7 +176,7 @@ namespace Silverio.Žodynas.Forms
             // 
             // ShowLearnedWordsButton
             // 
-            this.ShowLearnedWordsButton.Location = new System.Drawing.Point(821, 146);
+            this.ShowLearnedWordsButton.Location = new System.Drawing.Point(822, 136);
             this.ShowLearnedWordsButton.Name = "ShowLearnedWordsButton";
             this.ShowLearnedWordsButton.Size = new System.Drawing.Size(75, 23);
             this.ShowLearnedWordsButton.TabIndex = 40;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Silverio.Žodynas.Constants;
 using Silverio.Žodynas.Enums;
 using Silverio.Žodynas.Models;
 using Silverio.Žodynas.Services;
@@ -44,21 +45,28 @@ namespace Silverio.Žodynas.Forms
 
         private void UnknownWordsGrammarTestForm_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar >= 48 && e.KeyChar <= 57)
+            if (e.KeyChar == KeyCodes.Space)
             {
-                MessageBox.Show("Form.KeyPress: '" +
-                                e.KeyChar.ToString() + "' pressed.");
 
-                switch (e.KeyChar)
-                {
-                    case (char)49:
-                    case (char)52:
-                    case (char)55:
-                        MessageBox.Show("Form.KeyPress: '" +
-                                        e.KeyChar.ToString() + "' consumed.");
-                        e.Handled = true;
-                        break;
-                }
+
+                e.Handled = true;
+            }
+            else if (e.KeyChar == KeyCodes.Enter || e.KeyChar == KeyCodes.KeypadEnter)
+            {
+                AssertAndHandleEnteredWord();
+                e.Handled = true;
+            }
+            /*else if (e.KeyChar == KeyCodes.Backspace)
+            {
+                e.Handled = true;
+            }*/
+        }
+
+        private void AssertAndHandleEnteredWord()
+        {
+            if (_selectedLanguage == SelectedLanguage.Lithuanian)
+            {
+                
             }
         }
 
