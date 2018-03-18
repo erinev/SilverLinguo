@@ -7,7 +7,7 @@ using Silverio.Žodynas.Enums;
 using Silverio.Žodynas.Models;
 using Silverio.Žodynas.Repositories;
 
-namespace Silverio.Žodynas
+namespace Silverio.Žodynas.Forms
 {
     public partial class WordsTestForm : Form
     {

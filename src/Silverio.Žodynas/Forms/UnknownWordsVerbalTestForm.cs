@@ -6,7 +6,7 @@ using Silverio.Žodynas.Enums;
 using Silverio.Žodynas.Models;
 using Silverio.Žodynas.Services;
 
-namespace Silverio.Žodynas
+namespace Silverio.Žodynas.Forms
 {
     public partial class UnknownWordsVerbalTestForm : Form
     {

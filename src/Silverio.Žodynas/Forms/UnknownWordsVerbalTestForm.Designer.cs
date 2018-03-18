@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace Silverio.Žodynas
+namespace Silverio.Žodynas.Forms
 {
     partial class UnknownWordsVerbalTestForm
     {
