@@ -42,6 +42,7 @@ namespace Silverio.Žodynas.Forms
             this.EnWordTextBox = new System.Windows.Forms.TextBox();
             this.LtWordTextBox = new System.Windows.Forms.TextBox();
             this.ShowLearnedWordsButton = new System.Windows.Forms.Button();
+            this.TestTimerLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LearnedWordsCountLabel
@@ -184,6 +185,17 @@ namespace Silverio.Žodynas.Forms
             this.ShowLearnedWordsButton.UseVisualStyleBackColor = true;
             this.ShowLearnedWordsButton.Click += new System.EventHandler(this.ShowLearnedWordsButton_Click);
             // 
+            // TestTimerLabel
+            // 
+            this.TestTimerLabel.AutoSize = true;
+            this.TestTimerLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TestTimerLabel.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.TestTimerLabel.Location = new System.Drawing.Point(29, 252);
+            this.TestTimerLabel.Name = "TestTimerLabel";
+            this.TestTimerLabel.Size = new System.Drawing.Size(92, 27);
+            this.TestTimerLabel.TabIndex = 41;
+            this.TestTimerLabel.Text = "00:00:00";
+            // 
             // UnknownWordsVerbalTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -191,6 +203,7 @@ namespace Silverio.Žodynas.Forms
             this.CancelButton = this.EndTestButton;
             this.ClientSize = new System.Drawing.Size(930, 291);
             this.ControlBox = false;
+            this.Controls.Add(this.TestTimerLabel);
             this.Controls.Add(this.ShowLearnedWordsButton);
             this.Controls.Add(this.LtWordTextBox);
             this.Controls.Add(this.EnWordTextBox);
@@ -227,5 +240,6 @@ namespace Silverio.Žodynas.Forms
         private System.Windows.Forms.TextBox EnWordTextBox;
         private System.Windows.Forms.TextBox LtWordTextBox;
         private Button ShowLearnedWordsButton;
+        private Label TestTimerLabel;
     }
 }

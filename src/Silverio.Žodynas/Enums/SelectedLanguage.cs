@@ -4,6 +4,6 @@
     {
         Lithuanian,
         English,
-        Random
+        Mixed
     }
 }

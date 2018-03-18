@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using Silverio.Žodynas.Enums;
@@ -18,8 +19,12 @@ namespace Silverio.Žodynas.Forms
         private static WordPair[] _unknownWords;
         private static IList<WordPair> _learnedWords = new List<WordPair>();
 
+        private static readonly Stopwatch StopWatch = new Stopwatch();
+
         public UnknownWordsVerbalTestForm(SelectedLanguage selectedLanguage)
         {
+            SetTestTimer();
+
             _wordsService = new WordsService();
 
             _selectedLanguage = selectedLanguage;
@@ -27,6 +32,23 @@ namespace Silverio.Žodynas.Forms
             InitializeComponent();
 
             SetSelectedLanguage(_selectedLanguage);
+        }
+
+        private void SetTestTimer()
+        {
+            var timer = new Timer();
+            timer.Tick += timer_Tick;
+            timer.Interval = 1000;
+            timer.Enabled = true;
+            StopWatch.Start();
+            timer.Start();
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            TestTimerLabel.Text = StopWatch.Elapsed.Hours.ToString("00") + @":" +
+                                  StopWatch.Elapsed.Minutes.ToString("00") + @":" +
+                                  StopWatch.Elapsed.Seconds.ToString("00");
         }
 
         private void UnknownWordsTestForm_Load(object sender, EventArgs e)
@@ -73,7 +95,7 @@ namespace Silverio.Žodynas.Forms
             }
             else
             {
-                OpenStartupForm();
+                HandleFinishedTest();
             }
 
             switch (_selectedLanguage)
@@ -84,7 +106,7 @@ namespace Silverio.Žodynas.Forms
                 case SelectedLanguage.English:
                     EnWordTextBox.Visible = false;
                     break;
-                case SelectedLanguage.Random:
+                case SelectedLanguage.Mixed:
                     bool currentEnLabelVisibleState = EnWordTextBox.Visible;
                     bool currentLtLabelVisibleState = LtWordTextBox.Visible;
                     EnWordTextBox.Visible = !currentEnLabelVisibleState;
@@ -114,7 +136,7 @@ namespace Silverio.Žodynas.Forms
 
         private void EndTestButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            HandleFinishedTest();
         }
 
         private void SetSelectedLanguage(SelectedLanguage selectedLanguage)
@@ -136,16 +158,6 @@ namespace Silverio.Žodynas.Forms
             }
         }
 
-        private void OpenStartupForm()
-        {
-            this.Hide();
-            
-            var startupForm = new StartupForm();
-            startupForm.Closed += (s, args) => this.Close();
-
-            startupForm.Show();
-        }
-
         private void ShowLearnedWordsButton_Click(object sender, EventArgs e)
         {
             List<string> learnedWordsToDisplay =
@@ -156,6 +168,20 @@ namespace Silverio.Žodynas.Forms
 
             showWordsListByTypeForm.Activate();
             showWordsListByTypeForm.ShowDialog(this);
+        }
+
+        private void HandleFinishedTest()
+        {
+            StopWatch.Stop();
+
+            this.Hide();
+            
+            List<string> learnedWordsToDisplay =
+                _learnedWords.Select(learnedWord => learnedWord.LithuanianWord + " - " + learnedWord.EnglishWord).ToList();
+            var testResultsForm = new TestResultsForm(_selectedLanguage, TestType.Grammar, WordsType.UnknownWords, StopWatch, learnedWordsToDisplay);
+            testResultsForm.Closed += (s, args) => this.Close();
+
+            testResultsForm.Show();
         }
     }
 }

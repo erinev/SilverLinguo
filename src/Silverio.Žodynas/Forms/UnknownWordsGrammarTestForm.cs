@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -21,8 +22,12 @@ namespace Silverio.Žodynas.Forms
         private static IList<WordPair> _learnedWords = new List<WordPair>();
         private readonly Color _textBoxBackColorForIncorrectWord = Color.LightCoral;
 
+        private static readonly Stopwatch StopWatch = new Stopwatch();
+
         public UnknownWordsGrammarTestForm(SelectedLanguage selectedLanguage)
         {
+            SetTestTimer();
+
             _wordsService = new WordsService();
 
             _selectedLanguage = selectedLanguage;
@@ -30,6 +35,21 @@ namespace Silverio.Žodynas.Forms
             InitializeComponent();
 
             SetSelectedLanguage(selectedLanguage);
+        }
+
+        private void SetTestTimer()
+        {
+            var timer = new Timer();
+            timer.Tick += timer_Tick;
+            timer.Interval = 1000;
+            timer.Enabled = true;
+            StopWatch.Start();
+            timer.Start();
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            TestTimerLabel.Text = GetElapsedTestTimeText();
         }
 
         private void UnknownWordsGrammarTestForm_Load(object sender, System.EventArgs e)
@@ -135,7 +155,7 @@ namespace Silverio.Žodynas.Forms
             }
             else
             {
-                OpenStartupForm();
+                HandleFinishedTest();
             }
         }
 
@@ -158,9 +178,26 @@ namespace Silverio.Žodynas.Forms
 
             NextWordButton.Visible = false;
 
+            if (_selectedLanguage == SelectedLanguage.Mixed)
+            {
+                bool currentEnWordTextBoxReadOnlyState = EnWordTextBox.ReadOnly;
+                bool currentLtWordTextBoxReadOnlyState = LtWordTextBox.ReadOnly;
+                EnWordTextBox.ReadOnly = !currentEnWordTextBoxReadOnlyState;
+                LtWordTextBox.ReadOnly = !currentLtWordTextBoxReadOnlyState;
+            }
+
             WordPair currentUnknownWord = _unknownWords.First();
             LtWordTextBox.Text = LtWordTextBox.ReadOnly ? currentUnknownWord.LithuanianWord : String.Empty;
             EnWordTextBox.Text = EnWordTextBox.ReadOnly ? currentUnknownWord.EnglishWord : String.Empty;
+
+            if (!LtWordTextBox.ReadOnly)
+            {
+                LtWordTextBox.Focus();
+            }
+            else
+            {
+                EnWordTextBox.Focus();
+            }
         }
 
         private void ShowLearnedWordsButton_Click(object sender, EventArgs e)
@@ -177,7 +214,7 @@ namespace Silverio.Žodynas.Forms
 
         private void EndTestButton_Click(object sender, System.EventArgs e)
         {
-            this.Close();
+            HandleFinishedTest();
         }
 
         private void SetSelectedLanguage(SelectedLanguage selectedLanguage)
@@ -199,14 +236,25 @@ namespace Silverio.Žodynas.Forms
             }
         }
 
-        private void OpenStartupForm()
+        private void HandleFinishedTest()
         {
+            StopWatch.Stop();
+
             this.Hide();
             
-            var startupForm = new StartupForm();
-            startupForm.Closed += (s, args) => this.Close();
+            List<string> learnedWordsToDisplay =
+                _learnedWords.Select(learnedWord => learnedWord.LithuanianWord + " - " + learnedWord.EnglishWord).ToList();
+            var testResultsForm = new TestResultsForm(_selectedLanguage, TestType.Grammar, WordsType.UnknownWords, StopWatch, learnedWordsToDisplay);
+            testResultsForm.Closed += (s, args) => this.Close();
 
-            startupForm.Show();
+            testResultsForm.Show();
+        }
+
+        private static string GetElapsedTestTimeText()
+        {
+            return StopWatch.Elapsed.Hours.ToString("00") + @":" +
+                   StopWatch.Elapsed.Minutes.ToString("00") + @":" +
+                   StopWatch.Elapsed.Seconds.ToString("00");
         }
     }
 }

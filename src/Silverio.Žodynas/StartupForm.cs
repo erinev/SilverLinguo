@@ -80,7 +80,7 @@ namespace Silverio.Žodynas
             }
             else if (RandomRadioButton.Checked)
             {
-                selectedLanguage = SelectedLanguage.Random;
+                selectedLanguage = SelectedLanguage.Mixed;
             }
             else
             {
