@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Silverio.Žodynas.Enums;
@@ -13,28 +12,27 @@ namespace Silverio.Žodynas
     {
         private readonly IWordsService _wordsService;
         private static SelectedLanguage _selectedLanguage;
-        private static bool _shouldCheckGrammar;
 
         private static int _currentUnknownWordPairId;
 
         private static WordPair[] _unknownWords;
         private static IList<WordPair> _learnedWords = new List<WordPair>();
 
-        public UnknownWordsTestForm(SelectedLanguage selectedLanguage, bool shouldCheckGrammar)
+        public UnknownWordsTestForm(SelectedLanguage selectedLanguage)
         {
             _wordsService = new WordsService();
 
             _selectedLanguage = selectedLanguage;
-            _shouldCheckGrammar = shouldCheckGrammar;
 
             InitializeComponent();
 
             SetSelectedLanguage(_selectedLanguage);
-            ConfigureGrammarChecking(_shouldCheckGrammar);
         }
 
         private void UnknownWordsTestForm_Load(object sender, EventArgs e)
         {
+            ShowLearnedWordsButton.Visible = false;
+
             _unknownWords = _wordsService.GetRandomlySortedUnknownWords();
 
             _currentUnknownWordPairId = _unknownWords[0].Id;
@@ -42,8 +40,8 @@ namespace Silverio.Žodynas
             ProgressLabel.Text = _unknownWords.Length.ToString();
 
             WordPair firstUnknownWord = _unknownWords.First();
-            LtWordTextBox.Text = LtWordTextBox.ReadOnly ? firstUnknownWord.LithuanianWord : String.Empty;
-            EnWordTextBox.Text = EnWordTextBox.ReadOnly ? firstUnknownWord.EnglishWord : String.Empty;
+            LtWordTextBox.Text = firstUnknownWord.LithuanianWord;
+            EnWordTextBox.Text = firstUnknownWord.EnglishWord;
         }
 
         private void NextWordButton_Click(object sender, EventArgs e)
@@ -59,7 +57,8 @@ namespace Silverio.Žodynas
             {
                 SetSelectedLanguage(_selectedLanguage);
             }
-            
+
+            ShowLearnedWordsButton.Visible = _learnedWords.Count > 0;
             IDontKnowTheWordButton.Visible = true;
 
             if (_unknownWords.Length > 0)
@@ -68,8 +67,8 @@ namespace Silverio.Žodynas
 
                 WordPair nextUnknownWord = _unknownWords.First();
 
-                LtWordLabel.Text = nextUnknownWord.LithuanianWord;
-                EnWordLabel.Text = nextUnknownWord.EnglishWord;
+                LtWordTextBox.Text = nextUnknownWord.LithuanianWord;
+                EnWordTextBox.Text = nextUnknownWord.EnglishWord;
                 _currentUnknownWordPairId = nextUnknownWord.Id;
             }
             else
@@ -80,16 +79,16 @@ namespace Silverio.Žodynas
             switch (_selectedLanguage)
             {
                 case SelectedLanguage.Lithuanian:
-                    EnWordLabel.Visible = false;
+                    LtWordTextBox.Visible = false;
                     break;
                 case SelectedLanguage.English:
-                    LtWordLabel.Visible = false;
+                    EnWordTextBox.Visible = false;
                     break;
                 case SelectedLanguage.Random:
-                    bool currentEnLabelVisibleState = EnWordLabel.Visible;
-                    bool currentLtLabelVisibleState = LtWordLabel.Visible;
-                    EnWordLabel.Visible = !currentEnLabelVisibleState;
-                    LtWordLabel.Visible = !currentLtLabelVisibleState;
+                    bool currentEnLabelVisibleState = EnWordTextBox.Visible;
+                    bool currentLtLabelVisibleState = LtWordTextBox.Visible;
+                    EnWordTextBox.Visible = !currentEnLabelVisibleState;
+                    LtWordTextBox.Visible = !currentLtLabelVisibleState;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -100,8 +99,8 @@ namespace Silverio.Žodynas
         {
             IDontKnowTheWordButton.Visible = false;
 
-            EnWordLabel.Visible = true;
-            LtWordLabel.Visible = true;
+            EnWordTextBox.Visible = true;
+            LtWordTextBox.Visible = true;
 
             var unknownWordToMove = _unknownWords[0];
 
@@ -122,32 +121,18 @@ namespace Silverio.Žodynas
         {
             if (selectedLanguage == SelectedLanguage.Lithuanian)
             {
-                LtWordTextBox.ReadOnly = true;
-                EnWordTextBox.ReadOnly = false;
+                LtWordTextBox.Visible = false;
+                EnWordTextBox.Visible = true;
             }
             else if (selectedLanguage == SelectedLanguage.English)
             {
-                LtWordTextBox.ReadOnly = false;
-                EnWordTextBox.ReadOnly = true;
+                LtWordTextBox.Visible = true;
+                EnWordTextBox.Visible = false;
             }
             else
             {
-                LtWordTextBox.ReadOnly = true;
-                EnWordTextBox.ReadOnly = false;
-            }
-        }
-
-        private void ConfigureGrammarChecking(bool shouldCheckGrammar)
-        {
-            if (shouldCheckGrammar)
-            {
-                NextWordButton.Visible = false;
-                IDontKnowTheWordButton.Visible = false;
-            }
-            else
-            {
-                NextWordButton.Visible = true;
-                IDontKnowTheWordButton.Visible = true;
+                LtWordTextBox.Visible = false;
+                EnWordTextBox.Visible = true;
             }
         }
 
@@ -159,6 +144,17 @@ namespace Silverio.Žodynas
             startupForm.Closed += (s, args) => this.Close();
 
             startupForm.Show();
+        }
+
+        private void ShowLearnedWordsButton_Click(object sender, EventArgs e)
+        {
+            List<string> learnedWordsToDisplay =
+                _learnedWords.Select(learnedWord => learnedWord.LithuanianWord + " - " + learnedWord.EnglishWord).ToList();
+
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(learnedWordsToDisplay);
+
+            showWordsListByTypeForm.Activate();
+            showWordsListByTypeForm.ShowDialog(this);
         }
     }
 }

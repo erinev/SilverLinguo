@@ -35,8 +35,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\SelectedLanguage.cs" />
@@ -45,11 +47,23 @@
     <Compile Include="Repositories\WordsRepository.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Services\WordsService.cs" />
+    <Compile Include="ShowWordsListByTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowWordsListByTypeForm.Designer.cs">
+      <DependentUpon>ShowWordsListByTypeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="StartupForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="StartupForm.Designer.cs">
       <DependentUpon>StartupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnknownWordsGrammarTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnknownWordsGrammarTestForm.Designer.cs">
+      <DependentUpon>UnknownWordsGrammarTestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UnknownWordsTestForm.cs">
       <SubType>Form</SubType>
@@ -75,8 +89,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ShowWordsListByTypeForm.resx">
+      <DependentUpon>ShowWordsListByTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StartupForm.resx">
       <DependentUpon>StartupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnknownWordsGrammarTestForm.resx">
+      <DependentUpon>UnknownWordsGrammarTestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UnknownWordsTestForm.resx">
       <DependentUpon>UnknownWordsTestForm.cs</DependentUpon>

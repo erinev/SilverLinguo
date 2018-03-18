@@ -44,10 +44,20 @@ namespace Silverio.Žodynas
 
             SelectedLanguage selectedLanguage = GetSelectedLanguage();
 
-            var unknownWordsVocabularyForm = new UnknownWordsTestForm(selectedLanguage, ShouldCheckGrammarCheckBox.Checked);
-            unknownWordsVocabularyForm.Closed += (s, args) => this.Close();
+            if (ShouldCheckGrammarCheckBox.Checked)
+            {
+                var unknownWordsGrammarTestForm = new UnknownWordsGrammarTestForm(selectedLanguage);
+                unknownWordsGrammarTestForm.Closed += (s, args) => this.Close();
 
-            unknownWordsVocabularyForm.Show();
+                unknownWordsGrammarTestForm.Show();
+            }
+            else
+            {
+                var unknownWordsTestForm = new UnknownWordsTestForm(selectedLanguage);
+                unknownWordsTestForm.Closed += (s, args) => this.Close();
+
+                unknownWordsTestForm.Show();
+            }
         }
 
         private void EndProgramButton_Click(object sender, System.EventArgs e)
