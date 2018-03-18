@@ -52,6 +52,7 @@
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ShowWordsListByTypeForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Išmokti žodžiai:";
             this.Load += new System.EventHandler(this.ShowWordsListByTypeForm_Load);
             this.ResumeLayout(false);
