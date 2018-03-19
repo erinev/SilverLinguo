@@ -21,6 +21,7 @@ namespace Silverio.Žodynas.Forms
         private WordPair[] _unknownWords;
         private readonly IList<WordPair> _learnedWords = new List<WordPair>();
         private readonly Color _textBoxBackColorForIncorrectWord = Color.LightCoral;
+        private int _startingCountOfUnknownWords;
 
         private readonly Stopwatch _stopWatch = new Stopwatch();
 
@@ -34,7 +35,7 @@ namespace Silverio.Žodynas.Forms
 
             InitializeComponent();
 
-            SetSelectedLanguage(selectedLanguage);
+            ConfigureSelectedLanguage(selectedLanguage);
         }
 
         private void SetTestTimer()
@@ -55,10 +56,12 @@ namespace Silverio.Žodynas.Forms
         private void UnknownWordsGrammarTestForm_Load(object sender, System.EventArgs e)
         {
             _unknownWords = _wordsService.GetRandomlySortedUnknownWords();
+            _startingCountOfUnknownWords = _unknownWords.Length;
 
             _currentUnknownWordPairId = _unknownWords[0].Id;
 
             ProgressLabel.Text = _unknownWords.Length.ToString();
+            LearnedWordsCountLinkLabel.Enabled = false;
 
             WordPair firstUnknownWord = _unknownWords.First();
             LtWordTextBox.Text = LtWordTextBox.ReadOnly ? firstUnknownWord.LithuanianWord : String.Empty;
@@ -116,6 +119,7 @@ namespace Silverio.Žodynas.Forms
         private void HandleIncorrectlyEnteredWord(TextBox textBox, string correctValueForTextBox)
         {
             NextWordButton.Visible = true;
+            NextWordButton.Focus();
 
             textBox.BackColor = _textBoxBackColorForIncorrectWord;
             textBox.Text = correctValueForTextBox;
@@ -134,12 +138,15 @@ namespace Silverio.Žodynas.Forms
         private void HandleCorrectlyEnteredWord()
         {
             _learnedWords.Add(_unknownWords.First(uw => uw.Id == _currentUnknownWordPairId));
-            LearnedWordsCountLabel.Text = _learnedWords.Count.ToString();
+            LearnedWordsCountLinkLabel.Text = _learnedWords.Count.ToString();
+
+            LearnedWordsCountLinkLabel.Enabled = _learnedWords.Count > 0;
 
             _unknownWords = _unknownWords.Where(unknownWord => unknownWord.Id != _currentUnknownWordPairId).ToArray();
 
             if (_unknownWords.Length > 0)
             {
+                ProgressLabel.Text = _unknownWords.Length.ToString();
                 _currentUnknownWordPairId = _unknownWords.First().Id;
 
                 HandleNextWordEvent();
@@ -167,14 +174,32 @@ namespace Silverio.Žodynas.Forms
                 LtWordTextBox.ReadOnly = !currentLtWordTextBoxReadOnlyState;
             }
 
+            SetInputColorsOnNextWordEvent();
+
+            WordPair currentUnknownWord = _unknownWords.First();
+            LtWordTextBox.Text = LtWordTextBox.ReadOnly ? currentUnknownWord.LithuanianWord : String.Empty;
+            EnWordTextBox.Text = EnWordTextBox.ReadOnly ? currentUnknownWord.EnglishWord : String.Empty;
+
+            if (!LtWordTextBox.ReadOnly)
+            {
+                LtWordTextBox.Focus();
+            }
+            else
+            {
+                EnWordTextBox.Focus();
+            }
+        }
+
+        private void SetInputColorsOnNextWordEvent()
+        {
             if (LtWordTextBox.BackColor == _textBoxBackColorForIncorrectWord && !LtWordTextBox.ReadOnly)
             {
                 LtWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
-            } 
+            }
             else if (LtWordTextBox.BackColor == _textBoxBackColorForIncorrectWord && LtWordTextBox.ReadOnly)
             {
                 LtWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Control);
-            } 
+            }
             else if (LtWordTextBox.BackColor == Color.FromKnownColor(KnownColor.Control) && !LtWordTextBox.ReadOnly)
             {
                 LtWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
@@ -192,22 +217,9 @@ namespace Silverio.Žodynas.Forms
             {
                 EnWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
             }
-
-            WordPair currentUnknownWord = _unknownWords.First();
-            LtWordTextBox.Text = LtWordTextBox.ReadOnly ? currentUnknownWord.LithuanianWord : String.Empty;
-            EnWordTextBox.Text = EnWordTextBox.ReadOnly ? currentUnknownWord.EnglishWord : String.Empty;
-
-            if (!LtWordTextBox.ReadOnly)
-            {
-                LtWordTextBox.Focus();
-            }
-            else
-            {
-                EnWordTextBox.Focus();
-            }
         }
 
-        private void ShowLearnedWordsButton_Click(object sender, EventArgs e)
+        private void LearnedWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             List<string> learnedWordsToDisplay =
                 _learnedWords.Select(learnedWord => learnedWord.LithuanianWord + " - " + learnedWord.EnglishWord).ToList();
@@ -224,21 +236,24 @@ namespace Silverio.Žodynas.Forms
             HandleFinishedTest();
         }
 
-        private void SetSelectedLanguage(SelectedLanguage selectedLanguage)
+        private void ConfigureSelectedLanguage(SelectedLanguage selectedLanguage)
         {
             switch (selectedLanguage)
             {
                 case SelectedLanguage.Lithuanian:
                     LtWordTextBox.ReadOnly = false;
                     EnWordTextBox.ReadOnly = true;
+                    LtWordTextBox.Select();
                     break;
                 case SelectedLanguage.English:
                     LtWordTextBox.ReadOnly = true;
                     EnWordTextBox.ReadOnly = false;
+                    EnWordTextBox.Select();
                     break;
                 default:
                     LtWordTextBox.ReadOnly = false;
                     EnWordTextBox.ReadOnly = true;
+                    LtWordTextBox.Select();
                     break;
             }
         }
@@ -251,7 +266,7 @@ namespace Silverio.Žodynas.Forms
             
             List<string> learnedWordsToDisplay =
                 _learnedWords.Select(learnedWord => learnedWord.LithuanianWord + " - " + learnedWord.EnglishWord).ToList();
-            var testResultsForm = new TestResultsForm(_selectedLanguage, TestType.Grammar, WordsType.UnknownWords, _stopWatch, learnedWordsToDisplay);
+            var testResultsForm = new TestResultsForm(_selectedLanguage, TestType.Grammar, WordsType.UnknownWords, _stopWatch, _startingCountOfUnknownWords, learnedWordsToDisplay);
             testResultsForm.Closed += (s, args) => this.Close();
 
             testResultsForm.Show();

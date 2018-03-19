@@ -38,8 +38,7 @@
             this.LtHeaderLabel = new System.Windows.Forms.Label();
             this.NextWordButton = new System.Windows.Forms.Button();
             this.TestTimerLabel = new System.Windows.Forms.Label();
-            this.LearnedWordsCountLabel = new System.Windows.Forms.Label();
-            this.ShowLearnedWordsButton = new System.Windows.Forms.Button();
+            this.LearnedWordsCountLinkLabel = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // LtWordTextBox
@@ -161,25 +160,16 @@
             this.TestTimerLabel.TabIndex = 42;
             this.TestTimerLabel.Text = "00:00:00";
             // 
-            // LearnedWordsCountLabel
+            // LearnedWordsCountLinkLabel
             // 
-            this.LearnedWordsCountLabel.AutoSize = true;
-            this.LearnedWordsCountLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.LearnedWordsCountLabel.Location = new System.Drawing.Point(819, 113);
-            this.LearnedWordsCountLabel.Name = "LearnedWordsCountLabel";
-            this.LearnedWordsCountLabel.Size = new System.Drawing.Size(15, 17);
-            this.LearnedWordsCountLabel.TabIndex = 34;
-            this.LearnedWordsCountLabel.Text = "0";
-            // 
-            // ShowLearnedWordsButton
-            // 
-            this.ShowLearnedWordsButton.Location = new System.Drawing.Point(822, 136);
-            this.ShowLearnedWordsButton.Name = "ShowLearnedWordsButton";
-            this.ShowLearnedWordsButton.Size = new System.Drawing.Size(75, 23);
-            this.ShowLearnedWordsButton.TabIndex = 39;
-            this.ShowLearnedWordsButton.Text = "Rodyti";
-            this.ShowLearnedWordsButton.UseVisualStyleBackColor = true;
-            this.ShowLearnedWordsButton.Click += new System.EventHandler(this.ShowLearnedWordsButton_Click);
+            this.LearnedWordsCountLinkLabel.AutoSize = true;
+            this.LearnedWordsCountLinkLabel.Location = new System.Drawing.Point(819, 111);
+            this.LearnedWordsCountLinkLabel.Name = "LearnedWordsCountLinkLabel";
+            this.LearnedWordsCountLinkLabel.Size = new System.Drawing.Size(15, 16);
+            this.LearnedWordsCountLinkLabel.TabIndex = 43;
+            this.LearnedWordsCountLinkLabel.TabStop = true;
+            this.LearnedWordsCountLinkLabel.Text = "0";
+            this.LearnedWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LearnedWordsCountLinkLabel_LinkClicked);
             // 
             // UnknownWordsGrammarTestForm
             // 
@@ -188,12 +178,11 @@
             this.CancelButton = this.EndTestButton;
             this.ClientSize = new System.Drawing.Size(930, 291);
             this.ControlBox = false;
+            this.Controls.Add(this.LearnedWordsCountLinkLabel);
             this.Controls.Add(this.TestTimerLabel);
             this.Controls.Add(this.NextWordButton);
-            this.Controls.Add(this.ShowLearnedWordsButton);
             this.Controls.Add(this.LtWordTextBox);
             this.Controls.Add(this.EnWordTextBox);
-            this.Controls.Add(this.LearnedWordsCountLabel);
             this.Controls.Add(this.LearnedWordsCountHeaderLabel);
             this.Controls.Add(this.ProgressLabel);
             this.Controls.Add(this.ProgressHeaderLabel);
@@ -224,7 +213,6 @@
         private System.Windows.Forms.Label LtHeaderLabel;
         private System.Windows.Forms.Button NextWordButton;
         private System.Windows.Forms.Label TestTimerLabel;
-        private System.Windows.Forms.Label LearnedWordsCountLabel;
-        private System.Windows.Forms.Button ShowLearnedWordsButton;
+        private System.Windows.Forms.LinkLabel LearnedWordsCountLinkLabel;
     }
 }

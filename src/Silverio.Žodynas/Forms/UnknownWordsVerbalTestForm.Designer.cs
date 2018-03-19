@@ -30,7 +30,6 @@ namespace Silverio.Žodynas.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.LearnedWordsCountLabel = new System.Windows.Forms.Label();
             this.LearnedWordsCountHeaderLabel = new System.Windows.Forms.Label();
             this.ProgressLabel = new System.Windows.Forms.Label();
             this.ProgressHeaderLabel = new System.Windows.Forms.Label();
@@ -41,19 +40,9 @@ namespace Silverio.Žodynas.Forms
             this.NextWordButton = new System.Windows.Forms.Button();
             this.EnWordTextBox = new System.Windows.Forms.TextBox();
             this.LtWordTextBox = new System.Windows.Forms.TextBox();
-            this.ShowLearnedWordsButton = new System.Windows.Forms.Button();
             this.TestTimerLabel = new System.Windows.Forms.Label();
+            this.LearnedWordsCountLinkLabel = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
-            // 
-            // LearnedWordsCountLabel
-            // 
-            this.LearnedWordsCountLabel.AutoSize = true;
-            this.LearnedWordsCountLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.LearnedWordsCountLabel.Location = new System.Drawing.Point(819, 113);
-            this.LearnedWordsCountLabel.Name = "LearnedWordsCountLabel";
-            this.LearnedWordsCountLabel.Size = new System.Drawing.Size(15, 17);
-            this.LearnedWordsCountLabel.TabIndex = 23;
-            this.LearnedWordsCountLabel.Text = "0";
             // 
             // LearnedWordsCountHeaderLabel
             // 
@@ -177,16 +166,6 @@ namespace Silverio.Žodynas.Forms
             this.LtWordTextBox.Size = new System.Drawing.Size(356, 69);
             this.LtWordTextBox.TabIndex = 27;
             // 
-            // ShowLearnedWordsButton
-            // 
-            this.ShowLearnedWordsButton.Location = new System.Drawing.Point(822, 136);
-            this.ShowLearnedWordsButton.Name = "ShowLearnedWordsButton";
-            this.ShowLearnedWordsButton.Size = new System.Drawing.Size(75, 23);
-            this.ShowLearnedWordsButton.TabIndex = 40;
-            this.ShowLearnedWordsButton.Text = "Rodyti";
-            this.ShowLearnedWordsButton.UseVisualStyleBackColor = true;
-            this.ShowLearnedWordsButton.Click += new System.EventHandler(this.ShowLearnedWordsButton_Click);
-            // 
             // TestTimerLabel
             // 
             this.TestTimerLabel.AutoSize = true;
@@ -198,6 +177,17 @@ namespace Silverio.Žodynas.Forms
             this.TestTimerLabel.TabIndex = 41;
             this.TestTimerLabel.Text = "00:00:00";
             // 
+            // LearnedWordsCountLinkLabel
+            // 
+            this.LearnedWordsCountLinkLabel.AutoSize = true;
+            this.LearnedWordsCountLinkLabel.Location = new System.Drawing.Point(819, 111);
+            this.LearnedWordsCountLinkLabel.Name = "LearnedWordsCountLinkLabel";
+            this.LearnedWordsCountLinkLabel.Size = new System.Drawing.Size(15, 16);
+            this.LearnedWordsCountLinkLabel.TabIndex = 44;
+            this.LearnedWordsCountLinkLabel.TabStop = true;
+            this.LearnedWordsCountLinkLabel.Text = "0";
+            this.LearnedWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LearnedWordsCountLinkLabel_LinkClicked);
+            // 
             // UnknownWordsVerbalTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -205,13 +195,12 @@ namespace Silverio.Žodynas.Forms
             this.CancelButton = this.EndTestButton;
             this.ClientSize = new System.Drawing.Size(930, 291);
             this.ControlBox = false;
+            this.Controls.Add(this.LearnedWordsCountLinkLabel);
             this.Controls.Add(this.TestTimerLabel);
-            this.Controls.Add(this.ShowLearnedWordsButton);
             this.Controls.Add(this.LtWordTextBox);
             this.Controls.Add(this.EnWordTextBox);
             this.Controls.Add(this.IDontKnowTheWordButton);
             this.Controls.Add(this.NextWordButton);
-            this.Controls.Add(this.LearnedWordsCountLabel);
             this.Controls.Add(this.LearnedWordsCountHeaderLabel);
             this.Controls.Add(this.ProgressLabel);
             this.Controls.Add(this.ProgressHeaderLabel);
@@ -229,8 +218,6 @@ namespace Silverio.Žodynas.Forms
         }
 
         #endregion
-
-        private System.Windows.Forms.Label LearnedWordsCountLabel;
         private System.Windows.Forms.Label LearnedWordsCountHeaderLabel;
         private System.Windows.Forms.Label ProgressLabel;
         private System.Windows.Forms.Label ProgressHeaderLabel;
@@ -241,7 +228,7 @@ namespace Silverio.Žodynas.Forms
         private System.Windows.Forms.Button NextWordButton;
         private System.Windows.Forms.TextBox EnWordTextBox;
         private System.Windows.Forms.TextBox LtWordTextBox;
-        private Button ShowLearnedWordsButton;
         private Label TestTimerLabel;
+        private LinkLabel LearnedWordsCountLinkLabel;
     }
 }

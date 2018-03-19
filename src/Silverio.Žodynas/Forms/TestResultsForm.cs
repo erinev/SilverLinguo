@@ -12,15 +12,17 @@ namespace Silverio.Žodynas.Forms
         private readonly TestType _testType;
         private readonly WordsType _wordsType;
         private readonly Stopwatch _elapsedTimeStopWatch;
+        private readonly int _totalWordsCountInTest;
         private readonly List<string> _lernedWordsForStats;
         private readonly List<string> _unknownWordsForStats;
 
-        public TestResultsForm(SelectedLanguage selectedLanguage, TestType testType, WordsType wordsType, Stopwatch elapsedTimeStopWatch, List<string> lernedWordsForStats = null, List<string> unknownWordsForStats = null)
+        public TestResultsForm(SelectedLanguage selectedLanguage, TestType testType, WordsType wordsType, Stopwatch elapsedTimeStopWatch, int totalWordsCountInTest, List<string> lernedWordsForStats = null, List<string> unknownWordsForStats = null)
         {
             _selectedLanguage = selectedLanguage;
             _testType = testType;
             _wordsType = wordsType;
             _elapsedTimeStopWatch = elapsedTimeStopWatch;
+            _totalWordsCountInTest = totalWordsCountInTest;
             _lernedWordsForStats = lernedWordsForStats;
             _unknownWordsForStats = unknownWordsForStats;
 
@@ -78,14 +80,14 @@ namespace Silverio.Žodynas.Forms
             {
                 LearnedWordsStatsHeaderLabel.Visible = true;
                 LearnedWordsStatsLabel.Visible = true;
-                LearnedWordsStatsLabel.Text = $@"{_lernedWordsForStats.Count}";
+                LearnedWordsStatsLabel.Text = $@"{_lernedWordsForStats.Count} / {_totalWordsCountInTest}";
             }
             
             if (_unknownWordsForStats != null)
             {
                 UnknownWordsStatsHeaderLabel.Visible = true;
                 UnknownWordsStatsLabel.Visible = true;
-                UnknownWordsStatsLabel.Text = $@"{_unknownWordsForStats.Count}";
+                UnknownWordsStatsLabel.Text = $@"{_unknownWordsForStats.Count} / {_totalWordsCountInTest}";
             }
         }
 

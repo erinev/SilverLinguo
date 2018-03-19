@@ -18,6 +18,7 @@ namespace Silverio.Žodynas.Forms
 
         private WordPair[] _unknownWords;
         private readonly IList<WordPair> _learnedWords = new List<WordPair>();
+        private int _startingCountOfUnknownWords;
 
         private readonly Stopwatch _stopWatch = new Stopwatch();
 
@@ -53,13 +54,15 @@ namespace Silverio.Žodynas.Forms
 
         private void UnknownWordsTestForm_Load(object sender, EventArgs e)
         {
-            ShowLearnedWordsButton.Visible = false;
+            NextWordButton.Select();
 
             _unknownWords = _wordsService.GetRandomlySortedUnknownWords();
+            _startingCountOfUnknownWords = _unknownWords.Length;
 
             _currentUnknownWordPairId = _unknownWords[0].Id;
 
             ProgressLabel.Text = _unknownWords.Length.ToString();
+            LearnedWordsCountLinkLabel.Enabled = false;
 
             WordPair firstUnknownWord = _unknownWords.First();
             LtWordTextBox.Text = firstUnknownWord.LithuanianWord;
@@ -71,7 +74,7 @@ namespace Silverio.Žodynas.Forms
             if (IDontKnowTheWordButton.Visible)
             {
                 _learnedWords.Add(_unknownWords.First(uw => uw.Id == _currentUnknownWordPairId));
-                LearnedWordsCountLabel.Text = _learnedWords.Count.ToString();
+                LearnedWordsCountLinkLabel.Text = _learnedWords.Count.ToString();
                 
                 _unknownWords = _unknownWords.Where(unknownWord => unknownWord.Id != _currentUnknownWordPairId).ToArray();
             }
@@ -80,7 +83,7 @@ namespace Silverio.Žodynas.Forms
                 SetSelectedLanguage(_selectedLanguage);
             }
 
-            ShowLearnedWordsButton.Visible = _learnedWords.Count > 0;
+            LearnedWordsCountLinkLabel.Enabled = _learnedWords.Count > 0;
             IDontKnowTheWordButton.Visible = true;
 
             if (_unknownWords.Length > 0)
@@ -158,7 +161,7 @@ namespace Silverio.Žodynas.Forms
             }
         }
 
-        private void ShowLearnedWordsButton_Click(object sender, EventArgs e)
+        private void LearnedWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             List<string> learnedWordsToDisplay =
                 _learnedWords.Select(learnedWord => learnedWord.LithuanianWord + " - " + learnedWord.EnglishWord).ToList();
@@ -178,7 +181,7 @@ namespace Silverio.Žodynas.Forms
             
             List<string> learnedWordsToDisplay =
                 _learnedWords.Select(learnedWord => learnedWord.LithuanianWord + " - " + learnedWord.EnglishWord).ToList();
-            var testResultsForm = new TestResultsForm(_selectedLanguage, TestType.Verbal, WordsType.UnknownWords, _stopWatch, learnedWordsToDisplay);
+            var testResultsForm = new TestResultsForm(_selectedLanguage, TestType.Verbal, WordsType.UnknownWords, _stopWatch, _startingCountOfUnknownWords, learnedWordsToDisplay);
             testResultsForm.Closed += (s, args) => this.Close();
 
             testResultsForm.Show();
