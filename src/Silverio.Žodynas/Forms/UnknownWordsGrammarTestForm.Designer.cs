@@ -50,6 +50,7 @@
             this.LtWordTextBox.Multiline = true;
             this.LtWordTextBox.Name = "LtWordTextBox";
             this.LtWordTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.LtWordTextBox.ShortcutsEnabled = false;
             this.LtWordTextBox.Size = new System.Drawing.Size(356, 69);
             this.LtWordTextBox.TabIndex = 38;
             // 
@@ -62,6 +63,7 @@
             this.EnWordTextBox.Name = "EnWordTextBox";
             this.EnWordTextBox.ReadOnly = true;
             this.EnWordTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.EnWordTextBox.ShortcutsEnabled = false;
             this.EnWordTextBox.Size = new System.Drawing.Size(356, 69);
             this.EnWordTextBox.TabIndex = 37;
             // 

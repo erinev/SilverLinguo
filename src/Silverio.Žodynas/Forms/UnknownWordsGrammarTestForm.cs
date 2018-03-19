@@ -14,15 +14,15 @@ namespace Silverio.Žodynas.Forms
     public partial class UnknownWordsGrammarTestForm : Form
     {
         private readonly IWordsService _wordsService;
-        private static SelectedLanguage _selectedLanguage;
+        private readonly SelectedLanguage _selectedLanguage;
 
-        private static int _currentUnknownWordPairId;
+        private int _currentUnknownWordPairId;
 
-        private static WordPair[] _unknownWords;
-        private static IList<WordPair> _learnedWords = new List<WordPair>();
+        private WordPair[] _unknownWords;
+        private readonly IList<WordPair> _learnedWords = new List<WordPair>();
         private readonly Color _textBoxBackColorForIncorrectWord = Color.LightCoral;
 
-        private static readonly Stopwatch StopWatch = new Stopwatch();
+        private readonly Stopwatch _stopWatch = new Stopwatch();
 
         public UnknownWordsGrammarTestForm(SelectedLanguage selectedLanguage)
         {
@@ -43,7 +43,7 @@ namespace Silverio.Žodynas.Forms
             timer.Tick += timer_Tick;
             timer.Interval = 1000;
             timer.Enabled = true;
-            StopWatch.Start();
+            _stopWatch.Start();
             timer.Start();
         }
 
@@ -67,28 +67,19 @@ namespace Silverio.Žodynas.Forms
 
         private void UnknownWordsGrammarTestForm_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == KeyCodes.Plus)
+            if (e.KeyChar == KeyCodes.Enter)
             {
                 if (NextWordButton.Visible)
                 {
                     HandleNextWordEvent();
                 }
-
-                e.Handled = true;
-            }
-            else if (e.KeyChar == KeyCodes.Enter)
-            {
-                if (!NextWordButton.Visible)
+                else
                 {
                     AssertAndHandleEnteredWord();
                 }
 
                 e.Handled = true;
             }
-            /*else if (e.KeyChar == KeyCodes.Backspace)
-            {
-                e.Handled = true;
-            }*/
         }
 
         private void AssertAndHandleEnteredWord()
@@ -166,16 +157,6 @@ namespace Silverio.Žodynas.Forms
 
         private void HandleNextWordEvent()
         {
-            if (LtWordTextBox.BackColor == _textBoxBackColorForIncorrectWord)
-            {
-                LtWordTextBox.BackColor = Color.White;
-            }
-
-            if (EnWordTextBox.BackColor == _textBoxBackColorForIncorrectWord)
-            {
-                EnWordTextBox.BackColor = Color.White;
-            }
-
             NextWordButton.Visible = false;
 
             if (_selectedLanguage == SelectedLanguage.Mixed)
@@ -184,6 +165,32 @@ namespace Silverio.Žodynas.Forms
                 bool currentLtWordTextBoxReadOnlyState = LtWordTextBox.ReadOnly;
                 EnWordTextBox.ReadOnly = !currentEnWordTextBoxReadOnlyState;
                 LtWordTextBox.ReadOnly = !currentLtWordTextBoxReadOnlyState;
+            }
+
+            if (LtWordTextBox.BackColor == _textBoxBackColorForIncorrectWord && !LtWordTextBox.ReadOnly)
+            {
+                LtWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
+            } 
+            else if (LtWordTextBox.BackColor == _textBoxBackColorForIncorrectWord && LtWordTextBox.ReadOnly)
+            {
+                LtWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Control);
+            } 
+            else if (LtWordTextBox.BackColor == Color.FromKnownColor(KnownColor.Control) && !LtWordTextBox.ReadOnly)
+            {
+                LtWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
+            }
+
+            if (EnWordTextBox.BackColor == _textBoxBackColorForIncorrectWord && !EnWordTextBox.ReadOnly)
+            {
+                EnWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
+            }
+            else if (EnWordTextBox.BackColor == _textBoxBackColorForIncorrectWord && EnWordTextBox.ReadOnly)
+            {
+                EnWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Control);
+            }
+            else if (EnWordTextBox.BackColor == Color.FromKnownColor(KnownColor.Control) && !EnWordTextBox.ReadOnly)
+            {
+                EnWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
             }
 
             WordPair currentUnknownWord = _unknownWords.First();
@@ -238,23 +245,23 @@ namespace Silverio.Žodynas.Forms
 
         private void HandleFinishedTest()
         {
-            StopWatch.Stop();
+            _stopWatch.Stop();
 
             this.Hide();
             
             List<string> learnedWordsToDisplay =
                 _learnedWords.Select(learnedWord => learnedWord.LithuanianWord + " - " + learnedWord.EnglishWord).ToList();
-            var testResultsForm = new TestResultsForm(_selectedLanguage, TestType.Grammar, WordsType.UnknownWords, StopWatch, learnedWordsToDisplay);
+            var testResultsForm = new TestResultsForm(_selectedLanguage, TestType.Grammar, WordsType.UnknownWords, _stopWatch, learnedWordsToDisplay);
             testResultsForm.Closed += (s, args) => this.Close();
 
             testResultsForm.Show();
         }
 
-        private static string GetElapsedTestTimeText()
+        private string GetElapsedTestTimeText()
         {
-            return StopWatch.Elapsed.Hours.ToString("00") + @":" +
-                   StopWatch.Elapsed.Minutes.ToString("00") + @":" +
-                   StopWatch.Elapsed.Seconds.ToString("00");
+            return _stopWatch.Elapsed.Hours.ToString("00") + @":" +
+                   _stopWatch.Elapsed.Minutes.ToString("00") + @":" +
+                   _stopWatch.Elapsed.Seconds.ToString("00");
         }
     }
 }

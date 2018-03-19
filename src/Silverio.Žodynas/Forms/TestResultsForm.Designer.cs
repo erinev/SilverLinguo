@@ -34,10 +34,14 @@
             this.SelectedLanguageLabel = new System.Windows.Forms.Label();
             this.SelectedTestTypeHeaderLabel = new System.Windows.Forms.Label();
             this.SelectedTestTypeLabel = new System.Windows.Forms.Label();
-            this.WordsStatsHeaderLabel = new System.Windows.Forms.Label();
-            this.WordsStatsLabel = new System.Windows.Forms.LinkLabel();
+            this.LearnedWordsStatsHeaderLabel = new System.Windows.Forms.Label();
+            this.LearnedWordsStatsLabel = new System.Windows.Forms.LinkLabel();
             this.StartDifferentTestButton = new System.Windows.Forms.Button();
             this.EndProgramButton = new System.Windows.Forms.Button();
+            this.UnknownWordsStatsHeaderLabel = new System.Windows.Forms.Label();
+            this.UnknownWordsStatsLabel = new System.Windows.Forms.LinkLabel();
+            this.WordsTypeHeaderLabel = new System.Windows.Forms.Label();
+            this.WordsTypeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ElapsedTimeHeaderLabel
@@ -52,11 +56,11 @@
             // ElapsedTimeLabel
             // 
             this.ElapsedTimeLabel.AutoSize = true;
-            this.ElapsedTimeLabel.Location = new System.Drawing.Point(373, 25);
+            this.ElapsedTimeLabel.Location = new System.Drawing.Point(355, 25);
             this.ElapsedTimeLabel.Name = "ElapsedTimeLabel";
-            this.ElapsedTimeLabel.Size = new System.Drawing.Size(56, 16);
+            this.ElapsedTimeLabel.Size = new System.Drawing.Size(75, 16);
             this.ElapsedTimeLabel.TabIndex = 1;
-            this.ElapsedTimeLabel.Text = "00:05:29";
+            this.ElapsedTimeLabel.Text = "0h 12m 15s";
             // 
             // SelectedLanguageHeaderLabel
             // 
@@ -70,7 +74,7 @@
             // SelectedLanguageLabel
             // 
             this.SelectedLanguageLabel.AutoSize = true;
-            this.SelectedLanguageLabel.Location = new System.Drawing.Point(118, 25);
+            this.SelectedLanguageLabel.Location = new System.Drawing.Point(106, 25);
             this.SelectedLanguageLabel.Name = "SelectedLanguageLabel";
             this.SelectedLanguageLabel.Size = new System.Drawing.Size(53, 16);
             this.SelectedLanguageLabel.TabIndex = 3;
@@ -88,31 +92,33 @@
             // SelectedTestTypeLabel
             // 
             this.SelectedTestTypeLabel.AutoSize = true;
-            this.SelectedTestTypeLabel.Location = new System.Drawing.Point(118, 55);
+            this.SelectedTestTypeLabel.Location = new System.Drawing.Point(81, 55);
             this.SelectedTestTypeLabel.Name = "SelectedTestTypeLabel";
             this.SelectedTestTypeLabel.Size = new System.Drawing.Size(39, 16);
             this.SelectedTestTypeLabel.TabIndex = 5;
             this.SelectedTestTypeLabel.Text = "Raštu";
             // 
-            // WordsStatsHeaderLabel
+            // LearnedWordsStatsHeaderLabel
             // 
-            this.WordsStatsHeaderLabel.AutoSize = true;
-            this.WordsStatsHeaderLabel.Location = new System.Drawing.Point(272, 55);
-            this.WordsStatsHeaderLabel.Name = "WordsStatsHeaderLabel";
-            this.WordsStatsHeaderLabel.Size = new System.Drawing.Size(95, 16);
-            this.WordsStatsHeaderLabel.TabIndex = 6;
-            this.WordsStatsHeaderLabel.Text = "Išmokti žodžiai:";
+            this.LearnedWordsStatsHeaderLabel.AutoSize = true;
+            this.LearnedWordsStatsHeaderLabel.Location = new System.Drawing.Point(532, 25);
+            this.LearnedWordsStatsHeaderLabel.Name = "LearnedWordsStatsHeaderLabel";
+            this.LearnedWordsStatsHeaderLabel.Size = new System.Drawing.Size(126, 16);
+            this.LearnedWordsStatsHeaderLabel.TabIndex = 6;
+            this.LearnedWordsStatsHeaderLabel.Text = "Nauji išmokti žodžiai:";
+            this.LearnedWordsStatsHeaderLabel.Visible = false;
             // 
-            // WordsStatsLabel
+            // LearnedWordsStatsLabel
             // 
-            this.WordsStatsLabel.AutoSize = true;
-            this.WordsStatsLabel.Location = new System.Drawing.Point(373, 55);
-            this.WordsStatsLabel.Name = "WordsStatsLabel";
-            this.WordsStatsLabel.Size = new System.Drawing.Size(15, 16);
-            this.WordsStatsLabel.TabIndex = 8;
-            this.WordsStatsLabel.TabStop = true;
-            this.WordsStatsLabel.Text = "5";
-            this.WordsStatsLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.WordsStatsLabel_LinkClicked);
+            this.LearnedWordsStatsLabel.AutoSize = true;
+            this.LearnedWordsStatsLabel.Location = new System.Drawing.Point(656, 25);
+            this.LearnedWordsStatsLabel.Name = "LearnedWordsStatsLabel";
+            this.LearnedWordsStatsLabel.Size = new System.Drawing.Size(22, 16);
+            this.LearnedWordsStatsLabel.TabIndex = 8;
+            this.LearnedWordsStatsLabel.TabStop = true;
+            this.LearnedWordsStatsLabel.Text = "25";
+            this.LearnedWordsStatsLabel.Visible = false;
+            this.LearnedWordsStatsLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LearnedWordsStatsLabel_LinkClicked);
             // 
             // StartDifferentTestButton
             // 
@@ -140,16 +146,60 @@
             this.EndProgramButton.UseVisualStyleBackColor = false;
             this.EndProgramButton.Click += new System.EventHandler(this.EndProgramButton_Click);
             // 
+            // UnknownWordsStatsHeaderLabel
+            // 
+            this.UnknownWordsStatsHeaderLabel.AutoSize = true;
+            this.UnknownWordsStatsHeaderLabel.Location = new System.Drawing.Point(532, 55);
+            this.UnknownWordsStatsHeaderLabel.Name = "UnknownWordsStatsHeaderLabel";
+            this.UnknownWordsStatsHeaderLabel.Size = new System.Drawing.Size(136, 16);
+            this.UnknownWordsStatsHeaderLabel.TabIndex = 11;
+            this.UnknownWordsStatsHeaderLabel.Text = "Nauji nežinomi žodžiai:";
+            this.UnknownWordsStatsHeaderLabel.Visible = false;
+            // 
+            // UnknownWordsStatsLabel
+            // 
+            this.UnknownWordsStatsLabel.AutoSize = true;
+            this.UnknownWordsStatsLabel.Location = new System.Drawing.Point(666, 55);
+            this.UnknownWordsStatsLabel.Name = "UnknownWordsStatsLabel";
+            this.UnknownWordsStatsLabel.Size = new System.Drawing.Size(15, 16);
+            this.UnknownWordsStatsLabel.TabIndex = 12;
+            this.UnknownWordsStatsLabel.TabStop = true;
+            this.UnknownWordsStatsLabel.Text = "5";
+            this.UnknownWordsStatsLabel.Visible = false;
+            this.UnknownWordsStatsLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // WordsTypeHeaderLabel
+            // 
+            this.WordsTypeHeaderLabel.AutoSize = true;
+            this.WordsTypeHeaderLabel.Location = new System.Drawing.Point(272, 55);
+            this.WordsTypeHeaderLabel.Name = "WordsTypeHeaderLabel";
+            this.WordsTypeHeaderLabel.Size = new System.Drawing.Size(83, 16);
+            this.WordsTypeHeaderLabel.TabIndex = 13;
+            this.WordsTypeHeaderLabel.Text = "Žodžių tipas: ";
+            // 
+            // WordsTypeLabel
+            // 
+            this.WordsTypeLabel.AutoSize = true;
+            this.WordsTypeLabel.Location = new System.Drawing.Point(348, 55);
+            this.WordsTypeLabel.Name = "WordsTypeLabel";
+            this.WordsTypeLabel.Size = new System.Drawing.Size(28, 16);
+            this.WordsTypeLabel.TabIndex = 14;
+            this.WordsTypeLabel.Text = "Visi";
+            // 
             // TestResultsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(930, 291);
             this.ControlBox = false;
+            this.Controls.Add(this.WordsTypeLabel);
+            this.Controls.Add(this.WordsTypeHeaderLabel);
+            this.Controls.Add(this.UnknownWordsStatsLabel);
+            this.Controls.Add(this.UnknownWordsStatsHeaderLabel);
             this.Controls.Add(this.EndProgramButton);
             this.Controls.Add(this.StartDifferentTestButton);
-            this.Controls.Add(this.WordsStatsLabel);
-            this.Controls.Add(this.WordsStatsHeaderLabel);
+            this.Controls.Add(this.LearnedWordsStatsLabel);
+            this.Controls.Add(this.LearnedWordsStatsHeaderLabel);
             this.Controls.Add(this.SelectedTestTypeLabel);
             this.Controls.Add(this.SelectedTestTypeHeaderLabel);
             this.Controls.Add(this.SelectedLanguageLabel);
@@ -161,6 +211,7 @@
             this.Name = "TestResultsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Testo rezultatai:";
+            this.Load += new System.EventHandler(this.TestResultsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -174,9 +225,13 @@
         private System.Windows.Forms.Label SelectedLanguageLabel;
         private System.Windows.Forms.Label SelectedTestTypeHeaderLabel;
         private System.Windows.Forms.Label SelectedTestTypeLabel;
-        private System.Windows.Forms.Label WordsStatsHeaderLabel;
-        private System.Windows.Forms.LinkLabel WordsStatsLabel;
+        private System.Windows.Forms.Label LearnedWordsStatsHeaderLabel;
+        private System.Windows.Forms.LinkLabel LearnedWordsStatsLabel;
         private System.Windows.Forms.Button StartDifferentTestButton;
         private System.Windows.Forms.Button EndProgramButton;
+        private System.Windows.Forms.Label UnknownWordsStatsHeaderLabel;
+        private System.Windows.Forms.LinkLabel UnknownWordsStatsLabel;
+        private System.Windows.Forms.Label WordsTypeHeaderLabel;
+        private System.Windows.Forms.Label WordsTypeLabel;
     }
 }

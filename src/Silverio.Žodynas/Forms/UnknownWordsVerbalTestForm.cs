@@ -12,14 +12,14 @@ namespace Silverio.Žodynas.Forms
     public partial class UnknownWordsVerbalTestForm : Form
     {
         private readonly IWordsService _wordsService;
-        private static SelectedLanguage _selectedLanguage;
+        private readonly SelectedLanguage _selectedLanguage;
 
-        private static int _currentUnknownWordPairId;
+        private int _currentUnknownWordPairId;
 
-        private static WordPair[] _unknownWords;
-        private static IList<WordPair> _learnedWords = new List<WordPair>();
+        private WordPair[] _unknownWords;
+        private readonly IList<WordPair> _learnedWords = new List<WordPair>();
 
-        private static readonly Stopwatch StopWatch = new Stopwatch();
+        private readonly Stopwatch _stopWatch = new Stopwatch();
 
         public UnknownWordsVerbalTestForm(SelectedLanguage selectedLanguage)
         {
@@ -40,15 +40,15 @@ namespace Silverio.Žodynas.Forms
             timer.Tick += timer_Tick;
             timer.Interval = 1000;
             timer.Enabled = true;
-            StopWatch.Start();
+            _stopWatch.Start();
             timer.Start();
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            TestTimerLabel.Text = StopWatch.Elapsed.Hours.ToString("00") + @":" +
-                                  StopWatch.Elapsed.Minutes.ToString("00") + @":" +
-                                  StopWatch.Elapsed.Seconds.ToString("00");
+            TestTimerLabel.Text = _stopWatch.Elapsed.Hours.ToString("00") + @":" +
+                                  _stopWatch.Elapsed.Minutes.ToString("00") + @":" +
+                                  _stopWatch.Elapsed.Seconds.ToString("00");
         }
 
         private void UnknownWordsTestForm_Load(object sender, EventArgs e)
@@ -172,13 +172,13 @@ namespace Silverio.Žodynas.Forms
 
         private void HandleFinishedTest()
         {
-            StopWatch.Stop();
+            _stopWatch.Stop();
 
             this.Hide();
             
             List<string> learnedWordsToDisplay =
                 _learnedWords.Select(learnedWord => learnedWord.LithuanianWord + " - " + learnedWord.EnglishWord).ToList();
-            var testResultsForm = new TestResultsForm(_selectedLanguage, TestType.Grammar, WordsType.UnknownWords, StopWatch, learnedWordsToDisplay);
+            var testResultsForm = new TestResultsForm(_selectedLanguage, TestType.Verbal, WordsType.UnknownWords, _stopWatch, learnedWordsToDisplay);
             testResultsForm.Closed += (s, args) => this.Close();
 
             testResultsForm.Show();

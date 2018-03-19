@@ -13,14 +13,14 @@ namespace Silverio.Žodynas.Forms
     {
         private readonly IWordsRepository _wordsRepository;
 
-        private static SelectedLanguage _selectedLanguage;
-        private static int _currentWordPairIndex;
-        private static int _currentWordPairIndexForProgress = 1;
+        private SelectedLanguage _selectedLanguage;
+        private int _currentWordPairIndex;
+        private int _currentWordPairIndexForProgress = 1;
 
         private readonly Bitmap _englishFlagBitmap = Properties.Resources.EnglishFlag;
         private readonly Bitmap _lithuanianFlagBitmap = Properties.Resources.LithuanianFlag;
-        private static WordPair[] _words;
-        private static IList<WordPair> _unknownWords = new List<WordPair>();
+        private WordPair[] _words;
+        private readonly IList<WordPair> _unknownWords = new List<WordPair>();
         private readonly string _progressLabelText = "{0} / {1}";
 
         public WordsTestForm()

@@ -23,7 +23,7 @@ namespace Silverio.Žodynas.Repositories
                 new WordPair {Id = 7, LithuanianWord = "Viso gero", EnglishWord = "Good bye"},
                 new WordPair {Id = 8, LithuanianWord = "Senelis", EnglishWord = "Grandfather, Grandpa, Grandad"},
                 new WordPair {Id = 9, LithuanianWord = "Grybas", EnglishWord = "Mushroom"},
-                new WordPair {Id = 10, LithuanianWord = "Book bag", EnglishWord = "Kuprinė"},
+                new WordPair {Id = 10, LithuanianWord = "Kuprinė", EnglishWord = "Book bag"},
                 new WordPair {Id = 11, LithuanianWord = "Man patinka mėlynas dangus", EnglishWord = "I like blue sky"},
             };
         }
@@ -41,7 +41,7 @@ namespace Silverio.Žodynas.Repositories
                 new WordPair {Id = 7, LithuanianWord = "Viso gero", EnglishWord = "Good bye"},
                 new WordPair {Id = 8, LithuanianWord = "Senelis", EnglishWord = "Grandfather, Grandpa, Grandad"},
                 new WordPair {Id = 9, LithuanianWord = "Grybas", EnglishWord = "Mushroom"},
-                new WordPair {Id = 10, LithuanianWord = "Book bag", EnglishWord = "Kuprinė"},
+                new WordPair {Id = 10, LithuanianWord = "Kuprinė", EnglishWord = "Book bag"},
                 new WordPair {Id = 11, LithuanianWord = "Man patinka mėlynas dangus", EnglishWord = "I like blue sky"},
             };
         }
