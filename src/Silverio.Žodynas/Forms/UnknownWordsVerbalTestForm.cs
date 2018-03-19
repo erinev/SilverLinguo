@@ -123,6 +123,7 @@ namespace Silverio.Žodynas.Forms
         private void IDontKnowTheWordButton_Click(object sender, EventArgs e)
         {
             IDontKnowTheWordButton.Visible = false;
+            NextWordButton.Focus();
 
             EnWordTextBox.Visible = true;
             LtWordTextBox.Visible = true;
