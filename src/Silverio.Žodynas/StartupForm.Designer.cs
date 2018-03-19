@@ -49,7 +49,7 @@
             // TestSelectionLabel
             // 
             this.TestSelectionLabel.AutoSize = true;
-            this.TestSelectionLabel.Location = new System.Drawing.Point(309, 9);
+            this.TestSelectionLabel.Location = new System.Drawing.Point(228, 9);
             this.TestSelectionLabel.Name = "TestSelectionLabel";
             this.TestSelectionLabel.Size = new System.Drawing.Size(129, 17);
             this.TestSelectionLabel.TabIndex = 0;
@@ -105,7 +105,7 @@
             this.UnknownWordsPanel.Controls.Add(this.UnknownWordsCountLabel);
             this.UnknownWordsPanel.Controls.Add(this.UnknownWordListLabel);
             this.UnknownWordsPanel.Controls.Add(this.UnknownWordsListSelectionButton);
-            this.UnknownWordsPanel.Location = new System.Drawing.Point(466, 152);
+            this.UnknownWordsPanel.Location = new System.Drawing.Point(360, 152);
             this.UnknownWordsPanel.Name = "UnknownWordsPanel";
             this.UnknownWordsPanel.Size = new System.Drawing.Size(236, 77);
             this.UnknownWordsPanel.TabIndex = 5;
@@ -124,9 +124,9 @@
             this.panel1.Controls.Add(this.WordsCountLabel);
             this.panel1.Controls.Add(this.WordListLabel);
             this.panel1.Controls.Add(this.WordListSelectionButton);
-            this.panel1.Location = new System.Drawing.Point(202, 152);
+            this.panel1.Location = new System.Drawing.Point(144, 152);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(236, 77);
+            this.panel1.Size = new System.Drawing.Size(214, 77);
             this.panel1.TabIndex = 6;
             // 
             // WordsCountLabel
@@ -145,7 +145,7 @@
             this.EndProgramButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.EndProgramButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.EndProgramButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.EndProgramButton.Location = new System.Drawing.Point(326, 245);
+            this.EndProgramButton.Location = new System.Drawing.Point(225, 245);
             this.EndProgramButton.Name = "EndProgramButton";
             this.EndProgramButton.Padding = new System.Windows.Forms.Padding(4);
             this.EndProgramButton.Size = new System.Drawing.Size(145, 44);
@@ -158,7 +158,7 @@
             // 
             this.LithuanianLanguageRadioButton.Image = global::Silverio.Žodynas.Properties.Resources.LithuanianFlag;
             this.LithuanianLanguageRadioButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.LithuanianLanguageRadioButton.Location = new System.Drawing.Point(208, 55);
+            this.LithuanianLanguageRadioButton.Location = new System.Drawing.Point(84, 55);
             this.LithuanianLanguageRadioButton.Name = "LithuanianLanguageRadioButton";
             this.LithuanianLanguageRadioButton.Size = new System.Drawing.Size(132, 21);
             this.LithuanianLanguageRadioButton.TabIndex = 8;
@@ -171,7 +171,7 @@
             // 
             this.EnglishRadioButton.Image = global::Silverio.Žodynas.Properties.Resources.EnglishFlag;
             this.EnglishRadioButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.EnglishRadioButton.Location = new System.Drawing.Point(371, 55);
+            this.EnglishRadioButton.Location = new System.Drawing.Point(247, 55);
             this.EnglishRadioButton.Name = "EnglishRadioButton";
             this.EnglishRadioButton.Size = new System.Drawing.Size(115, 21);
             this.EnglishRadioButton.TabIndex = 9;
@@ -183,7 +183,7 @@
             // RandomRadioButton
             // 
             this.RandomRadioButton.AutoSize = true;
-            this.RandomRadioButton.Location = new System.Drawing.Point(509, 55);
+            this.RandomRadioButton.Location = new System.Drawing.Point(385, 55);
             this.RandomRadioButton.Name = "RandomRadioButton";
             this.RandomRadioButton.Size = new System.Drawing.Size(79, 21);
             this.RandomRadioButton.TabIndex = 10;
@@ -195,7 +195,7 @@
             // ShouldCheckGrammarCheckBox
             // 
             this.ShouldCheckGrammarCheckBox.AutoSize = true;
-            this.ShouldCheckGrammarCheckBox.Location = new System.Drawing.Point(341, 98);
+            this.ShouldCheckGrammarCheckBox.Location = new System.Drawing.Point(217, 98);
             this.ShouldCheckGrammarCheckBox.Name = "ShouldCheckGrammarCheckBox";
             this.ShouldCheckGrammarCheckBox.Size = new System.Drawing.Size(145, 21);
             this.ShouldCheckGrammarCheckBox.TabIndex = 11;
@@ -207,7 +207,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.EndProgramButton;
-            this.ClientSize = new System.Drawing.Size(814, 301);
+            this.ClientSize = new System.Drawing.Size(632, 301);
             this.ControlBox = false;
             this.Controls.Add(this.ShouldCheckGrammarCheckBox);
             this.Controls.Add(this.RandomRadioButton);
