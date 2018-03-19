@@ -35,11 +35,11 @@
             this.SelectedTestTypeHeaderLabel = new System.Windows.Forms.Label();
             this.SelectedTestTypeLabel = new System.Windows.Forms.Label();
             this.LearnedWordsStatsHeaderLabel = new System.Windows.Forms.Label();
-            this.LearnedWordsStatsLabel = new System.Windows.Forms.LinkLabel();
+            this.LearnedWordsStatsLinkLabel = new System.Windows.Forms.LinkLabel();
             this.StartDifferentTestButton = new System.Windows.Forms.Button();
             this.EndProgramButton = new System.Windows.Forms.Button();
             this.UnknownWordsStatsHeaderLabel = new System.Windows.Forms.Label();
-            this.UnknownWordsStatsLabel = new System.Windows.Forms.LinkLabel();
+            this.UnknownWordsStatsLinkLabel = new System.Windows.Forms.LinkLabel();
             this.WordsTypeHeaderLabel = new System.Windows.Forms.Label();
             this.WordsTypeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -108,17 +108,17 @@
             this.LearnedWordsStatsHeaderLabel.Text = "Nauji išmokti žodžiai:";
             this.LearnedWordsStatsHeaderLabel.Visible = false;
             // 
-            // LearnedWordsStatsLabel
+            // LearnedWordsStatsLinkLabel
             // 
-            this.LearnedWordsStatsLabel.AutoSize = true;
-            this.LearnedWordsStatsLabel.Location = new System.Drawing.Point(656, 25);
-            this.LearnedWordsStatsLabel.Name = "LearnedWordsStatsLabel";
-            this.LearnedWordsStatsLabel.Size = new System.Drawing.Size(22, 16);
-            this.LearnedWordsStatsLabel.TabIndex = 8;
-            this.LearnedWordsStatsLabel.TabStop = true;
-            this.LearnedWordsStatsLabel.Text = "25";
-            this.LearnedWordsStatsLabel.Visible = false;
-            this.LearnedWordsStatsLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LearnedWordsStatsLabel_LinkClicked);
+            this.LearnedWordsStatsLinkLabel.AutoSize = true;
+            this.LearnedWordsStatsLinkLabel.Location = new System.Drawing.Point(656, 25);
+            this.LearnedWordsStatsLinkLabel.Name = "LearnedWordsStatsLinkLabel";
+            this.LearnedWordsStatsLinkLabel.Size = new System.Drawing.Size(55, 16);
+            this.LearnedWordsStatsLinkLabel.TabIndex = 8;
+            this.LearnedWordsStatsLinkLabel.TabStop = true;
+            this.LearnedWordsStatsLinkLabel.Text = "95 / 100";
+            this.LearnedWordsStatsLinkLabel.Visible = false;
+            this.LearnedWordsStatsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LearnedWordsStatsLabel_LinkClicked);
             // 
             // StartDifferentTestButton
             // 
@@ -156,17 +156,17 @@
             this.UnknownWordsStatsHeaderLabel.Text = "Nauji nežinomi žodžiai:";
             this.UnknownWordsStatsHeaderLabel.Visible = false;
             // 
-            // UnknownWordsStatsLabel
+            // UnknownWordsStatsLinkLabel
             // 
-            this.UnknownWordsStatsLabel.AutoSize = true;
-            this.UnknownWordsStatsLabel.Location = new System.Drawing.Point(666, 55);
-            this.UnknownWordsStatsLabel.Name = "UnknownWordsStatsLabel";
-            this.UnknownWordsStatsLabel.Size = new System.Drawing.Size(15, 16);
-            this.UnknownWordsStatsLabel.TabIndex = 12;
-            this.UnknownWordsStatsLabel.TabStop = true;
-            this.UnknownWordsStatsLabel.Text = "5";
-            this.UnknownWordsStatsLabel.Visible = false;
-            this.UnknownWordsStatsLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.UnknownWordsStatsLinkLabel.AutoSize = true;
+            this.UnknownWordsStatsLinkLabel.Location = new System.Drawing.Point(666, 55);
+            this.UnknownWordsStatsLinkLabel.Name = "UnknownWordsStatsLinkLabel";
+            this.UnknownWordsStatsLinkLabel.Size = new System.Drawing.Size(48, 16);
+            this.UnknownWordsStatsLinkLabel.TabIndex = 12;
+            this.UnknownWordsStatsLinkLabel.TabStop = true;
+            this.UnknownWordsStatsLinkLabel.Text = "5 / 100";
+            this.UnknownWordsStatsLinkLabel.Visible = false;
+            this.UnknownWordsStatsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // WordsTypeHeaderLabel
             // 
@@ -194,11 +194,11 @@
             this.ControlBox = false;
             this.Controls.Add(this.WordsTypeLabel);
             this.Controls.Add(this.WordsTypeHeaderLabel);
-            this.Controls.Add(this.UnknownWordsStatsLabel);
+            this.Controls.Add(this.UnknownWordsStatsLinkLabel);
             this.Controls.Add(this.UnknownWordsStatsHeaderLabel);
             this.Controls.Add(this.EndProgramButton);
             this.Controls.Add(this.StartDifferentTestButton);
-            this.Controls.Add(this.LearnedWordsStatsLabel);
+            this.Controls.Add(this.LearnedWordsStatsLinkLabel);
             this.Controls.Add(this.LearnedWordsStatsHeaderLabel);
             this.Controls.Add(this.SelectedTestTypeLabel);
             this.Controls.Add(this.SelectedTestTypeHeaderLabel);
@@ -226,11 +226,11 @@
         private System.Windows.Forms.Label SelectedTestTypeHeaderLabel;
         private System.Windows.Forms.Label SelectedTestTypeLabel;
         private System.Windows.Forms.Label LearnedWordsStatsHeaderLabel;
-        private System.Windows.Forms.LinkLabel LearnedWordsStatsLabel;
+        private System.Windows.Forms.LinkLabel LearnedWordsStatsLinkLabel;
         private System.Windows.Forms.Button StartDifferentTestButton;
         private System.Windows.Forms.Button EndProgramButton;
         private System.Windows.Forms.Label UnknownWordsStatsHeaderLabel;
-        private System.Windows.Forms.LinkLabel UnknownWordsStatsLabel;
+        private System.Windows.Forms.LinkLabel UnknownWordsStatsLinkLabel;
         private System.Windows.Forms.Label WordsTypeHeaderLabel;
         private System.Windows.Forms.Label WordsTypeLabel;
     }

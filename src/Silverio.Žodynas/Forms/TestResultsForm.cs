@@ -79,15 +79,17 @@ namespace Silverio.Žodynas.Forms
             if (_lernedWordsForStats != null)
             {
                 LearnedWordsStatsHeaderLabel.Visible = true;
-                LearnedWordsStatsLabel.Visible = true;
-                LearnedWordsStatsLabel.Text = $@"{_lernedWordsForStats.Count} / {_totalWordsCountInTest}";
+                LearnedWordsStatsLinkLabel.Visible = true;
+                LearnedWordsStatsLinkLabel.Enabled = _lernedWordsForStats.Count > 0;
+                LearnedWordsStatsLinkLabel.Text = $@"{_lernedWordsForStats.Count} / {_totalWordsCountInTest}";
             }
             
             if (_unknownWordsForStats != null)
             {
                 UnknownWordsStatsHeaderLabel.Visible = true;
-                UnknownWordsStatsLabel.Visible = true;
-                UnknownWordsStatsLabel.Text = $@"{_unknownWordsForStats.Count} / {_totalWordsCountInTest}";
+                UnknownWordsStatsLinkLabel.Visible = true;
+                UnknownWordsStatsLinkLabel.Enabled = _unknownWordsForStats.Count > 0;
+                UnknownWordsStatsLinkLabel.Text = $@"{_unknownWordsForStats.Count} / {_totalWordsCountInTest}";
             }
         }
 
