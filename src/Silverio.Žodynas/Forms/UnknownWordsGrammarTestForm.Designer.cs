@@ -191,11 +191,11 @@
             this.Controls.Add(this.LtHeaderLabel);
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.KeyPreview = true;
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UnknownWordsGrammarTestForm_KeyPress);
             this.Name = "UnknownWordsGrammarTestForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nežinomų žodžių testas (raštu):";
             this.Load += new System.EventHandler(this.UnknownWordsGrammarTestForm_Load);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UnknownWordsGrammarTestForm_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
 

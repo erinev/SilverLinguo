@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using Silverio.Žodynas.Constants;
 using Silverio.Žodynas.Enums;
 using Silverio.Žodynas.Models;
 using Silverio.Žodynas.Services;
@@ -69,13 +70,38 @@ namespace Silverio.Žodynas.Forms
             EnWordTextBox.Text = firstUnknownWord.EnglishWord;
         }
 
+        private void UnknownWordsVerbalTestForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == KeyCodes.Enter)
+            {
+                if (NextWordButton.Visible)
+                {
+                    HandleNextWordButtonClickedEvent();
+                }
+
+                e.Handled = true;
+            }
+            else if (e.KeyChar == KeyCodes.Backspace)
+            {
+                if (IDontKnowTheWordButton.Visible)
+                {
+                    HandleIDontKnowWordButtonClickedEvent();
+                }
+            }
+        }
+
         private void NextWordButton_Click(object sender, EventArgs e)
+        {
+            HandleNextWordButtonClickedEvent();
+        }
+
+        private void HandleNextWordButtonClickedEvent()
         {
             if (IDontKnowTheWordButton.Visible)
             {
                 _learnedWords.Add(_unknownWords.First(uw => uw.Id == _currentUnknownWordPairId));
                 LearnedWordsCountLinkLabel.Text = _learnedWords.Count.ToString();
-                
+
                 _unknownWords = _unknownWords.Where(unknownWord => unknownWord.Id != _currentUnknownWordPairId).ToArray();
             }
             else
@@ -121,6 +147,11 @@ namespace Silverio.Žodynas.Forms
         }
 
         private void IDontKnowTheWordButton_Click(object sender, EventArgs e)
+        {
+            HandleIDontKnowWordButtonClickedEvent();
+        }
+
+        private void HandleIDontKnowWordButtonClickedEvent()
         {
             IDontKnowTheWordButton.Visible = false;
             NextWordButton.Focus();
