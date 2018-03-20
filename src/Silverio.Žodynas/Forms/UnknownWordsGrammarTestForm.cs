@@ -120,9 +120,10 @@ namespace Silverio.Žodynas.Forms
         {
             NextWordButton.Visible = true;
             NextWordButton.Focus();
+            CorrectWordTextBox.Visible = true;
 
             textBox.BackColor = _textBoxBackColorForIncorrectWord;
-            textBox.Text = correctValueForTextBox;
+            CorrectWordTextBox.Text = correctValueForTextBox.ToLowerInvariant();
 
             WordPair unknownWordToMove = _unknownWords.First();
 
@@ -165,6 +166,7 @@ namespace Silverio.Žodynas.Forms
         private void HandleNextWordEvent()
         {
             NextWordButton.Visible = false;
+            CorrectWordTextBox.Visible = false;
 
             if (_selectedLanguage == SelectedLanguage.Mixed)
             {

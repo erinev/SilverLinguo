@@ -39,6 +39,7 @@
             this.NextWordButton = new System.Windows.Forms.Button();
             this.TestTimerLabel = new System.Windows.Forms.Label();
             this.LearnedWordsCountLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.CorrectWordTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // LtWordTextBox
@@ -139,7 +140,7 @@
             this.NextWordButton.BackColor = System.Drawing.Color.YellowGreen;
             this.NextWordButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.NextWordButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.NextWordButton.Location = new System.Drawing.Point(29, 128);
+            this.NextWordButton.Location = new System.Drawing.Point(29, 120);
             this.NextWordButton.Name = "NextWordButton";
             this.NextWordButton.Padding = new System.Windows.Forms.Padding(2);
             this.NextWordButton.Size = new System.Drawing.Size(107, 39);
@@ -171,6 +172,20 @@
             this.LearnedWordsCountLinkLabel.Text = "0";
             this.LearnedWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LearnedWordsCountLinkLabel_LinkClicked);
             // 
+            // CorrectWordTextBox
+            // 
+            this.CorrectWordTextBox.BackColor = System.Drawing.Color.YellowGreen;
+            this.CorrectWordTextBox.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.CorrectWordTextBox.Location = new System.Drawing.Point(224, 120);
+            this.CorrectWordTextBox.Multiline = true;
+            this.CorrectWordTextBox.Name = "CorrectWordTextBox";
+            this.CorrectWordTextBox.ReadOnly = true;
+            this.CorrectWordTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.CorrectWordTextBox.ShortcutsEnabled = false;
+            this.CorrectWordTextBox.Size = new System.Drawing.Size(356, 69);
+            this.CorrectWordTextBox.TabIndex = 44;
+            this.CorrectWordTextBox.Visible = false;
+            // 
             // UnknownWordsGrammarTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -178,6 +193,7 @@
             this.CancelButton = this.EndTestButton;
             this.ClientSize = new System.Drawing.Size(930, 291);
             this.ControlBox = false;
+            this.Controls.Add(this.CorrectWordTextBox);
             this.Controls.Add(this.LearnedWordsCountLinkLabel);
             this.Controls.Add(this.TestTimerLabel);
             this.Controls.Add(this.NextWordButton);
@@ -191,11 +207,11 @@
             this.Controls.Add(this.LtHeaderLabel);
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.KeyPreview = true;
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UnknownWordsGrammarTestForm_KeyPress);
             this.Name = "UnknownWordsGrammarTestForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nežinomų žodžių testas (raštu):";
             this.Load += new System.EventHandler(this.UnknownWordsGrammarTestForm_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UnknownWordsGrammarTestForm_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,5 +230,6 @@
         private System.Windows.Forms.Button NextWordButton;
         private System.Windows.Forms.Label TestTimerLabel;
         private System.Windows.Forms.LinkLabel LearnedWordsCountLinkLabel;
+        private System.Windows.Forms.TextBox CorrectWordTextBox;
     }
 }
