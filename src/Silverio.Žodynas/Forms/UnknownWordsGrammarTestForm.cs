@@ -205,6 +205,7 @@ namespace Silverio.Žodynas.Forms
             else if (LtWordTextBox.BackColor == Color.FromKnownColor(KnownColor.Control) && !LtWordTextBox.ReadOnly)
             {
                 LtWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
+                EnWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Control);
             }
 
             if (EnWordTextBox.BackColor == _textBoxBackColorForIncorrectWord && !EnWordTextBox.ReadOnly)
@@ -218,6 +219,7 @@ namespace Silverio.Žodynas.Forms
             else if (EnWordTextBox.BackColor == Color.FromKnownColor(KnownColor.Control) && !EnWordTextBox.ReadOnly)
             {
                 EnWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
+                LtWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Control);
             }
         }
 
