@@ -65,7 +65,7 @@
             // SelectedLanguageHeaderLabel
             // 
             this.SelectedLanguageHeaderLabel.AutoSize = true;
-            this.SelectedLanguageHeaderLabel.Location = new System.Drawing.Point(12, 25);
+            this.SelectedLanguageHeaderLabel.Location = new System.Drawing.Point(26, 25);
             this.SelectedLanguageHeaderLabel.Name = "SelectedLanguageHeaderLabel";
             this.SelectedLanguageHeaderLabel.Size = new System.Drawing.Size(100, 16);
             this.SelectedLanguageHeaderLabel.TabIndex = 2;
@@ -74,7 +74,7 @@
             // SelectedLanguageLabel
             // 
             this.SelectedLanguageLabel.AutoSize = true;
-            this.SelectedLanguageLabel.Location = new System.Drawing.Point(106, 25);
+            this.SelectedLanguageLabel.Location = new System.Drawing.Point(120, 25);
             this.SelectedLanguageLabel.Name = "SelectedLanguageLabel";
             this.SelectedLanguageLabel.Size = new System.Drawing.Size(53, 16);
             this.SelectedLanguageLabel.TabIndex = 3;
@@ -83,7 +83,7 @@
             // SelectedTestTypeHeaderLabel
             // 
             this.SelectedTestTypeHeaderLabel.AutoSize = true;
-            this.SelectedTestTypeHeaderLabel.Location = new System.Drawing.Point(12, 55);
+            this.SelectedTestTypeHeaderLabel.Location = new System.Drawing.Point(26, 55);
             this.SelectedTestTypeHeaderLabel.Name = "SelectedTestTypeHeaderLabel";
             this.SelectedTestTypeHeaderLabel.Size = new System.Drawing.Size(76, 16);
             this.SelectedTestTypeHeaderLabel.TabIndex = 4;
@@ -92,7 +92,7 @@
             // SelectedTestTypeLabel
             // 
             this.SelectedTestTypeLabel.AutoSize = true;
-            this.SelectedTestTypeLabel.Location = new System.Drawing.Point(81, 55);
+            this.SelectedTestTypeLabel.Location = new System.Drawing.Point(95, 55);
             this.SelectedTestTypeLabel.Name = "SelectedTestTypeLabel";
             this.SelectedTestTypeLabel.Size = new System.Drawing.Size(39, 16);
             this.SelectedTestTypeLabel.TabIndex = 5;
@@ -124,7 +124,7 @@
             // 
             this.StartDifferentTestButton.BackColor = System.Drawing.Color.YellowGreen;
             this.StartDifferentTestButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.StartDifferentTestButton.Location = new System.Drawing.Point(229, 152);
+            this.StartDifferentTestButton.Location = new System.Drawing.Point(195, 152);
             this.StartDifferentTestButton.Name = "StartDifferentTestButton";
             this.StartDifferentTestButton.Padding = new System.Windows.Forms.Padding(2);
             this.StartDifferentTestButton.Size = new System.Drawing.Size(138, 32);
@@ -137,7 +137,7 @@
             // 
             this.EndProgramButton.BackColor = System.Drawing.Color.Red;
             this.EndProgramButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.EndProgramButton.Location = new System.Drawing.Point(444, 152);
+            this.EndProgramButton.Location = new System.Drawing.Point(414, 152);
             this.EndProgramButton.Name = "EndProgramButton";
             this.EndProgramButton.Padding = new System.Windows.Forms.Padding(2);
             this.EndProgramButton.Size = new System.Drawing.Size(138, 32);
@@ -190,7 +190,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(930, 291);
+            this.ClientSize = new System.Drawing.Size(739, 291);
             this.ControlBox = false;
             this.Controls.Add(this.WordsTypeLabel);
             this.Controls.Add(this.WordsTypeHeaderLabel);
