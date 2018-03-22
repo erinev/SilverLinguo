@@ -91,8 +91,7 @@ namespace Silverio.Žodynas.Forms
 
             if (!EnWordTextBox.ReadOnly)
             {
-                bool isEqual = String.Equals(EnWordTextBox.Text.Trim(), currentWordPair.EnglishWord.Trim(),
-                    StringComparison.InvariantCultureIgnoreCase);
+                bool isEqual = IsEnteredValueIsEqualToExpectedValue(EnWordTextBox.Text, currentWordPair.EnglishWord);
                 if (isEqual)
                 {
                     HandleCorrectlyEnteredWord();
@@ -104,7 +103,7 @@ namespace Silverio.Žodynas.Forms
             }
             else if (!LtWordTextBox.ReadOnly)
             {
-                bool isEqual = String.Equals(LtWordTextBox.Text.Trim(), currentWordPair.LithuanianWord.Trim(), StringComparison.InvariantCultureIgnoreCase);
+                bool isEqual = IsEnteredValueIsEqualToExpectedValue(LtWordTextBox.Text, currentWordPair.LithuanianWord);
                 if (isEqual)
                 {
                     HandleCorrectlyEnteredWord();
@@ -116,6 +115,24 @@ namespace Silverio.Žodynas.Forms
             }
         }
 
+        private bool IsEnteredValueIsEqualToExpectedValue(string enteredValue, string expectedValue)
+        {
+            string[] expectedWords = expectedValue.Split(',')
+                .Select(ev => ev.Trim().ToLowerInvariant())
+                .OrderBy(ev => ev)
+                .ToArray();
+            expectedWords = expectedWords.OrderBy(x => x).ToArray();
+
+            string[] enteredWords = enteredValue.Split(',')
+                .Select(ev => ev.Trim().ToLowerInvariant())
+                .OrderBy(ev => ev)
+                .ToArray();
+
+            bool isEnteredValueIsEqualToExpectedValue = expectedWords.SequenceEqual(enteredWords);
+
+            return isEnteredValueIsEqualToExpectedValue;
+        }
+
         private void HandleIncorrectlyEnteredWord(TextBox textBox, string correctValueForTextBox)
         {
             NextWordButton.Visible = true;
@@ -123,7 +140,7 @@ namespace Silverio.Žodynas.Forms
             CorrectWordTextBox.Visible = true;
 
             textBox.BackColor = _textBoxBackColorForIncorrectWord;
-            CorrectWordTextBox.Text = correctValueForTextBox.ToLowerInvariant();
+            CorrectWordTextBox.Text = correctValueForTextBox;
 
             WordPair unknownWordToMove = _unknownWords.First();
 
