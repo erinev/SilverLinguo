@@ -103,15 +103,15 @@
             this.LearnedWordsStatsHeaderLabel.AutoSize = true;
             this.LearnedWordsStatsHeaderLabel.Location = new System.Drawing.Point(532, 25);
             this.LearnedWordsStatsHeaderLabel.Name = "LearnedWordsStatsHeaderLabel";
-            this.LearnedWordsStatsHeaderLabel.Size = new System.Drawing.Size(126, 16);
+            this.LearnedWordsStatsHeaderLabel.Size = new System.Drawing.Size(95, 16);
             this.LearnedWordsStatsHeaderLabel.TabIndex = 6;
-            this.LearnedWordsStatsHeaderLabel.Text = "Nauji išmokti žodžiai:";
+            this.LearnedWordsStatsHeaderLabel.Text = "Išmokti žodžiai:";
             this.LearnedWordsStatsHeaderLabel.Visible = false;
             // 
             // LearnedWordsStatsLinkLabel
             // 
             this.LearnedWordsStatsLinkLabel.AutoSize = true;
-            this.LearnedWordsStatsLinkLabel.Location = new System.Drawing.Point(656, 25);
+            this.LearnedWordsStatsLinkLabel.Location = new System.Drawing.Point(625, 25);
             this.LearnedWordsStatsLinkLabel.Name = "LearnedWordsStatsLinkLabel";
             this.LearnedWordsStatsLinkLabel.Size = new System.Drawing.Size(55, 16);
             this.LearnedWordsStatsLinkLabel.TabIndex = 8;
@@ -124,7 +124,7 @@
             // 
             this.StartDifferentTestButton.BackColor = System.Drawing.Color.YellowGreen;
             this.StartDifferentTestButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.StartDifferentTestButton.Location = new System.Drawing.Point(195, 152);
+            this.StartDifferentTestButton.Location = new System.Drawing.Point(174, 152);
             this.StartDifferentTestButton.Name = "StartDifferentTestButton";
             this.StartDifferentTestButton.Padding = new System.Windows.Forms.Padding(2);
             this.StartDifferentTestButton.Size = new System.Drawing.Size(138, 32);
@@ -137,7 +137,7 @@
             // 
             this.EndProgramButton.BackColor = System.Drawing.Color.Red;
             this.EndProgramButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.EndProgramButton.Location = new System.Drawing.Point(414, 152);
+            this.EndProgramButton.Location = new System.Drawing.Point(397, 152);
             this.EndProgramButton.Name = "EndProgramButton";
             this.EndProgramButton.Padding = new System.Windows.Forms.Padding(2);
             this.EndProgramButton.Size = new System.Drawing.Size(138, 32);
@@ -151,15 +151,15 @@
             this.UnknownWordsStatsHeaderLabel.AutoSize = true;
             this.UnknownWordsStatsHeaderLabel.Location = new System.Drawing.Point(532, 55);
             this.UnknownWordsStatsHeaderLabel.Name = "UnknownWordsStatsHeaderLabel";
-            this.UnknownWordsStatsHeaderLabel.Size = new System.Drawing.Size(136, 16);
+            this.UnknownWordsStatsHeaderLabel.Size = new System.Drawing.Size(106, 16);
             this.UnknownWordsStatsHeaderLabel.TabIndex = 11;
-            this.UnknownWordsStatsHeaderLabel.Text = "Nauji nežinomi žodžiai:";
+            this.UnknownWordsStatsHeaderLabel.Text = "Nežinomi žodžiai:";
             this.UnknownWordsStatsHeaderLabel.Visible = false;
             // 
             // UnknownWordsStatsLinkLabel
             // 
             this.UnknownWordsStatsLinkLabel.AutoSize = true;
-            this.UnknownWordsStatsLinkLabel.Location = new System.Drawing.Point(666, 55);
+            this.UnknownWordsStatsLinkLabel.Location = new System.Drawing.Point(636, 55);
             this.UnknownWordsStatsLinkLabel.Name = "UnknownWordsStatsLinkLabel";
             this.UnknownWordsStatsLinkLabel.Size = new System.Drawing.Size(48, 16);
             this.UnknownWordsStatsLinkLabel.TabIndex = 12;
@@ -190,7 +190,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(739, 243);
+            this.ClientSize = new System.Drawing.Size(703, 243);
             this.ControlBox = false;
             this.Controls.Add(this.WordsTypeLabel);
             this.Controls.Add(this.WordsTypeHeaderLabel);
