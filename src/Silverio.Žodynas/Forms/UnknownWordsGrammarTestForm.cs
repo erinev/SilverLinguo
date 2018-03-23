@@ -74,10 +74,10 @@ namespace Silverio.Žodynas.Forms
         {
             try
             {
+                _originalInputLanguage = InputLanguage.CurrentInputLanguage;
+
                 if (_selectedLanguage == SelectedLanguage.Lithuanian || _selectedLanguage == SelectedLanguage.Mixed)
                 {
-                    _originalInputLanguage = InputLanguage.CurrentInputLanguage;
-
                     CultureInfo lithuanianCultureInfo = CultureInfo.GetCultureInfo("lt-LT");
                     InputLanguage lithuanianLanguage = InputLanguage.FromCulture(lithuanianCultureInfo);
 
