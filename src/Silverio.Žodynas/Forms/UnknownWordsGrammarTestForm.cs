@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using Silverio.Žodynas.Constants;
@@ -15,6 +16,7 @@ namespace Silverio.Žodynas.Forms
     {
         private readonly IWordsService _wordsService;
         private readonly SelectedLanguage _selectedLanguage;
+        private InputLanguage _originalInputLanguage = InputLanguage.DefaultInputLanguage;
 
         private int _currentUnknownWordPairId;
 
@@ -53,7 +55,7 @@ namespace Silverio.Žodynas.Forms
             TestTimerLabel.Text = GetElapsedTestTimeText();
         }
 
-        private void UnknownWordsGrammarTestForm_Load(object sender, System.EventArgs e)
+        private void UnknownWordsGrammarTestForm_Load(object sender, EventArgs e)
         {
             _unknownWords = _wordsService.GetRandomlySortedUnknownWords();
             _startingCountOfUnknownWords = _unknownWords.Length;
@@ -66,6 +68,30 @@ namespace Silverio.Žodynas.Forms
             WordPair firstUnknownWord = _unknownWords.First();
             LtWordTextBox.Text = LtWordTextBox.ReadOnly ? firstUnknownWord.LithuanianWord : String.Empty;
             EnWordTextBox.Text = EnWordTextBox.ReadOnly ? firstUnknownWord.EnglishWord : String.Empty;
+        }
+
+        private void UnknownWordsGrammarTestForm_Shown(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_selectedLanguage == SelectedLanguage.Lithuanian || _selectedLanguage == SelectedLanguage.Mixed)
+                {
+                    _originalInputLanguage = InputLanguage.CurrentInputLanguage;
+
+                    CultureInfo lithuanianCultureInfo = CultureInfo.GetCultureInfo("lt-LT");
+                    InputLanguage lithuanianLanguage = InputLanguage.FromCulture(lithuanianCultureInfo);
+
+                    InputLanguage.CurrentInputLanguage = 
+                        // ReSharper disable once AssignNullToNotNullAttribute
+                        InputLanguage.InstalledInputLanguages.IndexOf(lithuanianLanguage) >= 0 ?
+                            lithuanianLanguage :
+                            InputLanguage.DefaultInputLanguage;
+                }
+            }
+            catch (Exception)
+            {
+                InputLanguage.CurrentInputLanguage = _originalInputLanguage;
+            }
         }
 
         private void UnknownWordsGrammarTestForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -252,7 +278,7 @@ namespace Silverio.Žodynas.Forms
             showWordsListByTypeForm.ShowDialog(this);
         }
 
-        private void EndTestButton_Click(object sender, System.EventArgs e)
+        private void EndTestButton_Click(object sender, EventArgs e)
         {
             HandleFinishedTest();
         }
@@ -281,6 +307,8 @@ namespace Silverio.Žodynas.Forms
 
         private void HandleFinishedTest()
         {
+            InputLanguage.CurrentInputLanguage = _originalInputLanguage;
+
             _stopWatch.Stop();
 
             this.Hide();

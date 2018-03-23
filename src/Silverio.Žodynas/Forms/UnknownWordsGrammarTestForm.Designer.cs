@@ -1,4 +1,6 @@
-﻿namespace Silverio.Žodynas.Forms
+﻿using System;
+
+namespace Silverio.Žodynas.Forms
 {
     partial class UnknownWordsGrammarTestForm
     {
@@ -212,6 +214,7 @@
             this.Text = "Nežinomų žodžių testas (raštu):";
             this.Load += new System.EventHandler(this.UnknownWordsGrammarTestForm_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UnknownWordsGrammarTestForm_KeyPress);
+            this.Shown += new EventHandler(this.UnknownWordsGrammarTestForm_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
