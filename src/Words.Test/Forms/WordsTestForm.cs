@@ -19,7 +19,7 @@ namespace Words.Test.Forms
 
         private readonly Bitmap _englishFlagBitmap = Properties.Resources.EnglishFlag;
         private readonly Bitmap _lithuanianFlagBitmap = Properties.Resources.LithuanianFlag;
-        private WordPair[] _words;
+        private WordPair[] _allWords;
         private readonly IList<WordPair> _unknownWords = new List<WordPair>();
         private readonly string _progressLabelText = "{0} / {1}";
 
@@ -32,7 +32,7 @@ namespace Words.Test.Forms
 
         private void VocabularyForm_Load(object sender, EventArgs e)
         {
-            _words = _wordsRepository.GetWordsForTest();
+            _allWords = _wordsRepository.GetAllWords();
 
             _selectedLanguage = SelectedLanguage.Lithuanian;
 
@@ -44,10 +44,10 @@ namespace Words.Test.Forms
 
             ChangeLanguageButton.Image = _englishFlagBitmap;
 
-            ProgressLabel.Text = string.Format(_progressLabelText, _currentWordPairIndexForProgress, _words.Length);
+            ProgressLabel.Text = string.Format(_progressLabelText, _currentWordPairIndexForProgress, _allWords.Length);
 
-            LtWordLabel.Text = _words[_currentWordPairIndex].FirstLanguageWord;
-            EnWordLabel.Text = _words[_currentWordPairIndex].SecondLanguageWord;
+            LtWordLabel.Text = _allWords[_currentWordPairIndex].FirstLanguageWord;
+            EnWordLabel.Text = _allWords[_currentWordPairIndex].SecondLanguageWord;
         }
 
         private void ChangeLanguageButton_Click(object sender, EventArgs e)
@@ -80,7 +80,7 @@ namespace Words.Test.Forms
             {
                 PreviousWordButton.Visible = false;
             }
-            else if (_currentWordPairIndex < _words.Length)
+            else if (_currentWordPairIndex < _allWords.Length)
             {
                 NextWordButton.Visible = true;
             }
@@ -88,12 +88,12 @@ namespace Words.Test.Forms
             if (_currentWordPairIndex > 0)
             {
                 --_currentWordPairIndexForProgress;
-                ProgressLabel.Text = string.Format(_progressLabelText, _currentWordPairIndexForProgress, _words.Length);
+                ProgressLabel.Text = string.Format(_progressLabelText, _currentWordPairIndexForProgress, _allWords.Length);
 
                 int previousWordIndex = --_currentWordPairIndex;
 
-                LtWordLabel.Text = _words[previousWordIndex].FirstLanguageWord;
-                EnWordLabel.Text = _words[previousWordIndex].SecondLanguageWord;
+                LtWordLabel.Text = _allWords[previousWordIndex].FirstLanguageWord;
+                EnWordLabel.Text = _allWords[previousWordIndex].SecondLanguageWord;
             }
 
             if (_selectedLanguage == SelectedLanguage.Lithuanian)
@@ -114,7 +114,7 @@ namespace Words.Test.Forms
 
         private void NextWordButton_Click(object sender, EventArgs e)
         {
-            if (_currentWordPairIndex + 2 == _words.Length)
+            if (_currentWordPairIndex + 2 == _allWords.Length)
             {
                 NextWordButton.Visible = false;
             } else if (_currentWordPairIndex >= 0)
@@ -122,15 +122,15 @@ namespace Words.Test.Forms
                 PreviousWordButton.Visible = true;
             }
 
-            if (_currentWordPairIndex + 1 < _words.Length)
+            if (_currentWordPairIndex + 1 < _allWords.Length)
             {
                 ++_currentWordPairIndexForProgress;
-                ProgressLabel.Text = string.Format(_progressLabelText, _currentWordPairIndexForProgress, _words.Length);
+                ProgressLabel.Text = string.Format(_progressLabelText, _currentWordPairIndexForProgress, _allWords.Length);
 
                 int nextWordIndex = ++_currentWordPairIndex;
 
-                LtWordLabel.Text = _words[nextWordIndex].FirstLanguageWord;
-                EnWordLabel.Text = _words[nextWordIndex].SecondLanguageWord;
+                LtWordLabel.Text = _allWords[nextWordIndex].FirstLanguageWord;
+                EnWordLabel.Text = _allWords[nextWordIndex].SecondLanguageWord;
             }
             
             if (_selectedLanguage == SelectedLanguage.Lithuanian)
@@ -151,7 +151,7 @@ namespace Words.Test.Forms
 
         private void UnknownWordButton_Click(object sender, EventArgs e)
         {
-            WordPair unknownWordCandidate = _words[_currentWordPairIndex];
+            WordPair unknownWordCandidate = _allWords[_currentWordPairIndex];
 
             WordPair existingUnknownWord =
                 _unknownWords.FirstOrDefault(unknownWord =>
@@ -182,7 +182,7 @@ namespace Words.Test.Forms
 
         private void HandleUnknownButtonVisibility()
         {
-            WordPair currentWord = _words[_currentWordPairIndex];
+            WordPair currentWord = _allWords[_currentWordPairIndex];
 
             WordPair alreadyExistingUnknownWord = _unknownWords.FirstOrDefault(unknownWord =>
                 unknownWord.FirstLanguageWord == currentWord.FirstLanguageWord &&

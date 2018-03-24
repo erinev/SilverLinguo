@@ -8,8 +8,8 @@ namespace Words.Test.Repositories
 {
     public interface IWordsRepository
     {
-        WordPair[] GetWordsForTest();
-        WordPair[] GetUnknownWordsForTest();
+        WordPair[] GetAllWords();
+        WordPair[] GetUnknownWords();
     }
 
     public class WordsRepository : IWordsRepository
@@ -24,7 +24,7 @@ namespace Words.Test.Repositories
             _connectionString = $"Data Source={dbFile}";
         }
 
-        public WordPair[] GetWordsForTest()
+        public WordPair[] GetAllWords()
         {
             using (var dbConnection = new SQLiteConnection(_connectionString))
             {
@@ -36,7 +36,7 @@ namespace Words.Test.Repositories
             }
         }
 
-        public WordPair[] GetUnknownWordsForTest()
+        public WordPair[] GetUnknownWords()
         {
             using (var dbConnection = new SQLiteConnection(_connectionString))
             {
