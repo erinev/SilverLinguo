@@ -30,7 +30,7 @@
         {
             this.TestSelectionLabel = new System.Windows.Forms.Label();
             this.WordListLabel = new System.Windows.Forms.Label();
-            this.WordListSelectionButton = new System.Windows.Forms.Button();
+            this.AllWordListSelectionButton = new System.Windows.Forms.Button();
             this.UnknownWordListLabel = new System.Windows.Forms.Label();
             this.UnknownWordsListSelectionButton = new System.Windows.Forms.Button();
             this.UnknownWordsPanel = new System.Windows.Forms.Panel();
@@ -64,19 +64,19 @@
             this.WordListLabel.TabIndex = 1;
             this.WordListLabel.Text = "Žodžių sąrašas:";
             // 
-            // WordListSelectionButton
+            // AllWordListSelectionButton
             // 
-            this.WordListSelectionButton.BackColor = System.Drawing.Color.YellowGreen;
-            this.WordListSelectionButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.WordListSelectionButton.Location = new System.Drawing.Point(6, 38);
-            this.WordListSelectionButton.Name = "WordListSelectionButton";
-            this.WordListSelectionButton.Padding = new System.Windows.Forms.Padding(2);
-            this.WordListSelectionButton.Size = new System.Drawing.Size(75, 32);
-            this.WordListSelectionButton.TabIndex = 2;
-            this.WordListSelectionButton.Text = "Pradėti";
-            this.WordListSelectionButton.UseVisualStyleBackColor = false;
-            this.WordListSelectionButton.Visible = false;
-            this.WordListSelectionButton.Click += new System.EventHandler(this.WordListSelectionButton_Click);
+            this.AllWordListSelectionButton.BackColor = System.Drawing.Color.YellowGreen;
+            this.AllWordListSelectionButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AllWordListSelectionButton.Location = new System.Drawing.Point(6, 38);
+            this.AllWordListSelectionButton.Name = "AllWordListSelectionButton";
+            this.AllWordListSelectionButton.Padding = new System.Windows.Forms.Padding(2);
+            this.AllWordListSelectionButton.Size = new System.Drawing.Size(75, 32);
+            this.AllWordListSelectionButton.TabIndex = 2;
+            this.AllWordListSelectionButton.Text = "Pradėti";
+            this.AllWordListSelectionButton.UseVisualStyleBackColor = false;
+            this.AllWordListSelectionButton.Visible = false;
+            this.AllWordListSelectionButton.Click += new System.EventHandler(this.AllWordListSelectionButton_Click);
             // 
             // UnknownWordListLabel
             // 
@@ -123,7 +123,7 @@
             // 
             this.panel1.Controls.Add(this.WordsCountLabel);
             this.panel1.Controls.Add(this.WordListLabel);
-            this.panel1.Controls.Add(this.WordListSelectionButton);
+            this.panel1.Controls.Add(this.AllWordListSelectionButton);
             this.panel1.Location = new System.Drawing.Point(144, 152);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(214, 77);
@@ -235,7 +235,7 @@
 
         private System.Windows.Forms.Label TestSelectionLabel;
         private System.Windows.Forms.Label WordListLabel;
-        private System.Windows.Forms.Button WordListSelectionButton;
+        private System.Windows.Forms.Button AllWordListSelectionButton;
         private System.Windows.Forms.Label UnknownWordListLabel;
         private System.Windows.Forms.Button UnknownWordsListSelectionButton;
         private System.Windows.Forms.Panel UnknownWordsPanel;

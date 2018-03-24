@@ -29,14 +29,23 @@ namespace Words.Test
             UnknownWordsCountLabel.Text = $@"({unknownWordsCount})";
         }
 
-        private void WordListSelectionButton_Click(object sender, EventArgs e)
+        private void AllWordListSelectionButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            
-            var wordsVocabularyForm = new WordsTestForm();
-            wordsVocabularyForm.Closed += (s, args) => this.Close();
 
-            wordsVocabularyForm.Show();
+            SelectedLanguage selectedLanguage = GetSelectedLanguage();
+
+            if (ShouldCheckGrammarCheckBox.Checked)
+            {
+                //TODO: show Grammar test form here for All words
+            }
+            else
+            {
+                var allWordsVerbalTestForm = new AllWordsVerbalTestForm(selectedLanguage);
+                allWordsVerbalTestForm.Closed += (s, args) => this.Close();
+
+                allWordsVerbalTestForm.Show();
+            }
         }
 
         private void UnknownWordsListSelectionButton_Click(object sender, EventArgs e)

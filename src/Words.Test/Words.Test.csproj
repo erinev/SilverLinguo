@@ -52,6 +52,8 @@
     <Compile Include="Forms\TestResultsForm.Designer.cs">
       <DependentUpon>TestResultsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Form\CommonFormService.cs" />
+    <Compile Include="Helpers\Form\VerbalFormService.cs" />
     <Compile Include="Models\WordPair.cs" />
     <Compile Include="Repositories\WordsRepository.cs" />
     <Compile Include="Helpers\Extensions.cs" />
@@ -80,11 +82,11 @@
     <Compile Include="Forms\UnknownWordsVerbalTestForm.Designer.cs">
       <DependentUpon>UnknownWordsVerbalTestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\WordsTestForm.cs">
+    <Compile Include="Forms\AllWordsVerbalTestForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\WordsTestForm.Designer.cs">
-      <DependentUpon>WordsTestForm.cs</DependentUpon>
+    <Compile Include="Forms\AllWordsVerbalTestForm.Designer.cs">
+      <DependentUpon>AllWordsVerbalTestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -113,8 +115,8 @@
     <EmbeddedResource Include="Forms\UnknownWordsVerbalTestForm.resx">
       <DependentUpon>UnknownWordsVerbalTestForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\WordsTestForm.resx">
-      <DependentUpon>WordsTestForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\AllWordsVerbalTestForm.resx">
+      <DependentUpon>AllWordsVerbalTestForm.cs</DependentUpon>
     </EmbeddedResource>
     <Content Include="Database\scripts\create.table.AllWords.sql" />
     <Content Include="Database\scripts\create.table.TestResults.sql" />
