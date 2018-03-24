@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Silverio.Žodynas
+namespace Words.Test
 {
     static class Program
     {

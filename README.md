@@ -1,2 +1,2 @@
-# silverio-zodynas
-English words learning app
+# Vocabulary
+Two languages words learning windows forms application

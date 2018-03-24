@@ -1,4 +1,4 @@
-﻿namespace Silverio.Žodynas
+﻿namespace Words.Test.Forms
 {
     partial class WordsTestForm
     {
@@ -140,7 +140,7 @@
             // 
             this.ChangeLanguageButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ChangeLanguageButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.ChangeLanguageButton.Image = global::Silverio.Žodynas.Properties.Resources.EnglishFlag;
+            this.ChangeLanguageButton.Image = global::Words.Test.Properties.Resources.EnglishFlag;
             this.ChangeLanguageButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ChangeLanguageButton.Location = new System.Drawing.Point(232, 115);
             this.ChangeLanguageButton.Name = "ChangeLanguageButton";

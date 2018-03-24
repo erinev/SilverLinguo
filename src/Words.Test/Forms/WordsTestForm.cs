@@ -3,31 +3,38 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Silverio.Žodynas.Enums;
-using Silverio.Žodynas.Models;
-using Silverio.Žodynas.Repositories;
+using Words.Test.Enums;
+using Words.Test.Models;
+using Words.Test.Repositories;
 
-namespace Silverio.Žodynas
+namespace Words.Test.Forms
 {
     public partial class WordsTestForm : Form
     {
-        private static CurrentLanguage _currentLanguage;
-        private static int _currentWordPairIndex;
-        private static int _currentWordPairIndexForProgress = 1;
+        private readonly IWordsRepository _wordsRepository;
+
+        private SelectedLanguage _selectedLanguage;
+        private int _currentWordPairIndex;
+        private int _currentWordPairIndexForProgress = 1;
 
         private readonly Bitmap _englishFlagBitmap = Properties.Resources.EnglishFlag;
         private readonly Bitmap _lithuanianFlagBitmap = Properties.Resources.LithuanianFlag;
-        private static WordPair[] _words;
-        private static IList<WordPair> _unknownWords = new List<WordPair>();
+        private WordPair[] _words;
+        private readonly IList<WordPair> _unknownWords = new List<WordPair>();
         private readonly string _progressLabelText = "{0} / {1}";
 
         public WordsTestForm()
         {
-            _words = WordsRepository.GetWordsForTest();
+            _wordsRepository = new WordsRepository();
 
             InitializeComponent();
+        }
 
-            _currentLanguage = CurrentLanguage.Lithuanian;
+        private void VocabularyForm_Load(object sender, EventArgs e)
+        {
+            _words = _wordsRepository.GetWordsForTest();
+
+            _selectedLanguage = SelectedLanguage.Lithuanian;
 
             LtWordLabel.Visible = true;
             EnWordLabel.Visible = false;
@@ -36,10 +43,7 @@ namespace Silverio.Žodynas
             PreviousWordButton.Visible = false;
 
             ChangeLanguageButton.Image = _englishFlagBitmap;
-        }
 
-        private void VocabularyForm_Load(object sender, EventArgs e)
-        {
             ProgressLabel.Text = string.Format(_progressLabelText, _currentWordPairIndexForProgress, _words.Length);
 
             LtWordLabel.Text = _words[_currentWordPairIndex].LithuanianWord;
@@ -50,16 +54,16 @@ namespace Silverio.Žodynas
         {
             Bitmap languageIcon;
 
-            if (_currentLanguage == CurrentLanguage.Lithuanian)
+            if (_selectedLanguage == SelectedLanguage.Lithuanian)
             {
                 languageIcon = _lithuanianFlagBitmap;
-                _currentLanguage = CurrentLanguage.English;
+                _selectedLanguage = SelectedLanguage.English;
                 EnWordLabel.Visible = true;
             }
-            else if (_currentLanguage == CurrentLanguage.English)
+            else if (_selectedLanguage == SelectedLanguage.English)
             {
                 languageIcon = _englishFlagBitmap;
-                _currentLanguage = CurrentLanguage.Lithuanian;
+                _selectedLanguage = SelectedLanguage.Lithuanian;
                 LtWordLabel.Visible = true;
             }
             else
@@ -92,11 +96,11 @@ namespace Silverio.Žodynas
                 EnWordLabel.Text = _words[previousWordIndex].EnglishWord;
             }
 
-            if (_currentLanguage == CurrentLanguage.Lithuanian)
+            if (_selectedLanguage == SelectedLanguage.Lithuanian)
             {
                 EnWordLabel.Visible = false;
             }
-            else if (_currentLanguage == CurrentLanguage.English)
+            else if (_selectedLanguage == SelectedLanguage.English)
             {
                 LtWordLabel.Visible = false;
             }
@@ -129,11 +133,11 @@ namespace Silverio.Žodynas
                 EnWordLabel.Text = _words[nextWordIndex].EnglishWord;
             }
             
-            if (_currentLanguage == CurrentLanguage.Lithuanian)
+            if (_selectedLanguage == SelectedLanguage.Lithuanian)
             {
                 EnWordLabel.Visible = false;
             }
-            else if (_currentLanguage == CurrentLanguage.English)
+            else if (_selectedLanguage == SelectedLanguage.English)
             {
                 LtWordLabel.Visible = false;
             }

@@ -1,9 +1,8 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27413.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverio.Žodynas", "Silverio.Žodynas\Silverio.Žodynas.csproj", "{66449207-B867-42E1-ADA5-72BBC92C3318}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Words.Test", "Words.Test\Words.Test.csproj", "{66449207-B867-42E1-ADA5-72BBC92C3318}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

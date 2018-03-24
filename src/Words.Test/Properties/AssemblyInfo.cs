@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Silverio.Žodynas")]
-[assembly: AssemblyDescription("Silverio anglų kalbos mokymosi programėlė")]
+[assembly: AssemblyTitle("Words.Test")]
+[assembly: AssemblyDescription("Two languages words learning windows form application")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Silverio.Žodynas")]
+[assembly: AssemblyProduct("Words.Test")]
 [assembly: AssemblyCopyright("Copyright © Erikas Neverdauskas 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
