@@ -8,6 +8,8 @@ namespace Words.Test.Models
         public int Id { get; set; }
         public string LithuanianWord { get; set; }
         public string EnglishWord { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime ModifiedAt { get; set; }
 
         public override bool Equals(object obj)
         {
