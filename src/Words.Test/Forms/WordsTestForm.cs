@@ -46,8 +46,8 @@ namespace Words.Test.Forms
 
             ProgressLabel.Text = string.Format(_progressLabelText, _currentWordPairIndexForProgress, _words.Length);
 
-            LtWordLabel.Text = _words[_currentWordPairIndex].LithuanianWord;
-            EnWordLabel.Text = _words[_currentWordPairIndex].EnglishWord;
+            LtWordLabel.Text = _words[_currentWordPairIndex].FirstLanguageWord;
+            EnWordLabel.Text = _words[_currentWordPairIndex].SecondLanguageWord;
         }
 
         private void ChangeLanguageButton_Click(object sender, EventArgs e)
@@ -92,8 +92,8 @@ namespace Words.Test.Forms
 
                 int previousWordIndex = --_currentWordPairIndex;
 
-                LtWordLabel.Text = _words[previousWordIndex].LithuanianWord;
-                EnWordLabel.Text = _words[previousWordIndex].EnglishWord;
+                LtWordLabel.Text = _words[previousWordIndex].FirstLanguageWord;
+                EnWordLabel.Text = _words[previousWordIndex].SecondLanguageWord;
             }
 
             if (_selectedLanguage == SelectedLanguage.Lithuanian)
@@ -129,8 +129,8 @@ namespace Words.Test.Forms
 
                 int nextWordIndex = ++_currentWordPairIndex;
 
-                LtWordLabel.Text = _words[nextWordIndex].LithuanianWord;
-                EnWordLabel.Text = _words[nextWordIndex].EnglishWord;
+                LtWordLabel.Text = _words[nextWordIndex].FirstLanguageWord;
+                EnWordLabel.Text = _words[nextWordIndex].SecondLanguageWord;
             }
             
             if (_selectedLanguage == SelectedLanguage.Lithuanian)
@@ -155,8 +155,8 @@ namespace Words.Test.Forms
 
             WordPair existingUnknownWord =
                 _unknownWords.FirstOrDefault(unknownWord =>
-                    unknownWord.LithuanianWord == unknownWordCandidate.LithuanianWord &&
-                    unknownWord.EnglishWord == unknownWordCandidate.EnglishWord);
+                    unknownWord.FirstLanguageWord == unknownWordCandidate.FirstLanguageWord &&
+                    unknownWord.SecondLanguageWord == unknownWordCandidate.SecondLanguageWord);
 
             if (existingUnknownWord == null)
             {
@@ -164,8 +164,8 @@ namespace Words.Test.Forms
                     new WordPair
                     {
                         Id = _unknownWords.Count + 1,
-                        LithuanianWord = unknownWordCandidate.LithuanianWord,
-                        EnglishWord = unknownWordCandidate.EnglishWord
+                        FirstLanguageWord = unknownWordCandidate.FirstLanguageWord,
+                        SecondLanguageWord = unknownWordCandidate.SecondLanguageWord
                     }
                 );
             }
@@ -185,8 +185,8 @@ namespace Words.Test.Forms
             WordPair currentWord = _words[_currentWordPairIndex];
 
             WordPair alreadyExistingUnknownWord = _unknownWords.FirstOrDefault(unknownWord =>
-                unknownWord.LithuanianWord == currentWord.LithuanianWord &&
-                unknownWord.EnglishWord == currentWord.EnglishWord);
+                unknownWord.FirstLanguageWord == currentWord.FirstLanguageWord &&
+                unknownWord.SecondLanguageWord == currentWord.SecondLanguageWord);
 
             UnknownWordButton.Visible = alreadyExistingUnknownWord == null;
         }

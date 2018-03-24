@@ -2,8 +2,8 @@
 {
     public enum SelectedLanguage
     {
-        Lithuanian,
-        English,
-        Mixed
+        Lithuanian = 1,
+        English = 2,
+        Mixed = 3
     }
 }

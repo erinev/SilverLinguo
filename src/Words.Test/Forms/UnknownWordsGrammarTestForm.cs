@@ -66,8 +66,8 @@ namespace Words.Test.Forms
             LearnedWordsCountLinkLabel.Enabled = false;
 
             WordPair firstUnknownWord = _unknownWords.First();
-            LtWordTextBox.Text = LtWordTextBox.ReadOnly ? firstUnknownWord.LithuanianWord : String.Empty;
-            EnWordTextBox.Text = EnWordTextBox.ReadOnly ? firstUnknownWord.EnglishWord : String.Empty;
+            LtWordTextBox.Text = LtWordTextBox.ReadOnly ? firstUnknownWord.FirstLanguageWord : String.Empty;
+            EnWordTextBox.Text = EnWordTextBox.ReadOnly ? firstUnknownWord.SecondLanguageWord : String.Empty;
         }
 
         private void UnknownWordsGrammarTestForm_Shown(object sender, EventArgs e)
@@ -117,26 +117,26 @@ namespace Words.Test.Forms
 
             if (!EnWordTextBox.ReadOnly)
             {
-                bool isEqual = IsEnteredValueIsEqualToExpectedValue(EnWordTextBox.Text, currentWordPair.EnglishWord);
+                bool isEqual = IsEnteredValueIsEqualToExpectedValue(EnWordTextBox.Text, currentWordPair.SecondLanguageWord);
                 if (isEqual)
                 {
                     HandleCorrectlyEnteredWord();
                 }
                 else
                 {
-                    HandleIncorrectlyEnteredWord(EnWordTextBox, currentWordPair.EnglishWord);
+                    HandleIncorrectlyEnteredWord(EnWordTextBox, currentWordPair.SecondLanguageWord);
                 }
             }
             else if (!LtWordTextBox.ReadOnly)
             {
-                bool isEqual = IsEnteredValueIsEqualToExpectedValue(LtWordTextBox.Text, currentWordPair.LithuanianWord);
+                bool isEqual = IsEnteredValueIsEqualToExpectedValue(LtWordTextBox.Text, currentWordPair.FirstLanguageWord);
                 if (isEqual)
                 {
                     HandleCorrectlyEnteredWord();
                 }
                 else
                 {
-                    HandleIncorrectlyEnteredWord(LtWordTextBox, currentWordPair.LithuanianWord);
+                    HandleIncorrectlyEnteredWord(LtWordTextBox, currentWordPair.FirstLanguageWord);
                 }
             }
         }
@@ -222,8 +222,8 @@ namespace Words.Test.Forms
             SetInputColorsOnNextWordEvent();
 
             WordPair currentUnknownWord = _unknownWords.First();
-            LtWordTextBox.Text = LtWordTextBox.ReadOnly ? currentUnknownWord.LithuanianWord : String.Empty;
-            EnWordTextBox.Text = EnWordTextBox.ReadOnly ? currentUnknownWord.EnglishWord : String.Empty;
+            LtWordTextBox.Text = LtWordTextBox.ReadOnly ? currentUnknownWord.FirstLanguageWord : String.Empty;
+            EnWordTextBox.Text = EnWordTextBox.ReadOnly ? currentUnknownWord.SecondLanguageWord : String.Empty;
 
             if (!LtWordTextBox.ReadOnly)
             {
@@ -269,7 +269,7 @@ namespace Words.Test.Forms
         private void LearnedWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             List<string> learnedWordsToDisplay =
-                _learnedWords.Select(learnedWord => learnedWord.LithuanianWord + " - " + learnedWord.EnglishWord).ToList();
+                _learnedWords.Select(learnedWord => learnedWord.FirstLanguageWord + " - " + learnedWord.SecondLanguageWord).ToList();
 
             string showWordsFormName = "Išmokti žodžiai:";
             var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, learnedWordsToDisplay);
@@ -314,7 +314,7 @@ namespace Words.Test.Forms
             this.Hide();
             
             List<string> learnedWordsToDisplay =
-                _learnedWords.Select(learnedWord => learnedWord.LithuanianWord + " - " + learnedWord.EnglishWord).ToList();
+                _learnedWords.Select(learnedWord => learnedWord.FirstLanguageWord + " - " + learnedWord.SecondLanguageWord).ToList();
             var testResultsForm = new TestResultsForm(_selectedLanguage, TestType.Grammar, WordsType.UnknownWords, _stopWatch, _startingCountOfUnknownWords, learnedWordsToDisplay);
             testResultsForm.Closed += (s, args) => this.Close();
 

@@ -2,7 +2,7 @@
 {
     public enum WordsType
     {
-        AllWords,
-        UnknownWords
+        AllWords = 1,
+        UnknownWords = 2
     }
 }

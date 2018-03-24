@@ -66,8 +66,8 @@ namespace Words.Test.Forms
             LearnedWordsCountLinkLabel.Enabled = false;
 
             WordPair firstUnknownWord = _unknownWords.First();
-            LtWordTextBox.Text = firstUnknownWord.LithuanianWord;
-            EnWordTextBox.Text = firstUnknownWord.EnglishWord;
+            LtWordTextBox.Text = firstUnknownWord.FirstLanguageWord;
+            EnWordTextBox.Text = firstUnknownWord.SecondLanguageWord;
         }
 
         private void UnknownWordsVerbalTestForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -118,8 +118,8 @@ namespace Words.Test.Forms
 
                 WordPair nextUnknownWord = _unknownWords.First();
 
-                LtWordTextBox.Text = nextUnknownWord.LithuanianWord;
-                EnWordTextBox.Text = nextUnknownWord.EnglishWord;
+                LtWordTextBox.Text = nextUnknownWord.FirstLanguageWord;
+                EnWordTextBox.Text = nextUnknownWord.SecondLanguageWord;
                 _currentUnknownWordPairId = nextUnknownWord.Id;
             }
             else
@@ -196,7 +196,7 @@ namespace Words.Test.Forms
         private void LearnedWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             List<string> learnedWordsToDisplay =
-                _learnedWords.Select(learnedWord => learnedWord.LithuanianWord + " - " + learnedWord.EnglishWord).ToList();
+                _learnedWords.Select(learnedWord => learnedWord.FirstLanguageWord + " - " + learnedWord.SecondLanguageWord).ToList();
 
             string showWordsFormName = "Išmokti žodžiai:";
             var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, learnedWordsToDisplay);
@@ -212,7 +212,7 @@ namespace Words.Test.Forms
             this.Hide();
             
             List<string> learnedWordsToDisplay =
-                _learnedWords.Select(learnedWord => learnedWord.LithuanianWord + " - " + learnedWord.EnglishWord).ToList();
+                _learnedWords.Select(learnedWord => learnedWord.FirstLanguageWord + " - " + learnedWord.SecondLanguageWord).ToList();
             var testResultsForm = new TestResultsForm(_selectedLanguage, TestType.Verbal, WordsType.UnknownWords, _stopWatch, _startingCountOfUnknownWords, learnedWordsToDisplay);
             testResultsForm.Closed += (s, args) => this.Close();
 
