@@ -121,12 +121,6 @@
     <Content Include="Database\scripts\create.table.UnknownWords.sql" />
     <Content Include="Database\scripts\insert.rows.AllWords.sql" />
     <Content Include="Database\scripts\insert.rows.UnknownWords.sql" />
-    <Content Include="Files\UnknownWords.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Files\Words.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Database\Vocabulary.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
