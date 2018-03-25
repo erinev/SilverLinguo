@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Forms;
 using Words.Test.Constants;
 using Words.Test.Enums;
-using Words.Test.Repositories;
 using Words.Test.Repositories.Models;
 using Words.Test.Services;
 using Words.Test.Services.Form;
@@ -153,6 +152,54 @@ namespace Words.Test.Forms
             _allWords = _allWords.Where(aw => aw.Id != _currentWordPairId).ToArray();
         }
 
+        private void NewUnknownWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            List<string> newUnknownWordsToDisplay =
+                _newUnknownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+
+            string showWordsFormName = "Nauji nežinomi žodžiai:";
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, newUnknownWordsToDisplay);
+
+            showWordsListByTypeForm.Activate();
+            showWordsListByTypeForm.ShowDialog(this);
+        }
+
+        private void UnknownWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            List<string> unknownWordsToDisplay =
+                _unknownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+
+            string showWordsFormName = "Vis dar nežinomi žodžiai:";
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, unknownWordsToDisplay);
+
+            showWordsListByTypeForm.Activate();
+            showWordsListByTypeForm.ShowDialog(this);
+        }
+
+        private void NewLearnedWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            List<string> learnedWordsToDisplay =
+                _learnedWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+
+            string showWordsFormName = "Nauji išmokti žodžiai:";
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, learnedWordsToDisplay);
+
+            showWordsListByTypeForm.Activate();
+            showWordsListByTypeForm.ShowDialog(this);
+        }
+
+        private void KnownWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            List<string> knownWordsToDisplay =
+                _knownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+
+            string showWordsFormName = "Žinomi žodžiai:";
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, knownWordsToDisplay);
+
+            showWordsListByTypeForm.Activate();
+            showWordsListByTypeForm.ShowDialog(this);
+        }
+
         private void EndTestButton_Click(object sender, EventArgs e)
         {
             HandleFinishedTest();
@@ -162,7 +209,19 @@ namespace Words.Test.Forms
         {
             _stopWatch.Stop();
 
-            this.Close();
+            this.Hide();
+
+            List<WordPair> learnedAndKnownWords = _learnedWords.Concat(_knownWords).ToList();
+            List<string> learnedAndKnownWordsToDisplay =
+                learnedAndKnownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+            List<WordPair> unknownWords = _newUnknownWords.Concat(_unknownWords).ToList();
+            List<string> unknownWordsToDisplay =
+                unknownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+
+            var testResultsForm = new TestResultsForm(_selectedLanguage, TestType.Verbal, WordsType.AllWords, _stopWatch, _startingCountOfAllWords, learnedAndKnownWordsToDisplay, unknownWordsToDisplay);
+            testResultsForm.Closed += (s, args) => this.Close();
+
+            testResultsForm.Show();
         }
     }
 }

@@ -57,6 +57,7 @@
             this.NewUnknownWordsCountLinkLabel.TabIndex = 56;
             this.NewUnknownWordsCountLinkLabel.TabStop = true;
             this.NewUnknownWordsCountLinkLabel.Text = "0";
+            this.NewUnknownWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.NewUnknownWordsCountLinkLabel_LinkClicked);
             // 
             // TestTimerLabel
             // 
@@ -210,6 +211,7 @@
             this.UnknownWordsCountLinkLabel.TabIndex = 58;
             this.UnknownWordsCountLinkLabel.TabStop = true;
             this.UnknownWordsCountLinkLabel.Text = "0";
+            this.UnknownWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.UnknownWordsCountLinkLabel_LinkClicked);
             // 
             // NewLearnedWordsCountHeaderLabel
             // 
@@ -230,6 +232,7 @@
             this.NewLearnedWordsCountLinkLabel.TabIndex = 60;
             this.NewLearnedWordsCountLinkLabel.TabStop = true;
             this.NewLearnedWordsCountLinkLabel.Text = "0";
+            this.NewLearnedWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.NewLearnedWordsCountLinkLabel_LinkClicked);
             // 
             // KnownWordsCountHeaderLabel
             // 
@@ -250,6 +253,7 @@
             this.KnownWordsCountLinkLabel.TabIndex = 62;
             this.KnownWordsCountLinkLabel.TabStop = true;
             this.KnownWordsCountLinkLabel.Text = "0";
+            this.KnownWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.KnownWordsCountLinkLabel_LinkClicked);
             // 
             // AllWordsVerbalTestForm
             // 
