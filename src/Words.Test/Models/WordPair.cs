@@ -1,44 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
+using Words.Test.Enums;
 
 namespace Words.Test.Models
 {
-    public class WordPair : IEquatable<WordPair>
+    public class WordPair
     {
         public int Id { get; set; }
-        public string LithuanianWord { get; set; }
-        public string EnglishWord { get; set; }
+        public string FirstLanguageWord { get; set; }
+        public string SecondLanguageWord { get; set; }
+        public LanguagePair LanguagePair { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime ModifiedAt { get; set; }
+    }
 
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as WordPair);
-        }
+    public class WordPairQueries
+    {
+        public const string GetAllWordsQuery = 
+            @"select 
+                AW.Id, AW.FirstLanguageWord, AW.SecondLanguageWord, AW.LanguagePair, AW.CreatedAt, AW.ModifiedAt  
+              from AllWords AW";
 
-        public bool Equals(WordPair other)
-        {
-            return other != null &&
-                   Id == other.Id &&
-                   LithuanianWord == other.LithuanianWord &&
-                   EnglishWord == other.EnglishWord;
-        }
-
-        public override int GetHashCode()
-        {
-            var hashCode = -1134854903;
-            hashCode = hashCode * -1521134295 + Id.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(LithuanianWord);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(EnglishWord);
-            return hashCode;
-        }
-
-        public static bool operator ==(WordPair pair1, WordPair pair2)
-        {
-            return EqualityComparer<WordPair>.Default.Equals(pair1, pair2);
-        }
-
-        public static bool operator !=(WordPair pair1, WordPair pair2)
-        {
-            return !(pair1 == pair2);
-        }
+        public const string GetUnknownWordsQuery = 
+            @"select 
+                AW.Id, AW.FirstLanguageWord, AW.SecondLanguageWord, AW.LanguagePair, AW.CreatedAt, AW.ModifiedAt  
+              from UnknownWords UW
+              join AllWords AW ON UW.ID_AllWords = AW.Id";
     }
 }

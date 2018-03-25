@@ -2,7 +2,7 @@
 {
     public enum TestType
     {
-        Verbal,
-        Grammar
+        Verbal = 1,
+        Grammar = 2
     }
 }

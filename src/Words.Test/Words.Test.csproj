@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Words.Test</RootNamespace>
     <AssemblyName>Words.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\KeyCodes.cs" />
+    <Compile Include="Enums\LanguagePair.cs" />
     <Compile Include="Enums\SelectedLanguage.cs" />
     <Compile Include="Enums\TestType.cs" />
     <Compile Include="Enums\WordsType.cs" />
@@ -115,12 +116,14 @@
     <EmbeddedResource Include="Forms\WordsTestForm.resx">
       <DependentUpon>WordsTestForm.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="Files\UnknownWords.txt">
+    <Content Include="Database\scripts\create.table.AllWords.sql" />
+    <Content Include="Database\scripts\create.table.TestResults.sql" />
+    <Content Include="Database\scripts\create.table.UnknownWords.sql" />
+    <Content Include="Database\scripts\insert.rows.AllWords.sql" />
+    <Content Include="Database\scripts\insert.rows.UnknownWords.sql" />
+    <None Include="Database\Vocabulary.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Files\Words.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -143,8 +146,11 @@
     <None Include="Resources\LithuanianFlag.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>11.0.1</Version>
+    <PackageReference Include="Dapper">
+      <Version>1.50.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Data.SQLite.Core">
+      <Version>1.0.108</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />

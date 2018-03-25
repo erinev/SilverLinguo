@@ -24,21 +24,21 @@ namespace Words.Test.Services
 
         public int GetWordsCount()
         {
-            WordPair[] words = _wordsRepository.GetWordsForTest();
+            WordPair[] words = _wordsRepository.GetAllWords();
 
             return words.Length;
         }
 
         public int GetUnknownWordsCount()
         {
-            WordPair[] unknownWords = _wordsRepository.GetUnknownWordsForTest();
+            WordPair[] unknownWords = _wordsRepository.GetUnknownWords();
 
             return unknownWords.Length;
         }
 
         public WordPair[] GetRandomlySortedWords()
         {
-            WordPair[] words = _wordsRepository.GetWordsForTest();
+            WordPair[] words = _wordsRepository.GetAllWords();
 
             new Random().Shuffle(words);
 
@@ -47,7 +47,7 @@ namespace Words.Test.Services
 
         public WordPair[] GetRandomlySortedUnknownWords()
         {
-            WordPair[] unknownWords = _wordsRepository.GetUnknownWordsForTest();
+            WordPair[] unknownWords = _wordsRepository.GetUnknownWords();
 
             new Random().Shuffle(unknownWords);
 
