@@ -76,6 +76,7 @@ namespace Words.Test.Forms
             {
                 _learnedWords.Add(_unknownWords.First(uw => uw.Id == _currentUnknownWordPairId));
                 LearnedWordsCountLinkLabel.Text = _learnedWords.Count.ToString();
+                LearnedWordsCountLinkLabel.Enabled = _learnedWords.Count > 0;
 
                 _unknownWords = _unknownWords.Where(unknownWord => unknownWord.Id != _currentUnknownWordPairId).ToArray();
             }
@@ -84,8 +85,7 @@ namespace Words.Test.Forms
                 VerbalFormService.SetWordTextBoxVisibilityForSelectedLanguage(_selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox);
             }
 
-            VerbalFormService.HandleNextWordButtonClickedEvent(LearnedWordsCountLinkLabel, _learnedWords,
-                IDontKnowTheWordButton, FirstLanguageWordTextBox, SecondLanguageWordTextBox, _selectedLanguage);
+            VerbalFormService.HandleNextWordButtonClickedEvent(IDontKnowTheWordButton, FirstLanguageWordTextBox, SecondLanguageWordTextBox, _selectedLanguage);
 
             if (_unknownWords.Length > 0)
             {

@@ -40,7 +40,10 @@ namespace Words.Test
 
             if (ShouldCheckGrammarCheckBox.Checked)
             {
-                //TODO: show Grammar test form here for All words
+                var allWordsVerbalTestForm = new AllWordsVerbalTestForm(selectedLanguage);
+                allWordsVerbalTestForm.Closed += (s, args) => this.Close();
+
+                allWordsVerbalTestForm.Show();
             }
             else
             {

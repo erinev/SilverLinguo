@@ -58,26 +58,28 @@ namespace Words.Test.Services
 
         public bool InsertNewUnknownWordIfDoesntExist(WordPair newUnknownWordCandidate)
         {
-            bool unknownWordAlreadyExist = _wordsRepository.CheckIfUnknownWordAlreadyExist(newUnknownWordCandidate.Id);
+            bool unknownWordAdded = false;
 
+            bool unknownWordAlreadyExist = _wordsRepository.CheckIfUnknownWordAlreadyExist(newUnknownWordCandidate.Id);
             if (!unknownWordAlreadyExist)
             {
-                _wordsRepository.AddNewUnknownWord(newUnknownWordCandidate.Id);
+                unknownWordAdded = _wordsRepository.AddNewUnknownWord(newUnknownWordCandidate.Id);
             }
 
-            return !unknownWordAlreadyExist;
+            return unknownWordAdded;
         }
 
         public bool RemoveLearnedUnknownWordIfExist(WordPair learnedWord)
         {
-            bool unknownWordExists = _wordsRepository.CheckIfUnknownWordAlreadyExist(learnedWord.Id);
+            bool unknownWordRemoved = false;
 
+            bool unknownWordExists = _wordsRepository.CheckIfUnknownWordAlreadyExist(learnedWord.Id);
             if (unknownWordExists)
             {
-                _wordsRepository.RemoveLearnedUnknownWord(learnedWord.Id);
+                unknownWordRemoved = _wordsRepository.RemoveLearnedUnknownWord(learnedWord.Id);
             }
 
-            return unknownWordExists;
+            return unknownWordRemoved;
         }
     }
 }

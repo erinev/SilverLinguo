@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Words.Test.Constants;
 using Words.Test.Enums;
+using Words.Test.Repositories;
 using Words.Test.Repositories.Models;
 using Words.Test.Services;
 using Words.Test.Services.Form;
@@ -104,7 +105,7 @@ namespace Words.Test.Forms
                 VerbalFormService.SetWordTextBoxVisibilityForSelectedLanguage(_selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox);
             }
 
-            VerbalFormService.HandleNextWordButtonClickedEvent(NewLearnedWordsCountLinkLabel, _knownWords, IDontKnowTheWordButton, FirstLanguageWordTextBox, SecondLanguageWordTextBox, _selectedLanguage);
+            VerbalFormService.HandleNextWordButtonClickedEvent(IDontKnowTheWordButton, FirstLanguageWordTextBox, SecondLanguageWordTextBox, _selectedLanguage);
 
             if (_allWords.Length > 0)
             {

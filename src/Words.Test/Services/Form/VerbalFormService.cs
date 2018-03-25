@@ -48,10 +48,9 @@ namespace Words.Test.Services.Form
         }
 
         public static void HandleNextWordButtonClickedEvent(
-            LinkLabel learnedWordsCountLinkLabel, List<WordPair> learnedWords, Button iDontKnowTheWordButton,
-            TextBox firstLanguageWordTextBox, TextBox secondLanguageWordTextBox, SelectedLanguage selectedLanguage)
+            Button iDontKnowTheWordButton, TextBox firstLanguageWordTextBox, 
+            TextBox secondLanguageWordTextBox, SelectedLanguage selectedLanguage)
         {
-            learnedWordsCountLinkLabel.Enabled = learnedWords.Count > 0;
             iDontKnowTheWordButton.Visible = true;
 
             switch (selectedLanguage)
