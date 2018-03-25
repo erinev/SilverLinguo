@@ -123,9 +123,6 @@
     <Content Include="Database\scripts\create.table.UnknownWords.sql" />
     <Content Include="Database\scripts\insert.rows.AllWords.sql" />
     <Content Include="Database\scripts\insert.rows.UnknownWords.sql" />
-    <None Include="Database\Vocabulary.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
