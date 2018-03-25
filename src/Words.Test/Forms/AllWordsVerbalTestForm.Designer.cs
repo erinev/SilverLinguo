@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.NewUnknownWordsCountLabel = new System.Windows.Forms.LinkLabel();
+            this.NewUnknownWordsCountLinkLabel = new System.Windows.Forms.LinkLabel();
             this.TestTimerLabel = new System.Windows.Forms.Label();
             this.FirstLanguageWordTextBox = new System.Windows.Forms.TextBox();
             this.SecondLanguageWordTextBox = new System.Windows.Forms.TextBox();
@@ -42,19 +42,21 @@
             this.LtHeaderLabel = new System.Windows.Forms.Label();
             this.UnknownWordsCountHeaderLabel = new System.Windows.Forms.Label();
             this.UnknownWordsCountLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.LearnedWordsCountHeaderLabel = new System.Windows.Forms.Label();
-            this.LearnedWordsCountLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.NewLearnedWordsCountHeaderLabel = new System.Windows.Forms.Label();
+            this.NewLearnedWordsCountLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.KnownWordsCountHeaderLabel = new System.Windows.Forms.Label();
+            this.KnownWordsCountLinkLabel = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
-            // NewUnknownWordsCountLabel
+            // NewUnknownWordsCountLinkLabel
             // 
-            this.NewUnknownWordsCountLabel.AutoSize = true;
-            this.NewUnknownWordsCountLabel.Location = new System.Drawing.Point(812, 80);
-            this.NewUnknownWordsCountLabel.Name = "NewUnknownWordsCountLabel";
-            this.NewUnknownWordsCountLabel.Size = new System.Drawing.Size(15, 16);
-            this.NewUnknownWordsCountLabel.TabIndex = 56;
-            this.NewUnknownWordsCountLabel.TabStop = true;
-            this.NewUnknownWordsCountLabel.Text = "0";
+            this.NewUnknownWordsCountLinkLabel.AutoSize = true;
+            this.NewUnknownWordsCountLinkLabel.Location = new System.Drawing.Point(812, 80);
+            this.NewUnknownWordsCountLinkLabel.Name = "NewUnknownWordsCountLinkLabel";
+            this.NewUnknownWordsCountLinkLabel.Size = new System.Drawing.Size(15, 16);
+            this.NewUnknownWordsCountLinkLabel.TabIndex = 56;
+            this.NewUnknownWordsCountLinkLabel.TabStop = true;
+            this.NewUnknownWordsCountLinkLabel.Text = "0";
             // 
             // TestTimerLabel
             // 
@@ -167,6 +169,7 @@
             this.EndTestButton.TabIndex = 47;
             this.EndTestButton.Text = "Baigtį testą";
             this.EndTestButton.UseVisualStyleBackColor = false;
+            this.EndTestButton.Click += new System.EventHandler(this.EndTestButton_Click);
             // 
             // EnHeaderLabel
             // 
@@ -208,25 +211,45 @@
             this.UnknownWordsCountLinkLabel.TabStop = true;
             this.UnknownWordsCountLinkLabel.Text = "0";
             // 
-            // LearnedWordsCountHeaderLabel
+            // NewLearnedWordsCountHeaderLabel
             // 
-            this.LearnedWordsCountHeaderLabel.AutoSize = true;
-            this.LearnedWordsCountHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.LearnedWordsCountHeaderLabel.Location = new System.Drawing.Point(812, 161);
-            this.LearnedWordsCountHeaderLabel.Name = "LearnedWordsCountHeaderLabel";
-            this.LearnedWordsCountHeaderLabel.Size = new System.Drawing.Size(99, 16);
-            this.LearnedWordsCountHeaderLabel.TabIndex = 59;
-            this.LearnedWordsCountHeaderLabel.Text = "Išmokti žodžiai: ";
+            this.NewLearnedWordsCountHeaderLabel.AutoSize = true;
+            this.NewLearnedWordsCountHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.NewLearnedWordsCountHeaderLabel.Location = new System.Drawing.Point(812, 161);
+            this.NewLearnedWordsCountHeaderLabel.Name = "NewLearnedWordsCountHeaderLabel";
+            this.NewLearnedWordsCountHeaderLabel.Size = new System.Drawing.Size(132, 16);
+            this.NewLearnedWordsCountHeaderLabel.TabIndex = 59;
+            this.NewLearnedWordsCountHeaderLabel.Text = "Nauji Išmokti žodžiai: ";
             // 
-            // LearnedWordsCountLinkLabel
+            // NewLearnedWordsCountLinkLabel
             // 
-            this.LearnedWordsCountLinkLabel.AutoSize = true;
-            this.LearnedWordsCountLinkLabel.Location = new System.Drawing.Point(812, 177);
-            this.LearnedWordsCountLinkLabel.Name = "LearnedWordsCountLinkLabel";
-            this.LearnedWordsCountLinkLabel.Size = new System.Drawing.Size(15, 16);
-            this.LearnedWordsCountLinkLabel.TabIndex = 60;
-            this.LearnedWordsCountLinkLabel.TabStop = true;
-            this.LearnedWordsCountLinkLabel.Text = "0";
+            this.NewLearnedWordsCountLinkLabel.AutoSize = true;
+            this.NewLearnedWordsCountLinkLabel.Location = new System.Drawing.Point(812, 177);
+            this.NewLearnedWordsCountLinkLabel.Name = "NewLearnedWordsCountLinkLabel";
+            this.NewLearnedWordsCountLinkLabel.Size = new System.Drawing.Size(15, 16);
+            this.NewLearnedWordsCountLinkLabel.TabIndex = 60;
+            this.NewLearnedWordsCountLinkLabel.TabStop = true;
+            this.NewLearnedWordsCountLinkLabel.Text = "0";
+            // 
+            // KnownWordsCountHeaderLabel
+            // 
+            this.KnownWordsCountHeaderLabel.AutoSize = true;
+            this.KnownWordsCountHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.KnownWordsCountHeaderLabel.Location = new System.Drawing.Point(812, 210);
+            this.KnownWordsCountHeaderLabel.Name = "KnownWordsCountHeaderLabel";
+            this.KnownWordsCountHeaderLabel.Size = new System.Drawing.Size(96, 16);
+            this.KnownWordsCountHeaderLabel.TabIndex = 61;
+            this.KnownWordsCountHeaderLabel.Text = "Žinomi žodžiai: ";
+            // 
+            // KnownWordsCountLinkLabel
+            // 
+            this.KnownWordsCountLinkLabel.AutoSize = true;
+            this.KnownWordsCountLinkLabel.Location = new System.Drawing.Point(812, 227);
+            this.KnownWordsCountLinkLabel.Name = "KnownWordsCountLinkLabel";
+            this.KnownWordsCountLinkLabel.Size = new System.Drawing.Size(15, 16);
+            this.KnownWordsCountLinkLabel.TabIndex = 62;
+            this.KnownWordsCountLinkLabel.TabStop = true;
+            this.KnownWordsCountLinkLabel.Text = "0";
             // 
             // AllWordsVerbalTestForm
             // 
@@ -235,11 +258,13 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(969, 291);
             this.ControlBox = false;
-            this.Controls.Add(this.LearnedWordsCountLinkLabel);
-            this.Controls.Add(this.LearnedWordsCountHeaderLabel);
+            this.Controls.Add(this.KnownWordsCountLinkLabel);
+            this.Controls.Add(this.KnownWordsCountHeaderLabel);
+            this.Controls.Add(this.NewLearnedWordsCountLinkLabel);
+            this.Controls.Add(this.NewLearnedWordsCountHeaderLabel);
             this.Controls.Add(this.UnknownWordsCountLinkLabel);
             this.Controls.Add(this.UnknownWordsCountHeaderLabel);
-            this.Controls.Add(this.NewUnknownWordsCountLabel);
+            this.Controls.Add(this.NewUnknownWordsCountLinkLabel);
             this.Controls.Add(this.TestTimerLabel);
             this.Controls.Add(this.FirstLanguageWordTextBox);
             this.Controls.Add(this.SecondLanguageWordTextBox);
@@ -265,7 +290,7 @@
 
         #endregion
 
-        private System.Windows.Forms.LinkLabel NewUnknownWordsCountLabel;
+        private System.Windows.Forms.LinkLabel NewUnknownWordsCountLinkLabel;
         private System.Windows.Forms.Label TestTimerLabel;
         private System.Windows.Forms.TextBox FirstLanguageWordTextBox;
         private System.Windows.Forms.TextBox SecondLanguageWordTextBox;
@@ -279,8 +304,10 @@
         private System.Windows.Forms.Label LtHeaderLabel;
         private System.Windows.Forms.Label UnknownWordsCountHeaderLabel;
         private System.Windows.Forms.LinkLabel UnknownWordsCountLinkLabel;
-        private System.Windows.Forms.Label LearnedWordsCountHeaderLabel;
-        private System.Windows.Forms.LinkLabel LearnedWordsCountLinkLabel;
+        private System.Windows.Forms.Label NewLearnedWordsCountHeaderLabel;
+        private System.Windows.Forms.LinkLabel NewLearnedWordsCountLinkLabel;
+        private System.Windows.Forms.Label KnownWordsCountHeaderLabel;
+        private System.Windows.Forms.LinkLabel KnownWordsCountLinkLabel;
     }
 }
 

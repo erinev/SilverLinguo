@@ -47,42 +47,12 @@ namespace Words.Test.Services.Form
             secondLanguageWordTextBox.Text = firstWord.SecondLanguageWord;
         }
 
-        public static WordPair[] HandleLearnedWordOnNextWordClick(
-            List<WordPair> learnedWords, WordPair[] testingWords, int currentWordPairId,
-            LinkLabel learnedWordsCountLinkLabel)
-        {
-            learnedWords.Add(testingWords.First(uw => uw.Id == currentWordPairId));
-            learnedWordsCountLinkLabel.Text = learnedWords.Count.ToString();
-
-            WordPair[] testingWordsWithoutUnknownWord = testingWords.Where(unknownWord => unknownWord.Id != currentWordPairId).ToArray();
-            return testingWordsWithoutUnknownWord;
-        }
-
         public static void HandleNextWordButtonClickedEvent(
             LinkLabel learnedWordsCountLinkLabel, List<WordPair> learnedWords, Button iDontKnowTheWordButton,
-            WordPair[] learningWords, Label progressLabel, TextBox firstLanguageWordTextBox,
-            TextBox secondLanguageWordTextBox, out int currentWordPairId, Action handleFinishedTestAction,
-            SelectedLanguage selectedLanguage)
+            TextBox firstLanguageWordTextBox, TextBox secondLanguageWordTextBox, SelectedLanguage selectedLanguage)
         {
-            currentWordPairId = 0;
-
             learnedWordsCountLinkLabel.Enabled = learnedWords.Count > 0;
             iDontKnowTheWordButton.Visible = true;
-
-            if (learningWords.Length > 0)
-            {
-                progressLabel.Text = learningWords.Length.ToString();
-
-                WordPair nextWord = learningWords.First();
-
-                firstLanguageWordTextBox.Text = nextWord.FirstLanguageWord;
-                secondLanguageWordTextBox.Text = nextWord.SecondLanguageWord;
-                currentWordPairId = nextWord.Id;
-            }
-            else
-            {
-                handleFinishedTestAction();
-            }
 
             switch (selectedLanguage)
             {

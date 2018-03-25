@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Data.SQLite;
 using System.Linq;
 using Dapper;
@@ -12,6 +11,8 @@ namespace Words.Test.Repositories
         WordPair[] GetAllWords();
         WordPair[] GetUnknownWords();
         bool CheckIfUnknownWordAlreadyExist(int wordId);
+        void AddNewUnknownWord(int wordId);
+        void RemoveLearnedUnknownWord(int wordId);
     }
 
     public class WordsRepository : IWordsRepository
@@ -30,7 +31,13 @@ namespace Words.Test.Repositories
             {
                 dbConnection.Open();
 
-                WordPair[] allWords = dbConnection.Query<WordPair>(WordPairQueries.GetAllWordsQuery).ToArray();
+                const string getAllWordsQuery = 
+                    @"SELECT 
+                        AW.Id, AW.FirstLanguageWord, AW.SecondLanguageWord, 
+                        AW.LanguagePair, AW.CreatedAt, AW.ModifiedAt
+                      FROM AllWords AW";
+
+                WordPair[] allWords = dbConnection.Query<WordPair>(getAllWordsQuery).ToArray();
 
                 return allWords;
             }
@@ -42,7 +49,14 @@ namespace Words.Test.Repositories
             {
                 dbConnection.Open();
 
-                WordPair[] unknownWords = dbConnection.Query<WordPair>(WordPairQueries.GetUnknownWordsQuery).ToArray();
+                const string getUnknownWordsQuery = 
+                    @"SELECT 
+                        AW.Id, AW.FirstLanguageWord, AW.SecondLanguageWord, 
+                        AW.LanguagePair, AW.CreatedAt, AW.ModifiedAt  
+                      FROM UnknownWords UW
+                      JOIN AllWords AW ON UW.ID_AllWords = AW.Id";
+
+                WordPair[] unknownWords = dbConnection.Query<WordPair>(getUnknownWordsQuery).ToArray();
 
                 return unknownWords;
             }
@@ -54,25 +68,49 @@ namespace Words.Test.Repositories
             {
                 dbConnection.Open();
 
-                string queryWithInserterId = string.Format(WordPairQueries.CheckIfUnknownWordExistQuery, wordId);
+                const string checkIfUnknownWordAlreadyExistsQuery = 
+                    @"SELECT EXISTS(
+                        SELECT 1 
+                        FROM UnknownWords
+                        WHERE ID_AllWords = @WordId
+                        LIMIT 1
+                      )";
+                var queryParameters = new { WordId = wordId };
 
-                bool exist = dbConnection.QuerySingle<bool>(queryWithInserterId);
+                bool exist = dbConnection.QuerySingle<bool>(checkIfUnknownWordAlreadyExistsQuery, queryParameters);
 
                 return exist;
             } 
         }
 
-        /*public void AddNewUnknownWord(WordPair newUnknownWord)
+        public void AddNewUnknownWord(int wordId)
         {
             using (var dbConnection = new SQLiteConnection(_connectionString))
             {
                 dbConnection.Open();
 
-                DynamicParameters parameter = new DynamicParameters();
-                //parameter.Add("@Kind", InvoiceKind.WebInvoice, DbType.Int64, ParameterDirection.Input);
+                const string insertNewUnknownWord = 
+                    @"INSERT INTO UnknownWords
+                      VALUES(NULL, @WordId)";
+                var queryParameters = new { WordId = wordId };
 
-                dbConnection.Execute(WordPairQueries.CheckIfUnknownWordExistQuery);
+                dbConnection.Execute(insertNewUnknownWord, queryParameters);
             } 
-        }*/
+        }
+
+        public void RemoveLearnedUnknownWord(int wordId)
+        {
+            using (var dbConnection = new SQLiteConnection(_connectionString))
+            {
+                dbConnection.Open();
+
+                const string insertNewUnknownWord = 
+                    @"DELETE FROM UnknownWords
+                      WHERE ID_AllWords = @WordId";
+                var queryParameters = new { WordId = wordId };
+
+                dbConnection.Execute(insertNewUnknownWord, queryParameters);
+            } 
+        }
     }
 }
