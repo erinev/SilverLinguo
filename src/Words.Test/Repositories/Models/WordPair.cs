@@ -26,10 +26,11 @@ namespace Words.Test.Repositories.Models
               from UnknownWords UW
               join AllWords AW ON UW.ID_AllWords = AW.Id";
 
-        public const string CheckIfUnknownWordExist = 
-            @"select top 1 
-                1
-              from UnknownWords
-              where ID_AllWords = @WordId";
+        public const string CheckIfUnknownWordExistQuery = 
+            @"SELECT EXISTS(
+                SELECT 1 
+                FROM UnknownWords 
+                WHERE ID_AllWords = {0} 
+                LIMIT 1)";
     }
 }

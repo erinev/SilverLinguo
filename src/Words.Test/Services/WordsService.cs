@@ -11,6 +11,7 @@ namespace Words.Test.Services
         int GetUnknownWordsCount();
         WordPair[] GetRandomlySortedAllWords();
         WordPair[] GetRandomlySortedUnknownWords();
+        bool InsertNewUnknownWordIfDoesntExist(WordPair newUnknownWordCandidate);
     }
 
     public class WordsService : IWordsService
@@ -52,6 +53,15 @@ namespace Words.Test.Services
             new Random().Shuffle(unknownWords);
 
             return unknownWords;
+        }
+
+        public bool InsertNewUnknownWordIfDoesntExist(WordPair newUnknownWordCandidate)
+        {
+            bool alreadyExist = _wordsRepository.CheckIfUnknownWordAlreadyExist(newUnknownWordCandidate.Id);
+
+
+
+            return !alreadyExist;
         }
     }
 }

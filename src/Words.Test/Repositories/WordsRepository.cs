@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SQLite;
 using System.Linq;
 using Dapper;
@@ -10,6 +11,7 @@ namespace Words.Test.Repositories
     {
         WordPair[] GetAllWords();
         WordPair[] GetUnknownWords();
+        bool CheckIfUnknownWordAlreadyExist(int wordId);
     }
 
     public class WordsRepository : IWordsRepository
@@ -45,5 +47,32 @@ namespace Words.Test.Repositories
                 return unknownWords;
             }
         }
+
+        public bool CheckIfUnknownWordAlreadyExist(int wordId)
+        {
+            using (var dbConnection = new SQLiteConnection(_connectionString))
+            {
+                dbConnection.Open();
+
+                string queryWithInserterId = string.Format(WordPairQueries.CheckIfUnknownWordExistQuery, wordId);
+
+                bool exist = dbConnection.QuerySingle<bool>(queryWithInserterId);
+
+                return exist;
+            } 
+        }
+
+        /*public void AddNewUnknownWord(WordPair newUnknownWord)
+        {
+            using (var dbConnection = new SQLiteConnection(_connectionString))
+            {
+                dbConnection.Open();
+
+                DynamicParameters parameter = new DynamicParameters();
+                //parameter.Add("@Kind", InvoiceKind.WebInvoice, DbType.Int64, ParameterDirection.Input);
+
+                dbConnection.Execute(WordPairQueries.CheckIfUnknownWordExistQuery);
+            } 
+        }*/
     }
 }

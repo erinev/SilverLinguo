@@ -101,7 +101,10 @@ namespace Words.Test.Forms
             VerbalFormService.HandleVisibilityOnIDontKnowButtonClickedEvent(IDontKnowTheWordButton, NextWordButton,
                 FirstLanguageWordTextBox, SecondLanguageWordTextBox);
 
+            _unknownWords.Add(_allWords.First(aw => aw.Id == _currentWordPairId));
+
             WordPair currentUnknownWord = _unknownWords[0];
+            bool added = _wordsService.InsertNewUnknownWordIfDoesntExist(currentUnknownWord);
             // AddToUnknownWords table IfDoesntExist
             // depending on query result add to newUnkownWords array or unknownWordsArray
         }
