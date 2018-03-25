@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Words.Test.Helpers
+namespace Words.Test.Extensions
 {
     static class ArrayExtensions
     {

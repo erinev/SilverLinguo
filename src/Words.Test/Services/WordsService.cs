@@ -1,5 +1,5 @@
 ﻿using System;
-using Words.Test.Helpers;
+using Words.Test.Extensions;
 using Words.Test.Repositories;
 using Words.Test.Repositories.Models;
 

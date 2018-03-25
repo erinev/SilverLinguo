@@ -56,7 +56,7 @@
     <Compile Include="Services\Form\VerbalFormService.cs" />
     <Compile Include="Repositories\Models\WordPair.cs" />
     <Compile Include="Repositories\WordsRepository.cs" />
-    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Services\WordsService.cs" />
     <Compile Include="Forms\ShowWordsListByTypeForm.cs">
       <SubType>Form</SubType>
