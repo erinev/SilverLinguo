@@ -12,4 +12,18 @@ namespace Words.Test.Models
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
     }
+
+    public class WordPairQueries
+    {
+        public const string GetAllWordsQuery = 
+            @"select 
+                AW.Id, AW.FirstLanguageWord, AW.SecondLanguageWord, AW.LanguagePair, AW.CreatedAt, AW.ModifiedAt  
+              from AllWords AW";
+
+        public const string GetUnknownWordsQuery = 
+            @"select 
+                AW.Id, AW.FirstLanguageWord, AW.SecondLanguageWord, AW.LanguagePair, AW.CreatedAt, AW.ModifiedAt  
+              from UnknownWords UW
+              join AllWords AW ON UW.ID_AllWords = AW.Id";
+    }
 }
