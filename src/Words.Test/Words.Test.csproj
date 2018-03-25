@@ -54,7 +54,7 @@
     </Compile>
     <Compile Include="Helpers\Form\CommonFormService.cs" />
     <Compile Include="Helpers\Form\VerbalFormService.cs" />
-    <Compile Include="Models\WordPair.cs" />
+    <Compile Include="Repositories\Models\WordPair.cs" />
     <Compile Include="Repositories\WordsRepository.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Services\WordsService.cs" />

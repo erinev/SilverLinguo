@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using Words.Test.Constants;
 using Words.Test.Enums;
 using Words.Test.Helpers.Form;
-using Words.Test.Models;
+using Words.Test.Repositories.Models;
 using Words.Test.Services;
 
 namespace Words.Test.Forms

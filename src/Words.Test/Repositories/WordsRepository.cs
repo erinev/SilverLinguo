@@ -2,7 +2,7 @@
 using System.Data.SQLite;
 using System.Linq;
 using Dapper;
-using Words.Test.Models;
+using Words.Test.Repositories.Models;
 
 namespace Words.Test.Repositories
 {

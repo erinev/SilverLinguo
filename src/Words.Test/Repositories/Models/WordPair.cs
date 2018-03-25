@@ -1,7 +1,7 @@
 ﻿using System;
 using Words.Test.Enums;
 
-namespace Words.Test.Models
+namespace Words.Test.Repositories.Models
 {
     public class WordPair
     {

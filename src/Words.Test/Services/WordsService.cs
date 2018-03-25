@@ -1,7 +1,7 @@
 ﻿using System;
 using Words.Test.Helpers;
-using Words.Test.Models;
 using Words.Test.Repositories;
+using Words.Test.Repositories.Models;
 
 namespace Words.Test.Services
 {
