@@ -7,7 +7,7 @@ namespace Words.Test.Services
 {
     public interface IWordsService
     {
-        int GetWordsCount();
+        int GetAllWordsCount();
         int GetUnknownWordsCount();
         WordPair[] GetRandomlySortedAllWords();
         WordPair[] GetRandomlySortedUnknownWords();
@@ -22,7 +22,7 @@ namespace Words.Test.Services
             _wordsRepository = new WordsRepository();
         }
 
-        public int GetWordsCount()
+        public int GetAllWordsCount()
         {
             WordPair[] words = _wordsRepository.GetAllWords();
 

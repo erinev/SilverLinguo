@@ -35,7 +35,7 @@
             this.UnknownWordsListSelectionButton = new System.Windows.Forms.Button();
             this.UnknownWordsPanel = new System.Windows.Forms.Panel();
             this.UnknownWordsCountLabel = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.AllWordsPanel = new System.Windows.Forms.Panel();
             this.WordsCountLabel = new System.Windows.Forms.Label();
             this.EndProgramButton = new System.Windows.Forms.Button();
             this.LithuanianLanguageRadioButton = new System.Windows.Forms.RadioButton();
@@ -43,7 +43,7 @@
             this.RandomRadioButton = new System.Windows.Forms.RadioButton();
             this.ShouldCheckGrammarCheckBox = new System.Windows.Forms.CheckBox();
             this.UnknownWordsPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.AllWordsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // TestSelectionLabel
@@ -75,7 +75,6 @@
             this.AllWordListSelectionButton.TabIndex = 2;
             this.AllWordListSelectionButton.Text = "Pradėti";
             this.AllWordListSelectionButton.UseVisualStyleBackColor = false;
-            this.AllWordListSelectionButton.Visible = false;
             this.AllWordListSelectionButton.Click += new System.EventHandler(this.AllWordListSelectionButton_Click);
             // 
             // UnknownWordListLabel
@@ -109,6 +108,7 @@
             this.UnknownWordsPanel.Name = "UnknownWordsPanel";
             this.UnknownWordsPanel.Size = new System.Drawing.Size(236, 77);
             this.UnknownWordsPanel.TabIndex = 5;
+            this.UnknownWordsPanel.Visible = false;
             // 
             // UnknownWordsCountLabel
             // 
@@ -119,15 +119,16 @@
             this.UnknownWordsCountLabel.TabIndex = 5;
             this.UnknownWordsCountLabel.Text = "(3)";
             // 
-            // panel1
+            // AllWordsPanel
             // 
-            this.panel1.Controls.Add(this.WordsCountLabel);
-            this.panel1.Controls.Add(this.WordListLabel);
-            this.panel1.Controls.Add(this.AllWordListSelectionButton);
-            this.panel1.Location = new System.Drawing.Point(144, 152);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(214, 77);
-            this.panel1.TabIndex = 6;
+            this.AllWordsPanel.Controls.Add(this.WordsCountLabel);
+            this.AllWordsPanel.Controls.Add(this.WordListLabel);
+            this.AllWordsPanel.Controls.Add(this.AllWordListSelectionButton);
+            this.AllWordsPanel.Location = new System.Drawing.Point(144, 152);
+            this.AllWordsPanel.Name = "AllWordsPanel";
+            this.AllWordsPanel.Size = new System.Drawing.Size(214, 77);
+            this.AllWordsPanel.TabIndex = 6;
+            this.AllWordsPanel.Visible = false;
             // 
             // WordsCountLabel
             // 
@@ -214,7 +215,7 @@
             this.Controls.Add(this.EnglishRadioButton);
             this.Controls.Add(this.LithuanianLanguageRadioButton);
             this.Controls.Add(this.EndProgramButton);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.AllWordsPanel);
             this.Controls.Add(this.UnknownWordsPanel);
             this.Controls.Add(this.TestSelectionLabel);
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
@@ -224,8 +225,8 @@
             this.Load += new System.EventHandler(this.StartupForm_Load);
             this.UnknownWordsPanel.ResumeLayout(false);
             this.UnknownWordsPanel.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.AllWordsPanel.ResumeLayout(false);
+            this.AllWordsPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -240,7 +241,7 @@
         private System.Windows.Forms.Button UnknownWordsListSelectionButton;
         private System.Windows.Forms.Panel UnknownWordsPanel;
         private System.Windows.Forms.Label UnknownWordsCountLabel;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel AllWordsPanel;
         private System.Windows.Forms.Label WordsCountLabel;
         private System.Windows.Forms.Button EndProgramButton;
         private System.Windows.Forms.RadioButton LithuanianLanguageRadioButton;

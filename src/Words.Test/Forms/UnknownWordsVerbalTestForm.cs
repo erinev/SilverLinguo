@@ -19,7 +19,7 @@ namespace Words.Test.Forms
         private int _currentUnknownWordPairId;
 
         private WordPair[] _unknownWords;
-        private readonly IList<WordPair> _learnedWords = new List<WordPair>();
+        private readonly List<WordPair> _learnedWords = new List<WordPair>();
         private int _startingCountOfUnknownWords;
 
         private readonly Stopwatch _stopWatch = new Stopwatch();
@@ -36,21 +36,13 @@ namespace Words.Test.Forms
         private void UnknownWordsTestForm_Load(object sender, EventArgs e)
         {
             CommonFormService.InitializeTestTimer(TestTimerLabel, _stopWatch);
+            
             VerbalFormService.SetWordTextBoxVisibilityForSelectedLanguage(_selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox);
 
-            NextWordButton.Select();
+            VerbalFormService.HanldeVerbalFormLoadedEvent(NextWordButton, out _unknownWords, _wordsService.GetRandomlySortedUnknownWords, out _startingCountOfUnknownWords, out _currentUnknownWordPairId,
+                ProgressLabel, FirstLanguageWordTextBox, SecondLanguageWordTextBox);
 
-            _unknownWords = _wordsService.GetRandomlySortedUnknownWords();
-            _startingCountOfUnknownWords = _unknownWords.Length;
-
-            _currentUnknownWordPairId = _unknownWords[0].Id;
-
-            ProgressLabel.Text = _unknownWords.Length.ToString();
             LearnedWordsCountLinkLabel.Enabled = false;
-
-            WordPair firstUnknownWord = _unknownWords.First();
-            FirstLanguageWordTextBox.Text = firstUnknownWord.FirstLanguageWord;
-            SecondLanguageWordTextBox.Text = firstUnknownWord.SecondLanguageWord;
         }
 
         private void UnknownWordsVerbalTestForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -82,51 +74,17 @@ namespace Words.Test.Forms
         {
             if (IDontKnowTheWordButton.Visible)
             {
-                _learnedWords.Add(_unknownWords.First(uw => uw.Id == _currentUnknownWordPairId));
-                LearnedWordsCountLinkLabel.Text = _learnedWords.Count.ToString();
-
-                _unknownWords = _unknownWords.Where(unknownWord => unknownWord.Id != _currentUnknownWordPairId).ToArray();
+                _unknownWords = VerbalFormService.HandleLearnedWordOnNextWordClick(_learnedWords, _unknownWords, _currentUnknownWordPairId, LearnedWordsCountLinkLabel);
             }
             else
             {
                 VerbalFormService.SetWordTextBoxVisibilityForSelectedLanguage(_selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox);
             }
 
-            LearnedWordsCountLinkLabel.Enabled = _learnedWords.Count > 0;
-            IDontKnowTheWordButton.Visible = true;
-
-            if (_unknownWords.Length > 0)
-            {
-                ProgressLabel.Text = _unknownWords.Length.ToString();
-
-                WordPair nextUnknownWord = _unknownWords.First();
-
-                FirstLanguageWordTextBox.Text = nextUnknownWord.FirstLanguageWord;
-                SecondLanguageWordTextBox.Text = nextUnknownWord.SecondLanguageWord;
-                _currentUnknownWordPairId = nextUnknownWord.Id;
-            }
-            else
-            {
-                HandleFinishedTest();
-            }
-
-            switch (_selectedLanguage)
-            {
-                case SelectedLanguage.Lithuanian:
-                    FirstLanguageWordTextBox.Visible = false;
-                    break;
-                case SelectedLanguage.English:
-                    SecondLanguageWordTextBox.Visible = false;
-                    break;
-                case SelectedLanguage.Mixed:
-                    bool currentEnLabelVisibleState = SecondLanguageWordTextBox.Visible;
-                    bool currentLtLabelVisibleState = FirstLanguageWordTextBox.Visible;
-                    SecondLanguageWordTextBox.Visible = !currentEnLabelVisibleState;
-                    FirstLanguageWordTextBox.Visible = !currentLtLabelVisibleState;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            VerbalFormService.HandleNextWordButtonClickedEvent(LearnedWordsCountLinkLabel, _learnedWords, IDontKnowTheWordButton,
+                _unknownWords, ProgressLabel, FirstLanguageWordTextBox, SecondLanguageWordTextBox,
+                out _currentUnknownWordPairId,
+                HandleFinishedTest, _selectedLanguage);
         }
 
         private void IDontKnowTheWordButton_Click(object sender, EventArgs e)
@@ -136,20 +94,16 @@ namespace Words.Test.Forms
 
         private void HandleIDontKnowWordButtonClickedEvent()
         {
-            IDontKnowTheWordButton.Visible = false;
-            NextWordButton.Focus();
+            VerbalFormService.HandleVisibilityOnIDontKnowButtonClickedEvent(IDontKnowTheWordButton, NextWordButton,
+                FirstLanguageWordTextBox, SecondLanguageWordTextBox);
 
-            SecondLanguageWordTextBox.Visible = true;
-            FirstLanguageWordTextBox.Visible = true;
+            WordPair unknownWordToMove = _unknownWords[0];
 
-            var unknownWordToMove = _unknownWords[0];
+            List<WordPair> wordsWithoutUnknownWord = _unknownWords.Where(unknownWord => unknownWord.Id != _currentUnknownWordPairId).ToList();
 
-            _unknownWords = _unknownWords.Where(unknownWord => unknownWord.Id != _currentUnknownWordPairId).ToArray();
+            wordsWithoutUnknownWord.Add(unknownWordToMove);
 
-            var unknownWordsWithoutUnknownWord = _unknownWords.ToList();
-            unknownWordsWithoutUnknownWord.Add(unknownWordToMove);
-
-            _unknownWords = unknownWordsWithoutUnknownWord.ToArray();
+            _unknownWords = wordsWithoutUnknownWord.ToArray();
         }
 
         private void EndTestButton_Click(object sender, EventArgs e)

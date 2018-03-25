@@ -73,7 +73,7 @@ namespace Words.Test.Forms
             // 
             this.LearnedWordsCountHeaderLabel.AutoSize = true;
             this.LearnedWordsCountHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.LearnedWordsCountHeaderLabel.Location = new System.Drawing.Point(819, 95);
+            this.LearnedWordsCountHeaderLabel.Location = new System.Drawing.Point(819, 69);
             this.LearnedWordsCountHeaderLabel.Name = "LearnedWordsCountHeaderLabel";
             this.LearnedWordsCountHeaderLabel.Size = new System.Drawing.Size(99, 16);
             this.LearnedWordsCountHeaderLabel.TabIndex = 33;
@@ -166,7 +166,7 @@ namespace Words.Test.Forms
             // LearnedWordsCountLinkLabel
             // 
             this.LearnedWordsCountLinkLabel.AutoSize = true;
-            this.LearnedWordsCountLinkLabel.Location = new System.Drawing.Point(819, 111);
+            this.LearnedWordsCountLinkLabel.Location = new System.Drawing.Point(819, 85);
             this.LearnedWordsCountLinkLabel.Name = "LearnedWordsCountLinkLabel";
             this.LearnedWordsCountLinkLabel.Size = new System.Drawing.Size(15, 16);
             this.LearnedWordsCountLinkLabel.TabIndex = 43;
@@ -213,8 +213,8 @@ namespace Words.Test.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nežinomų žodžių testas (raštu):";
             this.Load += new System.EventHandler(this.UnknownWordsGrammarTestForm_Load);
+            this.Shown += new System.EventHandler(this.UnknownWordsGrammarTestForm_Shown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UnknownWordsGrammarTestForm_KeyPress);
-            this.Shown += new EventHandler(this.UnknownWordsGrammarTestForm_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

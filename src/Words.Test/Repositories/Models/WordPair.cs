@@ -25,5 +25,11 @@ namespace Words.Test.Repositories.Models
                 AW.Id, AW.FirstLanguageWord, AW.SecondLanguageWord, AW.LanguagePair, AW.CreatedAt, AW.ModifiedAt  
               from UnknownWords UW
               join AllWords AW ON UW.ID_AllWords = AW.Id";
+
+        public const string CheckIfUnknownWordExist = 
+            @"select top 1 
+                1
+              from UnknownWords
+              where ID_AllWords = @WordId";
     }
 }

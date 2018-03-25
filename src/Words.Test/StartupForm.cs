@@ -19,13 +19,16 @@ namespace Words.Test
 
         private void StartupForm_Load(object sender, EventArgs e)
         {
-            int wordsCount = _wordsService.GetWordsCount();
+            int allWordsCount = _wordsService.GetAllWordsCount();
             int unknownWordsCount = _wordsService.GetUnknownWordsCount();
+
+            AllWordsPanel.Visible = allWordsCount > 0;
+            UnknownWordsPanel.Visible = unknownWordsCount > 0;
 
             LithuanianLanguageRadioButton.Select();
             ShouldCheckGrammarCheckBox.Checked = false;
 
-            WordsCountLabel.Text = $@"({wordsCount})";
+            WordsCountLabel.Text = $@"({allWordsCount})";
             UnknownWordsCountLabel.Text = $@"({unknownWordsCount})";
         }
 
