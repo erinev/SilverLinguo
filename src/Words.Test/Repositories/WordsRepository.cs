@@ -15,8 +15,6 @@ namespace Words.Test.Repositories
     public class WordsRepository : IWordsRepository
     {
         private readonly string _connectionString;
-        private const string GetAllWordsQuery = @"select * from AllWords";
-        private const string GetUnknownWordsQuery = @"select * from UnknownWords";
 
         public WordsRepository()
         {
@@ -30,7 +28,7 @@ namespace Words.Test.Repositories
             {
                 dbConnection.Open();
 
-                WordPair[] allWords = dbConnection.Query<WordPair>(GetAllWordsQuery).ToArray();
+                WordPair[] allWords = dbConnection.Query<WordPair>(WordPairQueries.GetAllWordsQuery).ToArray();
 
                 return allWords;
             }
@@ -42,7 +40,7 @@ namespace Words.Test.Repositories
             {
                 dbConnection.Open();
 
-                WordPair[] unknownWords = dbConnection.Query<WordPair>(GetUnknownWordsQuery).ToArray();
+                WordPair[] unknownWords = dbConnection.Query<WordPair>(WordPairQueries.GetUnknownWordsQuery).ToArray();
 
                 return unknownWords;
             }
