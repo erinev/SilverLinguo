@@ -9,7 +9,7 @@ namespace Words.Test.Services
     {
         int GetWordsCount();
         int GetUnknownWordsCount();
-        WordPair[] GetRandomlySortedWords();
+        WordPair[] GetRandomlySortedAllWords();
         WordPair[] GetRandomlySortedUnknownWords();
     }
 
@@ -36,7 +36,7 @@ namespace Words.Test.Services
             return unknownWords.Length;
         }
 
-        public WordPair[] GetRandomlySortedWords()
+        public WordPair[] GetRandomlySortedAllWords()
         {
             WordPair[] words = _wordsRepository.GetAllWords();
 

@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace Words.Test.Helpers.Form
+namespace Words.Test.Services.Form
 {
     public class CommonFormService
     {

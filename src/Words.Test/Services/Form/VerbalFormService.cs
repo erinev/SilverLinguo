@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using Words.Test.Enums;
 
-namespace Words.Test.Helpers.Form
+namespace Words.Test.Services.Form
 {
     public class VerbalFormService
     {

@@ -52,8 +52,8 @@
     <Compile Include="Forms\TestResultsForm.Designer.cs">
       <DependentUpon>TestResultsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Form\CommonFormService.cs" />
-    <Compile Include="Helpers\Form\VerbalFormService.cs" />
+    <Compile Include="Services\Form\CommonFormService.cs" />
+    <Compile Include="Services\Form\VerbalFormService.cs" />
     <Compile Include="Repositories\Models\WordPair.cs" />
     <Compile Include="Repositories\WordsRepository.cs" />
     <Compile Include="Helpers\Extensions.cs" />
