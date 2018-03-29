@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Words.Test.Enums;
 using Words.Test.Forms;
+using Words.Test.Repositories;
 using Words.Test.Services;
 
 namespace Words.Test
@@ -18,6 +19,11 @@ namespace Words.Test
         }
 
         private void StartupForm_Load(object sender, EventArgs e)
+        {
+            SetWordsCountForTestSelection();
+        }
+
+        private void SetWordsCountForTestSelection()
         {
             int allWordsCount = _wordsService.GetAllWordsCount();
             int unknownWordsCount = _wordsService.GetUnknownWordsCount();
@@ -103,6 +109,15 @@ namespace Words.Test
             }
 
             return selectedLanguage;
+        }
+
+        private void ReintializeDatabaseButton_Click(object sender, EventArgs e)
+        {
+            var wordsRepository = new WordsRepository();
+
+            wordsRepository.ReinitializeAllTables();
+
+            SetWordsCountForTestSelection();
         }
     }
 }

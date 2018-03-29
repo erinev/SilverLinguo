@@ -121,6 +121,20 @@ namespace Words.Test.Repositories
             }
         }
 
+        public void ReinitializeAllTables()
+        {
+            if (!File.Exists(_dbFile)) return;
+
+            using (var dbConnection = new SQLiteConnection(_connectionString))
+            {
+                dbConnection.Open();
+
+                CreateAllTables(dbConnection);
+
+                FillAllWordsTable(dbConnection);
+            }
+        }
+
         public void InitializeDatabaseIfNotExist()
         {
             if (File.Exists(_dbFile)) return;
@@ -132,20 +146,30 @@ namespace Words.Test.Repositories
             {
                 dbConnection.Open();
 
-                CreateAllWordsTable(dbConnection);
-
-                CreateUnknownWordsTable(dbConnection);
-
-                CreateTestResultsTable(dbConnection);
+                CreateAllTables(dbConnection);
 
                 FillAllWordsTable(dbConnection);
             }
         }
 
+        private void CreateAllTables(SQLiteConnection dbConnection)
+        {
+            CreateAllWordsTable(dbConnection);
+
+            CreateUnknownWordsTable(dbConnection);
+
+            CreateTestResultsTable(dbConnection);
+        }
+
         private void CreateAllWordsTable(SQLiteConnection dbConnection)
         {
+            string dropAllWordsTableQuery = GetDropTableQuery("AllWords");
+            SQLiteCommand dropAllWordsTableCommand = new SQLiteCommand(dropAllWordsTableQuery, dbConnection);
+            dropAllWordsTableCommand.ExecuteNonQuery();
+
             const string createAllWordsTableSql =
-                @"CREATE TABLE [AllWords] (
+                @"                  
+                  CREATE TABLE [AllWords] (
                     [Id] INTEGER NOT NULL
                     , [FirstLanguageWord] TEXT NOT NULL
                     , [SecondLanguageWord] TEXT NOT NULL
@@ -154,30 +178,40 @@ namespace Words.Test.Repositories
                     , [ModifiedAt] TEXT NOT NULL
                     , CONSTRAINT [PK_AllWords] PRIMARY KEY ([Id])
                     , UNIQUE(FirstLanguageWord, SecondLanguageWord, LanguagePair)
-                );";
-
+                  );
+                ";
             SQLiteCommand createAllWordsTableCommand = new SQLiteCommand(createAllWordsTableSql, dbConnection);
             createAllWordsTableCommand.ExecuteNonQuery();
         }
 
         private void CreateUnknownWordsTable(SQLiteConnection dbConnection)
         {
+            string dropUnknownWordsTableQuery = GetDropTableQuery("UnknownWords");
+            SQLiteCommand dropUnknownWordsTableCommand = new SQLiteCommand(dropUnknownWordsTableQuery, dbConnection);
+            dropUnknownWordsTableCommand.ExecuteNonQuery();
+
             const string createUnknownWordsTableSql =
-                @"CREATE TABLE [UnknownWords] (
+                @"                  
+                  CREATE TABLE [UnknownWords] (
                       [Id] INTEGER NOT NULL
                     , [Id_AllWords] INTEGER NOT NULL
                     , CONSTRAINT [PK_UnknownWords] PRIMARY KEY ([Id])
                     , FOREIGN KEY([Id_AllWords]) REFERENCES AllWords([Id])
-                );";
-
+                  );
+                ";
             SQLiteCommand createUnknownWordsTableCommand = new SQLiteCommand(createUnknownWordsTableSql, dbConnection);
             createUnknownWordsTableCommand.ExecuteNonQuery();
         }
 
         private void CreateTestResultsTable(SQLiteConnection dbConnection)
         {
+            string dropTestResultsTableQuery = GetDropTableQuery("TestResults");
+            SQLiteCommand dropTestResultsTableCommand = new SQLiteCommand(dropTestResultsTableQuery, dbConnection);
+            dropTestResultsTableCommand.ExecuteNonQuery();
+
             const string createTestResultsTableSql =
-                @"CREATE TABLE [TestResults] (
+                @"                  
+                  CREATE TABLE [TestResults] (
                       [Id] INTEGER NOT NULL
                     , [FinishedAt] TEXT NOT NULL
                     , [DurationAsTicks] TEXT NOT NULL
@@ -192,33 +226,39 @@ namespace Words.Test.Repositories
                     , [UnknownWordsAsJson] TEXT NOT NULL
                     , CONSTRAINT [PK_TestResults] PRIMARY KEY ([Id])
                 );";
-
             SQLiteCommand createTestResultsTableCommand = new SQLiteCommand(createTestResultsTableSql, dbConnection);
             createTestResultsTableCommand.ExecuteNonQuery();
+        }
+
+        private string GetDropTableQuery(string tableName)
+        {
+            return $"DROP TABLE IF EXISTS [{tableName}]";
         }
 
         private void FillAllWordsTable(SQLiteConnection dbConnection)
         {
             const string fillAllWordsTableCommand =
                 @"BEGIN TRANSACTION;
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Pirmadienis', 'Monday', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Šiandien', 'Today', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Metai', 'Year', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Laikrodis', 'Clock', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Valanda', 'Hour', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Pavasaris', 'Spring', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Viso gero', 'Good bye', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Senelis', 'Grandfather, Grandpa, Grandad', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Grybas', 'Mushroom', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Kuprinė', 'Book bag', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Žalia', 'Green', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Dramblys', 'Elephant', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Laiptai', 'Stairs', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Sapnas, Svajonė', 'Dream', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+            INSERT INTO 'AllWords' VALUES (NULL, 'Sapnas, Svajonė', 'Dream', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+            INSERT INTO 'AllWords' VALUES (NULL, 'Lėktuvas', 'Airplane, Plane, Aircraft', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Ranka', 'Arm', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Pirmyn', 'Forward, Ahead', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Atgal', 'Backwards', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Nugara', 'Back', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Peilis', 'Knife', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Aštrus', 'Sharp, Spicy', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Mes', 'We', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Jų', 'Theirs', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Gegutė', 'Cuckoo', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Tamsus, Tamsa', 'Dark', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Vienišas', 'Lonely', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Megztinis', 'Sweater', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Suknelė', 'Dress', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Praeitis', 'Past', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Grindys', 'Floor', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Apie ką tu kalbi?', 'What you talking about?', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Man patinka mėlynas dangus', 'I like blue sky', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
                 COMMIT;";
-
             SQLiteCommand createTestResultsTableCommand = new SQLiteCommand(fillAllWordsTableCommand, dbConnection);
             createTestResultsTableCommand.ExecuteNonQuery();
         }

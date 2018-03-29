@@ -118,11 +118,6 @@
     <EmbeddedResource Include="Forms\AllWordsVerbalTestForm.resx">
       <DependentUpon>AllWordsVerbalTestForm.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="Database\scripts\create.table.AllWords.sql" />
-    <Content Include="Database\scripts\create.table.TestResults.sql" />
-    <Content Include="Database\scripts\create.table.UnknownWords.sql" />
-    <Content Include="Database\scripts\insert.rows.AllWords.sql" />
-    <Content Include="Database\scripts\insert.rows.UnknownWords.sql" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
