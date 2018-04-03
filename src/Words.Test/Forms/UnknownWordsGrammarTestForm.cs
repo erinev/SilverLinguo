@@ -201,7 +201,7 @@ namespace Words.Test.Forms
             }
         }
 
-        private void NextWordButton_Click(object sender, EventArgs e)
+        private void NextWordButton_MouseClick(object sender, EventArgs e)
         {
             HandleNextWordEvent();
         }

@@ -65,7 +65,7 @@ namespace Words.Test.Forms
             }
         }
 
-        private void NextWordButton_Click(object sender, EventArgs e)
+        private void NextWordButton_MouseClick(object sender, EventArgs e)
         {
             HandleNextWordButtonClickedEvent();
         }
@@ -104,7 +104,7 @@ namespace Words.Test.Forms
             }
         }
 
-        private void IDontKnowTheWordButton_Click(object sender, EventArgs e)
+        private void IDontKnowTheWordButton_MouseClick(object sender, EventArgs e)
         {
             HandleIDontKnowWordButtonClickedEvent();
         }

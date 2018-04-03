@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace Words.Test.Forms
 {
@@ -150,7 +151,7 @@ namespace Words.Test.Forms
             this.NextWordButton.Text = "Kitas žodis";
             this.NextWordButton.UseVisualStyleBackColor = false;
             this.NextWordButton.Visible = false;
-            this.NextWordButton.Click += new System.EventHandler(this.NextWordButton_Click);
+            this.NextWordButton.MouseClick += new MouseEventHandler(this.NextWordButton_MouseClick);
             // 
             // TestTimerLabel
             // 

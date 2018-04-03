@@ -52,18 +52,18 @@ namespace Words.Test.Forms
             KnownWordsCountLinkLabel.Enabled = false;
         }
 
-        private void AllWordsVerbalTestForm_KeyPress(object sender, KeyPressEventArgs e)
+        private void AllWordsVerbalTestForm_KeyUp(object sender, KeyEventArgs keyEventArgs)
         {
-            if (e.KeyChar == KeyCodes.Enter)
+            if (keyEventArgs.KeyValue == KeyCodes.Enter)
             {
                 if (NextWordButton.Visible)
                 {
                     HandleNextWordButtonClickedEvent();
                 }
 
-                e.Handled = true;
+                keyEventArgs.Handled = true;
             }
-            else if (e.KeyChar == KeyCodes.Backspace)
+            else if (keyEventArgs.KeyValue == KeyCodes.Backspace)
             {
                 if (IDontKnowTheWordButton.Visible)
                 {
@@ -72,7 +72,7 @@ namespace Words.Test.Forms
             }
         }
 
-        private void NextWordButton_Click(object sender, EventArgs e)
+        private void NextWordButton_MouseClick(object sender, EventArgs e)
         {
             HandleNextWordButtonClickedEvent();
         }
@@ -123,7 +123,7 @@ namespace Words.Test.Forms
             }
         }
 
-        private void IDontKnowTheWordButton_Click(object sender, EventArgs e)
+        private void IDontKnowTheWordButton_MouseClick(object sender, EventArgs e)
         {
             HandleIDontKnowWordButtonClickedEvent();
         }

@@ -125,7 +125,7 @@ namespace Words.Test.Forms
             this.IDontKnowTheWordButton.TabIndex = 25;
             this.IDontKnowTheWordButton.Text = "Nežinau žodžio";
             this.IDontKnowTheWordButton.UseVisualStyleBackColor = false;
-            this.IDontKnowTheWordButton.Click += new System.EventHandler(this.IDontKnowTheWordButton_Click);
+            this.IDontKnowTheWordButton.MouseClick += new MouseEventHandler(this.IDontKnowTheWordButton_MouseClick);
             // 
             // NextWordButton
             // 
@@ -139,7 +139,7 @@ namespace Words.Test.Forms
             this.NextWordButton.TabIndex = 24;
             this.NextWordButton.Text = "Kitas žodis";
             this.NextWordButton.UseVisualStyleBackColor = false;
-            this.NextWordButton.Click += new System.EventHandler(this.NextWordButton_Click);
+            this.NextWordButton.MouseClick += new MouseEventHandler(this.NextWordButton_MouseClick);
             // 
             // SecondLanguageWordTextBox
             // 

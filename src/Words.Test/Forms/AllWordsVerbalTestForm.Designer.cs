@@ -1,4 +1,6 @@
-﻿namespace Words.Test.Forms
+﻿using System.Windows.Forms;
+
+namespace Words.Test.Forms
 {
     partial class AllWordsVerbalTestForm
     {
@@ -108,7 +110,7 @@
             this.IDontKnowTheWordButton.TabIndex = 52;
             this.IDontKnowTheWordButton.Text = "Nežinau žodžio";
             this.IDontKnowTheWordButton.UseVisualStyleBackColor = false;
-            this.IDontKnowTheWordButton.Click += new System.EventHandler(this.IDontKnowTheWordButton_Click);
+            this.IDontKnowTheWordButton.MouseClick += new MouseEventHandler(this.IDontKnowTheWordButton_MouseClick);
             // 
             // NextWordButton
             // 
@@ -122,7 +124,7 @@
             this.NextWordButton.TabIndex = 51;
             this.NextWordButton.Text = "Kitas žodis";
             this.NextWordButton.UseVisualStyleBackColor = false;
-            this.NextWordButton.Click += new System.EventHandler(this.NextWordButton_Click);
+            this.NextWordButton.MouseClick += new MouseEventHandler(this.NextWordButton_MouseClick);
             // 
             // NewUnknownWordsCountHeaderLabel
             // 
@@ -286,7 +288,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Visų žodžių testas (žodžiu):";
             this.Load += new System.EventHandler(this.AllWordsVerbalTestForm_Load);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AllWordsVerbalTestForm_KeyPress);
+            this.KeyUp += new KeyEventHandler(this.AllWordsVerbalTestForm_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
