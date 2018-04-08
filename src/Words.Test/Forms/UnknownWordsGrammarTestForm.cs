@@ -26,6 +26,9 @@ namespace Words.Test.Forms
         private readonly Color _textBoxBackColorForIncorrectWord = Color.LightCoral;
         private int _startingCountOfUnknownWords;
 
+        private Point _firstWordLocationForButton = new Point(29, 120);
+        private Point _secondWordLocationForButton = new Point(663, 120);
+
         private readonly Stopwatch _stopWatch = new Stopwatch();
 
         public UnknownWordsGrammarTestForm(SelectedLanguage selectedLanguage)
@@ -67,8 +70,8 @@ namespace Words.Test.Forms
             LearnedWordsCountLinkLabel.Enabled = false;
 
             WordPair firstUnknownWord = _unknownWords.First();
-            LtWordTextBox.Text = LtWordTextBox.ReadOnly ? firstUnknownWord.FirstLanguageWord : String.Empty;
-            EnWordTextBox.Text = EnWordTextBox.ReadOnly ? firstUnknownWord.SecondLanguageWord : String.Empty;
+            FirstWordTextBox.Text = FirstWordTextBox.ReadOnly ? firstUnknownWord.FirstLanguageWord : String.Empty;
+            SecondWordTextBox.Text = SecondWordTextBox.ReadOnly ? firstUnknownWord.SecondLanguageWord : String.Empty;
         }
 
         private void UnknownWordsGrammarTestForm_Shown(object sender, EventArgs e)
@@ -112,32 +115,37 @@ namespace Words.Test.Forms
             }
         }
 
+        private void ConfirmWordButton_MouseClick(object sender, EventArgs e)
+        {
+            AssertAndHandleEnteredWord();
+        }
+
         private void AssertAndHandleEnteredWord()
         {
             WordPair currentWordPair = _unknownWords.First(unknownWord => unknownWord.Id == _currentUnknownWordPairId);
 
-            if (!EnWordTextBox.ReadOnly)
+            if (!SecondWordTextBox.ReadOnly)
             {
-                bool isEqual = IsEnteredValueIsEqualToExpectedValue(EnWordTextBox.Text, currentWordPair.SecondLanguageWord);
+                bool isEqual = IsEnteredValueIsEqualToExpectedValue(SecondWordTextBox.Text, currentWordPair.SecondLanguageWord);
                 if (isEqual)
                 {
                     HandleCorrectlyEnteredWord();
                 }
                 else
                 {
-                    HandleIncorrectlyEnteredWord(EnWordTextBox, currentWordPair.SecondLanguageWord);
+                    HandleIncorrectlyEnteredWord(SecondWordTextBox, currentWordPair.SecondLanguageWord);
                 }
             }
-            else if (!LtWordTextBox.ReadOnly)
+            else if (!FirstWordTextBox.ReadOnly)
             {
-                bool isEqual = IsEnteredValueIsEqualToExpectedValue(LtWordTextBox.Text, currentWordPair.FirstLanguageWord);
+                bool isEqual = IsEnteredValueIsEqualToExpectedValue(FirstWordTextBox.Text, currentWordPair.FirstLanguageWord);
                 if (isEqual)
                 {
                     HandleCorrectlyEnteredWord();
                 }
                 else
                 {
-                    HandleIncorrectlyEnteredWord(LtWordTextBox, currentWordPair.FirstLanguageWord);
+                    HandleIncorrectlyEnteredWord(FirstWordTextBox, currentWordPair.FirstLanguageWord);
                 }
             }
         }
@@ -162,6 +170,7 @@ namespace Words.Test.Forms
 
         private void HandleIncorrectlyEnteredWord(TextBox textBox, string correctValueForTextBox)
         {
+            ValidateWordButton.Visible = false;
             NextWordButton.Visible = true;
             NextWordButton.Focus();
             CorrectWordTextBox.Visible = true;
@@ -202,68 +211,71 @@ namespace Words.Test.Forms
             }
         }
 
-        private void NextWordButton_MouseClick(object sender, EventArgs e)
+        private void NextWordButton_MouseClick(object sender, MouseEventArgs e)
         {
             HandleNextWordEvent();
         }
 
         private void HandleNextWordEvent()
         {
+            ValidateWordButton.Visible = true;
             NextWordButton.Visible = false;
             CorrectWordTextBox.Visible = false;
 
             if (_selectedLanguage == SelectedLanguage.Mixed)
             {
-                bool currentEnWordTextBoxReadOnlyState = EnWordTextBox.ReadOnly;
-                bool currentLtWordTextBoxReadOnlyState = LtWordTextBox.ReadOnly;
-                EnWordTextBox.ReadOnly = !currentEnWordTextBoxReadOnlyState;
-                LtWordTextBox.ReadOnly = !currentLtWordTextBoxReadOnlyState;
+                bool currentEnWordTextBoxReadOnlyState = SecondWordTextBox.ReadOnly;
+                bool currentLtWordTextBoxReadOnlyState = FirstWordTextBox.ReadOnly;
+                SecondWordTextBox.ReadOnly = !currentEnWordTextBoxReadOnlyState;
+                FirstWordTextBox.ReadOnly = !currentLtWordTextBoxReadOnlyState;
+
+                RepositionConfirmAndNextWordButtons();
             }
 
             SetInputColorsOnNextWordEvent();
 
             WordPair currentUnknownWord = _unknownWords.First();
-            LtWordTextBox.Text = LtWordTextBox.ReadOnly ? currentUnknownWord.FirstLanguageWord : String.Empty;
-            EnWordTextBox.Text = EnWordTextBox.ReadOnly ? currentUnknownWord.SecondLanguageWord : String.Empty;
+            FirstWordTextBox.Text = FirstWordTextBox.ReadOnly ? currentUnknownWord.FirstLanguageWord : String.Empty;
+            SecondWordTextBox.Text = SecondWordTextBox.ReadOnly ? currentUnknownWord.SecondLanguageWord : String.Empty;
 
-            if (!LtWordTextBox.ReadOnly)
+            if (!FirstWordTextBox.ReadOnly)
             {
-                LtWordTextBox.Focus();
+                FirstWordTextBox.Focus();
             }
             else
             {
-                EnWordTextBox.Focus();
+                SecondWordTextBox.Focus();
             }
         }
 
         private void SetInputColorsOnNextWordEvent()
         {
-            if (LtWordTextBox.BackColor == _textBoxBackColorForIncorrectWord && !LtWordTextBox.ReadOnly)
+            if (FirstWordTextBox.BackColor == _textBoxBackColorForIncorrectWord && !FirstWordTextBox.ReadOnly)
             {
-                LtWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
+                FirstWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
             }
-            else if (LtWordTextBox.BackColor == _textBoxBackColorForIncorrectWord && LtWordTextBox.ReadOnly)
+            else if (FirstWordTextBox.BackColor == _textBoxBackColorForIncorrectWord && FirstWordTextBox.ReadOnly)
             {
-                LtWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Control);
+                FirstWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Control);
             }
-            else if (LtWordTextBox.BackColor == Color.FromKnownColor(KnownColor.Control) && !LtWordTextBox.ReadOnly)
+            else if (FirstWordTextBox.BackColor == Color.FromKnownColor(KnownColor.Control) && !FirstWordTextBox.ReadOnly)
             {
-                LtWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
-                EnWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Control);
+                FirstWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
+                SecondWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Control);
             }
 
-            if (EnWordTextBox.BackColor == _textBoxBackColorForIncorrectWord && !EnWordTextBox.ReadOnly)
+            if (SecondWordTextBox.BackColor == _textBoxBackColorForIncorrectWord && !SecondWordTextBox.ReadOnly)
             {
-                EnWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
+                SecondWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
             }
-            else if (EnWordTextBox.BackColor == _textBoxBackColorForIncorrectWord && EnWordTextBox.ReadOnly)
+            else if (SecondWordTextBox.BackColor == _textBoxBackColorForIncorrectWord && SecondWordTextBox.ReadOnly)
             {
-                EnWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Control);
+                SecondWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Control);
             }
-            else if (EnWordTextBox.BackColor == Color.FromKnownColor(KnownColor.Control) && !EnWordTextBox.ReadOnly)
+            else if (SecondWordTextBox.BackColor == Color.FromKnownColor(KnownColor.Control) && !SecondWordTextBox.ReadOnly)
             {
-                EnWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
-                LtWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Control);
+                SecondWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Window);
+                FirstWordTextBox.BackColor = Color.FromKnownColor(KnownColor.Control);
             }
         }
 
@@ -289,21 +301,31 @@ namespace Words.Test.Forms
             switch (selectedLanguage)
             {
                 case SelectedLanguage.Lithuanian:
-                    LtWordTextBox.ReadOnly = false;
-                    EnWordTextBox.ReadOnly = true;
-                    LtWordTextBox.Select();
+                    FirstWordTextBox.ReadOnly = false;
+                    SecondWordTextBox.ReadOnly = true;
+                    FirstWordTextBox.Select();
                     break;
                 case SelectedLanguage.English:
-                    LtWordTextBox.ReadOnly = true;
-                    EnWordTextBox.ReadOnly = false;
-                    EnWordTextBox.Select();
+                    FirstWordTextBox.ReadOnly = true;
+                    SecondWordTextBox.ReadOnly = false;
+                    SecondWordTextBox.Select();
                     break;
                 default:
-                    LtWordTextBox.ReadOnly = false;
-                    EnWordTextBox.ReadOnly = true;
-                    LtWordTextBox.Select();
+                    FirstWordTextBox.ReadOnly = false;
+                    SecondWordTextBox.ReadOnly = true;
+                    FirstWordTextBox.Select();
                     break;
             }
+
+            RepositionConfirmAndNextWordButtons();
+        }
+
+        private void RepositionConfirmAndNextWordButtons()
+        {
+            ValidateWordButton.Location =
+                FirstWordTextBox.ReadOnly ? _secondWordLocationForButton : _firstWordLocationForButton;
+            NextWordButton.Location =
+                FirstWordTextBox.ReadOnly ? _firstWordLocationForButton : _secondWordLocationForButton;
         }
 
         private void HandleFinishedTest()

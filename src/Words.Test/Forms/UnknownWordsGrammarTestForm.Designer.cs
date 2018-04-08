@@ -31,8 +31,8 @@ namespace Words.Test.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.LtWordTextBox = new System.Windows.Forms.TextBox();
-            this.EnWordTextBox = new System.Windows.Forms.TextBox();
+            this.FirstWordTextBox = new System.Windows.Forms.TextBox();
+            this.SecondWordTextBox = new System.Windows.Forms.TextBox();
             this.LearnedWordsCountHeaderLabel = new System.Windows.Forms.Label();
             this.ProgressLabel = new System.Windows.Forms.Label();
             this.ProgressHeaderLabel = new System.Windows.Forms.Label();
@@ -43,32 +43,33 @@ namespace Words.Test.Forms
             this.TestTimerLabel = new System.Windows.Forms.Label();
             this.LearnedWordsCountLinkLabel = new System.Windows.Forms.LinkLabel();
             this.CorrectWordTextBox = new System.Windows.Forms.TextBox();
+            this.ValidateWordButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // LtWordTextBox
+            // FirstWordTextBox
             // 
-            this.LtWordTextBox.AcceptsReturn = true;
-            this.LtWordTextBox.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.LtWordTextBox.Location = new System.Drawing.Point(29, 45);
-            this.LtWordTextBox.Multiline = true;
-            this.LtWordTextBox.Name = "LtWordTextBox";
-            this.LtWordTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.LtWordTextBox.ShortcutsEnabled = false;
-            this.LtWordTextBox.Size = new System.Drawing.Size(356, 69);
-            this.LtWordTextBox.TabIndex = 38;
+            this.FirstWordTextBox.AcceptsReturn = true;
+            this.FirstWordTextBox.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.FirstWordTextBox.Location = new System.Drawing.Point(29, 45);
+            this.FirstWordTextBox.Multiline = true;
+            this.FirstWordTextBox.Name = "FirstWordTextBox";
+            this.FirstWordTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.FirstWordTextBox.ShortcutsEnabled = false;
+            this.FirstWordTextBox.Size = new System.Drawing.Size(356, 69);
+            this.FirstWordTextBox.TabIndex = 38;
             // 
-            // EnWordTextBox
+            // SecondWordTextBox
             // 
-            this.EnWordTextBox.AcceptsReturn = true;
-            this.EnWordTextBox.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.EnWordTextBox.Location = new System.Drawing.Point(414, 45);
-            this.EnWordTextBox.Multiline = true;
-            this.EnWordTextBox.Name = "EnWordTextBox";
-            this.EnWordTextBox.ReadOnly = true;
-            this.EnWordTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.EnWordTextBox.ShortcutsEnabled = false;
-            this.EnWordTextBox.Size = new System.Drawing.Size(356, 69);
-            this.EnWordTextBox.TabIndex = 37;
+            this.SecondWordTextBox.AcceptsReturn = true;
+            this.SecondWordTextBox.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.SecondWordTextBox.Location = new System.Drawing.Point(414, 45);
+            this.SecondWordTextBox.Multiline = true;
+            this.SecondWordTextBox.Name = "SecondWordTextBox";
+            this.SecondWordTextBox.ReadOnly = true;
+            this.SecondWordTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.SecondWordTextBox.ShortcutsEnabled = false;
+            this.SecondWordTextBox.Size = new System.Drawing.Size(356, 69);
+            this.SecondWordTextBox.TabIndex = 37;
             // 
             // LearnedWordsCountHeaderLabel
             // 
@@ -140,7 +141,7 @@ namespace Words.Test.Forms
             // 
             // NextWordButton
             // 
-            this.NextWordButton.BackColor = System.Drawing.Color.YellowGreen;
+            this.NextWordButton.BackColor = System.Drawing.Color.Yellow;
             this.NextWordButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.NextWordButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.NextWordButton.Location = new System.Drawing.Point(29, 120);
@@ -189,6 +190,20 @@ namespace Words.Test.Forms
             this.CorrectWordTextBox.TabIndex = 44;
             this.CorrectWordTextBox.Visible = false;
             // 
+            // ValidateWordButton
+            // 
+            this.ValidateWordButton.BackColor = System.Drawing.Color.YellowGreen;
+            this.ValidateWordButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ValidateWordButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.ValidateWordButton.Location = new System.Drawing.Point(663, 120);
+            this.ValidateWordButton.Name = "ValidateWordButton";
+            this.ValidateWordButton.Padding = new System.Windows.Forms.Padding(2);
+            this.ValidateWordButton.Size = new System.Drawing.Size(107, 39);
+            this.ValidateWordButton.TabIndex = 45;
+            this.ValidateWordButton.Text = "Tikrinti";
+            this.ValidateWordButton.UseVisualStyleBackColor = false;
+            this.ValidateWordButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ConfirmWordButton_MouseClick);
+            // 
             // UnknownWordsGrammarTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -196,12 +211,13 @@ namespace Words.Test.Forms
             this.CancelButton = this.EndTestButton;
             this.ClientSize = new System.Drawing.Size(930, 291);
             this.ControlBox = false;
+            this.Controls.Add(this.ValidateWordButton);
             this.Controls.Add(this.CorrectWordTextBox);
             this.Controls.Add(this.LearnedWordsCountLinkLabel);
             this.Controls.Add(this.TestTimerLabel);
             this.Controls.Add(this.NextWordButton);
-            this.Controls.Add(this.LtWordTextBox);
-            this.Controls.Add(this.EnWordTextBox);
+            this.Controls.Add(this.FirstWordTextBox);
+            this.Controls.Add(this.SecondWordTextBox);
             this.Controls.Add(this.LearnedWordsCountHeaderLabel);
             this.Controls.Add(this.ProgressLabel);
             this.Controls.Add(this.ProgressHeaderLabel);
@@ -223,8 +239,8 @@ namespace Words.Test.Forms
 
         #endregion
 
-        private System.Windows.Forms.TextBox LtWordTextBox;
-        private System.Windows.Forms.TextBox EnWordTextBox;
+        private System.Windows.Forms.TextBox FirstWordTextBox;
+        private System.Windows.Forms.TextBox SecondWordTextBox;
         private System.Windows.Forms.Label LearnedWordsCountHeaderLabel;
         private System.Windows.Forms.Label ProgressLabel;
         private System.Windows.Forms.Label ProgressHeaderLabel;
@@ -235,5 +251,6 @@ namespace Words.Test.Forms
         private System.Windows.Forms.Label TestTimerLabel;
         private System.Windows.Forms.LinkLabel LearnedWordsCountLinkLabel;
         private System.Windows.Forms.TextBox CorrectWordTextBox;
+        private Button ValidateWordButton;
     }
 }
