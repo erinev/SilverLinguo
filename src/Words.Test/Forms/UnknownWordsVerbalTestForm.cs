@@ -45,23 +45,25 @@ namespace Words.Test.Forms
             LearnedWordsCountLinkLabel.Enabled = false;
         }
 
-        private void UnknownWordsVerbalTestForm_KeyPress(object sender, KeyPressEventArgs e)
+        private void UnknownWordsVerbalTestForm_KeyUp(object sender, KeyEventArgs keyEventArgs)
         {
-            if (e.KeyChar == KeyCodes.Enter)
+            if (keyEventArgs.KeyValue == KeyCodes.Enter)
             {
                 if (NextWordButton.Visible)
                 {
                     HandleNextWordButtonClickedEvent();
                 }
 
-                e.Handled = true;
+                keyEventArgs.Handled = true;
             }
-            else if (e.KeyChar == KeyCodes.Backspace)
+            else if (keyEventArgs.KeyValue == KeyCodes.Backspace)
             {
                 if (IDontKnowTheWordButton.Visible)
                 {
                     HandleIDontKnowWordButtonClickedEvent();
                 }
+
+                keyEventArgs.Handled = true;
             }
         }
 

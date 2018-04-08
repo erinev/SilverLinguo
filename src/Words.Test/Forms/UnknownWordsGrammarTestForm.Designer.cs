@@ -151,7 +151,7 @@ namespace Words.Test.Forms
             this.NextWordButton.Text = "Kitas žodis";
             this.NextWordButton.UseVisualStyleBackColor = false;
             this.NextWordButton.Visible = false;
-            this.NextWordButton.MouseClick += new MouseEventHandler(this.NextWordButton_MouseClick);
+            this.NextWordButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NextWordButton_MouseClick);
             // 
             // TestTimerLabel
             // 
@@ -215,7 +215,7 @@ namespace Words.Test.Forms
             this.Text = "Nežinomų žodžių testas (raštu):";
             this.Load += new System.EventHandler(this.UnknownWordsGrammarTestForm_Load);
             this.Shown += new System.EventHandler(this.UnknownWordsGrammarTestForm_Shown);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UnknownWordsGrammarTestForm_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.UnknownWordsGrammarTestForm_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 

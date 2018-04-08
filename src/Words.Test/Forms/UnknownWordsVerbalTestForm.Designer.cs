@@ -214,7 +214,7 @@ namespace Words.Test.Forms
             this.Text = "Nežinomu žodžiu testas (žodžiu):";
             this.Load += new System.EventHandler(this.UnknownWordsTestForm_Load);
             this.KeyPreview = true;
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UnknownWordsVerbalTestForm_KeyPress);
+            this.KeyUp += new KeyEventHandler(this.UnknownWordsVerbalTestForm_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 

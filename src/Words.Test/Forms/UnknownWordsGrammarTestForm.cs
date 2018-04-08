@@ -94,9 +94,9 @@ namespace Words.Test.Forms
             }
         }
 
-        private void UnknownWordsGrammarTestForm_KeyPress(object sender, KeyPressEventArgs e)
+        private void UnknownWordsGrammarTestForm_KeyUp(object sender, KeyEventArgs keyEventArgs)
         {
-            if (e.KeyChar == KeyCodes.Enter)
+            if (keyEventArgs.KeyValue == KeyCodes.Enter)
             {
                 if (NextWordButton.Visible)
                 {
@@ -107,7 +107,7 @@ namespace Words.Test.Forms
                     AssertAndHandleEnteredWord();
                 }
 
-                e.Handled = true;
+                keyEventArgs.Handled = true;
             }
         }
 
