@@ -9,6 +9,7 @@ using Words.Test.Constants;
 using Words.Test.Enums;
 using Words.Test.Repositories.Models;
 using Words.Test.Services;
+using Words.Test.Services.Form;
 
 namespace Words.Test.Forms
 {
@@ -280,7 +281,7 @@ namespace Words.Test.Forms
 
         private void EndTestButton_Click(object sender, EventArgs e)
         {
-            HandleFinishedTest();
+            CommonFormService.HandelEndTestButtonPressedEvent(HandleFinishedTest);
         }
 
         private void ConfigureSelectedLanguage(SelectedLanguage selectedLanguage)

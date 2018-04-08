@@ -127,7 +127,7 @@ namespace Words.Test.Forms
 
         private void EndTestButton_Click(object sender, EventArgs e)
         {
-            HandleFinishedTest();
+            CommonFormService.HandelEndTestButtonPressedEvent(HandleFinishedTest);
         }
 
         private void LearnedWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

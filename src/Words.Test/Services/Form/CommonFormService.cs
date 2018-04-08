@@ -16,6 +16,17 @@ namespace Words.Test.Services.Form
             timer.Start();
         }
 
+        public static void HandelEndTestButtonPressedEvent(Action endTestConfirmedAction)
+        {
+            DialogResult dialogResult = MessageBox.Show("Ar tikrai norite baigti testą ?", "Testo pabaiga",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                endTestConfirmedAction();
+            }
+        }
+
         private static void timer_Tick(object sender, EventArgs args, Label testTimerLabel, Stopwatch stopwatch)
         {
             testTimerLabel.Text = stopwatch.Elapsed.Hours.ToString("00") + @":" +
