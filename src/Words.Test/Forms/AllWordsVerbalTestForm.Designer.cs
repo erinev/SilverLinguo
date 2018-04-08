@@ -110,7 +110,7 @@ namespace Words.Test.Forms
             this.IDontKnowTheWordButton.TabIndex = 52;
             this.IDontKnowTheWordButton.Text = "Nežinau žodžio";
             this.IDontKnowTheWordButton.UseVisualStyleBackColor = false;
-            this.IDontKnowTheWordButton.MouseClick += new MouseEventHandler(this.IDontKnowTheWordButton_MouseClick);
+            this.IDontKnowTheWordButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.IDontKnowTheWordButton_MouseClick);
             // 
             // NextWordButton
             // 
@@ -124,7 +124,7 @@ namespace Words.Test.Forms
             this.NextWordButton.TabIndex = 51;
             this.NextWordButton.Text = "Kitas žodis";
             this.NextWordButton.UseVisualStyleBackColor = false;
-            this.NextWordButton.MouseClick += new MouseEventHandler(this.NextWordButton_MouseClick);
+            this.NextWordButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NextWordButton_MouseClick);
             // 
             // NewUnknownWordsCountHeaderLabel
             // 
@@ -262,6 +262,7 @@ namespace Words.Test.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.CancelButton = this.EndTestButton;
             this.ClientSize = new System.Drawing.Size(969, 291);
             this.ControlBox = false;
             this.Controls.Add(this.KnownWordsCountLinkLabel);
@@ -288,7 +289,7 @@ namespace Words.Test.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Visų žodžių testas (žodžiu):";
             this.Load += new System.EventHandler(this.AllWordsVerbalTestForm_Load);
-            this.KeyUp += new KeyEventHandler(this.AllWordsVerbalTestForm_KeyUp);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AllWordsVerbalTestForm_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
