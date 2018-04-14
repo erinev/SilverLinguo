@@ -221,9 +221,9 @@ namespace Words.Test.Forms
             this.NewLearnedWordsCountHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.NewLearnedWordsCountHeaderLabel.Location = new System.Drawing.Point(812, 161);
             this.NewLearnedWordsCountHeaderLabel.Name = "NewLearnedWordsCountHeaderLabel";
-            this.NewLearnedWordsCountHeaderLabel.Size = new System.Drawing.Size(132, 16);
+            this.NewLearnedWordsCountHeaderLabel.Size = new System.Drawing.Size(130, 16);
             this.NewLearnedWordsCountHeaderLabel.TabIndex = 59;
-            this.NewLearnedWordsCountHeaderLabel.Text = "Nauji Išmokti žodžiai: ";
+            this.NewLearnedWordsCountHeaderLabel.Text = "Nauji išmokti žodžiai: ";
             // 
             // NewLearnedWordsCountLinkLabel
             // 
