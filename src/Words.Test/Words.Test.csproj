@@ -53,6 +53,7 @@
       <DependentUpon>TestResultsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\Form\CommonFormService.cs" />
+    <Compile Include="Services\Form\GrammarFormService.cs" />
     <Compile Include="Services\Form\VerbalFormService.cs" />
     <Compile Include="Repositories\Models\WordPair.cs" />
     <Compile Include="Repositories\WordsRepository.cs" />

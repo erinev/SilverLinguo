@@ -28,13 +28,13 @@ namespace Words.Test.Services.Form
         }
 
         public static void HanldeVerbalFormLoadedEvent(
-            Button nextWordButton, out WordPair[] wordsArray, Func<WordPair[]> myMethodName,
+            Button nextWordButton, out WordPair[] wordsArray, Func<WordPair[]> wordsArrayLoadFunc,
             out int startingCountOfWords, out int currentWordPairId, Label progressLabel,
             TextBox firstLanguageWordTextBox, TextBox secondLanguageWordTextBox)
         {
             nextWordButton.Select();
 
-            wordsArray = myMethodName();
+            wordsArray = wordsArrayLoadFunc();
             startingCountOfWords = wordsArray.Length;
 
             currentWordPairId = wordsArray[0].Id;

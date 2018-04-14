@@ -123,11 +123,7 @@ namespace Words.Test.Forms
             wordsWithoutUnknownWord.Add(unknownWordToMove);
 
             _unknownWords = wordsWithoutUnknownWord.ToArray();
-        }
-
-        private void EndTestButton_Click(object sender, EventArgs e)
-        {
-            CommonFormService.HandelEndTestButtonPressedEvent(HandleFinishedTest);
+            _currentUnknownWordPairId = _unknownWords.First().Id;
         }
 
         private void LearnedWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -140,6 +136,11 @@ namespace Words.Test.Forms
 
             showWordsListByTypeForm.Activate();
             showWordsListByTypeForm.ShowDialog(this);
+        }
+
+        private void EndTestButton_Click(object sender, EventArgs e)
+        {
+            CommonFormService.HandelEndTestButtonPressedEvent(HandleFinishedTest);
         }
 
         private void HandleFinishedTest()

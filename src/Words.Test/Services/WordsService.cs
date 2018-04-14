@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Words.Test.Extensions;
 using Words.Test.Repositories;
 using Words.Test.Repositories.Models;
@@ -7,6 +8,7 @@ namespace Words.Test.Services
 {
     public interface IWordsService
     {
+        bool IsEnteredWordIsEqualToExpectedWord(string enteredValue, string expectedValue);
         int GetAllWordsCount();
         int GetUnknownWordsCount();
         WordPair[] GetRandomlySortedAllWords();
@@ -22,6 +24,24 @@ namespace Words.Test.Services
         public WordsService()
         {
             _wordsRepository = new WordsRepository();
+        }
+
+        public bool IsEnteredWordIsEqualToExpectedWord(string enteredValue, string expectedValue)
+        {
+            string[] expectedWords = expectedValue.Split(',')
+                .Select(ev => ev.Trim().ToLowerInvariant())
+                .OrderBy(ev => ev)
+                .ToArray();
+            expectedWords = expectedWords.OrderBy(x => x).ToArray();
+
+            string[] enteredWords = enteredValue.Split(',')
+                .Select(ev => ev.Trim().ToLowerInvariant())
+                .OrderBy(ev => ev)
+                .ToArray();
+
+            bool isEnteredValueIsEqualToExpectedValue = expectedWords.SequenceEqual(enteredWords);
+
+            return isEnteredValueIsEqualToExpectedValue;
         }
 
         public int GetAllWordsCount()
