@@ -53,10 +53,10 @@ namespace Words.Test
             }
             else
             {
-                var allWordsVerbalTestForm = new AllWordsVerbalTestForm(selectedLanguage);
-                allWordsVerbalTestForm.Closed += (s, args) => this.Close();
+                var allWordsVerbalTestPasswordForm = new AllWordsVerbalTestPasswordForm(selectedLanguage);
+                allWordsVerbalTestPasswordForm.Closed += (s, args) => this.Close();
 
-                allWordsVerbalTestForm.Show();
+                allWordsVerbalTestPasswordForm.Show();
             }
         }
 

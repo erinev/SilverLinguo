@@ -52,6 +52,12 @@
     <Compile Include="Forms\AllWordsGrammarTestForm.Designer.cs">
       <DependentUpon>AllWordsGrammarTestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AllWordsVerbalTestPasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AllWordsVerbalTestPasswordForm.Designer.cs">
+      <DependentUpon>AllWordsVerbalTestPasswordForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\TestResultsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +105,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AllWordsGrammarTestForm.resx">
       <DependentUpon>AllWordsGrammarTestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AllWordsVerbalTestPasswordForm.resx">
+      <DependentUpon>AllWordsVerbalTestPasswordForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TestResultsForm.resx">
       <DependentUpon>TestResultsForm.cs</DependentUpon>
