@@ -182,9 +182,9 @@
             this.WordsTypeLabel.AutoSize = true;
             this.WordsTypeLabel.Location = new System.Drawing.Point(348, 55);
             this.WordsTypeLabel.Name = "WordsTypeLabel";
-            this.WordsTypeLabel.Size = new System.Drawing.Size(28, 16);
+            this.WordsTypeLabel.Size = new System.Drawing.Size(61, 16);
             this.WordsTypeLabel.TabIndex = 14;
-            this.WordsTypeLabel.Text = "Visi";
+            this.WordsTypeLabel.Text = "Nežinomi";
             // 
             // UnknownWordsTestResultsForm
             // 
@@ -210,7 +210,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UnknownWordsTestResultsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Testo rezultatai:";
+            this.Text = "Nežinomų žodžių testo rezultatai:";
             this.Load += new System.EventHandler(this.TestResultsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
