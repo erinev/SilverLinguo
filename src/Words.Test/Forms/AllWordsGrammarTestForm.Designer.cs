@@ -61,6 +61,7 @@
             this.ValidateWordButton.TabIndex = 54;
             this.ValidateWordButton.Text = "Tikrinti";
             this.ValidateWordButton.UseVisualStyleBackColor = false;
+            this.ValidateWordButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ValidateWordButton_MouseClick);
             // 
             // CorrectWordTextBox
             // 
@@ -293,6 +294,10 @@
             this.Name = "AllWordsGrammarTestForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Visų žodžių testas (raštu):";
+            this.Load += new System.EventHandler(this.AllWordsGrammarTestForm_Load);
+            this.Shown += new System.EventHandler(this.AllWordsGrammarTestForm_Shown);
+            this.KeyPreview = true;
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AllWordsGrammarTestForm_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
