@@ -91,7 +91,7 @@ namespace Words.Test.Forms
 
             if (_unknownWords.Length > 0)
             {
-                ProgressLabel.Text = _unknownWords.Length.ToString();
+                CommonFormService.SetProgressLabelText(ProgressLabel, _unknownWords);
 
                 WordPair nextWord = _unknownWords.First();
 

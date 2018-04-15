@@ -157,7 +157,7 @@ namespace Words.Test.Forms
 
             if (_allWords.Length > 0)
             {
-                ProgressLabel.Text = _allWords.Length.ToString();
+                CommonFormService.SetProgressLabelText(ProgressLabel, _allWords);
                 _currentWordPairId = _allWords.First().Id;
 
                 GrammarFormService.HandleNextWordButtonClickedEvent(ValidateWordButton, NextWordButton,

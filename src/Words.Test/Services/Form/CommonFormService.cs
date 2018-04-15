@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using Words.Test.Repositories.Models;
 
 namespace Words.Test.Services.Form
 {
@@ -25,6 +26,12 @@ namespace Words.Test.Services.Form
             {
                 endTestConfirmedAction();
             }
+        }
+
+        public static void SetProgressLabelText(Label progressLabel, WordPair[] wordsForProgress)
+        {
+            int leftWordsCount = wordsForProgress.Length - 1;
+            progressLabel.Text = leftWordsCount.ToString();
         }
 
         private static void timer_Tick(object sender, EventArgs args, Label testTimerLabel, Stopwatch stopwatch)

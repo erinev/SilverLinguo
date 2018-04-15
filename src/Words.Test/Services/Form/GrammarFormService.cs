@@ -49,7 +49,7 @@ namespace Words.Test.Services.Form
 
             currentWordPairId = wordsArray[0].Id;
 
-            progressLabel.Text = wordsArray.Length.ToString();
+            CommonFormService.SetProgressLabelText(progressLabel, wordsArray);
 
             WordPair firstWord = wordsArray.First();
             firstLanguageWordTextBox.Text = firstLanguageWordTextBox.ReadOnly ? firstWord.FirstLanguageWord : String.Empty;
