@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
 using Words.Test.Enums;
+using Words.Test.Forms.Helper;
 
-namespace Words.Test.Forms
+namespace Words.Test.Forms.TestResults
 {
-    public partial class UnknownWordsTestResultsForm : BaseTestResultsForm
+    public partial class TestResultsForUnknownWordsForm : BaseTestResultsForm
     {
         private readonly int _totalWordsCountInTest;
         private readonly List<string> _lernedWordsForStats;
 
-        public UnknownWordsTestResultsForm(
+        public TestResultsForUnknownWordsForm(
             SelectedLanguage selectedLanguage, TestType testType, Stopwatch elapsedTimeStopWatch, 
             int totalWordsCountInTest, List<string> lernedWordsForStats) 
             : base(selectedLanguage, testType, elapsedTimeStopWatch)
@@ -22,7 +23,7 @@ namespace Words.Test.Forms
             InitializeComponent();
         }
 
-        private void TestResultsForm_Load(object sender, EventArgs e)
+        private void TestResultsForUnknownWordsForm_Load(object sender, EventArgs e)
         {
             WordsTypeLabel.Text = @"Nežinomi";
 

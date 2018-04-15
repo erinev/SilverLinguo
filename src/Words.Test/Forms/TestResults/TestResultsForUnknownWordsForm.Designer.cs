@@ -1,6 +1,6 @@
-﻿namespace Words.Test.Forms
+﻿namespace Words.Test.Forms.TestResults
 {
-    partial class UnknownWordsTestResultsForm
+    partial class TestResultsForUnknownWordsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -65,7 +65,7 @@
             this.Name = "UnknownWordsTestResultsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nežinomų žodžių testo rezultatai:";
-            this.Load += new System.EventHandler(this.TestResultsForm_Load);
+            this.Load += new System.EventHandler(this.TestResultsForUnknownWordsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

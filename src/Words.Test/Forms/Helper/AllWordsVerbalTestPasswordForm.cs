@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using Words.Test.Enums;
 
-namespace Words.Test.Forms
+namespace Words.Test.Forms.Helper
 {
     public partial class AllWordsVerbalTestPasswordForm : Form
     {

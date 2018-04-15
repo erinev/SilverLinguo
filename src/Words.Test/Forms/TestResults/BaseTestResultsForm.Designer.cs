@@ -1,4 +1,4 @@
-﻿namespace Words.Test.Forms
+﻿namespace Words.Test.Forms.TestResults
 {
     partial class BaseTestResultsForm
     {

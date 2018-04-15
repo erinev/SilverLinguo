@@ -5,6 +5,8 @@ using System.Linq;
 using System.Windows.Forms;
 using Words.Test.Constants;
 using Words.Test.Enums;
+using Words.Test.Forms.Helper;
+using Words.Test.Forms.TestResults;
 using Words.Test.Repositories.Models;
 using Words.Test.Services;
 using Words.Test.Services.Form;
@@ -181,7 +183,7 @@ namespace Words.Test.Forms
             List<string> learnedWordsToDisplay =
                 _learnedWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
 
-            var testResultsForm = new UnknownWordsTestResultsForm(_selectedLanguage, TestType.Grammar, _stopWatch, _startingCountOfUnknownWords, learnedWordsToDisplay);
+            var testResultsForm = new TestResultsForUnknownWordsForm(_selectedLanguage, TestType.Grammar, _stopWatch, _startingCountOfUnknownWords, learnedWordsToDisplay);
             testResultsForm.Closed += (s, args) => this.Close();
 
             testResultsForm.Show();

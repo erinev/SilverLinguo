@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using Words.Test.Enums;
 
-namespace Words.Test.Forms
+namespace Words.Test.Forms.TestResults
 {
     public partial class BaseTestResultsForm : Form
     {

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace Words.Test.Forms
+namespace Words.Test.Forms.Helper
 {
     partial class AllWordsVerbalTestPasswordForm
     {

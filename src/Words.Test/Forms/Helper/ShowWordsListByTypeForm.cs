@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Words.Test.Forms
+namespace Words.Test.Forms.Helper
 {
     public partial class ShowWordsListByTypeForm : Form
     {

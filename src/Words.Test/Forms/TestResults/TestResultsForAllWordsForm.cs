@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Words.Test.Enums;
+using Words.Test.Forms.Helper;
 
-namespace Words.Test.Forms
+namespace Words.Test.Forms.TestResults
 {
     public partial class TestResultsForAllWordsForm : BaseTestResultsForm
     {

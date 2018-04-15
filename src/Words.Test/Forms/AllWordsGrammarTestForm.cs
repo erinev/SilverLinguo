@@ -5,6 +5,8 @@ using System.Linq;
 using System.Windows.Forms;
 using Words.Test.Constants;
 using Words.Test.Enums;
+using Words.Test.Forms.Helper;
+using Words.Test.Forms.TestResults;
 using Words.Test.Repositories.Models;
 using Words.Test.Services;
 using Words.Test.Services.Form;
