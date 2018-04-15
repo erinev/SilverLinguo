@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Words.Test.Constants;
 using Words.Test.Enums;
 
 namespace Words.Test.Forms.Helper
@@ -23,11 +24,15 @@ namespace Words.Test.Forms.Helper
             ValidatePasswordButton.Visible = false;
         }
 
-        private void PasswordTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void PasswordTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (!ValidatePasswordButton.Visible)
+            if (!ValidatePasswordButton.Visible && !String.IsNullOrWhiteSpace(PasswordTextBox.Text))
             {
                 ValidatePasswordButton.Visible = true;
+            }
+            else if (ValidatePasswordButton.Visible && String.IsNullOrWhiteSpace(PasswordTextBox.Text))
+            {
+                ValidatePasswordButton.Visible = false;
             }
 
             if (IncorrectPasswordLabel.Visible)
@@ -36,7 +41,26 @@ namespace Words.Test.Forms.Helper
             }
         }
 
+        private void PasswordTextBox_KeyPress(object sender, KeyPressEventArgs keyEventArgs)
+        {
+            //TODO: cleanup or proper handle Enter key (now it causes one word as entered in opened form)
+            /*if (keyEventArgs.KeyChar == KeyCodes.Enter)
+            {
+                if (ValidatePasswordButton.Visible)
+                {
+                    ValidateAndHandlePassword();
+                }
+                
+                keyEventArgs.Handled = true;
+            }*/
+        }
+
         private void ValidatePasswordButton_Click(object sender, EventArgs e)
+        {
+            ValidateAndHandlePassword();
+        }
+
+        private void ValidateAndHandlePassword()
         {
             bool passwordMatches = PasswordTextBox.Text.Equals(password);
 

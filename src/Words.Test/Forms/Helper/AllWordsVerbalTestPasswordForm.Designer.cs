@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace Words.Test.Forms.Helper
 {
@@ -45,6 +46,7 @@ namespace Words.Test.Forms.Helper
             this.PasswordTextBox.Size = new System.Drawing.Size(282, 23);
             this.PasswordTextBox.TabIndex = 0;
             this.PasswordTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PasswordTextBox_KeyPress);
+            this.PasswordTextBox.TextChanged += new EventHandler(this.PasswordTextBox_TextChanged);
             // 
             // ValidatePasswordButton
             // 
