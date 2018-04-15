@@ -6,7 +6,7 @@ using Words.Test.Enums;
 
 namespace Words.Test.Forms
 {
-    public partial class TestResultsForm : Form
+    public partial class UnknownWordsTestResultsForm : Form
     {
         private readonly SelectedLanguage _selectedLanguage;
         private readonly TestType _testType;
@@ -16,7 +16,7 @@ namespace Words.Test.Forms
         private readonly List<string> _lernedWordsForStats;
         private readonly List<string> _unknownWordsForStats;
 
-        public TestResultsForm(SelectedLanguage selectedLanguage, TestType testType, WordsType wordsType, Stopwatch elapsedTimeStopWatch, int totalWordsCountInTest, List<string> lernedWordsForStats = null, List<string> unknownWordsForStats = null)
+        public UnknownWordsTestResultsForm(SelectedLanguage selectedLanguage, TestType testType, WordsType wordsType, Stopwatch elapsedTimeStopWatch, int totalWordsCountInTest, List<string> lernedWordsForStats = null, List<string> unknownWordsForStats = null)
         {
             _selectedLanguage = selectedLanguage;
             _testType = testType;

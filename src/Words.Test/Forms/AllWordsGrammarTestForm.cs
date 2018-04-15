@@ -260,7 +260,7 @@ namespace Words.Test.Forms
             List<string> unknownWordsToDisplay =
                 unknownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
 
-            var testResultsForm = new TestResultsForm(_selectedLanguage, TestType.Grammar, WordsType.AllWords, _stopWatch, _startingCountOfAllWords, learnedAndKnownWordsToDisplay, unknownWordsToDisplay);
+            var testResultsForm = new UnknownWordsTestResultsForm(_selectedLanguage, TestType.Grammar, WordsType.AllWords, _stopWatch, _startingCountOfAllWords, learnedAndKnownWordsToDisplay, unknownWordsToDisplay);
             testResultsForm.Closed += (s, args) => this.Close();
 
             testResultsForm.Show();

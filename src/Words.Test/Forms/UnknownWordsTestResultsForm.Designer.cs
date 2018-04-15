@@ -1,6 +1,6 @@
 ﻿namespace Words.Test.Forms
 {
-    partial class TestResultsForm
+    partial class UnknownWordsTestResultsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -124,7 +124,7 @@
             // 
             this.StartDifferentTestButton.BackColor = System.Drawing.Color.YellowGreen;
             this.StartDifferentTestButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.StartDifferentTestButton.Location = new System.Drawing.Point(174, 152);
+            this.StartDifferentTestButton.Location = new System.Drawing.Point(153, 152);
             this.StartDifferentTestButton.Name = "StartDifferentTestButton";
             this.StartDifferentTestButton.Padding = new System.Windows.Forms.Padding(2);
             this.StartDifferentTestButton.Size = new System.Drawing.Size(138, 32);
@@ -186,7 +186,7 @@
             this.WordsTypeLabel.TabIndex = 14;
             this.WordsTypeLabel.Text = "Visi";
             // 
-            // TestResultsForm
+            // UnknownWordsTestResultsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -208,7 +208,7 @@
             this.Controls.Add(this.ElapsedTimeHeaderLabel);
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "TestResultsForm";
+            this.Name = "UnknownWordsTestResultsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Testo rezultatai:";
             this.Load += new System.EventHandler(this.TestResultsForm_Load);

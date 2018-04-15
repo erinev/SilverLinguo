@@ -58,11 +58,11 @@
     <Compile Include="Forms\AllWordsVerbalTestPasswordForm.Designer.cs">
       <DependentUpon>AllWordsVerbalTestPasswordForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TestResultsForm.cs">
+    <Compile Include="Forms\UnknownWordsTestResultsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\TestResultsForm.Designer.cs">
-      <DependentUpon>TestResultsForm.cs</DependentUpon>
+    <Compile Include="Forms\UnknownWordsTestResultsForm.Designer.cs">
+      <DependentUpon>UnknownWordsTestResultsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\Form\CommonFormService.cs" />
     <Compile Include="Services\Form\GrammarFormService.cs" />
@@ -109,8 +109,8 @@
     <EmbeddedResource Include="Forms\AllWordsVerbalTestPasswordForm.resx">
       <DependentUpon>AllWordsVerbalTestPasswordForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TestResultsForm.resx">
-      <DependentUpon>TestResultsForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UnknownWordsTestResultsForm.resx">
+      <DependentUpon>UnknownWordsTestResultsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
