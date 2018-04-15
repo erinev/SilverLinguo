@@ -62,9 +62,7 @@ namespace Words.Test.Forms
             {
                 if (NextWordButton.Visible)
                 {
-                    GrammarFormService.HandleNextWordButtonClickedEvent(ValidateWordButton, NextWordButton,
-                        CorrectWordTextBox, _selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox,
-                        _allWords);
+                    HandleNextWordButtonEvent();
                 }
                 else
                 {
@@ -132,7 +130,11 @@ namespace Words.Test.Forms
             UnknownWordsCountLinkLabel.Enabled = _unknownWords.Count > 0;
 
             _allWords = _allWords.Where(aw => aw.Id != _currentWordPairId).ToArray();
-            _currentWordPairId = _allWords.First().Id;
+
+            if (_allWords.Length > 0)
+            {
+                _currentWordPairId = _allWords.First().Id;
+            }
         }
 
         private void HandleCorrectlyEnteredWord()
@@ -157,10 +159,10 @@ namespace Words.Test.Forms
 
             if (_allWords.Length > 0)
             {
-                CommonFormService.SetProgressLabelText(ProgressLabel, _allWords);
+                //CommonFormService.SetProgressLabelText(ProgressLabel, _allWords);
                 _currentWordPairId = _allWords.First().Id;
 
-                GrammarFormService.HandleNextWordButtonClickedEvent(ValidateWordButton, NextWordButton,
+                GrammarFormService.HandleNextWordButtonEvent(ValidateWordButton, NextWordButton,
                     CorrectWordTextBox, _selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox,
                     _allWords);
             }
@@ -172,9 +174,23 @@ namespace Words.Test.Forms
 
         private void NextWordButton_MouseClick(object sender, MouseEventArgs e)
         {
-            GrammarFormService.HandleNextWordButtonClickedEvent(ValidateWordButton, NextWordButton,
-                CorrectWordTextBox, _selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox,
-                _allWords);
+            HandleNextWordButtonEvent();
+        }
+
+        private void HandleNextWordButtonEvent()
+        {
+            if (_allWords.Length > 0)
+            {
+                CommonFormService.SetProgressLabelText(ProgressLabel, _allWords);
+
+                GrammarFormService.HandleNextWordButtonEvent(ValidateWordButton, NextWordButton,
+                    CorrectWordTextBox, _selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox,
+                    _allWords);
+            }
+            else
+            {
+                HandleFinishedTest();
+            }
         }
 
         private void NewUnknownWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

@@ -94,7 +94,7 @@ namespace Words.Test.Services.Form
             correctWordTextBox.Text = correctValueForTextBox;
         }
 
-        public static void HandleNextWordButtonClickedEvent(Button validateWordButton, Button nextWordButton, TextBox correctWordTextBox, SelectedLanguage selectedLanguage, TextBox firstLanguageWordTextBox, TextBox secondLanguageWordTextBox, WordPair[] words)
+        public static void HandleNextWordButtonEvent(Button validateWordButton, Button nextWordButton, TextBox correctWordTextBox, SelectedLanguage selectedLanguage, TextBox firstLanguageWordTextBox, TextBox secondLanguageWordTextBox, WordPair[] words)
         {
             validateWordButton.Visible = true;
             nextWordButton.Visible = false;

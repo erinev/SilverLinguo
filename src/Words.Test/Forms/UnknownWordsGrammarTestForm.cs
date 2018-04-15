@@ -56,7 +56,7 @@ namespace Words.Test.Forms
             {
                 if (NextWordButton.Visible)
                 {
-                    GrammarFormService.HandleNextWordButtonClickedEvent(ValidateWordButton, NextWordButton,
+                    GrammarFormService.HandleNextWordButtonEvent(ValidateWordButton, NextWordButton,
                         CorrectWordTextBox, _selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox,
                         _unknownWords);
                 }
@@ -133,7 +133,7 @@ namespace Words.Test.Forms
                 CommonFormService.SetProgressLabelText(ProgressLabel, _unknownWords);
                 _currentUnknownWordPairId = _unknownWords.First().Id;
 
-                GrammarFormService.HandleNextWordButtonClickedEvent(ValidateWordButton, NextWordButton,
+                GrammarFormService.HandleNextWordButtonEvent(ValidateWordButton, NextWordButton,
                     CorrectWordTextBox, _selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox,
                     _unknownWords);
             }
@@ -145,7 +145,7 @@ namespace Words.Test.Forms
 
         private void NextWordButton_MouseClick(object sender, MouseEventArgs e)
         {
-            GrammarFormService.HandleNextWordButtonClickedEvent(ValidateWordButton, NextWordButton,
+            GrammarFormService.HandleNextWordButtonEvent(ValidateWordButton, NextWordButton,
                 CorrectWordTextBox, _selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox,
                 _unknownWords);
         }
