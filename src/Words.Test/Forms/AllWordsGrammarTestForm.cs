@@ -253,14 +253,12 @@ namespace Words.Test.Forms
 
             this.Hide();
 
-            List<WordPair> learnedAndKnownWords = _learnedWords.Concat(_knownWords).ToList();
-            List<string> learnedAndKnownWordsToDisplay =
-                learnedAndKnownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
-            List<WordPair> unknownWords = _newUnknownWords.Concat(_unknownWords).ToList();
-            List<string> unknownWordsToDisplay =
-                unknownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+            List<string> learnedWordsForStats = _learnedWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+            List<string> knownWordsForStats = _knownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+            List<string> newUnknownWordsForStats = _newUnknownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+            List<string> unknownWordsForStats = _unknownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
 
-            var testResultsForm = new UnknownWordsTestResultsForm(_selectedLanguage, TestType.Grammar, WordsType.AllWords, _stopWatch, _startingCountOfAllWords, learnedAndKnownWordsToDisplay, unknownWordsToDisplay);
+            var testResultsForm = new TestResultsForAllWordsForm(_selectedLanguage, TestType.Grammar, _stopWatch, _startingCountOfAllWords, learnedWordsForStats, knownWordsForStats, newUnknownWordsForStats, unknownWordsForStats);
             testResultsForm.Closed += (s, args) => this.Close();
 
             testResultsForm.Show();
