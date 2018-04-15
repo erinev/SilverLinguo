@@ -30,12 +30,14 @@
         {
             this.KnownWordsCountLinkLabel = new System.Windows.Forms.LinkLabel();
             this.KnownWordsCountHeaderLabel = new System.Windows.Forms.Label();
-            this.NewLearnedWordsCountLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.LearnedWordsCountLinkLabel = new System.Windows.Forms.LinkLabel();
             this.LearnedWordsCountHeaderLabel = new System.Windows.Forms.Label();
             this.UnknownWordsCountLinkLabel = new System.Windows.Forms.LinkLabel();
             this.UnknownWordsCountHeaderLabel = new System.Windows.Forms.Label();
             this.NewUnknownWordsCountLinkLabel = new System.Windows.Forms.LinkLabel();
             this.NewUnknownWordsCountHeaderLabel = new System.Windows.Forms.Label();
+            this.TestProgressHeaderLabel = new System.Windows.Forms.Label();
+            this.TestProgressLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // KnownWordsCountLinkLabel
@@ -59,16 +61,16 @@
             this.KnownWordsCountHeaderLabel.TabIndex = 80;
             this.KnownWordsCountHeaderLabel.Text = "Žinomi žodžiai: ";
             // 
-            // NewLearnedWordsCountLinkLabel
+            // LearnedWordsCountLinkLabel
             // 
-            this.NewLearnedWordsCountLinkLabel.AutoSize = true;
-            this.NewLearnedWordsCountLinkLabel.Location = new System.Drawing.Point(642, 92);
-            this.NewLearnedWordsCountLinkLabel.Name = "NewLearnedWordsCountLinkLabel";
-            this.NewLearnedWordsCountLinkLabel.Size = new System.Drawing.Size(55, 16);
-            this.NewLearnedWordsCountLinkLabel.TabIndex = 79;
-            this.NewLearnedWordsCountLinkLabel.TabStop = true;
-            this.NewLearnedWordsCountLinkLabel.Text = "20 / 100";
-            this.NewLearnedWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LearnedWordsCountLinkLabel_LinkClicked);
+            this.LearnedWordsCountLinkLabel.AutoSize = true;
+            this.LearnedWordsCountLinkLabel.Location = new System.Drawing.Point(642, 92);
+            this.LearnedWordsCountLinkLabel.Name = "LearnedWordsCountLinkLabel";
+            this.LearnedWordsCountLinkLabel.Size = new System.Drawing.Size(55, 16);
+            this.LearnedWordsCountLinkLabel.TabIndex = 79;
+            this.LearnedWordsCountLinkLabel.TabStop = true;
+            this.LearnedWordsCountLinkLabel.Text = "20 / 100";
+            this.LearnedWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LearnedWordsCountLinkLabel_LinkClicked);
             // 
             // LearnedWordsCountHeaderLabel
             // 
@@ -122,15 +124,37 @@
             this.NewUnknownWordsCountHeaderLabel.TabIndex = 74;
             this.NewUnknownWordsCountHeaderLabel.Text = "Nauji nežinomi žodžiai: ";
             // 
+            // TestProgressHeaderLabel
+            // 
+            this.TestProgressHeaderLabel.AutoSize = true;
+            this.TestProgressHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.TestProgressHeaderLabel.Location = new System.Drawing.Point(519, 144);
+            this.TestProgressHeaderLabel.Name = "TestProgressHeaderLabel";
+            this.TestProgressHeaderLabel.Size = new System.Drawing.Size(101, 16);
+            this.TestProgressHeaderLabel.TabIndex = 82;
+            this.TestProgressHeaderLabel.Text = "Testo progresas:";
+            // 
+            // TestProgressLabel
+            // 
+            this.TestProgressLabel.AutoSize = true;
+            this.TestProgressLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.TestProgressLabel.Location = new System.Drawing.Point(617, 144);
+            this.TestProgressLabel.Name = "TestProgressLabel";
+            this.TestProgressLabel.Size = new System.Drawing.Size(62, 16);
+            this.TestProgressLabel.TabIndex = 84;
+            this.TestProgressLabel.Text = "100 / 100";
+            // 
             // TestResultsForAllWordsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(729, 243);
             this.ControlBox = false;
+            this.Controls.Add(this.TestProgressLabel);
+            this.Controls.Add(this.TestProgressHeaderLabel);
             this.Controls.Add(this.KnownWordsCountLinkLabel);
             this.Controls.Add(this.KnownWordsCountHeaderLabel);
-            this.Controls.Add(this.NewLearnedWordsCountLinkLabel);
+            this.Controls.Add(this.LearnedWordsCountLinkLabel);
             this.Controls.Add(this.LearnedWordsCountHeaderLabel);
             this.Controls.Add(this.UnknownWordsCountLinkLabel);
             this.Controls.Add(this.UnknownWordsCountHeaderLabel);
@@ -151,11 +175,13 @@
 
         private System.Windows.Forms.LinkLabel KnownWordsCountLinkLabel;
         private System.Windows.Forms.Label KnownWordsCountHeaderLabel;
-        private System.Windows.Forms.LinkLabel NewLearnedWordsCountLinkLabel;
+        private System.Windows.Forms.LinkLabel LearnedWordsCountLinkLabel;
         private System.Windows.Forms.Label LearnedWordsCountHeaderLabel;
         private System.Windows.Forms.LinkLabel UnknownWordsCountLinkLabel;
         private System.Windows.Forms.Label UnknownWordsCountHeaderLabel;
         private System.Windows.Forms.LinkLabel NewUnknownWordsCountLinkLabel;
         private System.Windows.Forms.Label NewUnknownWordsCountHeaderLabel;
+        private System.Windows.Forms.Label TestProgressHeaderLabel;
+        private System.Windows.Forms.Label TestProgressLabel;
     }
 }

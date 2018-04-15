@@ -32,29 +32,37 @@ namespace Words.Test.Forms
         {
             WordsTypeLabel.Text = @"Visi";
 
+            int wordsProgressCount = 0;
+
             if (_learnedWordsForStats != null)
             {
-                NewLearnedWordsCountLinkLabel.Enabled = _learnedWordsForStats.Count > 0;
-                NewLearnedWordsCountLinkLabel.Text = $@"{_learnedWordsForStats.Count} / {_totalWordsCountInTest}";
+                wordsProgressCount += _learnedWordsForStats.Count;
+                LearnedWordsCountLinkLabel.Enabled = _learnedWordsForStats.Count > 0;
+                LearnedWordsCountLinkLabel.Text = $@"{_learnedWordsForStats.Count} / {_totalWordsCountInTest}";
             }
             
             if (_knownWords != null)
             {
+                wordsProgressCount += _knownWords.Count;
                 KnownWordsCountLinkLabel.Enabled = _knownWords.Count > 0;
                 KnownWordsCountLinkLabel.Text = $@"{_knownWords.Count} / {_totalWordsCountInTest}";
             }
 
             if (_newUnknownWords != null)
             {
+                wordsProgressCount += _newUnknownWords.Count;
                 NewUnknownWordsCountLinkLabel.Enabled = _newUnknownWords.Count > 0;
                 NewUnknownWordsCountLinkLabel.Text = $@"{_newUnknownWords.Count} / {_totalWordsCountInTest}";
             }
             
             if (_unknownWords != null)
             {
+                wordsProgressCount += _unknownWords.Count;
                 UnknownWordsCountLinkLabel.Enabled = _unknownWords.Count > 0;
                 UnknownWordsCountLinkLabel.Text = $@"{_unknownWords.Count} / {_totalWordsCountInTest}";
             }
+
+            TestProgressLabel.Text = $@"{wordsProgressCount} / {_totalWordsCountInTest}";
         }
         
         private void LearnedWordsCountLinkLabel_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)

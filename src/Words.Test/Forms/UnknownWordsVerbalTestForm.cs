@@ -150,10 +150,10 @@ namespace Words.Test.Forms
             this.Hide();
             
             List<string> learnedWordsToDisplay =
-                _learnedWords.Select(learnedWord => learnedWord.FirstLanguageWord + " - " + learnedWord.SecondLanguageWord).ToList();
-            
-            var testResultsForm = new UnknownWordsTestResultsForm(_selectedLanguage, TestType.Verbal, WordsType.UnknownWords, _stopWatch, _startingCountOfUnknownWords, learnedWordsToDisplay);
-            testResultsForm.Closed += (s, args) => this.Close();
+                _learnedWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+
+            var testResultsForm = new UnknownWordsTestResultsForm(_selectedLanguage, TestType.Verbal, _stopWatch,
+                _startingCountOfUnknownWords, learnedWordsToDisplay);
 
             testResultsForm.Show();
         }

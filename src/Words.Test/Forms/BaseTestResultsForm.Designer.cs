@@ -62,7 +62,7 @@
             // 
             this.EndProgramButton.BackColor = System.Drawing.Color.Red;
             this.EndProgramButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.EndProgramButton.Location = new System.Drawing.Point(384, 169);
+            this.EndProgramButton.Location = new System.Drawing.Point(384, 179);
             this.EndProgramButton.Name = "EndProgramButton";
             this.EndProgramButton.Padding = new System.Windows.Forms.Padding(2);
             this.EndProgramButton.Size = new System.Drawing.Size(138, 32);
@@ -75,7 +75,7 @@
             // 
             this.StartDifferentTestButton.BackColor = System.Drawing.Color.YellowGreen;
             this.StartDifferentTestButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.StartDifferentTestButton.Location = new System.Drawing.Point(149, 169);
+            this.StartDifferentTestButton.Location = new System.Drawing.Point(149, 179);
             this.StartDifferentTestButton.Name = "StartDifferentTestButton";
             this.StartDifferentTestButton.Padding = new System.Windows.Forms.Padding(2);
             this.StartDifferentTestButton.Size = new System.Drawing.Size(138, 32);
