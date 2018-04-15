@@ -25,7 +25,7 @@ namespace Words.Test.Services.Form
             }
             else
             {
-                DialogResult dialogResult = MessageBox.Show("Ar tikrai norite baigti testą ?", "Testo pabaiga",
+                DialogResult dialogResult = MessageBox.Show("Ne visi žodžiai išspręsti ar tikrai norite baigti testą ?", "Testo pabaiga",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (dialogResult == DialogResult.Yes)
