@@ -115,38 +115,140 @@ namespace Words.Test.Forms
             GrammarFormService.HandleVisibilityOnIncorrectlyEnteredWordEvent(ValidateWordButton, NextWordButton,
                 CorrectWordTextBox, textBox, correctValueForTextBox);
 
-            /*WordPair unknownWordToMove = _unknownWords[0];
+            WordPair currentUnknownWord = _allWords.First(aw => aw.Id == _currentWordPairId);
+            bool unknownWordAdded = _wordsService.InsertNewUnknownWordIfDoesntExist(currentUnknownWord);
+            if (unknownWordAdded)
+            {
+                _newUnknownWords.Add(currentUnknownWord);
+                NewUnknownWordsCountLinkLabel.Text = _newUnknownWords.Count.ToString();
+            }
+            else
+            {
+                _unknownWords.Add(currentUnknownWord);
+                UnknownWordsCountLinkLabel.Text = _unknownWords.Count.ToString();
+            }
 
-            List<WordPair> wordsWithoutUnknownWord = _unknownWords.Where(unknownWord => unknownWord.Id != _currentWordPairId).ToList();
+            NewUnknownWordsCountLinkLabel.Enabled = _newUnknownWords.Count > 0;
+            UnknownWordsCountLinkLabel.Enabled = _unknownWords.Count > 0;
 
-            wordsWithoutUnknownWord.Add(unknownWordToMove);
-
-            _allWords = wordsWithoutUnknownWord.ToArray();
-            _currentWordPairId = _unknownWords.First().Id;*/
+            _allWords = _allWords.Where(aw => aw.Id != _currentWordPairId).ToArray();
+            _currentWordPairId = _allWords.First().Id;
         }
 
         private void HandleCorrectlyEnteredWord()
         {
-            /*_learnedWords.Add(_unknownWords.First(uw => uw.Id == _currentUnknownWordPairId));
-            LearnedWordsCountLinkLabel.Text = _learnedWords.Count.ToString();
-
-            LearnedWordsCountLinkLabel.Enabled = _learnedWords.Count > 0;
-
-            _unknownWords = _unknownWords.Where(unknownWord => unknownWord.Id != _currentUnknownWordPairId).ToArray();
-
-            if (_unknownWords.Length > 0)
+            WordPair currentLearnedWord = _allWords.First(uw => uw.Id == _currentWordPairId);
+            bool learnedUnknownWord = _wordsService.RemoveLearnedUnknownWordIfExist(currentLearnedWord);
+            if (learnedUnknownWord)
             {
-                ProgressLabel.Text = _unknownWords.Length.ToString();
-                _currentUnknownWordPairId = _unknownWords.First().Id;
+                _learnedWords.Add(currentLearnedWord);
+                NewLearnedWordsCountLinkLabel.Text = _learnedWords.Count.ToString();
+            }
+            else
+            {
+                _knownWords.Add(currentLearnedWord);
+                KnownWordsCountLinkLabel.Text = _knownWords.Count.ToString();
+            }
+
+            _allWords = _allWords.Where(aw => aw.Id != _currentWordPairId).ToArray();
+
+            NewLearnedWordsCountLinkLabel.Enabled = _learnedWords.Count > 0;
+            KnownWordsCountLinkLabel.Enabled = _knownWords.Count > 0;
+
+            if (_allWords.Length > 0)
+            {
+                ProgressLabel.Text = _allWords.Length.ToString();
+                _currentWordPairId = _allWords.First().Id;
 
                 GrammarFormService.HandleNextWordButtonClickedEvent(ValidateWordButton, NextWordButton,
                     CorrectWordTextBox, _selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox,
-                    _unknownWords);
+                    _allWords);
             }
             else
             {
                 HandleFinishedTest();
-            }*/
+            }
+        }
+
+        private void NextWordButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            GrammarFormService.HandleNextWordButtonClickedEvent(ValidateWordButton, NextWordButton,
+                CorrectWordTextBox, _selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox,
+                _allWords);
+        }
+
+        private void NewUnknownWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            List<string> newUnknownWordsToDisplay =
+                _newUnknownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+
+            string showWordsFormName = "Nauji nežinomi žodžiai:";
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, newUnknownWordsToDisplay);
+
+            showWordsListByTypeForm.Activate();
+            showWordsListByTypeForm.ShowDialog(this);
+        }
+
+        private void UnknownWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            List<string> unknownWordsToDisplay =
+                _unknownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+
+            string showWordsFormName = "Vis dar nežinomi žodžiai:";
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, unknownWordsToDisplay);
+
+            showWordsListByTypeForm.Activate();
+            showWordsListByTypeForm.ShowDialog(this);
+        }
+
+        private void NewLearnedWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            List<string> learnedWordsToDisplay =
+                _learnedWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+
+            string showWordsFormName = "Nauji išmokti žodžiai:";
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, learnedWordsToDisplay);
+
+            showWordsListByTypeForm.Activate();
+            showWordsListByTypeForm.ShowDialog(this);
+        }
+
+        private void KnownWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            List<string> knownWordsToDisplay =
+                _knownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+
+            string showWordsFormName = "Žinomi žodžiai:";
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, knownWordsToDisplay);
+
+            showWordsListByTypeForm.Activate();
+            showWordsListByTypeForm.ShowDialog(this);
+        }
+
+        private void EndTestButton_Click(object sender, EventArgs e)
+        {
+            CommonFormService.HandelEndTestButtonPressedEvent(HandleFinishedTest);
+        }
+
+        private void HandleFinishedTest()
+        {
+            InputLanguage.CurrentInputLanguage = _originalInputLanguage;
+
+            _stopWatch.Stop();
+
+            this.Hide();
+
+            List<WordPair> learnedAndKnownWords = _learnedWords.Concat(_knownWords).ToList();
+            List<string> learnedAndKnownWordsToDisplay =
+                learnedAndKnownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+            List<WordPair> unknownWords = _newUnknownWords.Concat(_unknownWords).ToList();
+            List<string> unknownWordsToDisplay =
+                unknownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+
+            var testResultsForm = new TestResultsForm(_selectedLanguage, TestType.Grammar, WordsType.AllWords, _stopWatch, _startingCountOfAllWords, learnedAndKnownWordsToDisplay, unknownWordsToDisplay);
+            testResultsForm.Closed += (s, args) => this.Close();
+
+            testResultsForm.Show();
         }
     }
 }

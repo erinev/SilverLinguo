@@ -101,6 +101,7 @@
             this.NextWordButton.Text = "Kitas žodis";
             this.NextWordButton.UseVisualStyleBackColor = false;
             this.NextWordButton.Visible = false;
+            this.NextWordButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NextWordButton_MouseClick);
             // 
             // FirstLanguageWordTextBox
             // 
@@ -143,6 +144,7 @@
             this.EndTestButton.TabIndex = 48;
             this.EndTestButton.Text = "Baigtį testą";
             this.EndTestButton.UseVisualStyleBackColor = false;
+            this.EndTestButton.Click += new System.EventHandler(this.EndTestButton_Click);
             // 
             // EnHeaderLabel
             // 
@@ -173,6 +175,7 @@
             this.KnownWordsCountLinkLabel.TabIndex = 72;
             this.KnownWordsCountLinkLabel.TabStop = true;
             this.KnownWordsCountLinkLabel.Text = "0";
+            this.KnownWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.KnownWordsCountLinkLabel_LinkClicked);
             // 
             // KnownWordsCountHeaderLabel
             // 
@@ -193,6 +196,7 @@
             this.NewLearnedWordsCountLinkLabel.TabIndex = 70;
             this.NewLearnedWordsCountLinkLabel.TabStop = true;
             this.NewLearnedWordsCountLinkLabel.Text = "0";
+            this.NewLearnedWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.NewLearnedWordsCountLinkLabel_LinkClicked);
             // 
             // NewLearnedWordsCountHeaderLabel
             // 
@@ -213,6 +217,7 @@
             this.UnknownWordsCountLinkLabel.TabIndex = 68;
             this.UnknownWordsCountLinkLabel.TabStop = true;
             this.UnknownWordsCountLinkLabel.Text = "0";
+            this.UnknownWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.UnknownWordsCountLinkLabel_LinkClicked);
             // 
             // UnknownWordsCountHeaderLabel
             // 
@@ -233,6 +238,7 @@
             this.NewUnknownWordsCountLinkLabel.TabIndex = 66;
             this.NewUnknownWordsCountLinkLabel.TabStop = true;
             this.NewUnknownWordsCountLinkLabel.Text = "0";
+            this.NewUnknownWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.NewUnknownWordsCountLinkLabel_LinkClicked);
             // 
             // NewUnknownWordsCountHeaderLabel
             // 
@@ -296,7 +302,6 @@
             this.Text = "Visų žodžių testas (raštu):";
             this.Load += new System.EventHandler(this.AllWordsGrammarTestForm_Load);
             this.Shown += new System.EventHandler(this.AllWordsGrammarTestForm_Shown);
-            this.KeyPreview = true;
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AllWordsGrammarTestForm_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();

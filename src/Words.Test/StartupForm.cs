@@ -46,10 +46,10 @@ namespace Words.Test
 
             if (ShouldCheckGrammarCheckBox.Checked)
             {
-                var allWordsVerbalTestForm = new AllWordsVerbalTestForm(selectedLanguage);
-                allWordsVerbalTestForm.Closed += (s, args) => this.Close();
+                var allWordsGrammarTestForm = new AllWordsGrammarTestForm(selectedLanguage);
+                allWordsGrammarTestForm.Closed += (s, args) => this.Close();
 
-                allWordsVerbalTestForm.Show();
+                allWordsGrammarTestForm.Show();
             }
             else
             {
