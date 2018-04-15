@@ -17,14 +17,21 @@ namespace Words.Test.Services.Form
             timer.Start();
         }
 
-        public static void HandelEndTestButtonPressedEvent(Action endTestConfirmedAction)
+        public static void HandelEndTestButtonPressedEvent(WordPair[] testWords, Action endTestConfirmedAction)
         {
-            DialogResult dialogResult = MessageBox.Show("Ar tikrai norite baigti testą ?", "Testo pabaiga",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (dialogResult == DialogResult.Yes)
+            if (testWords.Length <= 0)
             {
                 endTestConfirmedAction();
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("Ar tikrai norite baigti testą ?", "Testo pabaiga",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    endTestConfirmedAction();
+                }
             }
         }
 

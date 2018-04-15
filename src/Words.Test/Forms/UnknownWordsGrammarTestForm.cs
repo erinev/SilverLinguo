@@ -167,7 +167,7 @@ namespace Words.Test.Forms
 
         private void EndTestButton_Click(object sender, EventArgs e)
         {
-            CommonFormService.HandelEndTestButtonPressedEvent(HandleFinishedTest);
+            CommonFormService.HandelEndTestButtonPressedEvent(_unknownWords, HandleFinishedTest);
         }
 
         private void HandleFinishedTest()
