@@ -56,9 +56,7 @@ namespace Words.Test.Forms
             {
                 if (NextWordButton.Visible)
                 {
-                    GrammarFormService.HandleNextWordButtonEvent(ValidateWordButton, NextWordButton,
-                        CorrectWordTextBox, _selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox,
-                        _unknownWords);
+                    HandleNextWordEvent();
                 }
                 else
                 {
@@ -144,6 +142,11 @@ namespace Words.Test.Forms
         }
 
         private void NextWordButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            HandleNextWordEvent();
+        }
+
+        private void HandleNextWordEvent()
         {
             GrammarFormService.HandleNextWordButtonEvent(ValidateWordButton, NextWordButton,
                 CorrectWordTextBox, _selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox,

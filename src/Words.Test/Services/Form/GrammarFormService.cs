@@ -88,6 +88,7 @@ namespace Words.Test.Services.Form
             nextWordButton.Visible = true;
             nextWordButton.Focus();
 
+            textBoxWithIncorrectWord.Enabled = false;
             textBoxWithIncorrectWord.BackColor = TextBoxBackColorForIncorrectWord;
 
             correctWordTextBox.Visible = true;
@@ -96,6 +97,16 @@ namespace Words.Test.Services.Form
 
         public static void HandleNextWordButtonEvent(Button validateWordButton, Button nextWordButton, TextBox correctWordTextBox, SelectedLanguage selectedLanguage, TextBox firstLanguageWordTextBox, TextBox secondLanguageWordTextBox, WordPair[] words)
         {
+            if (!firstLanguageWordTextBox.Enabled)
+            {
+                firstLanguageWordTextBox.Enabled = true;
+            }
+
+            if (!secondLanguageWordTextBox.Enabled)
+            {
+                secondLanguageWordTextBox.Enabled = true;
+            }
+
             validateWordButton.Visible = true;
             nextWordButton.Visible = false;
             correctWordTextBox.Visible = false;
