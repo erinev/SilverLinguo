@@ -285,7 +285,7 @@
             this.KeyPreview = true;
             this.Name = "AllWordsVerbalTestForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Visų žodžių testas (žodžiu):";
+            this.Text = "SilverLinguo™ - Visų žodžių testas (žodžiu):";
             this.Load += new System.EventHandler(this.AllWordsVerbalTestForm_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AllWordsVerbalTestForm_KeyUp);
             this.ResumeLayout(false);

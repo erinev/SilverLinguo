@@ -45,8 +45,8 @@ namespace SilverLinguo.Forms.Helper
             this.PasswordTextBox.PasswordChar = '*';
             this.PasswordTextBox.Size = new System.Drawing.Size(282, 23);
             this.PasswordTextBox.TabIndex = 0;
+            this.PasswordTextBox.TextChanged += new System.EventHandler(this.PasswordTextBox_TextChanged);
             this.PasswordTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PasswordTextBox_KeyPress);
-            this.PasswordTextBox.TextChanged += new EventHandler(this.PasswordTextBox_TextChanged);
             // 
             // ValidatePasswordButton
             // 
@@ -112,7 +112,7 @@ namespace SilverLinguo.Forms.Helper
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AllWordsVerbalTestPasswordForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Visų žodžių testo (žodžiu) slaptažodis";
+            this.Text = "SilverLinguo™ - Visų žodžių testo (žodžiu) apsauga:";
             this.Load += new System.EventHandler(this.AllWordsVerbalTestPasswordForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

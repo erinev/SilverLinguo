@@ -52,7 +52,7 @@
             this.LearnedWordsStatsLinkLabel.Text = "95 / 100";
             this.LearnedWordsStatsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LearnedWordsStatsLabel_LinkClicked);
             // 
-            // UnknownWordsTestResultsForm
+            // TestResultsForUnknownWordsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -62,9 +62,9 @@
             this.Controls.Add(this.LearnedWordsStatsHeaderLabel);
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "UnknownWordsTestResultsForm";
+            this.Name = "TestResultsForUnknownWordsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Nežinomų žodžių testo rezultatai:";
+            this.Text = "SilverLinguo™ - Nežinomų žodžių testo rezultatai:";
             this.Load += new System.EventHandler(this.TestResultsForUnknownWordsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

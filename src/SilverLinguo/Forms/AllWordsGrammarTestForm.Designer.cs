@@ -300,7 +300,7 @@
             this.KeyPreview = true;
             this.Name = "AllWordsGrammarTestForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Visų žodžių testas (raštu):";
+            this.Text = "SilverLinguo™ - Visų žodžių testas (raštu):";
             this.Load += new System.EventHandler(this.AllWordsGrammarTestForm_Load);
             this.Shown += new System.EventHandler(this.AllWordsGrammarTestForm_Shown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AllWordsGrammarTestForm_KeyUp);

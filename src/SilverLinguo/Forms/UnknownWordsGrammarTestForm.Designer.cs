@@ -227,7 +227,7 @@ namespace SilverLinguo.Forms
             this.KeyPreview = true;
             this.Name = "UnknownWordsGrammarTestForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Nežinomų žodžių testas (raštu):";
+            this.Text = "SilverLinguo™ - Nežinomų žodžių testas (raštu):";
             this.Load += new System.EventHandler(this.UnknownWordsGrammarTestForm_Load);
             this.Shown += new System.EventHandler(this.UnknownWordsGrammarTestForm_Shown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.UnknownWordsGrammarTestForm_KeyUp);

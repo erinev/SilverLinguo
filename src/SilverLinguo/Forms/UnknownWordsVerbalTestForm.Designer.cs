@@ -124,7 +124,7 @@ namespace SilverLinguo.Forms
             this.IDontKnowTheWordButton.TabIndex = 25;
             this.IDontKnowTheWordButton.Text = "Nežinau žodžio";
             this.IDontKnowTheWordButton.UseVisualStyleBackColor = false;
-            this.IDontKnowTheWordButton.MouseClick += new MouseEventHandler(this.IDontKnowTheWordButton_MouseClick);
+            this.IDontKnowTheWordButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.IDontKnowTheWordButton_MouseClick);
             // 
             // NextWordButton
             // 
@@ -138,7 +138,7 @@ namespace SilverLinguo.Forms
             this.NextWordButton.TabIndex = 24;
             this.NextWordButton.Text = "Kitas žodis";
             this.NextWordButton.UseVisualStyleBackColor = false;
-            this.NextWordButton.MouseClick += new MouseEventHandler(this.NextWordButton_MouseClick);
+            this.NextWordButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NextWordButton_MouseClick);
             // 
             // SecondLanguageWordTextBox
             // 
@@ -208,12 +208,12 @@ namespace SilverLinguo.Forms
             this.Controls.Add(this.EnHeaderLabel);
             this.Controls.Add(this.LtHeaderLabel);
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.KeyPreview = true;
             this.Name = "UnknownWordsVerbalTestForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Nežinomu žodžiu testas (žodžiu):";
+            this.Text = "SilverLinguo™ - Nežinomu žodžiu testas (žodžiu):";
             this.Load += new System.EventHandler(this.UnknownWordsTestForm_Load);
-            this.KeyPreview = true;
-            this.KeyUp += new KeyEventHandler(this.UnknownWordsVerbalTestForm_KeyUp);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.UnknownWordsVerbalTestForm_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
