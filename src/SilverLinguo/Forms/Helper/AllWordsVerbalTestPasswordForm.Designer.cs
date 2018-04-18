@@ -46,7 +46,7 @@ namespace SilverLinguo.Forms.Helper
             this.PasswordTextBox.Size = new System.Drawing.Size(282, 23);
             this.PasswordTextBox.TabIndex = 0;
             this.PasswordTextBox.TextChanged += new System.EventHandler(this.PasswordTextBox_TextChanged);
-            this.PasswordTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PasswordTextBox_KeyPress);
+            this.PasswordTextBox.KeyUp += new KeyEventHandler(this.PasswordTextBox_KeyPress);
             // 
             // ValidatePasswordButton
             // 

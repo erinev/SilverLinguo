@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using SilverLinguo.Constants;
 using SilverLinguo.Enums;
 
 namespace SilverLinguo.Forms.Helper
@@ -40,18 +41,23 @@ namespace SilverLinguo.Forms.Helper
             }
         }
 
-        private void PasswordTextBox_KeyPress(object sender, KeyPressEventArgs keyEventArgs)
+        private void PasswordTextBox_KeyPress(object sender, KeyEventArgs keyEventArgs)
         {
-            //TODO: cleanup or proper handle Enter key (now it causes one word as entered in opened form)
-            /*if (keyEventArgs.KeyChar == KeyCodes.Enter)
+            if (keyEventArgs.KeyValue == KeyCodes.Enter)
             {
                 if (ValidatePasswordButton.Visible)
                 {
                     ValidateAndHandlePassword();
                 }
-                
+
                 keyEventArgs.Handled = true;
-            }*/
+            } 
+            else if (keyEventArgs.KeyValue == KeyCodes.Backspace)
+            {
+                GetBackToStartupForm();
+
+                keyEventArgs.Handled = true;
+            }
         }
 
         private void ValidatePasswordButton_Click(object sender, EventArgs e)
@@ -79,6 +85,11 @@ namespace SilverLinguo.Forms.Helper
         }
 
         private void BackToTestSelectionButton_Click(object sender, EventArgs e)
+        {
+            GetBackToStartupForm();
+        }
+
+        private void GetBackToStartupForm()
         {
             this.Hide();
 
