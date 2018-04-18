@@ -42,7 +42,7 @@
             this.EnglishRadioButton = new System.Windows.Forms.RadioButton();
             this.RandomRadioButton = new System.Windows.Forms.RadioButton();
             this.ShouldCheckGrammarCheckBox = new System.Windows.Forms.CheckBox();
-            this.ReintializeDatabaseButton = new System.Windows.Forms.Button();
+            this.AdminPanelButton = new System.Windows.Forms.Button();
             this.UnknownWordsPanel.SuspendLayout();
             this.AllWordsPanel.SuspendLayout();
             this.SuspendLayout();
@@ -204,18 +204,18 @@
             this.ShouldCheckGrammarCheckBox.Text = "Rašybos tikrinimas";
             this.ShouldCheckGrammarCheckBox.UseVisualStyleBackColor = true;
             // 
-            // ReintializeDatabaseButton
+            // AdminPanelButton
             // 
-            this.ReintializeDatabaseButton.BackColor = System.Drawing.Color.RoyalBlue;
-            this.ReintializeDatabaseButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ReintializeDatabaseButton.Location = new System.Drawing.Point(2, 268);
-            this.ReintializeDatabaseButton.Name = "ReintializeDatabaseButton";
-            this.ReintializeDatabaseButton.Padding = new System.Windows.Forms.Padding(2);
-            this.ReintializeDatabaseButton.Size = new System.Drawing.Size(79, 32);
-            this.ReintializeDatabaseButton.TabIndex = 13;
-            this.ReintializeDatabaseButton.Text = "Reset DB";
-            this.ReintializeDatabaseButton.UseVisualStyleBackColor = false;
-            this.ReintializeDatabaseButton.Click += new System.EventHandler(this.ReintializeDatabaseButton_Click);
+            this.AdminPanelButton.BackColor = System.Drawing.Color.Orange;
+            this.AdminPanelButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AdminPanelButton.Location = new System.Drawing.Point(527, 2);
+            this.AdminPanelButton.Name = "AdminPanelButton";
+            this.AdminPanelButton.Padding = new System.Windows.Forms.Padding(2);
+            this.AdminPanelButton.Size = new System.Drawing.Size(103, 32);
+            this.AdminPanelButton.TabIndex = 14;
+            this.AdminPanelButton.Text = "Redaktorius";
+            this.AdminPanelButton.UseVisualStyleBackColor = false;
+            this.AdminPanelButton.Click += new System.EventHandler(this.AdminPanelButton_Click);
             // 
             // StartupForm
             // 
@@ -224,7 +224,7 @@
             this.CancelButton = this.EndProgramButton;
             this.ClientSize = new System.Drawing.Size(632, 301);
             this.ControlBox = false;
-            this.Controls.Add(this.ReintializeDatabaseButton);
+            this.Controls.Add(this.AdminPanelButton);
             this.Controls.Add(this.ShouldCheckGrammarCheckBox);
             this.Controls.Add(this.RandomRadioButton);
             this.Controls.Add(this.EnglishRadioButton);
@@ -263,6 +263,6 @@
         private System.Windows.Forms.RadioButton EnglishRadioButton;
         private System.Windows.Forms.RadioButton RandomRadioButton;
         private System.Windows.Forms.CheckBox ShouldCheckGrammarCheckBox;
-        private System.Windows.Forms.Button ReintializeDatabaseButton;
+        private System.Windows.Forms.Button AdminPanelButton;
     }
 }

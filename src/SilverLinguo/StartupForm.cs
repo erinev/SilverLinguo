@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using SilverLinguo.Enums;
 using SilverLinguo.Forms;
+using SilverLinguo.Forms.AdminPanel;
 using SilverLinguo.Forms.Helper;
 using SilverLinguo.Repositories;
 using SilverLinguo.Services;
@@ -112,13 +113,15 @@ namespace SilverLinguo
             return selectedLanguage;
         }
 
-        private void ReintializeDatabaseButton_Click(object sender, EventArgs e)
+        private void AdminPanelButton_Click(object sender, EventArgs e)
         {
-            var wordsRepository = new WordsRepository();
+            this.Hide();
+            
+            var adminPanelForm = new AdminPanelForm();
 
-            wordsRepository.ReinitializeAllTables();
+            adminPanelForm.Closed += (s, args) => this.Close();
 
-            SetWordsCountForTestSelection();
+            adminPanelForm.Show();
         }
     }
 }
