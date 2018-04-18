@@ -30,11 +30,14 @@
         {
             this.AdminPanelTabControl = new System.Windows.Forms.TabControl();
             this.AllWordsTabPage = new System.Windows.Forms.TabPage();
+            this.AllWordsDataGridView = new System.Windows.Forms.DataGridView();
             this.UnknownWordsTabPage = new System.Windows.Forms.TabPage();
             this.AdminTabPage = new System.Windows.Forms.TabPage();
             this.ReintializeDatabaseButton = new System.Windows.Forms.Button();
             this.GoBackToStartupFormButton = new System.Windows.Forms.Button();
             this.AdminPanelTabControl.SuspendLayout();
+            this.AllWordsTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AllWordsDataGridView)).BeginInit();
             this.AdminTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,28 +46,38 @@
             this.AdminPanelTabControl.Controls.Add(this.AllWordsTabPage);
             this.AdminPanelTabControl.Controls.Add(this.UnknownWordsTabPage);
             this.AdminPanelTabControl.Controls.Add(this.AdminTabPage);
-            this.AdminPanelTabControl.Location = new System.Drawing.Point(2, 40);
+            this.AdminPanelTabControl.Location = new System.Drawing.Point(2, 30);
             this.AdminPanelTabControl.Name = "AdminPanelTabControl";
             this.AdminPanelTabControl.SelectedIndex = 0;
-            this.AdminPanelTabControl.Size = new System.Drawing.Size(927, 474);
+            this.AdminPanelTabControl.Size = new System.Drawing.Size(927, 484);
             this.AdminPanelTabControl.TabIndex = 0;
             // 
             // AllWordsTabPage
             // 
+            this.AllWordsTabPage.Controls.Add(this.AllWordsDataGridView);
             this.AllWordsTabPage.Location = new System.Drawing.Point(4, 24);
             this.AllWordsTabPage.Name = "AllWordsTabPage";
             this.AllWordsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.AllWordsTabPage.Size = new System.Drawing.Size(919, 484);
+            this.AllWordsTabPage.Size = new System.Drawing.Size(919, 456);
             this.AllWordsTabPage.TabIndex = 0;
             this.AllWordsTabPage.Text = "Visi žodžiai";
             this.AllWordsTabPage.UseVisualStyleBackColor = true;
+            // 
+            // AllWordsDataGridView
+            // 
+            this.AllWordsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.AllWordsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.AllWordsDataGridView.Location = new System.Drawing.Point(7, 7);
+            this.AllWordsDataGridView.Name = "AllWordsDataGridView";
+            this.AllWordsDataGridView.Size = new System.Drawing.Size(906, 443);
+            this.AllWordsDataGridView.TabIndex = 0;
             // 
             // UnknownWordsTabPage
             // 
             this.UnknownWordsTabPage.Location = new System.Drawing.Point(4, 24);
             this.UnknownWordsTabPage.Name = "UnknownWordsTabPage";
             this.UnknownWordsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.UnknownWordsTabPage.Size = new System.Drawing.Size(919, 484);
+            this.UnknownWordsTabPage.Size = new System.Drawing.Size(919, 456);
             this.UnknownWordsTabPage.TabIndex = 1;
             this.UnknownWordsTabPage.Text = "Nežinomi žodžiai";
             this.UnknownWordsTabPage.UseVisualStyleBackColor = true;
@@ -75,7 +88,7 @@
             this.AdminTabPage.Controls.Add(this.ReintializeDatabaseButton);
             this.AdminTabPage.Location = new System.Drawing.Point(4, 24);
             this.AdminTabPage.Name = "AdminTabPage";
-            this.AdminTabPage.Size = new System.Drawing.Size(919, 446);
+            this.AdminTabPage.Size = new System.Drawing.Size(919, 456);
             this.AdminTabPage.TabIndex = 2;
             this.AdminTabPage.Text = "Administravimas";
             this.AdminTabPage.UseVisualStyleBackColor = true;
@@ -120,6 +133,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SilverLinguo™ - Redaktrius";
             this.AdminPanelTabControl.ResumeLayout(false);
+            this.AllWordsTabPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.AllWordsDataGridView)).EndInit();
             this.AdminTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -133,5 +148,6 @@
         private System.Windows.Forms.TabPage AdminTabPage;
         private System.Windows.Forms.Button ReintializeDatabaseButton;
         private System.Windows.Forms.Button GoBackToStartupFormButton;
+        private System.Windows.Forms.DataGridView AllWordsDataGridView;
     }
 }
