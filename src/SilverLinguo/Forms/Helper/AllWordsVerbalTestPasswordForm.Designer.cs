@@ -46,7 +46,7 @@ namespace SilverLinguo.Forms.Helper
             this.PasswordTextBox.Size = new System.Drawing.Size(282, 23);
             this.PasswordTextBox.TabIndex = 0;
             this.PasswordTextBox.TextChanged += new System.EventHandler(this.PasswordTextBox_TextChanged);
-            this.PasswordTextBox.KeyUp += new KeyEventHandler(this.PasswordTextBox_KeyPress);
+            this.PasswordTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PasswordTextBox_KeyUp);
             // 
             // ValidatePasswordButton
             // 
@@ -78,6 +78,7 @@ namespace SilverLinguo.Forms.Helper
             // 
             this.BackToTestSelectionButton.BackColor = System.Drawing.Color.Yellow;
             this.BackToTestSelectionButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BackToTestSelectionButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.BackToTestSelectionButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.BackToTestSelectionButton.Location = new System.Drawing.Point(207, 128);
             this.BackToTestSelectionButton.Name = "BackToTestSelectionButton";
@@ -101,6 +102,7 @@ namespace SilverLinguo.Forms.Helper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.BackToTestSelectionButton;
             this.ClientSize = new System.Drawing.Size(429, 202);
             this.ControlBox = false;
             this.Controls.Add(this.EnterPasswordLabel);

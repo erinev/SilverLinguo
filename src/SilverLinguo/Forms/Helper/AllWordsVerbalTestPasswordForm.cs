@@ -41,7 +41,7 @@ namespace SilverLinguo.Forms.Helper
             }
         }
 
-        private void PasswordTextBox_KeyPress(object sender, KeyEventArgs keyEventArgs)
+        private void PasswordTextBox_KeyUp(object sender, KeyEventArgs keyEventArgs)
         {
             if (keyEventArgs.KeyValue == KeyCodes.Enter)
             {
@@ -49,12 +49,6 @@ namespace SilverLinguo.Forms.Helper
                 {
                     ValidateAndHandlePassword();
                 }
-
-                keyEventArgs.Handled = true;
-            } 
-            else if (keyEventArgs.KeyValue == KeyCodes.Backspace)
-            {
-                GetBackToStartupForm();
 
                 keyEventArgs.Handled = true;
             }
