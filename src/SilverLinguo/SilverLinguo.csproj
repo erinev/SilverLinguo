@@ -164,6 +164,7 @@
     <EmbeddedResource Include="Forms\AllWordsVerbalTestForm.resx">
       <DependentUpon>AllWordsVerbalTestForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\SilverLinguo.Repositories.Models.WordPair.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
