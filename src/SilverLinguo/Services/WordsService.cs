@@ -8,11 +8,11 @@ namespace SilverLinguo.Services
 {
     public interface IWordsService
     {
-        bool IsEnteredWordIsEqualToExpectedWord(string enteredValue, string expectedValue);
+        bool CheckIfWordsMatches(string suppliedWord, string expectedWord);
         int GetAllWordsCount();
         int GetUnknownWordsCount();
-        WordPair[] GetRandomlySortedAllWords();
-        WordPair[] GetRandomlySortedUnknownWords();
+        WordPair[] GetAllWords(bool shouldShuffle);
+        WordPair[] GetUnknownWords(bool shouldShuffle);
         bool InsertNewUnknownWordIfDoesntExist(WordPair newUnknownWordCandidate);
         bool RemoveLearnedUnknownWordIfExist(WordPair learnedWord);
     }
@@ -26,15 +26,15 @@ namespace SilverLinguo.Services
             _wordsRepository = new WordsRepository();
         }
 
-        public bool IsEnteredWordIsEqualToExpectedWord(string enteredValue, string expectedValue)
+        public bool CheckIfWordsMatches(string suppliedWord, string expectedWord)
         {
-            string[] expectedWords = expectedValue.Split(',')
+            string[] expectedWords = expectedWord.Split(',')
                 .Select(ev => ev.Trim().ToLowerInvariant())
                 .OrderBy(ev => ev)
                 .ToArray();
             expectedWords = expectedWords.OrderBy(x => x).ToArray();
 
-            string[] enteredWords = enteredValue.Split(',')
+            string[] enteredWords = suppliedWord.Split(',')
                 .Select(ev => ev.Trim().ToLowerInvariant())
                 .OrderBy(ev => ev)
                 .ToArray();
@@ -58,20 +58,26 @@ namespace SilverLinguo.Services
             return unknownWords.Length;
         }
 
-        public WordPair[] GetRandomlySortedAllWords()
+        public WordPair[] GetAllWords(bool shouldShuffle)
         {
             WordPair[] words = _wordsRepository.GetAllWords();
 
-            new Random().Shuffle(words);
+            if (shouldShuffle)
+            {
+                new Random().Shuffle(words);
+            }
 
             return words;
         }
 
-        public WordPair[] GetRandomlySortedUnknownWords()
+        public WordPair[] GetUnknownWords(bool shouldShuffle)
         {
             WordPair[] unknownWords = _wordsRepository.GetUnknownWords();
 
-            new Random().Shuffle(unknownWords);
+            if (shouldShuffle)
+            {
+                new Random().Shuffle(unknownWords);
+            }
 
             return unknownWords;
         }

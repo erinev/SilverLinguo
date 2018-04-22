@@ -45,7 +45,9 @@ namespace SilverLinguo.Forms
 
             GrammarFormService.ConfigureSelectedLanguage(_selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox, ValidateWordButton, NextWordButton);
 
-            GrammarFormService.HanldeVerbalFormLoadedEvent(out _allWords, _wordsService.GetRandomlySortedAllWords, out _startingCountOfAllWords, out _currentWordPairId, ProgressLabel, FirstLanguageWordTextBox, SecondLanguageWordTextBox);
+            GrammarFormService.HanldeVerbalFormLoadedEvent(out _allWords, 
+                () => _wordsService.GetAllWords(shouldShuffle: true), out _startingCountOfAllWords, 
+                out _currentWordPairId, ProgressLabel, FirstLanguageWordTextBox, SecondLanguageWordTextBox);
 
             NewUnknownWordsCountLinkLabel.Enabled = false;
             UnknownWordsCountLinkLabel.Enabled = false;
@@ -86,7 +88,7 @@ namespace SilverLinguo.Forms
 
             if (!SecondLanguageWordTextBox.ReadOnly)
             {
-                bool isEqual = _wordsService.IsEnteredWordIsEqualToExpectedWord(SecondLanguageWordTextBox.Text, currentWordPair.SecondLanguageWord);
+                bool isEqual = _wordsService.CheckIfWordsMatches(SecondLanguageWordTextBox.Text, currentWordPair.SecondLanguageWord);
                 if (isEqual)
                 {
                     HandleCorrectlyEnteredWord();
@@ -98,7 +100,7 @@ namespace SilverLinguo.Forms
             }
             else if (!FirstLanguageWordTextBox.ReadOnly)
             {
-                bool isEqual = _wordsService.IsEnteredWordIsEqualToExpectedWord(FirstLanguageWordTextBox.Text, currentWordPair.FirstLanguageWord);
+                bool isEqual = _wordsService.CheckIfWordsMatches(FirstLanguageWordTextBox.Text, currentWordPair.FirstLanguageWord);
                 if (isEqual)
                 {
                     HandleCorrectlyEnteredWord();

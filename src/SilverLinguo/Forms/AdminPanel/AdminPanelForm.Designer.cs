@@ -110,7 +110,8 @@ namespace SilverLinguo.Forms.AdminPanel
             this.AllWordsDataGridView.Name = "AllWordsDataGridView";
             this.AllWordsDataGridView.Size = new System.Drawing.Size(694, 443);
             this.AllWordsDataGridView.TabIndex = 0;
-            this.AllWordsDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.AllWordsDataGridView_CellEndEdit);
+            this.AllWordsDataGridView.RowValidating += new DataGridViewCellCancelEventHandler(AllWordsDataGridView_RowValidating);
+            this.AllWordsDataGridView.CellEndEdit += new DataGridViewCellEventHandler(this.AllWordsDataGridView_CellEndEdit);
             // 
             // UnknownWordsTabPage
             // 
