@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using SilverLinguo.Extensions;
@@ -15,6 +14,10 @@ namespace SilverLinguo.Forms.AdminPanel
         private readonly IWordsService _wordsService;
 
         private readonly BindingSource _allWordsBindingSource;
+
+        private int _wordPairIdCellIndex = 0;
+        private int _firstLanguageWordCellIndex = 1;
+        private int _secondLanguageWordCellIndex = 2;
 
         public AdminPanelForm()
         {
@@ -58,23 +61,45 @@ namespace SilverLinguo.Forms.AdminPanel
             {
                 DataGridViewRow editingRow = AllWordsDataGridView.Rows[e.RowIndex];
 
-                string firstLanguageWord = editingRow.Cells[0].EditedFormattedValue.ToString();
-                string secondLanguageWord = editingRow.Cells[1].EditedFormattedValue.ToString();
+                int wordPairId = Int32.Parse(editingRow.Cells[_wordPairIdCellIndex].EditedFormattedValue.ToString());
+
+                string firstLanguageWord = editingRow.Cells[_firstLanguageWordCellIndex].EditedFormattedValue.ToString();
+                string secondLanguageWord = editingRow.Cells[_secondLanguageWordCellIndex].EditedFormattedValue.ToString();
 
                 var currentWords = (IEnumerable<WordPair>) _allWordsBindingSource.DataSource;
-                var currentWordsExcludingNewlyAddedWord = currentWords.WithoutLast();
+                bool wordPairAlreadyExits;
 
-                bool wordAlreadyExits = currentWordsExcludingNewlyAddedWord.Any(w => 
-                    _wordsService.CheckIfWordsMatches(w.FirstLanguageWord, firstLanguageWord) &&
-                    _wordsService.CheckIfWordsMatches(w.SecondLanguageWord, secondLanguageWord));
-
-                if (wordAlreadyExits)
+                if (wordPairId > 0)
                 {
-                    AllWordsDataGridView.Rows[e.RowIndex].ErrorText =
-                        "Tokia žodžių pora jau egzistuoja!";
+                    IEnumerable<WordPair> wordsListExcludingCurrentlyEditingWord = currentWords.Where(w => w.Id != wordPairId);
+
+                    wordPairAlreadyExits = 
+                        WordPairAlreadyExits(wordsListExcludingCurrentlyEditingWord, firstLanguageWord, secondLanguageWord);
+                }
+                else
+                {
+                    IEnumerable<WordPair> currentWordsExcludingNewlyAddedWord = currentWords.WithoutLast();
+
+                    wordPairAlreadyExits = 
+                        WordPairAlreadyExits(currentWordsExcludingNewlyAddedWord, firstLanguageWord, secondLanguageWord);
+                }
+
+                if (wordPairAlreadyExits)
+                {
+                    AllWordsDataGridView.Rows[e.RowIndex].ErrorText = "Tokia žodžių pora jau egzistuoja!";
                     e.Cancel = true;
                 }
             }
+        }
+
+        private bool WordPairAlreadyExits(IEnumerable<WordPair> wordsListExcludingCurrentlyEditingWord, string firstLanguageWord,
+            string secondLanguageWord)
+        {
+            bool wordPairAlreadyExits = wordsListExcludingCurrentlyEditingWord.Any(w =>
+                _wordsService.CheckIfWordsMatches(w.FirstLanguageWord, firstLanguageWord) &&
+                _wordsService.CheckIfWordsMatches(w.SecondLanguageWord, secondLanguageWord));
+
+            return wordPairAlreadyExits;
         }
 
         private void AllWordsDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
