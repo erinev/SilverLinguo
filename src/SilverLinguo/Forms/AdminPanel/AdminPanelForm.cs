@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using SilverLinguo.Extensions;
+using SilverLinguo.Dto;
 using SilverLinguo.Repositories;
 using SilverLinguo.Repositories.Models;
 using SilverLinguo.Services;
@@ -17,7 +17,8 @@ namespace SilverLinguo.Forms.AdminPanel
 
         private int _wordPairIdCellIndex = 0;
         private int _firstLanguageWordCellIndex = 1;
-        private int _secondLanguageWordCellIndex = 2;
+        private int _dirtyRowUuidCellIndex = 2;
+        private int _secondLanguageWordCellIndex = 3;
 
         public AdminPanelForm()
         {
@@ -32,7 +33,9 @@ namespace SilverLinguo.Forms.AdminPanel
         {
             List<WordPair> allWords = _wordsService.GetAllWords(shouldShuffle: false).ToList();
 
-            _allWordsBindingSource.DataSource = allWords;
+            List<WordPairForDataGridView> allWordsForDataGridView = MapToDataGridViewStructure(allWords);
+
+            _allWordsBindingSource.DataSource = allWordsForDataGridView;
 
             AllWordsDataGridView.DataSource = _allWordsBindingSource;
         }
@@ -61,28 +64,32 @@ namespace SilverLinguo.Forms.AdminPanel
             {
                 DataGridViewRow editingRow = AllWordsDataGridView.Rows[e.RowIndex];
 
+                var dirtyRowUuidValue = editingRow.Cells[_dirtyRowUuidCellIndex].EditedFormattedValue;
+
+                if (string.IsNullOrWhiteSpace(dirtyRowUuidValue.ToString()) || Guid.Empty.ToString() == dirtyRowUuidValue.ToString())
+                {
+                    editingRow.Cells[_dirtyRowUuidCellIndex].Value = Guid.NewGuid();
+                }
+
                 int wordPairId = Int32.Parse(editingRow.Cells[_wordPairIdCellIndex].EditedFormattedValue.ToString());
+
+                Guid dirtyRowIdentifier = Guid.Parse(editingRow.Cells[_dirtyRowUuidCellIndex].EditedFormattedValue.ToString());
 
                 string firstLanguageWord = editingRow.Cells[_firstLanguageWordCellIndex].EditedFormattedValue.ToString();
                 string secondLanguageWord = editingRow.Cells[_secondLanguageWordCellIndex].EditedFormattedValue.ToString();
 
-                var currentWords = (IEnumerable<WordPair>) _allWordsBindingSource.DataSource;
-                bool wordPairAlreadyExits;
+                var currentWords = (IEnumerable<WordPairForDataGridView>) _allWordsBindingSource.DataSource;
 
-                if (wordPairId > 0)
+                bool atLeastOneCellIsEmpty = CheckIfRowContainsEmptyCells(firstLanguageWord, secondLanguageWord);
+                if (atLeastOneCellIsEmpty)
                 {
-                    IEnumerable<WordPair> wordsListExcludingCurrentlyEditingWord = currentWords.Where(w => w.Id != wordPairId);
-
-                    wordPairAlreadyExits = 
-                        WordPairAlreadyExits(wordsListExcludingCurrentlyEditingWord, firstLanguageWord, secondLanguageWord);
+                    AllWordsDataGridView.Rows[e.RowIndex].ErrorText = "Žodis negali būti tusčia reikšmė!";
+                    e.Cancel = true;
+                    return;
                 }
-                else
-                {
-                    IEnumerable<WordPair> currentWordsExcludingNewlyAddedWord = currentWords.WithoutLast();
 
-                    wordPairAlreadyExits = 
-                        WordPairAlreadyExits(currentWordsExcludingNewlyAddedWord, firstLanguageWord, secondLanguageWord);
-                }
+                bool wordPairAlreadyExits = 
+                    CheckIfWordAlreadyExists(wordPairId, currentWords, firstLanguageWord, secondLanguageWord, dirtyRowIdentifier);
 
                 if (wordPairAlreadyExits)
                 {
@@ -92,8 +99,51 @@ namespace SilverLinguo.Forms.AdminPanel
             }
         }
 
-        private bool WordPairAlreadyExits(IEnumerable<WordPair> wordsListExcludingCurrentlyEditingWord, string firstLanguageWord,
-            string secondLanguageWord)
+        private bool CheckIfWordAlreadyExists(int wordPairId, IEnumerable<WordPairForDataGridView> currentWords, string firstLanguageWord,
+            string secondLanguageWord, Guid dirtyRowIdentifier)
+        {
+            bool wordPairAlreadyExits;
+
+            if (wordPairId > 0)
+            {
+                IEnumerable<WordPairForDataGridView> wordsListExcludingCurrentlyEditingWord =
+                    currentWords.Where(w => w.Id != wordPairId);
+
+                wordPairAlreadyExits =
+                    WordPairAlreadyExits(wordsListExcludingCurrentlyEditingWord, firstLanguageWord, secondLanguageWord);
+            }
+            else
+            {
+                IEnumerable<WordPairForDataGridView> currentWordsExcludingNewlyAddedWord =
+                    currentWords.Where(w => w.DirtyRowUuid != dirtyRowIdentifier);
+
+                wordPairAlreadyExits =
+                    WordPairAlreadyExits(currentWordsExcludingNewlyAddedWord, firstLanguageWord, secondLanguageWord);
+            }
+
+            return wordPairAlreadyExits;
+        }
+
+        private bool CheckIfRowContainsEmptyCells(string firstLanguageWord, string secondLanguageWord)
+        {
+            return String.IsNullOrWhiteSpace(firstLanguageWord) || String.IsNullOrWhiteSpace(secondLanguageWord);
+        }
+
+        private List<WordPairForDataGridView> MapToDataGridViewStructure(List<WordPair> allWords)
+        {
+            return allWords.Select(aw => new WordPairForDataGridView()
+            {
+                Id = aw.Id,
+                FirstLanguageWord = aw.FirstLanguageWord,
+                SecondLanguageWord = aw.SecondLanguageWord,
+                LanguagePair = aw.LanguagePair,
+                CreatedAt = aw.CreatedAt,
+                ModifiedAt = aw.ModifiedAt
+            }).ToList();
+        }
+
+        private bool WordPairAlreadyExits(IEnumerable<WordPairForDataGridView> wordsListExcludingCurrentlyEditingWord, 
+            string firstLanguageWord, string secondLanguageWord)
         {
             bool wordPairAlreadyExits = wordsListExcludingCurrentlyEditingWord.Any(w =>
                 _wordsService.CheckIfWordsMatches(w.FirstLanguageWord, firstLanguageWord) &&

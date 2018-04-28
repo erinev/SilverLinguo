@@ -36,19 +36,20 @@ namespace SilverLinguo.Forms.AdminPanel
             this.SaveChangesButton = new System.Windows.Forms.Button();
             this.ReloadAllWordsGridViewButton = new System.Windows.Forms.Button();
             this.AllWordsDataGridView = new System.Windows.Forms.DataGridView();
-            this.wordPairBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.UnknownWordsTabPage = new System.Windows.Forms.TabPage();
             this.AdminTabPage = new System.Windows.Forms.TabPage();
             this.ReintializeDatabaseButton = new System.Windows.Forms.Button();
             this.GoBackToStartupFormButton = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DirtyRowUuid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.firstLanguageWordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.secondLanguageWordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wordPairForDataGridViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.AdminPanelTabControl.SuspendLayout();
             this.AllWordsTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AllWordsDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.wordPairBindingSource)).BeginInit();
             this.AdminTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.wordPairForDataGridViewBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // AdminPanelTabControl
@@ -106,18 +107,15 @@ namespace SilverLinguo.Forms.AdminPanel
             this.AllWordsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.firstLanguageWordDataGridViewTextBoxColumn,
+            this.DirtyRowUuid,
             this.secondLanguageWordDataGridViewTextBoxColumn});
-            this.AllWordsDataGridView.DataSource = this.wordPairBindingSource;
+            this.AllWordsDataGridView.DataSource = this.wordPairForDataGridViewBindingSource;
             this.AllWordsDataGridView.Location = new System.Drawing.Point(7, 7);
             this.AllWordsDataGridView.Name = "AllWordsDataGridView";
             this.AllWordsDataGridView.Size = new System.Drawing.Size(694, 443);
             this.AllWordsDataGridView.TabIndex = 0;
             this.AllWordsDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.AllWordsDataGridView_CellEndEdit);
             this.AllWordsDataGridView.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.AllWordsDataGridView_RowValidating);
-            // 
-            // wordPairBindingSource
-            // 
-            this.wordPairBindingSource.DataSource = typeof(SilverLinguo.Repositories.Models.WordPair);
             // 
             // UnknownWordsTabPage
             // 
@@ -174,6 +172,13 @@ namespace SilverLinguo.Forms.AdminPanel
             this.Id.ReadOnly = true;
             this.Id.Visible = false;
             // 
+            // DirtyRowUuid
+            // 
+            this.DirtyRowUuid.DataPropertyName = "DirtyRowUuid";
+            this.DirtyRowUuid.HeaderText = "DirtyRowUuid";
+            this.DirtyRowUuid.Name = "DirtyRowUuid";
+            this.DirtyRowUuid.Visible = false;
+            // 
             // firstLanguageWordDataGridViewTextBoxColumn
             // 
             this.firstLanguageWordDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -192,6 +197,10 @@ namespace SilverLinguo.Forms.AdminPanel
             this.secondLanguageWordDataGridViewTextBoxColumn.Name = "secondLanguageWordDataGridViewTextBoxColumn";
             this.secondLanguageWordDataGridViewTextBoxColumn.Width = 317;
             // 
+            // wordPairForDataGridViewBindingSource
+            // 
+            this.wordPairForDataGridViewBindingSource.DataSource = typeof(SilverLinguo.Dto.WordPairForDataGridView);
+            // 
             // AdminPanelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -204,13 +213,13 @@ namespace SilverLinguo.Forms.AdminPanel
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AdminPanelForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SilverLinguo™ - Redaktrius";
+            this.Text = "SilverLinguo™ - Redaktorius";
             this.Load += new System.EventHandler(this.AdminPanelForm_Load);
             this.AdminPanelTabControl.ResumeLayout(false);
             this.AllWordsTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.AllWordsDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.wordPairBindingSource)).EndInit();
             this.AdminTabPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.wordPairForDataGridViewBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -224,11 +233,12 @@ namespace SilverLinguo.Forms.AdminPanel
         private System.Windows.Forms.Button ReintializeDatabaseButton;
         private System.Windows.Forms.Button GoBackToStartupFormButton;
         private System.Windows.Forms.DataGridView AllWordsDataGridView;
-        private System.Windows.Forms.BindingSource wordPairBindingSource;
+        private System.Windows.Forms.BindingSource wordPairForDataGridViewBindingSource;
         private System.Windows.Forms.Button SaveChangesButton;
         private System.Windows.Forms.Button ReloadAllWordsGridViewButton;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn firstLanguageWordDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn DirtyRowUuid;
         private DataGridViewTextBoxColumn secondLanguageWordDataGridViewTextBoxColumn;
     }
 }

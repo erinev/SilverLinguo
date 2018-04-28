@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\KeyCodes.cs" />
+    <Compile Include="Dto\WordPairForDataGridView.cs" />
     <Compile Include="Enums\LanguagePair.cs" />
     <Compile Include="Enums\SelectedLanguage.cs" />
     <Compile Include="Enums\TestType.cs" />
@@ -164,6 +165,7 @@
     <EmbeddedResource Include="Forms\AllWordsVerbalTestForm.resx">
       <DependentUpon>AllWordsVerbalTestForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\SilverLinguo.Dto.WordPairForDataGridView.datasource" />
     <None Include="Properties\DataSources\SilverLinguo.Repositories.Models.WordPair.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
