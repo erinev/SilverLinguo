@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
@@ -14,6 +15,9 @@ namespace SilverLinguo.Repositories
         bool CheckIfUnknownWordAlreadyExist(int wordId);
         bool AddNewUnknownWord(int wordId);
         bool RemoveLearnedUnknownWord(int wordId);
+        int RemoveAllWordsByIds(IEnumerable<int> wordPairIdsToRemove);
+        int UpdateMultipleWordPairs(IEnumerable<WordPair> updatedWordPairs);
+        int InsertMultipleWordPairs(IEnumerable<WordPair> addedWordPairs);
     }
 
     public class WordsRepository : IWordsRepository
@@ -121,7 +125,108 @@ namespace SilverLinguo.Repositories
             }
         }
 
-        public void ReinitializeAllTables()
+        public int RemoveAllWordsByIds(IEnumerable<int> wordPairIdsToRemove)
+        {
+            int removedWordPairsCount = 0;
+
+            using (var dbConnection = new SQLiteConnection(_connectionString))
+            {
+                dbConnection.Open();
+
+                using (SQLiteTransaction transaction = dbConnection.BeginTransaction())
+                {
+                    foreach (int id in wordPairIdsToRemove)
+                    {
+                        const string deleteWordPairCommand =
+                            @"DELETE FROM AllWords
+                              WHERE Id = @Id";
+                        var queryParameters = new {Id = id};
+
+                        int affectedRows = dbConnection.Execute(deleteWordPairCommand, queryParameters);
+
+                        removedWordPairsCount += affectedRows;
+                    }
+
+                    transaction.Commit();
+                }
+            }
+
+            return removedWordPairsCount;
+        }
+
+        public int UpdateMultipleWordPairs(IEnumerable<WordPair> updatedWordPairs)
+        {
+            int updatedWordPairsCount = 0;
+
+            using (var dbConnection = new SQLiteConnection(_connectionString))
+            {
+                dbConnection.Open();
+
+                using (SQLiteTransaction transaction = dbConnection.BeginTransaction())
+                {
+                    foreach (WordPair updatedWordPair in updatedWordPairs)
+                    {
+                        const string updateWordPairCommand =
+                            @"UPDATE AllWords
+                              SET FirstLanguageWord = @FirstLanguageWord, SecondLanguageWord = @SecondLanguageWord, ModifiedAt = @ModifiedAt
+                              WHERE Id = @Id";
+                        var queryParameters = new
+                        {
+                            FirstLanguageWord = updatedWordPair.FirstLanguageWord,
+                            SecondLanguageWord = updatedWordPair.SecondLanguageWord,
+                            ModifiedAt = updatedWordPair.ModifiedAt,
+                            Id = updatedWordPair.Id
+                        };
+
+                        int affectedRows = dbConnection.Execute(updateWordPairCommand, queryParameters);
+
+                        updatedWordPairsCount += affectedRows;
+                    }
+
+                    transaction.Commit();
+                }
+            }
+
+            return updatedWordPairsCount;
+        }
+
+        public int InsertMultipleWordPairs(IEnumerable<WordPair> addedWordPairs)
+        {
+            int insertedWordPairsCount = 0;
+
+            using (var dbConnection = new SQLiteConnection(_connectionString))
+            {
+                dbConnection.Open();
+
+                using (SQLiteTransaction transaction = dbConnection.BeginTransaction())
+                {
+                    foreach (WordPair addedWordPair in addedWordPairs)
+                    {
+                        const string insertNewWordPairCommand =
+                            @"INSERT INTO AllWords
+                              VALUES(NULL, @FirstLanguageWord, @SecondLanguageWord, @LanguagePair, @CreatedAt, @ModifiedAt)";
+                        var queryParameters = new
+                        {
+                            FirstLanguageWord = addedWordPair.FirstLanguageWord,
+                            SecondLanguageWord = addedWordPair.SecondLanguageWord,
+                            LanguagePair = addedWordPair.LanguagePair,
+                            CreatedAt = addedWordPair.CreatedAt,
+                            ModifiedAt = addedWordPair.ModifiedAt
+                        };
+
+                        int affectedRows = dbConnection.Execute(insertNewWordPairCommand, queryParameters);
+
+                        insertedWordPairsCount += affectedRows;
+                    }
+
+                    transaction.Commit();
+                }
+            }
+
+            return insertedWordPairsCount;
+        }
+
+        /*public void ReinitializeAllTables()
         {
             if (!File.Exists(_dbFile)) return;
 
@@ -133,7 +238,7 @@ namespace SilverLinguo.Repositories
 
                 FillAllWordsTable(dbConnection);
             }
-        }
+        }*/
 
         public void InitializeDatabaseIfNotExist()
         {

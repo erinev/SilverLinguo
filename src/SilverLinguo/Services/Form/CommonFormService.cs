@@ -35,6 +35,16 @@ namespace SilverLinguo.Services.Form
             }
         }
 
+        public static void ShowConfirmAction(string dialogCaption, string dialogText, Action userConfirmedAction)
+        {
+            DialogResult dialogResult = MessageBox.Show(dialogText, dialogCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                userConfirmedAction();
+            }
+        }
+
         public static void SetProgressLabelText(Label progressLabel, WordPair[] wordsForProgress)
         {
             int leftWordsCount = wordsForProgress.Length - 1;

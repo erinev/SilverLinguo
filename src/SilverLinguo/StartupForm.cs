@@ -55,10 +55,15 @@ namespace SilverLinguo
             }
             else
             {
-                var allWordsVerbalTestPasswordForm = new AllWordsVerbalTestPasswordForm(selectedLanguage);
-                allWordsVerbalTestPasswordForm.Closed += (s, args) => this.Close();
+                string passwordFormName = "Visų žodžių testo (žodžiu) apsauga:";
+                string expectedPassword = "memo";
+                var allWordsVerbalTestForm = new AllWordsVerbalTestForm(selectedLanguage);
 
-                allWordsVerbalTestPasswordForm.Show();
+                var passwordConfirmationForm = 
+                    new PasswordConfirmationForm(passwordFormName, expectedPassword, allWordsVerbalTestForm);
+                passwordConfirmationForm.Closed += (s, args) => this.Close();
+
+                passwordConfirmationForm.Show();
             }
         }
 
@@ -82,6 +87,21 @@ namespace SilverLinguo
 
                 unknownWordsVerbalTestForm.Show();
             }
+        }
+
+        private void AdminPanelButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            string passwordFormName = "Redaktoriaus apsauga:";
+            string expectedPassword = "linguo";
+            var adminPanelForm = new AdminPanelForm();
+
+            var passwordConfirmationForm = new PasswordConfirmationForm(passwordFormName, expectedPassword, adminPanelForm);
+
+            passwordConfirmationForm.Closed += (s, args) => this.Close();
+
+            passwordConfirmationForm.Show();
         }
 
         private void EndProgramButton_Click(object sender, EventArgs e)
@@ -111,17 +131,6 @@ namespace SilverLinguo
             }
 
             return selectedLanguage;
-        }
-
-        private void AdminPanelButton_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            
-            var adminPanelForm = new AdminPanelForm();
-
-            adminPanelForm.Closed += (s, args) => this.Close();
-
-            adminPanelForm.Show();
         }
     }
 }

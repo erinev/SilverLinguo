@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using SilverLinguo.Dto;
-using SilverLinguo.Repositories;
 using SilverLinguo.Repositories.Models;
 using SilverLinguo.Services;
+using SilverLinguo.Services.Form;
 
 namespace SilverLinguo.Forms.AdminPanel
 {
@@ -19,6 +19,8 @@ namespace SilverLinguo.Forms.AdminPanel
         private int _firstLanguageWordCellIndex = 1;
         private int _dirtyRowUuidCellIndex = 2;
         private int _secondLanguageWordCellIndex = 3;
+
+        private readonly List<WordPairForDataGridView> _wordsToDeleteOnSave = new List<WordPairForDataGridView>();
 
         public AdminPanelForm()
         {
@@ -51,11 +53,9 @@ namespace SilverLinguo.Forms.AdminPanel
             startupForm.Show();
         }
 
-        private void ReintializeDatabaseButton_Click(object sender, EventArgs e)
+        private void AllWordsDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            var wordsRepository = new WordsRepository();
-
-            wordsRepository.ReinitializeAllTables();
+            AllWordsDataGridView.Rows[e.RowIndex].ErrorText = String.Empty;
         }
 
         private void AllWordsDataGridView_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
@@ -97,6 +97,86 @@ namespace SilverLinguo.Forms.AdminPanel
                     e.Cancel = true;
                 }
             }
+        }
+
+        private void AllWordsDataGridView_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            int deletedWordPairId = Int32.Parse(e.Row.Cells[_wordPairIdCellIndex].EditedFormattedValue.ToString());
+
+            if (deletedWordPairId > 0)
+            {
+                var currentWords = (IEnumerable<WordPairForDataGridView>) _allWordsBindingSource.DataSource;
+
+                _wordsToDeleteOnSave.Add(currentWords.First(w => w.Id == deletedWordPairId));
+            }
+        }
+
+        private void ReloadAllWordsGridViewButton_Click(object sender, EventArgs e)
+        {
+            CommonFormService.ShowConfirmAction(
+                "Atstatyti žodžius",
+                "Ar tikrai norite atstatyti žodžius iš duomenų bazės ? (neišaugoti pakeitimai bus atšaukti)",
+                () =>
+                {
+                    ReloadAllWordsToDataGridView();
+
+                    _wordsToDeleteOnSave.Clear();
+                });
+        }
+
+        private void SaveChangesButton_Click(object sender, EventArgs e)
+        {
+            CommonFormService.ShowConfirmAction(
+                "Išsaugoti pakeitimus",
+                "Ar tikrai norite išsaugoti pakeitimus ? (ištrinti žodžiai nus pašalinti iš duomenų bazės)",
+                () =>
+                {
+                    bool anyChangesPerssisted = false;
+
+                    DateTime currentDateTime = DateTime.Now;
+
+                    var currentWords = (IEnumerable<WordPairForDataGridView>) _allWordsBindingSource.DataSource;
+                    List<WordPairForDataGridView> currentWordsList = currentWords.ToList();
+
+                    List<WordPairForDataGridView> wordsToDelete = _wordsToDeleteOnSave;
+                    if (wordsToDelete.Any())
+                    {
+                        _wordsService.RemoveWordsDeletedInAdminPanel(wordsToDelete);
+                        anyChangesPerssisted = true;
+                        _wordsToDeleteOnSave.Clear();
+                    }
+                    
+                    List<WordPairForDataGridView> modifiedWordPairs = 
+                        currentWordsList.Where(w => w.DirtyRowUuid != Guid.Empty && w.Id > 0).ToList();
+                    if (modifiedWordPairs.Any())
+                    {
+                        _wordsService.UpdatedWordsChangedInAdminPanel(modifiedWordPairs, currentDateTime);
+                        anyChangesPerssisted = true;
+
+                    }
+                    
+                    List<WordPairForDataGridView> newWords = 
+                        currentWordsList.Where(w => w.DirtyRowUuid != Guid.Empty && w.Id <= 0).ToList();
+                    if (newWords.Any())
+                    {
+                        _wordsService.SaveWordsNewlyAddedInAdminPanel(newWords, currentDateTime);
+                        anyChangesPerssisted = true;
+                    }
+
+                    if (anyChangesPerssisted)
+                    {
+                        ReloadAllWordsToDataGridView();
+                    }
+                });
+        }
+
+        private void ReloadAllWordsToDataGridView()
+        {
+            List<WordPair> allWords = _wordsService.GetAllWords(shouldShuffle: false).ToList();
+
+            List<WordPairForDataGridView> allWordsForDataGridView = MapToDataGridViewStructure(allWords);
+
+            _allWordsBindingSource.DataSource = allWordsForDataGridView;
         }
 
         private bool CheckIfWordAlreadyExists(int wordPairId, IEnumerable<WordPairForDataGridView> currentWords, string firstLanguageWord,
@@ -142,7 +222,7 @@ namespace SilverLinguo.Forms.AdminPanel
             }).ToList();
         }
 
-        private bool WordPairAlreadyExits(IEnumerable<WordPairForDataGridView> wordsListExcludingCurrentlyEditingWord, 
+        private bool WordPairAlreadyExits(IEnumerable<WordPairForDataGridView> wordsListExcludingCurrentlyEditingWord,
             string firstLanguageWord, string secondLanguageWord)
         {
             bool wordPairAlreadyExits = wordsListExcludingCurrentlyEditingWord.Any(w =>
@@ -150,11 +230,6 @@ namespace SilverLinguo.Forms.AdminPanel
                 _wordsService.CheckIfWordsMatches(w.SecondLanguageWord, secondLanguageWord));
 
             return wordPairAlreadyExits;
-        }
-
-        private void AllWordsDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            AllWordsDataGridView.Rows[e.RowIndex].ErrorText = String.Empty;
         }
     }
 }

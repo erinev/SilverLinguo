@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace SilverLinguo.Forms.Helper
 {
-    partial class AllWordsVerbalTestPasswordForm
+    partial class PasswordConfirmationForm
     {
         /// <summary>
         /// Required designer variable.
@@ -56,9 +56,9 @@ namespace SilverLinguo.Forms.Helper
             this.ValidatePasswordButton.Location = new System.Drawing.Point(73, 128);
             this.ValidatePasswordButton.Name = "ValidatePasswordButton";
             this.ValidatePasswordButton.Padding = new System.Windows.Forms.Padding(2);
-            this.ValidatePasswordButton.Size = new System.Drawing.Size(107, 39);
+            this.ValidatePasswordButton.Size = new System.Drawing.Size(111, 39);
             this.ValidatePasswordButton.TabIndex = 55;
-            this.ValidatePasswordButton.Text = "Pereiti į testą";
+            this.ValidatePasswordButton.Text = "Patvirtinti";
             this.ValidatePasswordButton.UseVisualStyleBackColor = false;
             this.ValidatePasswordButton.Click += new System.EventHandler(this.ValidatePasswordButton_Click);
             // 
@@ -80,12 +80,12 @@ namespace SilverLinguo.Forms.Helper
             this.BackToTestSelectionButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BackToTestSelectionButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.BackToTestSelectionButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.BackToTestSelectionButton.Location = new System.Drawing.Point(207, 128);
+            this.BackToTestSelectionButton.Location = new System.Drawing.Point(239, 128);
             this.BackToTestSelectionButton.Name = "BackToTestSelectionButton";
             this.BackToTestSelectionButton.Padding = new System.Windows.Forms.Padding(2);
-            this.BackToTestSelectionButton.Size = new System.Drawing.Size(148, 39);
+            this.BackToTestSelectionButton.Size = new System.Drawing.Size(116, 39);
             this.BackToTestSelectionButton.TabIndex = 57;
-            this.BackToTestSelectionButton.Text = "Gryžti į pasirinkimą";
+            this.BackToTestSelectionButton.Text = "Gryžti atgal";
             this.BackToTestSelectionButton.UseVisualStyleBackColor = false;
             this.BackToTestSelectionButton.Click += new System.EventHandler(this.BackToTestSelectionButton_Click);
             // 

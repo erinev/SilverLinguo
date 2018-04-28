@@ -59,11 +59,11 @@
     <Compile Include="Forms\AllWordsGrammarTestForm.Designer.cs">
       <DependentUpon>AllWordsGrammarTestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Helper\AllWordsVerbalTestPasswordForm.cs">
+    <Compile Include="Forms\Helper\PasswordConfirmationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Helper\AllWordsVerbalTestPasswordForm.Designer.cs">
-      <DependentUpon>AllWordsVerbalTestPasswordForm.cs</DependentUpon>
+    <Compile Include="Forms\Helper\PasswordConfirmationForm.Designer.cs">
+      <DependentUpon>PasswordConfirmationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\TestResults\BaseTestResultsForm.cs">
       <SubType>Form</SubType>
@@ -128,8 +128,8 @@
     <EmbeddedResource Include="Forms\AllWordsGrammarTestForm.resx">
       <DependentUpon>AllWordsGrammarTestForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Helper\AllWordsVerbalTestPasswordForm.resx">
-      <DependentUpon>AllWordsVerbalTestPasswordForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Helper\PasswordConfirmationForm.resx">
+      <DependentUpon>PasswordConfirmationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TestResults\BaseTestResultsForm.resx">
       <DependentUpon>BaseTestResultsForm.cs</DependentUpon>

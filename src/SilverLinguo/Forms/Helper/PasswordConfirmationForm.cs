@@ -1,25 +1,28 @@
 ﻿using System;
 using System.Windows.Forms;
 using SilverLinguo.Constants;
-using SilverLinguo.Enums;
 
 namespace SilverLinguo.Forms.Helper
 {
-    public partial class AllWordsVerbalTestPasswordForm : Form
+    public partial class PasswordConfirmationForm : Form
     {
-        private readonly SelectedLanguage _selectedLanguage;
+        private readonly string _passwordFormName;
+        private readonly string _expectedPassword;
+        private readonly Form _formToOpenAfterCorrectPassword;
 
-        private readonly string password = "memo";
-
-        public AllWordsVerbalTestPasswordForm(SelectedLanguage selectedLanguage)
+        public PasswordConfirmationForm(string passwordFormName, string expectedPassword, Form formToOpenAfterCorrectPassword)
         {
-            _selectedLanguage = selectedLanguage;
+            _passwordFormName = passwordFormName;
+            _expectedPassword = expectedPassword;
+            _formToOpenAfterCorrectPassword = formToOpenAfterCorrectPassword;
 
             InitializeComponent();
         }
 
         private void AllWordsVerbalTestPasswordForm_Load(object sender, EventArgs e)
         {
+            this.Text = $@"SilverLinguo™ - {_passwordFormName}";
+
             IncorrectPasswordLabel.Visible = false;
             ValidatePasswordButton.Visible = false;
         }
@@ -61,13 +64,13 @@ namespace SilverLinguo.Forms.Helper
 
         private void ValidateAndHandlePassword()
         {
-            bool passwordMatches = PasswordTextBox.Text.Equals(password);
+            bool passwordMatches = PasswordTextBox.Text.Equals(_expectedPassword);
 
             if (passwordMatches)
             {
                 this.Hide();
 
-                var allWordsVerbalTestForm = new AllWordsVerbalTestForm(_selectedLanguage);
+                Form allWordsVerbalTestForm = _formToOpenAfterCorrectPassword;
                 allWordsVerbalTestForm.Closed += (s, args) => this.Close();
 
                 allWordsVerbalTestForm.Show();

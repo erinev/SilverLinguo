@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using SilverLinguo.Dto;
+using SilverLinguo.Enums;
 using SilverLinguo.Extensions;
 using SilverLinguo.Repositories;
 using SilverLinguo.Repositories.Models;
@@ -15,6 +19,12 @@ namespace SilverLinguo.Services
         WordPair[] GetUnknownWords(bool shouldShuffle);
         bool InsertNewUnknownWordIfDoesntExist(WordPair newUnknownWordCandidate);
         bool RemoveLearnedUnknownWordIfExist(WordPair learnedWord);
+
+        bool RemoveWordsDeletedInAdminPanel(List<WordPairForDataGridView> deletedWordPairsForDataGridView);
+        bool UpdatedWordsChangedInAdminPanel(List<WordPairForDataGridView> updatedWordPairsForDataGridView,
+            DateTime modificationTime);
+        bool SaveWordsNewlyAddedInAdminPanel(List<WordPairForDataGridView> addedWordPairsForDataGridView,
+            DateTime modificationTime);
     }
 
     public class WordsService : IWordsService
@@ -106,6 +116,68 @@ namespace SilverLinguo.Services
             }
 
             return unknownWordRemoved;
+        }
+
+        public bool RemoveWordsDeletedInAdminPanel(List<WordPairForDataGridView> deletedWordPairsForDataGridView)
+        {
+            IEnumerable<int> wordPairIdsToRemove = deletedWordPairsForDataGridView.Select(dw => dw.Id);
+
+            int removedWordPairsCount = _wordsRepository.RemoveAllWordsByIds(wordPairIdsToRemove);
+
+            return removedWordPairsCount == deletedWordPairsForDataGridView.Count;
+        }
+
+        public bool UpdatedWordsChangedInAdminPanel(List<WordPairForDataGridView> updatedWordPairsForDataGridView, DateTime modificationTime)
+        {
+            IEnumerable<WordPair> updatedWordPairs = updatedWordPairsForDataGridView.Select(MapToDataGridViewStructure);
+
+            updatedWordPairs = updatedWordPairs.Select(w => UpdateModifiedAtDateForChangedWords(w, modificationTime));
+
+            int updatedWordPairsCount = _wordsRepository.UpdateMultipleWordPairs(updatedWordPairs);
+
+            return updatedWordPairsCount == updatedWordPairsForDataGridView.Count;
+        }
+
+        public bool SaveWordsNewlyAddedInAdminPanel(List<WordPairForDataGridView> addedWordPairsForDataGridView,
+            DateTime modificationTime)
+        {
+            IEnumerable<WordPair> addedWordPairs = addedWordPairsForDataGridView.Select(MapToDataGridViewStructure);
+
+            addedWordPairs = addedWordPairs.Select(w => PrepareAddedWords(w, modificationTime));
+
+            int addedWordPairsCount = _wordsRepository.InsertMultipleWordPairs(addedWordPairs);
+
+            return addedWordPairsCount == addedWordPairsForDataGridView.Count;
+        }
+
+        private WordPair MapToDataGridViewStructure(WordPairForDataGridView wordPairForDataGridView)
+        {
+            return new WordPair
+            {
+                Id = wordPairForDataGridView.Id,
+                FirstLanguageWord = wordPairForDataGridView.FirstLanguageWord,
+                SecondLanguageWord = wordPairForDataGridView.SecondLanguageWord,
+                LanguagePair = wordPairForDataGridView.LanguagePair,
+                CreatedAt = wordPairForDataGridView.CreatedAt,
+                ModifiedAt = wordPairForDataGridView.ModifiedAt
+            };
+        }
+
+        private WordPair UpdateModifiedAtDateForChangedWords(WordPair wordPair, DateTime modificationTime)
+        {
+            wordPair.ModifiedAt = modificationTime;
+
+            return wordPair;
+        }
+
+        private WordPair PrepareAddedWords(WordPair wordPair, DateTime modificationTime)
+        {
+            wordPair.LanguagePair = LanguagePair.LithuanianEnglish;
+
+            wordPair.CreatedAt = modificationTime;
+            wordPair.ModifiedAt = modificationTime;
+
+            return wordPair;
         }
     }
 }
