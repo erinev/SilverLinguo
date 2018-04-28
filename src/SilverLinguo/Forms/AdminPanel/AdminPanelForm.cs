@@ -44,13 +44,19 @@ namespace SilverLinguo.Forms.AdminPanel
 
         private void GoBackToStartupFormButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            CommonFormService.ShowConfirmAction(
+                "Grįžti atgal",
+                "Ar tikrai norite grįžti į pradžios formą ? (neišaugoti pakeitimai bus atšaukti)",
+                () =>
+                {
+                    this.Hide();
 
-            var startupForm = new StartupForm();
+                    var startupForm = new StartupForm();
 
-            startupForm.Closed += (s, args) => this.Close();
+                    startupForm.Closed += (s, args) => this.Close();
 
-            startupForm.Show();
+                    startupForm.Show();
+                });
         }
 
         private void AllWordsDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
