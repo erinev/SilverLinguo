@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using SilverLinguo.Dto;
@@ -22,6 +23,9 @@ namespace SilverLinguo.Forms.AdminPanel
 
         private readonly List<WordPairForDataGridView> _wordsToDeleteOnSave = new List<WordPairForDataGridView>();
 
+        private InputLanguage _originalInputLanguage = InputLanguage.DefaultInputLanguage;
+        private readonly string _allWordsTabTagValue = "1";
+
         public AdminPanelForm()
         {
             _wordsService = new WordsService();
@@ -40,6 +44,23 @@ namespace SilverLinguo.Forms.AdminPanel
             _allWordsBindingSource.DataSource = allWordsForDataGridView;
 
             AllWordsDataGridView.DataSource = _allWordsBindingSource;
+        }
+
+        private void AdminPanelForm_Shown(object sender, EventArgs e)
+        {
+            ConfigureInputLanguageForTest();
+        }
+
+        private void AdminPanelTabControl_Selected(object sender, TabControlEventArgs e)
+        {
+            if (e.TabPage.Tag.ToString() == _allWordsTabTagValue)
+            {
+                ConfigureInputLanguageForTest();
+            }
+            else
+            {
+                InputLanguage.CurrentInputLanguage = _originalInputLanguage;
+            }
         }
 
         private void GoBackToStartupFormButton_Click(object sender, EventArgs e)
@@ -183,6 +204,28 @@ namespace SilverLinguo.Forms.AdminPanel
             List<WordPairForDataGridView> allWordsForDataGridView = MapToDataGridViewStructure(allWords);
 
             _allWordsBindingSource.DataSource = allWordsForDataGridView;
+        }
+
+        private void ConfigureInputLanguageForTest()
+        {
+            _originalInputLanguage = InputLanguage.CurrentInputLanguage;
+
+            try
+            {
+                CultureInfo lithuanianCultureInfo = CultureInfo.GetCultureInfo("lt-LT");
+                InputLanguage lithuanianLanguage = InputLanguage.FromCulture(lithuanianCultureInfo);
+
+                InputLanguage.CurrentInputLanguage =
+                    // ReSharper disable once AssignNullToNotNullAttribute
+                    InputLanguage.InstalledInputLanguages.IndexOf(lithuanianLanguage) >= 0
+                        ? lithuanianLanguage
+                        : _originalInputLanguage;
+
+            }
+            catch (Exception)
+            {
+                InputLanguage.CurrentInputLanguage = _originalInputLanguage;
+            }
         }
 
         private bool CheckIfWordAlreadyExists(int wordPairId, IEnumerable<WordPairForDataGridView> currentWords, string firstLanguageWord,

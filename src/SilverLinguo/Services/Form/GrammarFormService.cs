@@ -71,7 +71,7 @@ namespace SilverLinguo.Services.Form
                         // ReSharper disable once AssignNullToNotNullAttribute
                         InputLanguage.InstalledInputLanguages.IndexOf(lithuanianLanguage) >= 0
                             ? lithuanianLanguage
-                            : InputLanguage.DefaultInputLanguage;
+                            : originalInputLanguage;
                 }
             }
             catch (Exception)
