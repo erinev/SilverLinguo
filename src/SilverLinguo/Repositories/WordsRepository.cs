@@ -29,7 +29,7 @@ namespace SilverLinguo.Repositories
         public WordsRepository()
         {
             string databaseName = "SilverLinguo";
-            _dbFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\SilverWords";
+            _dbFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\SilverLinguo-75d4fcd7-4e68-47ba-9d46-8aad90575c09";
             _dbFile = $"{_dbFolder}\\{databaseName}.db";
             _connectionString = $"Data Source={_dbFile};Version=3;UseUTF16Encoding=True;Password=FJtkLXz2aBeBARdW;";
         }
