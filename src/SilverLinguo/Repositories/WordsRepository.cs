@@ -227,25 +227,19 @@ namespace SilverLinguo.Repositories
             return insertedWordPairsCount;
         }
 
-        /*public void ReinitializeAllTables()
-        {
-            if (!File.Exists(_dbFile)) return;
-
-            using (var dbConnection = new SQLiteConnection(_connectionString))
-            {
-                dbConnection.Open();
-
-                CreateAllTables(dbConnection);
-
-                FillAllWordsTable(dbConnection);
-            }
-        }*/
-
         public void InitializeDatabaseIfNotExist()
         {
             if (File.Exists(_dbFile)) return;
 
-            Directory.CreateDirectory(_dbFolder);
+            if (!Directory.Exists(_dbFolder))
+            {
+                Directory.CreateDirectory(_dbFolder);
+            }
+            else
+            {
+                DeleteLeftoverFilesAndFoldersBeforeDbCreate();
+            }
+            
             SQLiteConnection.CreateFile(_dbFile);
 
             using (var dbConnection = new SQLiteConnection(_connectionString))
@@ -255,6 +249,21 @@ namespace SilverLinguo.Repositories
                 CreateAllTables(dbConnection);
 
                 FillAllWordsTable(dbConnection);
+            }
+        }
+
+        private void DeleteLeftoverFilesAndFoldersBeforeDbCreate()
+        {
+            var directory = new DirectoryInfo(_dbFolder);
+
+            foreach (FileInfo file in directory.GetFiles())
+            {
+                file.Delete();
+            }
+
+            foreach (DirectoryInfo subdirectory in directory.GetDirectories())
+            {
+                subdirectory.Delete(true);
             }
         }
 
@@ -349,7 +358,7 @@ namespace SilverLinguo.Repositories
             INSERT INTO 'AllWords' VALUES (NULL, 'Lėktuvas', 'Airplane, Plane, Aircraft', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Ranka', 'Arm', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Pirmyn', 'Forward, Ahead', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Atgal', 'Backwards', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Atgal', 'Backward', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Nugara', 'Back', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Peilis', 'Knife', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Aštrus', 'Sharp, Spicy', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
@@ -362,7 +371,7 @@ namespace SilverLinguo.Repositories
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Suknelė', 'Dress', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Praeitis', 'Past', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Grindys', 'Floor', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Apie ką tu kalbi?', 'What you talking about?', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Apie ką tu kalbi?', 'What are you talking about?', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Man patinka mėlynas dangus', 'I like blue sky', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
                 COMMIT;";
             SQLiteCommand createTestResultsTableCommand = new SQLiteCommand(fillAllWordsTableCommand, dbConnection);
