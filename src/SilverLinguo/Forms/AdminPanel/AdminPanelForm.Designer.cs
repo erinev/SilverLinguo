@@ -95,7 +95,7 @@ namespace SilverLinguo.Forms.AdminPanel
             this.SearchAllWordsButton.TabIndex = 19;
             this.SearchAllWordsButton.Text = "Ieškoti";
             this.SearchAllWordsButton.UseVisualStyleBackColor = false;
-            this.SearchAllWordsButton.Click += new System.EventHandler(this.SearchAllWordsButton_Click);
+            this.SearchAllWordsButton.MouseClick += new MouseEventHandler(this.SearchAllWordsButton_Click);
             // 
             // AllWordsSearchTextBox
             // 
@@ -117,7 +117,7 @@ namespace SilverLinguo.Forms.AdminPanel
             this.SaveChangesButton.TabIndex = 17;
             this.SaveChangesButton.Text = "Išsaugoti";
             this.SaveChangesButton.UseVisualStyleBackColor = false;
-            this.SaveChangesButton.Click += new System.EventHandler(this.SaveChangesButton_Click);
+            this.SaveChangesButton.MouseClick += new MouseEventHandler(this.SaveChangesButton_Click);
             // 
             // ReloadAllWordsGridViewButton
             // 
@@ -130,7 +130,7 @@ namespace SilverLinguo.Forms.AdminPanel
             this.ReloadAllWordsGridViewButton.TabIndex = 16;
             this.ReloadAllWordsGridViewButton.Text = "Atstatyti";
             this.ReloadAllWordsGridViewButton.UseVisualStyleBackColor = false;
-            this.ReloadAllWordsGridViewButton.Click += new System.EventHandler(this.ReloadAllWordsGridViewButton_Click);
+            this.ReloadAllWordsGridViewButton.MouseClick += new MouseEventHandler(this.ReloadAllWordsGridViewButton_Click);
             // 
             // AllWordsDataGridView
             // 
@@ -204,7 +204,7 @@ namespace SilverLinguo.Forms.AdminPanel
             this.GoBackToStartupFormButton.TabIndex = 15;
             this.GoBackToStartupFormButton.Text = "Grįžti atgal";
             this.GoBackToStartupFormButton.UseVisualStyleBackColor = false;
-            this.GoBackToStartupFormButton.Click += new System.EventHandler(this.GoBackToStartupFormButton_Click);
+            this.GoBackToStartupFormButton.MouseClick += new MouseEventHandler(this.GoBackToStartupFormButton_Click);
             // 
             // firstLanguageWordDataGridViewTextBoxColumn
             // 
@@ -240,7 +240,7 @@ namespace SilverLinguo.Forms.AdminPanel
             this.ClearAllWordsSearchButton.Text = "Išvalyti paieška";
             this.ClearAllWordsSearchButton.UseVisualStyleBackColor = false;
             this.ClearAllWordsSearchButton.Visible = false;
-            this.ClearAllWordsSearchButton.Click += new System.EventHandler(this.ClearAllWordsSearchButton_Click);
+            this.ClearAllWordsSearchButton.MouseClick += new MouseEventHandler(this.ClearAllWordsSearchButton_Click);
             // 
             // AdminPanelForm
             // 
@@ -258,6 +258,8 @@ namespace SilverLinguo.Forms.AdminPanel
             this.Text = "SilverLinguo™ - Redaktorius";
             this.Load += new System.EventHandler(this.AdminPanelForm_Load);
             this.Shown += new System.EventHandler(this.AdminPanelForm_Shown);
+            this.KeyPreview = true;
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AdminPanelForm_KeyUp);
             this.AdminPanelTabControl.ResumeLayout(false);
             this.AllWordsTabPage.ResumeLayout(false);
             this.AllWordsTabPage.PerformLayout();

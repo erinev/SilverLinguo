@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace SilverLinguo.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -73,6 +76,16 @@ namespace SilverLinguo.Properties {
         internal static System.Drawing.Bitmap LithuanianFlag {
             get {
                 object obj = ResourceManager.GetObject("LithuanianFlag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Warning_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Warning_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

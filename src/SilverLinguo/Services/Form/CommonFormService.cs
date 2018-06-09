@@ -37,7 +37,7 @@ namespace SilverLinguo.Services.Form
 
         public static void ShowConfirmAction(string dialogCaption, string dialogText, Action userConfirmedAction)
         {
-            DialogResult dialogResult = MessageBox.Show(dialogText, dialogCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show(dialogText, dialogCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (dialogResult == DialogResult.Yes)
             {
