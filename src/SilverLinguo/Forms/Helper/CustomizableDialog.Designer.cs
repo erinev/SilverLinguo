@@ -1,6 +1,8 @@
-﻿namespace SilverLinguo.Forms.Helper
+﻿using System.Windows.Forms;
+
+namespace SilverLinguo.Forms.Helper
 {
-    partial class BetterMessageBox
+    partial class CustomizableDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -28,67 +30,73 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.WarningQuestionLabel = new System.Windows.Forms.Label();
             this.WarningIconPictureBox = new System.Windows.Forms.PictureBox();
             this.YesButton = new System.Windows.Forms.Button();
             this.NoButton = new System.Windows.Forms.Button();
+            this.DialogBodyReadonlyTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.WarningIconPictureBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // WarningQuestionLabel
-            // 
-            this.WarningQuestionLabel.AutoSize = true;
-            this.WarningQuestionLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.WarningQuestionLabel.Location = new System.Drawing.Point(81, 32);
-            this.WarningQuestionLabel.Name = "WarningQuestionLabel";
-            this.WarningQuestionLabel.Size = new System.Drawing.Size(136, 19);
-            this.WarningQuestionLabel.TabIndex = 0;
-            this.WarningQuestionLabel.Text = "Ar tikrai norite tęsti ?";
             // 
             // WarningIconPictureBox
             // 
             this.WarningIconPictureBox.BackgroundImage = global::SilverLinguo.Properties.Resources.Warning_Icon;
-            this.WarningIconPictureBox.Location = new System.Drawing.Point(12, 12);
+            this.WarningIconPictureBox.Location = new System.Drawing.Point(12, 13);
             this.WarningIconPictureBox.Name = "WarningIconPictureBox";
-            this.WarningIconPictureBox.Size = new System.Drawing.Size(63, 60);
+            this.WarningIconPictureBox.Size = new System.Drawing.Size(63, 63);
             this.WarningIconPictureBox.TabIndex = 1;
             this.WarningIconPictureBox.TabStop = false;
             // 
             // YesButton
             // 
             this.YesButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.YesButton.Location = new System.Drawing.Point(85, 95);
+            this.YesButton.Location = new System.Drawing.Point(85, 102);
             this.YesButton.Name = "YesButton";
-            this.YesButton.Size = new System.Drawing.Size(78, 32);
+            this.YesButton.Size = new System.Drawing.Size(88, 34);
             this.YesButton.TabIndex = 2;
             this.YesButton.Text = "Taip";
             this.YesButton.UseVisualStyleBackColor = true;
-            this.YesButton.Click += new System.EventHandler(this.YesButton_Click);
+            this.YesButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.YesButton_MouseClick);
             // 
             // NoButton
             // 
             this.NoButton.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.NoButton.Location = new System.Drawing.Point(240, 95);
+            this.NoButton.Location = new System.Drawing.Point(209, 102);
             this.NoButton.Name = "NoButton";
-            this.NoButton.Size = new System.Drawing.Size(78, 32);
+            this.NoButton.Size = new System.Drawing.Size(88, 34);
             this.NoButton.TabIndex = 3;
             this.NoButton.Text = "Ne";
             this.NoButton.UseVisualStyleBackColor = true;
-            this.NoButton.Click += new System.EventHandler(this.NoButton_Click);
+            this.NoButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NoButton_MouseClick);
             // 
-            // BetterMessageBox
+            // DialogBodyReadonlyTextBox
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.DialogBodyReadonlyTextBox.AcceptsReturn = true;
+            this.DialogBodyReadonlyTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.DialogBodyReadonlyTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DialogBodyReadonlyTextBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.DialogBodyReadonlyTextBox.Location = new System.Drawing.Point(85, 13);
+            this.DialogBodyReadonlyTextBox.Multiline = true;
+            this.DialogBodyReadonlyTextBox.Name = "DialogBodyReadonlyTextBox";
+            this.DialogBodyReadonlyTextBox.ReadOnly = true;
+            this.DialogBodyReadonlyTextBox.ShortcutsEnabled = false;
+            this.DialogBodyReadonlyTextBox.Size = new System.Drawing.Size(300, 63);
+            this.DialogBodyReadonlyTextBox.TabIndex = 55;
+            this.DialogBodyReadonlyTextBox.Text = "Ar tikrai tikrai tikrai tikrai tikrai tikrai tikrai tikrai tikrai norite tęsti ?";
+            // 
+            // CustomizableDialog
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(407, 140);
+            this.ClientSize = new System.Drawing.Size(407, 151);
             this.ControlBox = false;
+            this.Controls.Add(this.DialogBodyReadonlyTextBox);
             this.Controls.Add(this.NoButton);
             this.Controls.Add(this.YesButton);
             this.Controls.Add(this.WarningIconPictureBox);
-            this.Controls.Add(this.WarningQuestionLabel);
-            this.Name = "BetterMessageBox";
+            this.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.Name = "CustomizableDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Confirmation form";
+            this.Text = "Žodžio trinimas";
             this.Load += new System.EventHandler(this.BetterMessageBox_Load);
             ((System.ComponentModel.ISupportInitialize)(this.WarningIconPictureBox)).EndInit();
             this.ResumeLayout(false);
@@ -97,10 +105,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label WarningQuestionLabel;
         private System.Windows.Forms.PictureBox WarningIconPictureBox;
         private System.Windows.Forms.Button YesButton;
         private System.Windows.Forms.Button NoButton;
+        private TextBox DialogBodyReadonlyTextBox;
     }
 }

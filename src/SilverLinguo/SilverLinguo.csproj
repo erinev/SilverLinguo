@@ -60,11 +60,11 @@
     <Compile Include="Forms\AllWordsGrammarTestForm.Designer.cs">
       <DependentUpon>AllWordsGrammarTestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Helper\BetterMessageBox.cs">
+    <Compile Include="Forms\Helper\CustomizableDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Helper\BetterMessageBox.Designer.cs">
-      <DependentUpon>BetterMessageBox.cs</DependentUpon>
+    <Compile Include="Forms\Helper\CustomizableDialog.Designer.cs">
+      <DependentUpon>CustomizableDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Helper\PasswordConfirmationForm.cs">
       <SubType>Form</SubType>
@@ -135,8 +135,8 @@
     <EmbeddedResource Include="Forms\AllWordsGrammarTestForm.resx">
       <DependentUpon>AllWordsGrammarTestForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Helper\BetterMessageBox.resx">
-      <DependentUpon>BetterMessageBox.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Helper\CustomizableDialog.resx">
+      <DependentUpon>CustomizableDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Helper\PasswordConfirmationForm.resx">
       <DependentUpon>PasswordConfirmationForm.cs</DependentUpon>

@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SilverLinguo.Forms.Helper
 {
-    public partial class BetterMessageBox : Form
+    public partial class CustomizableDialog : Form
     {
         private readonly string _title;
         private readonly string _body;
 
-        public BetterMessageBox(string title, string body)
+        public CustomizableDialog(string title, string body)
         {
             InitializeComponent();
 
@@ -25,16 +19,16 @@ namespace SilverLinguo.Forms.Helper
         private void BetterMessageBox_Load(object sender, EventArgs e)
         {
             this.Text = _title;
-            WarningQuestionLabel.Text = _body;
+            DialogBodyReadonlyTextBox.Text = _body;
         }
 
-        private void YesButton_Click(object sender, EventArgs e)
+        private void YesButton_MouseClick(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Yes;
             this.Close();
         }
 
-        private void NoButton_Click(object sender, EventArgs e)
+        private void NoButton_MouseClick(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.No;
             this.Close();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using SilverLinguo.Forms.Helper;
 using SilverLinguo.Repositories.Models;
 
 namespace SilverLinguo.Services.Form
@@ -37,9 +38,11 @@ namespace SilverLinguo.Services.Form
 
         public static void ShowConfirmAction(string dialogCaption, string dialogText, Action userConfirmedAction)
         {
-            DialogResult dialogResult = MessageBox.Show(dialogText, dialogCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            var customizableDialogBox = new CustomizableDialog(dialogCaption, dialogText);
 
-            if (dialogResult == DialogResult.Yes)
+            var customizableDialogBoxResult = customizableDialogBox.ShowDialog();
+
+            if (customizableDialogBoxResult == DialogResult.Yes)
             {
                 userConfirmedAction();
             }

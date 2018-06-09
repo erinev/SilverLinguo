@@ -196,24 +196,7 @@ namespace SilverLinguo.Forms.AdminPanel
 
             if (string.IsNullOrWhiteSpace(searchText)) return;
 
-            var betterMessageBox = new BetterMessageBox("Žodžio paieška", "Ar tikrai norite ieškoti žodžio ? (neišaugoti pakeitimai bus atšaukti)");
-
-            var result = betterMessageBox.ShowDialog();
-            
-            if (result == DialogResult.Yes)
-            {
-                ClearAllWordsSearchButton.Visible = true;
-
-                var allWordsThatMatchedSearchCriteria =
-                    _wordsService.GetAllWords(shouldShuffle: false, searchText: searchText).ToList();
-
-                List<WordPairForDataGridView> allWordsForDataGridView =
-                    MapToDataGridViewStructure(allWordsThatMatchedSearchCriteria);
-
-                _allWordsBindingSource.DataSource = allWordsForDataGridView;
-            }
-
-            /*CommonFormService.ShowConfirmAction(
+            CommonFormService.ShowConfirmAction(
                 "Žodžio paieška",
                 "Ar tikrai norite ieškoti žodžio ? (neišaugoti pakeitimai bus atšaukti)",
                 () =>
@@ -227,7 +210,7 @@ namespace SilverLinguo.Forms.AdminPanel
                         MapToDataGridViewStructure(allWordsThatMatchedSearchCriteria);
 
                     _allWordsBindingSource.DataSource = allWordsForDataGridView;
-                });*/
+                });
 
         }
 
