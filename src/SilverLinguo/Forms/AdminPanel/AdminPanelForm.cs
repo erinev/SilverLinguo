@@ -86,6 +86,12 @@ namespace SilverLinguo.Forms.AdminPanel
             {
                 DataGridViewRow editingRow = AllWordsDataGridView.Rows[e.RowIndex];
 
+                DataGridViewCell firstLanguageWordCell = editingRow.Cells[_firstLanguageWordCellIndex];
+                DataGridViewCell secondLanguageWordCell = editingRow.Cells[_secondLanguageWordCellIndex];
+
+                string initialFirstLanguageWord = firstLanguageWordCell.EditedFormattedValue.ToString();
+                string initialSecondLanguageWord = secondLanguageWordCell.EditedFormattedValue.ToString();
+
                 var dirtyRowUuidValue = editingRow.Cells[_dirtyRowUuidCellIndex].EditedFormattedValue;
 
                 if (string.IsNullOrWhiteSpace(dirtyRowUuidValue.ToString()) ||
@@ -100,12 +106,26 @@ namespace SilverLinguo.Forms.AdminPanel
 
                 var currentWords = (IEnumerable<WordPairForDataGridView>) _allWordsBindingSource.DataSource;
 
-                string firstLanguageWord = editingRow.Cells[_firstLanguageWordCellIndex].EditedFormattedValue.ToString();
-                string secondLanguageWord = editingRow.Cells[_secondLanguageWordCellIndex].EditedFormattedValue.ToString();
+                if (string.IsNullOrEmpty(firstLanguageWordCell.EditedFormattedValue.ToString()) &&
+                    !string.IsNullOrEmpty(initialFirstLanguageWord))
+                {
+                    // somehow cell value is wiped after i set _dirtyRowUuidCell value in few lines above
+                    // so restoring to initial entered value
+                    firstLanguageWordCell.Value = initialFirstLanguageWord;
+                }
+                if (string.IsNullOrEmpty(secondLanguageWordCell.EditedFormattedValue.ToString()) && 
+                         !string.IsNullOrEmpty(initialSecondLanguageWord))
+                {
+                    // somehow cell value is wiped after i set _dirtyRowUuidCell value in few lines above
+                    // so restoring to initial entered value
+                    secondLanguageWordCell.Value = initialSecondLanguageWord;
+                }
+
+                string firstLanguageWord = firstLanguageWordCell.EditedFormattedValue.ToString();
+                string secondLanguageWord = secondLanguageWordCell.EditedFormattedValue.ToString();
 
                 DuplicateWord duplicateWord =
-                    CheckIfWordAlreadyExists(wordPairId, currentWords, firstLanguageWord, secondLanguageWord,
-                        dirtyRowIdentifier);
+                    CheckIfWordAlreadyExists(wordPairId, currentWords, firstLanguageWord, secondLanguageWord, dirtyRowIdentifier);
 
                 if (duplicateWord.WordAlreadyExist)
                 {
