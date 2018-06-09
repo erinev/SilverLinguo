@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\KeyCodes.cs" />
+    <Compile Include="Dto\DuplicateWord.cs" />
     <Compile Include="Dto\WordPairForDataGridView.cs" />
     <Compile Include="Enums\LanguagePair.cs" />
     <Compile Include="Enums\SelectedLanguage.cs" />

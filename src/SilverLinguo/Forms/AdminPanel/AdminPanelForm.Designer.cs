@@ -124,6 +124,7 @@ namespace SilverLinguo.Forms.AdminPanel
             this.AllWordsDataGridView.Size = new System.Drawing.Size(694, 443);
             this.AllWordsDataGridView.TabIndex = 0;
             this.AllWordsDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.AllWordsDataGridView_CellEndEdit);
+            this.AllWordsDataGridView.CellValidating += new DataGridViewCellValidatingEventHandler(this.AllWordsDataGridView_CellValidating);
             this.AllWordsDataGridView.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.AllWordsDataGridView_RowValidating);
             this.AllWordsDataGridView.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.AllWordsDataGridView_UserDeletingRow);
             // 

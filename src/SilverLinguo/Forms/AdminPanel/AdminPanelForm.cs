@@ -80,6 +80,41 @@ namespace SilverLinguo.Forms.AdminPanel
                 });
         }
 
+        private void AllWordsDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (AllWordsDataGridView.IsCurrentRowDirty)
+            {
+                DataGridViewRow editingRow = AllWordsDataGridView.Rows[e.RowIndex];
+
+                var dirtyRowUuidValue = editingRow.Cells[_dirtyRowUuidCellIndex].EditedFormattedValue;
+
+                if (string.IsNullOrWhiteSpace(dirtyRowUuidValue.ToString()) ||
+                    Guid.Empty.ToString() == dirtyRowUuidValue.ToString())
+                {
+                    editingRow.Cells[_dirtyRowUuidCellIndex].Value = Guid.NewGuid();
+                }
+
+                int wordPairId = Int32.Parse(editingRow.Cells[_wordPairIdCellIndex].EditedFormattedValue.ToString());
+
+                Guid dirtyRowIdentifier = Guid.Parse(editingRow.Cells[_dirtyRowUuidCellIndex].EditedFormattedValue.ToString());
+
+                var currentWords = (IEnumerable<WordPairForDataGridView>) _allWordsBindingSource.DataSource;
+
+                string firstLanguageWord = editingRow.Cells[_firstLanguageWordCellIndex].EditedFormattedValue.ToString();
+                string secondLanguageWord = editingRow.Cells[_secondLanguageWordCellIndex].EditedFormattedValue.ToString();
+
+                DuplicateWord duplicateWord =
+                    CheckIfWordAlreadyExists(wordPairId, currentWords, firstLanguageWord, secondLanguageWord,
+                        dirtyRowIdentifier);
+
+                if (duplicateWord.WordAlreadyExist)
+                {
+                    AllWordsDataGridView.Rows[e.RowIndex].ErrorText = $"Žodis '{duplicateWord.DuplicateWordValue}' jau egzistuoja!";
+                    e.Cancel = true;
+                }
+            }
+        }
+
         private void AllWordsDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             AllWordsDataGridView.Rows[e.RowIndex].ErrorText = String.Empty;
@@ -91,21 +126,8 @@ namespace SilverLinguo.Forms.AdminPanel
             {
                 DataGridViewRow editingRow = AllWordsDataGridView.Rows[e.RowIndex];
 
-                var dirtyRowUuidValue = editingRow.Cells[_dirtyRowUuidCellIndex].EditedFormattedValue;
-
-                if (string.IsNullOrWhiteSpace(dirtyRowUuidValue.ToString()) || Guid.Empty.ToString() == dirtyRowUuidValue.ToString())
-                {
-                    editingRow.Cells[_dirtyRowUuidCellIndex].Value = Guid.NewGuid();
-                }
-
-                int wordPairId = Int32.Parse(editingRow.Cells[_wordPairIdCellIndex].EditedFormattedValue.ToString());
-
-                Guid dirtyRowIdentifier = Guid.Parse(editingRow.Cells[_dirtyRowUuidCellIndex].EditedFormattedValue.ToString());
-
                 string firstLanguageWord = editingRow.Cells[_firstLanguageWordCellIndex].EditedFormattedValue.ToString();
                 string secondLanguageWord = editingRow.Cells[_secondLanguageWordCellIndex].EditedFormattedValue.ToString();
-
-                var currentWords = (IEnumerable<WordPairForDataGridView>) _allWordsBindingSource.DataSource;
 
                 bool atLeastOneCellIsEmpty = CheckIfRowContainsEmptyCells(firstLanguageWord, secondLanguageWord);
                 if (atLeastOneCellIsEmpty)
@@ -113,15 +135,6 @@ namespace SilverLinguo.Forms.AdminPanel
                     AllWordsDataGridView.Rows[e.RowIndex].ErrorText = "Žodis negali būti tusčia reikšmė!";
                     e.Cancel = true;
                     return;
-                }
-
-                bool wordPairAlreadyExits = 
-                    CheckIfWordAlreadyExists(wordPairId, currentWords, firstLanguageWord, secondLanguageWord, dirtyRowIdentifier);
-
-                if (wordPairAlreadyExits)
-                {
-                    AllWordsDataGridView.Rows[e.RowIndex].ErrorText = "Tokia žodžių pora jau egzistuoja!";
-                    e.Cancel = true;
                 }
             }
         }
@@ -228,17 +241,17 @@ namespace SilverLinguo.Forms.AdminPanel
             }
         }
 
-        private bool CheckIfWordAlreadyExists(int wordPairId, IEnumerable<WordPairForDataGridView> currentWords, string firstLanguageWord,
-            string secondLanguageWord, Guid dirtyRowIdentifier)
+        private DuplicateWord CheckIfWordAlreadyExists(int wordPairId, IEnumerable<WordPairForDataGridView> currentWords, 
+            string firstLanguageWord, string secondLanguageWord, Guid dirtyRowIdentifier)
         {
-            bool wordPairAlreadyExits;
+            DuplicateWord duplicateWord;
 
             if (wordPairId > 0)
             {
                 IEnumerable<WordPairForDataGridView> wordsListExcludingCurrentlyEditingWord =
                     currentWords.Where(w => w.Id != wordPairId);
 
-                wordPairAlreadyExits =
+                duplicateWord =
                     WordPairAlreadyExits(wordsListExcludingCurrentlyEditingWord, firstLanguageWord, secondLanguageWord);
             }
             else
@@ -246,11 +259,11 @@ namespace SilverLinguo.Forms.AdminPanel
                 IEnumerable<WordPairForDataGridView> currentWordsExcludingNewlyAddedWord =
                     currentWords.Where(w => w.DirtyRowUuid != dirtyRowIdentifier);
 
-                wordPairAlreadyExits =
+                duplicateWord =
                     WordPairAlreadyExits(currentWordsExcludingNewlyAddedWord, firstLanguageWord, secondLanguageWord);
             }
 
-            return wordPairAlreadyExits;
+            return duplicateWord;
         }
 
         private bool CheckIfRowContainsEmptyCells(string firstLanguageWord, string secondLanguageWord)
@@ -271,14 +284,30 @@ namespace SilverLinguo.Forms.AdminPanel
             }).ToList();
         }
 
-        private bool WordPairAlreadyExits(IEnumerable<WordPairForDataGridView> wordsListExcludingCurrentlyEditingWord,
+        private DuplicateWord WordPairAlreadyExits(IEnumerable<WordPairForDataGridView> wordsListExcludingCurrentlyEditingWord,
             string firstLanguageWord, string secondLanguageWord)
         {
-            bool wordPairAlreadyExits = wordsListExcludingCurrentlyEditingWord.Any(w =>
-                _wordsService.CheckIfWordsMatches(w.FirstLanguageWord, firstLanguageWord) &&
-                _wordsService.CheckIfWordsMatches(w.SecondLanguageWord, secondLanguageWord));
+            var duplicateWord = new DuplicateWord
+            {
+                WordAlreadyExist = false
+            };
 
-            return wordPairAlreadyExits;
+            foreach (var word in wordsListExcludingCurrentlyEditingWord)
+            {
+                bool firstLanguageWordAlreadyExist = _wordsService.CheckIfWordsMatches(word.FirstLanguageWord, firstLanguageWord);
+                bool secondLanguageWordAlreadyExist = _wordsService.CheckIfWordsMatches(word.SecondLanguageWord, secondLanguageWord);
+
+                if (firstLanguageWordAlreadyExist || secondLanguageWordAlreadyExist)
+                {
+                    duplicateWord.WordAlreadyExist = true;
+
+                    duplicateWord.DuplicateWordValue = firstLanguageWordAlreadyExist ? firstLanguageWord : secondLanguageWord;
+                    
+                    break;
+                }
+            }
+
+            return duplicateWord;
         }
     }
 }
