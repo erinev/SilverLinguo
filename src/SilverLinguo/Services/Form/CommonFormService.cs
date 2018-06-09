@@ -26,23 +26,20 @@ namespace SilverLinguo.Services.Form
             }
             else
             {
-                DialogResult dialogResult = MessageBox.Show("Ne visi žodžiai išspręsti ar tikrai norite baigti testą ?", "Testo pabaiga",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (dialogResult == DialogResult.Yes)
-                {
-                    endTestConfirmedAction();
-                }
+                ShowConfirmAction(
+                    "Testo pabaiga",
+                    "Ne visi žodžiai išspręsti ar tikrai norite baigti testą ?",
+                    endTestConfirmedAction);
             }
         }
 
         public static void ShowConfirmAction(string dialogCaption, string dialogText, Action userConfirmedAction)
         {
-            var customizableDialogBox = new CustomizableDialog(dialogCaption, dialogText);
+            var customizableDialog = new CustomizableDialog(dialogCaption, dialogText);
 
-            var customizableDialogBoxResult = customizableDialogBox.ShowDialog();
+            var customizableDialogResult = customizableDialog.ShowDialog();
 
-            if (customizableDialogBoxResult == DialogResult.Yes)
+            if (customizableDialogResult == DialogResult.Yes)
             {
                 userConfirmedAction();
             }

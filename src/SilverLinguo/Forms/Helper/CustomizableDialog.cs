@@ -16,7 +16,7 @@ namespace SilverLinguo.Forms.Helper
             _body = body;
         }
 
-        private void BetterMessageBox_Load(object sender, EventArgs e)
+        private void CustomizableDialog_Load(object sender, EventArgs e)
         {
             this.Text = _title;
             DialogBodyReadonlyTextBox.Text = _body;

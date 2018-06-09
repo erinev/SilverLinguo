@@ -97,7 +97,7 @@ namespace SilverLinguo.Forms.Helper
             this.Name = "CustomizableDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Žodžio trinimas";
-            this.Load += new System.EventHandler(this.BetterMessageBox_Load);
+            this.Load += new System.EventHandler(this.CustomizableDialog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.WarningIconPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
