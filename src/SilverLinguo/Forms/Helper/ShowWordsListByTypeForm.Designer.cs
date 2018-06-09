@@ -1,4 +1,6 @@
-﻿namespace SilverLinguo.Forms.Helper
+﻿using System.Windows.Forms;
+
+namespace SilverLinguo.Forms.Helper
 {
     partial class ShowWordsListByTypeForm
     {
@@ -29,6 +31,7 @@
         private void InitializeComponent()
         {
             this.WordsListBox = new System.Windows.Forms.ListBox();
+            this.TestShownWordsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // WordsListBox
@@ -40,14 +43,29 @@
             this.WordsListBox.Name = "WordsListBox";
             this.WordsListBox.ScrollAlwaysVisible = true;
             this.WordsListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.WordsListBox.Size = new System.Drawing.Size(945, 256);
+            this.WordsListBox.Size = new System.Drawing.Size(816, 256);
             this.WordsListBox.TabIndex = 0;
+            // 
+            // TestShownWordsButton
+            // 
+            this.TestShownWordsButton.BackColor = System.Drawing.Color.YellowGreen;
+            this.TestShownWordsButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.TestShownWordsButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.TestShownWordsButton.Location = new System.Drawing.Point(846, 12);
+            this.TestShownWordsButton.Name = "TestShownWordsButton";
+            this.TestShownWordsButton.Padding = new System.Windows.Forms.Padding(2);
+            this.TestShownWordsButton.Size = new System.Drawing.Size(111, 39);
+            this.TestShownWordsButton.TabIndex = 56;
+            this.TestShownWordsButton.Text = "Testuoti ";
+            this.TestShownWordsButton.UseVisualStyleBackColor = false;
+            this.TestShownWordsButton.Visible = false;
             // 
             // ShowWordsListByTypeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(969, 302);
+            this.Controls.Add(this.TestShownWordsButton);
             this.Controls.Add(this.WordsListBox);
             this.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -62,5 +80,6 @@
         #endregion
 
         private System.Windows.Forms.ListBox WordsListBox;
+        private System.Windows.Forms.Button TestShownWordsButton;
     }
 }

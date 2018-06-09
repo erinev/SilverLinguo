@@ -159,11 +159,8 @@ namespace SilverLinguo.Forms
 
         private void NewUnknownWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            List<string> newUnknownWordsToDisplay =
-                _newUnknownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
-
             string showWordsFormName = "Nauji nežinomi žodžiai:";
-            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, newUnknownWordsToDisplay);
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _newUnknownWords);
 
             showWordsListByTypeForm.Activate();
             showWordsListByTypeForm.ShowDialog(this);
@@ -171,11 +168,8 @@ namespace SilverLinguo.Forms
 
         private void UnknownWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            List<string> unknownWordsToDisplay =
-                _unknownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
-
             string showWordsFormName = "Vis dar nežinomi žodžiai:";
-            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, unknownWordsToDisplay);
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _unknownWords);
 
             showWordsListByTypeForm.Activate();
             showWordsListByTypeForm.ShowDialog(this);
@@ -183,11 +177,8 @@ namespace SilverLinguo.Forms
 
         private void NewLearnedWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            List<string> learnedWordsToDisplay =
-                _learnedWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
-
             string showWordsFormName = "Nauji išmokti žodžiai:";
-            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, learnedWordsToDisplay);
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _learnedWords);
 
             showWordsListByTypeForm.Activate();
             showWordsListByTypeForm.ShowDialog(this);
@@ -195,11 +186,8 @@ namespace SilverLinguo.Forms
 
         private void KnownWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            List<string> knownWordsToDisplay =
-                _knownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
-
             string showWordsFormName = "Žinomi žodžiai:";
-            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, knownWordsToDisplay);
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _knownWords);
 
             showWordsListByTypeForm.Activate();
             showWordsListByTypeForm.ShowDialog(this);
@@ -216,12 +204,8 @@ namespace SilverLinguo.Forms
 
             this.Hide();
 
-            List<string> learnedWordsForStats = _learnedWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
-            List<string> knownWordsForStats = _knownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
-            List<string> newUnknownWordsForStats = _newUnknownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
-            List<string> unknownWordsForStats = _unknownWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
-
-            var testResultsForm = new TestResultsForAllWordsForm(_selectedLanguage, TestType.Verbal, _stopWatch, _startingCountOfAllWords, learnedWordsForStats, knownWordsForStats, newUnknownWordsForStats, unknownWordsForStats);
+            var testResultsForm = new TestResultsForAllWordsForm(_selectedLanguage, TestType.Verbal, _stopWatch, 
+                _startingCountOfAllWords, _learnedWords, _knownWords, _newUnknownWords, _unknownWords);
             testResultsForm.Closed += (s, args) => this.Close();
 
             testResultsForm.Show();

@@ -22,7 +22,7 @@ namespace SilverLinguo.Forms
         private int _currentUnknownWordPairId;
 
         private WordPair[] _unknownWords;
-        private readonly IList<WordPair> _learnedWords = new List<WordPair>();
+        private readonly List<WordPair> _learnedWords = new List<WordPair>();
         private readonly int _startingCountOfUnknownWords;
 
         private readonly Stopwatch _stopWatch = new Stopwatch();
@@ -161,11 +161,8 @@ namespace SilverLinguo.Forms
 
         private void LearnedWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            List<string> learnedWordsToDisplay =
-                _learnedWords.Select(learnedWord => learnedWord.FirstLanguageWord + " - " + learnedWord.SecondLanguageWord).ToList();
-
             string showWordsFormName = "Išmokti žodžiai:";
-            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, learnedWordsToDisplay);
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _learnedWords);
 
             showWordsListByTypeForm.Activate();
             showWordsListByTypeForm.ShowDialog(this);
@@ -184,10 +181,7 @@ namespace SilverLinguo.Forms
 
             this.Hide();
             
-            List<string> learnedWordsToDisplay =
-                _learnedWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
-
-            var testResultsForm = new TestResultsForUnknownWordsForm(_selectedLanguage, TestType.Grammar, _stopWatch, _startingCountOfUnknownWords, learnedWordsToDisplay);
+            var testResultsForm = new TestResultsForUnknownWordsForm(_selectedLanguage, TestType.Grammar, _stopWatch, _startingCountOfUnknownWords, _learnedWords);
             testResultsForm.Closed += (s, args) => this.Close();
 
             testResultsForm.Show();

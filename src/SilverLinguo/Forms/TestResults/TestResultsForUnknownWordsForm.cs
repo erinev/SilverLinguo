@@ -4,17 +4,18 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using SilverLinguo.Enums;
 using SilverLinguo.Forms.Helper;
+using SilverLinguo.Repositories.Models;
 
 namespace SilverLinguo.Forms.TestResults
 {
     public partial class TestResultsForUnknownWordsForm : BaseTestResultsForm
     {
         private readonly int _totalWordsCountInTest;
-        private readonly List<string> _lernedWordsForStats;
+        private readonly List<WordPair> _lernedWordsForStats;
 
         public TestResultsForUnknownWordsForm(
             SelectedLanguage selectedLanguage, TestType testType, Stopwatch elapsedTimeStopWatch, 
-            int totalWordsCountInTest, List<string> lernedWordsForStats) 
+            int totalWordsCountInTest, List<WordPair> lernedWordsForStats) 
             : base(selectedLanguage, testType, elapsedTimeStopWatch)
         {
             _totalWordsCountInTest = totalWordsCountInTest;

@@ -1,25 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Windows.Forms;
 using SilverLinguo.Enums;
 using SilverLinguo.Forms.Helper;
+using SilverLinguo.Repositories.Models;
 
 namespace SilverLinguo.Forms.TestResults
 {
     public partial class TestResultsForAllWordsForm : BaseTestResultsForm
     {
+        private readonly SelectedLanguage _selectedLanguage;
+        private readonly TestType _testType;
         private readonly int _totalWordsCountInTest;
-        private readonly List<string> _learnedWordsForStats;
-        private readonly List<string> _knownWords;
-        private readonly List<string> _newUnknownWords;
-        private readonly List<string> _unknownWords;
+        private readonly List<WordPair> _learnedWordsForStats;
+        private readonly List<WordPair> _knownWords;
+        private readonly List<WordPair> _newUnknownWords;
+        private readonly List<WordPair> _unknownWords;
 
         public TestResultsForAllWordsForm(
             SelectedLanguage selectedLanguage, TestType testType, Stopwatch elapsedTimeStopwatch,
-            int totalWordsCountInTest, List<string> learnedWordsForStats, List<string> knownWords, 
-            List<string> newUnknownWords, List<string> unknownWords) 
+            int totalWordsCountInTest, List<WordPair> learnedWordsForStats, List<WordPair> knownWords, 
+            List<WordPair> newUnknownWords, List<WordPair> unknownWords) 
             : base(selectedLanguage, testType, elapsedTimeStopwatch)
         {
+            _selectedLanguage = selectedLanguage;
+            _testType = testType;
             _totalWordsCountInTest = totalWordsCountInTest;
             _learnedWordsForStats = learnedWordsForStats;
             _knownWords = knownWords;
@@ -96,10 +102,41 @@ namespace SilverLinguo.Forms.TestResults
         private void UnknownWordsCountLinkLabel_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
         {
             string showWordsFormName = "Vis dar nežinomi žodžiai:";
-            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _unknownWords);
+            var showWordsListByTypeForm =
+                new ShowWordsListByTypeForm(showWordsFormName, _unknownWords, InitializeTemporaryUnknownWordsTestByType);
 
             showWordsListByTypeForm.Activate();
             showWordsListByTypeForm.ShowDialog(this);
+        }
+
+        private void InitializeTemporaryUnknownWordsTestByType(Form ownerForm)
+        {
+            if (_testType == TestType.Grammar)
+            {
+                var unknownWordsGrammarTestForm = new UnknownWordsGrammarTestForm(_selectedLanguage, _unknownWords.ToArray());
+                unknownWordsGrammarTestForm.Closed += (s, args) =>
+                {
+                    this.Close();
+                    ownerForm.Close();
+                };
+
+                ownerForm.Hide();
+
+                unknownWordsGrammarTestForm.Show();
+            } 
+            else if (_testType == TestType.Verbal)
+            {
+                var unknownWordsVerbalTestForm = new UnknownWordsVerbalTestForm(_selectedLanguage, _unknownWords.ToArray());
+                unknownWordsVerbalTestForm.Closed += (s, args) =>
+                {
+                    this.Close();
+                    ownerForm.Close();
+                };
+
+                ownerForm.Hide();
+
+                unknownWordsVerbalTestForm.Show();
+            }
         }
     }
 }
