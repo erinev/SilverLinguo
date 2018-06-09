@@ -10,7 +10,7 @@ namespace SilverLinguo.Repositories
 {
     public interface IWordsRepository
     {
-        WordPair[] GetAllWords();
+        WordPair[] GetAllWords(string searchText = null);
         WordPair[] GetUnknownWords();
         bool CheckIfUnknownWordAlreadyExist(int wordId);
         bool AddNewUnknownWord(int wordId);
@@ -34,19 +34,29 @@ namespace SilverLinguo.Repositories
             _connectionString = $"Data Source={_dbFile};Version=3;UseUTF16Encoding=True;Password=FJtkLXz2aBeBARdW;";
         }
 
-        public WordPair[] GetAllWords()
+        public WordPair[] GetAllWords(string searchText)
         {
             using (var dbConnection = new SQLiteConnection(_connectionString))
             {
                 dbConnection.Open();
 
-                const string getAllWordsQuery =
+                string getAllWordsQuery =
                     @"SELECT 
                         AW.Id, AW.FirstLanguageWord, AW.SecondLanguageWord, 
                         AW.LanguagePair, AW.CreatedAt, AW.ModifiedAt
                       FROM AllWords AW";
 
-                WordPair[] allWords = dbConnection.Query<WordPair>(getAllWordsQuery).ToArray();
+                if (!string.IsNullOrEmpty(searchText))
+                {
+                    string searchCriteria = 
+                        " WHERE AW.FirstLanguageWord LIKE @SearchCriteria OR AW.SecondLanguageWord LIKE @SearchCriteria";
+
+                    getAllWordsQuery += searchCriteria;
+                }
+
+                var queryParameters = new {SearchCriteria = $"%{searchText}%"};
+                
+                WordPair[] allWords = dbConnection.Query<WordPair>(getAllWordsQuery, queryParameters).ToArray();
 
                 return allWords;
             }

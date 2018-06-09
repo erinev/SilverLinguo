@@ -154,7 +154,6 @@ namespace SilverLinguo.Forms.AdminPanel
                 {
                     AllWordsDataGridView.Rows[e.RowIndex].ErrorText = "Žodis negali būti tusčia reikšmė!";
                     e.Cancel = true;
-                    return;
                 }
             }
         }
@@ -169,6 +168,46 @@ namespace SilverLinguo.Forms.AdminPanel
 
                 _wordsToDeleteOnSave.Add(currentWords.First(w => w.Id == deletedWordPairId));
             }
+        }
+
+        private void SearchAllWordsButton_Click(object sender, EventArgs e)
+        {
+            string searchText = AllWordsSearchTextBox.Text;
+
+            if (string.IsNullOrWhiteSpace(searchText)) return;
+
+            CommonFormService.ShowConfirmAction(
+                "Žodžio paieška",
+                "Ar tikrai norite ieškoti žodžio ? (neišaugoti pakeitimai bus atšaukti)",
+                () =>
+                {
+                    ClearAllWordsSearchButton.Visible = true;
+
+                    var allWordsThatMatchedSearchCriteria = _wordsService.GetAllWords(shouldShuffle: false, searchText: searchText).ToList();
+
+                    List<WordPairForDataGridView> allWordsForDataGridView = MapToDataGridViewStructure(allWordsThatMatchedSearchCriteria);
+
+                    _allWordsBindingSource.DataSource = allWordsForDataGridView;
+                });
+        }
+
+        private void ClearAllWordsSearchButton_Click(object sender, EventArgs e)
+        {
+            CommonFormService.ShowConfirmAction(
+                "Išvalyti paieška",
+                "Ar tikrai norite išvalyti paieška ir užkrauti visus žodžius ? (neišaugoti pakeitimai bus atšaukti)",
+                () =>
+                {
+                    var allWords = _wordsService.GetAllWords(shouldShuffle: false).ToList();
+
+                    List<WordPairForDataGridView> allWordsForDataGridView = MapToDataGridViewStructure(allWords);
+
+                    _allWordsBindingSource.DataSource = allWordsForDataGridView;
+
+                    AllWordsSearchTextBox.Text = string.Empty;
+
+                    ClearAllWordsSearchButton.Visible = false;
+                });
         }
 
         private void ReloadAllWordsGridViewButton_Click(object sender, EventArgs e)

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using SilverLinguo.Dto;
@@ -15,7 +14,7 @@ namespace SilverLinguo.Services
         bool CheckIfWordsMatches(string suppliedWord, string expectedWord);
         int GetAllWordsCount();
         int GetUnknownWordsCount();
-        WordPair[] GetAllWords(bool shouldShuffle);
+        WordPair[] GetAllWords(bool shouldShuffle, string searchText = null);
         WordPair[] GetUnknownWords(bool shouldShuffle);
         bool InsertNewUnknownWordIfDoesntExist(WordPair newUnknownWordCandidate);
         bool RemoveLearnedUnknownWordIfExist(WordPair learnedWord);
@@ -68,9 +67,9 @@ namespace SilverLinguo.Services
             return unknownWords.Length;
         }
 
-        public WordPair[] GetAllWords(bool shouldShuffle)
+        public WordPair[] GetAllWords(bool shouldShuffle, string searchText = null)
         {
-            WordPair[] words = _wordsRepository.GetAllWords();
+            WordPair[] words = _wordsRepository.GetAllWords(searchText);
 
             if (shouldShuffle)
             {
