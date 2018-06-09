@@ -22,13 +22,16 @@ namespace SilverLinguo.Forms
 
         private WordPair[] _unknownWords;
         private readonly List<WordPair> _learnedWords = new List<WordPair>();
-        private int _startingCountOfUnknownWords;
+        private readonly int _startingCountOfUnknownWords;
 
         private readonly Stopwatch _stopWatch = new Stopwatch();
 
-        public UnknownWordsVerbalTestForm(SelectedLanguage selectedLanguage)
+        public UnknownWordsVerbalTestForm(SelectedLanguage selectedLanguage, WordPair[] unknownWords)
         {
             _wordsService = new WordsService();
+
+            _unknownWords = unknownWords;
+            _startingCountOfUnknownWords = _unknownWords.Length;
 
             _selectedLanguage = selectedLanguage;
 
@@ -41,9 +44,8 @@ namespace SilverLinguo.Forms
             
             VerbalFormService.SetWordTextBoxVisibilityForSelectedLanguage(_selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox);
 
-            VerbalFormService.HanldeVerbalFormLoadedEvent(NextWordButton, out _unknownWords,
-                () => _wordsService.GetUnknownWords(shouldShuffle: true), out _startingCountOfUnknownWords, 
-                out _currentUnknownWordPairId, ProgressLabel, FirstLanguageWordTextBox, SecondLanguageWordTextBox);
+            VerbalFormService.HanldeVerbalFormLoadedEvent(NextWordButton, _unknownWords, out _currentUnknownWordPairId, 
+                ProgressLabel, FirstLanguageWordTextBox, SecondLanguageWordTextBox);
 
             LearnedWordsCountLinkLabel.Enabled = false;
         }

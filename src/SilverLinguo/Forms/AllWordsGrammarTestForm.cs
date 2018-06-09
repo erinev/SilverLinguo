@@ -26,13 +26,16 @@ namespace SilverLinguo.Forms
         private readonly List<WordPair> _learnedWords = new List<WordPair>();
         private readonly List<WordPair> _unknownWords = new List<WordPair>();
         private readonly List<WordPair> _newUnknownWords = new List<WordPair>();
-        private int _startingCountOfAllWords;
+        private readonly int _startingCountOfAllWords;
 
         private readonly Stopwatch _stopWatch = new Stopwatch();
 
-        public AllWordsGrammarTestForm(SelectedLanguage selectedLanguage)
+        public AllWordsGrammarTestForm(SelectedLanguage selectedLanguage, WordPair[] allWords)
         {
             _wordsService = new WordsService();
+
+            _allWords = allWords;
+            _startingCountOfAllWords = _allWords.Length;
 
             _selectedLanguage = selectedLanguage;
 
@@ -45,9 +48,8 @@ namespace SilverLinguo.Forms
 
             GrammarFormService.ConfigureSelectedLanguage(_selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox, ValidateWordButton, NextWordButton);
 
-            GrammarFormService.HanldeVerbalFormLoadedEvent(out _allWords, 
-                () => _wordsService.GetAllWords(shouldShuffle: true), out _startingCountOfAllWords, 
-                out _currentWordPairId, ProgressLabel, FirstLanguageWordTextBox, SecondLanguageWordTextBox);
+            GrammarFormService.HanldeVerbalFormLoadedEvent(_allWords, out _currentWordPairId, ProgressLabel, 
+                FirstLanguageWordTextBox, SecondLanguageWordTextBox);
 
             NewUnknownWordsCountLinkLabel.Enabled = false;
             UnknownWordsCountLinkLabel.Enabled = false;

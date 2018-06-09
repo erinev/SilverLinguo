@@ -4,7 +4,7 @@ using SilverLinguo.Enums;
 using SilverLinguo.Forms;
 using SilverLinguo.Forms.AdminPanel;
 using SilverLinguo.Forms.Helper;
-using SilverLinguo.Repositories;
+using SilverLinguo.Repositories.Models;
 using SilverLinguo.Services;
 
 namespace SilverLinguo
@@ -12,6 +12,9 @@ namespace SilverLinguo
     public partial class StartupForm : Form
     {
         private readonly IWordsService _wordsService;
+
+        private WordPair[] _allWords;
+        private WordPair[] _unknownWords;
 
         public StartupForm()
         {
@@ -27,8 +30,11 @@ namespace SilverLinguo
 
         private void SetWordsCountForTestSelection()
         {
-            int allWordsCount = _wordsService.GetAllWordsCount();
-            int unknownWordsCount = _wordsService.GetUnknownWordsCount();
+            _allWords = _wordsService.GetAllWords(shouldShuffle: false);
+            _unknownWords = _wordsService.GetUnknownWords(shouldShuffle: false);
+
+            int allWordsCount = _allWords.Length;
+            int unknownWordsCount = _unknownWords.Length;
 
             AllWordsPanel.Visible = allWordsCount > 0;
             UnknownWordsPanel.Visible = unknownWordsCount > 0;
@@ -48,7 +54,7 @@ namespace SilverLinguo
 
             if (ShouldCheckGrammarCheckBox.Checked)
             {
-                var allWordsGrammarTestForm = new AllWordsGrammarTestForm(selectedLanguage);
+                var allWordsGrammarTestForm = new AllWordsGrammarTestForm(selectedLanguage, _allWords);
                 allWordsGrammarTestForm.Closed += (s, args) => this.Close();
 
                 allWordsGrammarTestForm.Show();
@@ -57,7 +63,7 @@ namespace SilverLinguo
             {
                 string passwordFormName = "Visų žodžių testo (žodžiu) apsauga:";
                 string expectedPassword = "memo";
-                var allWordsVerbalTestForm = new AllWordsVerbalTestForm(selectedLanguage);
+                var allWordsVerbalTestForm = new AllWordsVerbalTestForm(selectedLanguage, _allWords);
 
                 var passwordConfirmationForm = 
                     new PasswordConfirmationForm(passwordFormName, expectedPassword, allWordsVerbalTestForm);
@@ -75,14 +81,14 @@ namespace SilverLinguo
 
             if (ShouldCheckGrammarCheckBox.Checked)
             {
-                var unknownWordsGrammarTestForm = new UnknownWordsGrammarTestForm(selectedLanguage);
+                var unknownWordsGrammarTestForm = new UnknownWordsGrammarTestForm(selectedLanguage, _unknownWords);
                 unknownWordsGrammarTestForm.Closed += (s, args) => this.Close();
 
                 unknownWordsGrammarTestForm.Show();
             }
             else
             {
-                var unknownWordsVerbalTestForm = new UnknownWordsVerbalTestForm(selectedLanguage);
+                var unknownWordsVerbalTestForm = new UnknownWordsVerbalTestForm(selectedLanguage, _unknownWords);
                 unknownWordsVerbalTestForm.Closed += (s, args) => this.Close();
 
                 unknownWordsVerbalTestForm.Show();
