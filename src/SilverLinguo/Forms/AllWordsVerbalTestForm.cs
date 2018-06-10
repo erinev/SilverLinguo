@@ -157,7 +157,7 @@ namespace SilverLinguo.Forms
             _allWords = _allWords.Where(aw => aw.Id != _currentWordPairId).ToArray();
         }
 
-        private void NewUnknownWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void NewUnknownWordsCountLinkLabel_LinkMouseClick(object sender, MouseEventArgs mouseEventArgs)
         {
             string showWordsFormName = "Nauji nežinomi žodžiai:";
             var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _newUnknownWords);
@@ -166,7 +166,7 @@ namespace SilverLinguo.Forms
             showWordsListByTypeForm.ShowDialog(this);
         }
 
-        private void UnknownWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void UnknownWordsCountLinkLabel_LinkMouseClick(object sender, MouseEventArgs mouseEventArgs)
         {
             string showWordsFormName = "Vis dar nežinomi žodžiai:";
             var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _unknownWords);
@@ -175,7 +175,7 @@ namespace SilverLinguo.Forms
             showWordsListByTypeForm.ShowDialog(this);
         }
 
-        private void NewLearnedWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void NewLearnedWordsCountLinkLabel_LinkMouseClick(object sender, MouseEventArgs mouseEventArgs)
         {
             string showWordsFormName = "Nauji išmokti žodžiai:";
             var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _learnedWords);
@@ -184,7 +184,7 @@ namespace SilverLinguo.Forms
             showWordsListByTypeForm.ShowDialog(this);
         }
 
-        private void KnownWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void KnownWordsCountLinkLabel_LinkMouseClick(object sender, MouseEventArgs mouseEventArgs)
         {
             string showWordsFormName = "Žinomi žodžiai:";
             var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _knownWords);
@@ -193,7 +193,7 @@ namespace SilverLinguo.Forms
             showWordsListByTypeForm.ShowDialog(this);
         }
 
-        private void EndTestButton_Click(object sender, EventArgs e)
+        private void EndTestButton_MouseClick(object sender, EventArgs e)
         {
             CommonFormService.HandelEndTestButtonPressedEvent(_allWords, HandleFinishedTest);
         }

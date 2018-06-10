@@ -25,13 +25,13 @@ namespace SilverLinguo.Forms.Helper
         private void YesButton_MouseClick(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Yes;
-            this.Close();
+            this.Dispose();
         }
 
         private void NoButton_MouseClick(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.No;
-            this.Close();
+            this.Dispose();
         }
     }
 }

@@ -8,14 +8,12 @@ using SilverLinguo.Enums;
 using SilverLinguo.Forms.Helper;
 using SilverLinguo.Forms.TestResults;
 using SilverLinguo.Repositories.Models;
-using SilverLinguo.Services;
 using SilverLinguo.Services.Form;
 
 namespace SilverLinguo.Forms
 {
     public partial class UnknownWordsVerbalTestForm : Form
     {
-        private readonly IWordsService _wordsService;
         private readonly SelectedLanguage _selectedLanguage;
 
         private int _currentUnknownWordPairId;
@@ -28,8 +26,6 @@ namespace SilverLinguo.Forms
 
         public UnknownWordsVerbalTestForm(SelectedLanguage selectedLanguage, WordPair[] unknownWords)
         {
-            _wordsService = new WordsService();
-
             _unknownWords = unknownWords;
             _startingCountOfUnknownWords = _unknownWords.Length;
 
@@ -140,7 +136,7 @@ namespace SilverLinguo.Forms
             showWordsListByTypeForm.ShowDialog(this);
         }
 
-        private void EndTestButton_Click(object sender, EventArgs e)
+        private void EndTestButton_MouseClick(object sender, EventArgs e)
         {
             CommonFormService.HandelEndTestButtonPressedEvent(_unknownWords, HandleFinishedTest);
         }

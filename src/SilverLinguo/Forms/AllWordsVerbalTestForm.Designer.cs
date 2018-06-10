@@ -1,4 +1,6 @@
-﻿namespace SilverLinguo.Forms
+﻿using System.Windows.Forms;
+
+namespace SilverLinguo.Forms
 {
     partial class AllWordsVerbalTestForm
     {
@@ -57,7 +59,7 @@
             this.NewUnknownWordsCountLinkLabel.TabIndex = 56;
             this.NewUnknownWordsCountLinkLabel.TabStop = true;
             this.NewUnknownWordsCountLinkLabel.Text = "0";
-            this.NewUnknownWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.NewUnknownWordsCountLinkLabel_LinkClicked);
+            this.NewUnknownWordsCountLinkLabel.MouseClick += new MouseEventHandler(this.NewUnknownWordsCountLinkLabel_LinkMouseClick);
             // 
             // TestTimerLabel
             // 
@@ -108,7 +110,7 @@
             this.IDontKnowTheWordButton.TabIndex = 52;
             this.IDontKnowTheWordButton.Text = "Nežinau žodžio";
             this.IDontKnowTheWordButton.UseVisualStyleBackColor = false;
-            this.IDontKnowTheWordButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.IDontKnowTheWordButton_MouseClick);
+            this.IDontKnowTheWordButton.MouseClick += new MouseEventHandler(this.IDontKnowTheWordButton_MouseClick);
             // 
             // NextWordButton
             // 
@@ -122,7 +124,7 @@
             this.NextWordButton.TabIndex = 51;
             this.NextWordButton.Text = "Kitas žodis";
             this.NextWordButton.UseVisualStyleBackColor = false;
-            this.NextWordButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NextWordButton_MouseClick);
+            this.NextWordButton.MouseClick += new MouseEventHandler(this.NextWordButton_MouseClick);
             // 
             // NewUnknownWordsCountHeaderLabel
             // 
@@ -170,7 +172,7 @@
             this.EndTestButton.TabIndex = 47;
             this.EndTestButton.Text = "Baigtį testą";
             this.EndTestButton.UseVisualStyleBackColor = false;
-            this.EndTestButton.Click += new System.EventHandler(this.EndTestButton_Click);
+            this.EndTestButton.MouseClick += new MouseEventHandler(this.EndTestButton_MouseClick);
             // 
             // EnHeaderLabel
             // 
@@ -211,7 +213,7 @@
             this.UnknownWordsCountLinkLabel.TabIndex = 58;
             this.UnknownWordsCountLinkLabel.TabStop = true;
             this.UnknownWordsCountLinkLabel.Text = "0";
-            this.UnknownWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.UnknownWordsCountLinkLabel_LinkClicked);
+            this.UnknownWordsCountLinkLabel.MouseClick += new MouseEventHandler(this.UnknownWordsCountLinkLabel_LinkMouseClick);
             // 
             // NewLearnedWordsCountHeaderLabel
             // 
@@ -232,7 +234,7 @@
             this.NewLearnedWordsCountLinkLabel.TabIndex = 60;
             this.NewLearnedWordsCountLinkLabel.TabStop = true;
             this.NewLearnedWordsCountLinkLabel.Text = "0";
-            this.NewLearnedWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.NewLearnedWordsCountLinkLabel_LinkClicked);
+            this.NewLearnedWordsCountLinkLabel.MouseClick += new MouseEventHandler(this.NewLearnedWordsCountLinkLabel_LinkMouseClick);
             // 
             // KnownWordsCountHeaderLabel
             // 
@@ -253,7 +255,7 @@
             this.KnownWordsCountLinkLabel.TabIndex = 62;
             this.KnownWordsCountLinkLabel.TabStop = true;
             this.KnownWordsCountLinkLabel.Text = "0";
-            this.KnownWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.KnownWordsCountLinkLabel_LinkClicked);
+            this.KnownWordsCountLinkLabel.MouseClick += new MouseEventHandler(this.KnownWordsCountLinkLabel_LinkMouseClick);
             // 
             // AllWordsVerbalTestForm
             // 

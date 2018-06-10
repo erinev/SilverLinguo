@@ -58,26 +58,10 @@ namespace SilverLinguo.Forms.TestResults
 
             TimeSpan timeSpan = _elapsedTimeStopWatch.Elapsed;
             ElapsedTimeLabel.Text = $@"{timeSpan.Hours}h {timeSpan.Minutes}m {timeSpan.Seconds}s";
-
-/*            if (_lernedWordsForStats != null)
-            {
-                LearnedWordsStatsHeaderLabel.Visible = true;
-                LearnedWordsStatsLinkLabel.Visible = true;
-                LearnedWordsStatsLinkLabel.Enabled = _lernedWordsForStats.Count > 0;
-                LearnedWordsStatsLinkLabel.Text = $@"{_lernedWordsForStats.Count} / {_totalWordsCountInTest}";
-            }
-            
-            if (_unknownWordsForStats != null)
-            {
-                UnknownWordsStatsHeaderLabel.Visible = true;
-                UnknownWordsStatsLinkLabel.Visible = true;
-                UnknownWordsStatsLinkLabel.Enabled = _unknownWordsForStats.Count > 0;
-                UnknownWordsStatsLinkLabel.Text = $@"{_unknownWordsForStats.Count} / {_totalWordsCountInTest}";
-            }*/
         }
             
 
-        private void StartDifferentTestButton_Click_1(object sender, EventArgs e)
+        private void StartDifferentTestButton_Click(object sender, EventArgs e)
         {
             this.Hide();
             
@@ -87,7 +71,7 @@ namespace SilverLinguo.Forms.TestResults
             startupForm.Show();
         }
 
-        private void EndProgramButton_Click_1(object sender, EventArgs e)
+        private void EndProgramButton_MouseClick(object sender, EventArgs e)
         {
             this.Close();
         }

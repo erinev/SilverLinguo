@@ -10,13 +10,13 @@ namespace SilverLinguo.Forms.Helper
     {
         private readonly string _wordsListFormName;
         private readonly List<string> _wordsToDisplay;
-        private readonly Action<Form> _initializeTestAction;
+        //private readonly Action<Form> _initializeTestAction;
 
-        public ShowWordsListByTypeForm(string wordsListFormName, IEnumerable<WordPair> words, Action<Form> initializeTestAction = null)
+        public ShowWordsListByTypeForm(string wordsListFormName, IEnumerable<WordPair> words/*, Action<Form> initializeTestAction = null*/)
         {
             _wordsListFormName = wordsListFormName;
             _wordsToDisplay = words.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
-            _initializeTestAction = initializeTestAction;
+            //_initializeTestAction = initializeTestAction;
 
             InitializeComponent();
         }
@@ -27,18 +27,18 @@ namespace SilverLinguo.Forms.Helper
 
             WordsListBox.DataSource = _wordsToDisplay;
             
-            if (_initializeTestAction != null)
+            /*if (_initializeTestAction != null)
             {
                 TestShownWordsButton.MouseClick += TestShownWordsButton_MouseClick;
                 TestShownWordsButton.Visible = true;
-            }
+            }*/
         }
 
-        private void TestShownWordsButton_MouseClick(object sender, EventArgs e)
+        /*private void TestShownWordsButton_MouseClick(object sender, EventArgs e)
         {
-            this.Hide();
-
             _initializeTestAction(this.Owner);
-        }
+
+            this.Close();
+        }*/
     }
 }

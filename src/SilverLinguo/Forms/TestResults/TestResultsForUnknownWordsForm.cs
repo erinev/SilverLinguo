@@ -35,7 +35,7 @@ namespace SilverLinguo.Forms.TestResults
             }
         }
 
-        private void LearnedWordsStatsLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LearnedWordsStatsLabel_LinkMouseClicke(object sender, MouseEventArgs mouseEventArgs)
         {
             string showWordsFormName = "Išmokti žodžiai:";
             var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _lernedWordsForStats);

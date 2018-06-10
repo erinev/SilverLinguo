@@ -1,4 +1,6 @@
-﻿namespace SilverLinguo.Forms
+﻿using System.Windows.Forms;
+
+namespace SilverLinguo.Forms
 {
     partial class AllWordsGrammarTestForm
     {
@@ -61,7 +63,7 @@
             this.ValidateWordButton.TabIndex = 54;
             this.ValidateWordButton.Text = "Tikrinti";
             this.ValidateWordButton.UseVisualStyleBackColor = false;
-            this.ValidateWordButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ValidateWordButton_MouseClick);
+            this.ValidateWordButton.MouseClick += new MouseEventHandler(this.ValidateWordButton_MouseClick);
             // 
             // CorrectWordTextBox
             // 
@@ -101,7 +103,7 @@
             this.NextWordButton.Text = "Kitas žodis";
             this.NextWordButton.UseVisualStyleBackColor = false;
             this.NextWordButton.Visible = false;
-            this.NextWordButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NextWordButton_MouseClick);
+            this.NextWordButton.MouseClick += new MouseEventHandler(this.NextWordButton_MouseClick);
             // 
             // FirstLanguageWordTextBox
             // 
@@ -144,7 +146,7 @@
             this.EndTestButton.TabIndex = 48;
             this.EndTestButton.Text = "Baigtį testą";
             this.EndTestButton.UseVisualStyleBackColor = false;
-            this.EndTestButton.Click += new System.EventHandler(this.EndTestButton_Click);
+            this.EndTestButton.MouseClick += new MouseEventHandler(this.EndTestButton_MouseClick);
             // 
             // EnHeaderLabel
             // 
@@ -175,7 +177,7 @@
             this.KnownWordsCountLinkLabel.TabIndex = 72;
             this.KnownWordsCountLinkLabel.TabStop = true;
             this.KnownWordsCountLinkLabel.Text = "0";
-            this.KnownWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.KnownWordsCountLinkLabel_LinkClicked);
+            this.KnownWordsCountLinkLabel.MouseClick += new MouseEventHandler(this.KnownWordsCountLinkLabel_LinkMouseClick);
             // 
             // KnownWordsCountHeaderLabel
             // 
@@ -196,7 +198,7 @@
             this.NewLearnedWordsCountLinkLabel.TabIndex = 70;
             this.NewLearnedWordsCountLinkLabel.TabStop = true;
             this.NewLearnedWordsCountLinkLabel.Text = "0";
-            this.NewLearnedWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.NewLearnedWordsCountLinkLabel_LinkClicked);
+            this.NewLearnedWordsCountLinkLabel.MouseClick += new MouseEventHandler(this.NewLearnedWordsCountLinkLabel_LinkMouseClick);
             // 
             // NewLearnedWordsCountHeaderLabel
             // 
@@ -217,7 +219,7 @@
             this.UnknownWordsCountLinkLabel.TabIndex = 68;
             this.UnknownWordsCountLinkLabel.TabStop = true;
             this.UnknownWordsCountLinkLabel.Text = "0";
-            this.UnknownWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.UnknownWordsCountLinkLabel_LinkClicked);
+            this.UnknownWordsCountLinkLabel.MouseClick += new MouseEventHandler(this.UnknownWordsCountLinkLabel_LinkMouseClick);
             // 
             // UnknownWordsCountHeaderLabel
             // 
@@ -238,7 +240,7 @@
             this.NewUnknownWordsCountLinkLabel.TabIndex = 66;
             this.NewUnknownWordsCountLinkLabel.TabStop = true;
             this.NewUnknownWordsCountLinkLabel.Text = "0";
-            this.NewUnknownWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.NewUnknownWordsCountLinkLabel_LinkClicked);
+            this.NewUnknownWordsCountLinkLabel.MouseClick += new MouseEventHandler(this.NewUnknownWordsCountLinkLabel_LinkMouseClick);
             // 
             // NewUnknownWordsCountHeaderLabel
             // 

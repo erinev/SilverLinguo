@@ -159,7 +159,7 @@ namespace SilverLinguo.Forms
                 _unknownWords);
         }
 
-        private void LearnedWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LearnedWordsCountLinkLabel_LinkMouseClicke(object sender, MouseEventArgs mouseEventArgs)
         {
             string showWordsFormName = "Išmokti žodžiai:";
             var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _learnedWords);
@@ -168,7 +168,7 @@ namespace SilverLinguo.Forms
             showWordsListByTypeForm.ShowDialog(this);
         }
 
-        private void EndTestButton_Click(object sender, EventArgs e)
+        private void EndTestButton_MouseClick(object sender, EventArgs e)
         {
             CommonFormService.HandelEndTestButtonPressedEvent(_unknownWords, HandleFinishedTest);
         }

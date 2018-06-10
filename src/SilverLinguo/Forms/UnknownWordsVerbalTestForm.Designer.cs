@@ -90,7 +90,7 @@ namespace SilverLinguo.Forms
             this.EndTestButton.TabIndex = 18;
             this.EndTestButton.Text = "Baigtį testą";
             this.EndTestButton.UseVisualStyleBackColor = false;
-            this.EndTestButton.Click += new System.EventHandler(this.EndTestButton_Click);
+            this.EndTestButton.MouseClick += new MouseEventHandler(this.EndTestButton_MouseClick);
             // 
             // EnHeaderLabel
             // 
