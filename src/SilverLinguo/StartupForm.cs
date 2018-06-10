@@ -7,6 +7,7 @@ using SilverLinguo.Forms.Helper;
 using SilverLinguo.Repositories.Models;
 using SilverLinguo.Services;
 using SilverLinguo.Services.Form;
+using SortOrder = SilverLinguo.Repositories.Models.SortOrder;
 
 namespace SilverLinguo
 {
@@ -50,6 +51,17 @@ namespace SilverLinguo
         private void AllWordListSelectionButton_Click(object sender, EventArgs e)
         {
             this.Hide();
+
+            if (CreatedAtLimitEnablingCheckBox.Checked)
+            {
+                var limitCriteria = new QueryCriteria
+                {
+                    OrderByCriteria = new OrderByCriteria { OrderBy = OrderBy.CreatedAt, SortOrder = SortOrder.DESC },
+                    Limit = (int?) CreatedAtLimitNumericUpDown.Value
+                };
+
+                _allWords = _wordsService.GetAllWords(shouldShuffle: false, queryCriteria: limitCriteria);
+            }
 
             SelectedLanguage selectedLanguage = GetSelectedLanguage();
 
@@ -138,6 +150,11 @@ namespace SilverLinguo
             }
 
             return selectedLanguage;
+        }
+
+        private void CreatedAtLimitEnablingCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            CreatedAtLimitNumericUpDown.Enabled = CreatedAtLimitEnablingCheckBox.Checked;
         }
     }
 }

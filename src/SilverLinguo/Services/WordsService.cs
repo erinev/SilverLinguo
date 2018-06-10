@@ -12,10 +12,8 @@ namespace SilverLinguo.Services
     public interface IWordsService
     {
         bool CheckIfWordsMatches(string suppliedWord, string expectedWord);
-        int GetAllWordsCount();
-        int GetUnknownWordsCount();
-        WordPair[] GetAllWords(bool shouldShuffle, string searchText = null);
-        WordPair[] GetUnknownWords(bool shouldShuffle);
+        WordPair[] GetAllWords(bool shouldShuffle, QueryCriteria queryCriteria = null);
+        WordPair[] GetUnknownWords(bool shouldShuffle, QueryCriteria queryCriteria = null);
         bool InsertNewUnknownWordIfDoesntExist(WordPair newUnknownWordCandidate);
         bool RemoveLearnedUnknownWordIfExist(WordPair learnedWord);
 
@@ -53,23 +51,9 @@ namespace SilverLinguo.Services
             return isEnteredValueIsEqualToExpectedValue;
         }
 
-        public int GetAllWordsCount()
+        public WordPair[] GetAllWords(bool shouldShuffle, QueryCriteria queryCriteria = null)
         {
-            WordPair[] words = _wordsRepository.GetAllWords();
-
-            return words.Length;
-        }
-
-        public int GetUnknownWordsCount()
-        {
-            WordPair[] unknownWords = _wordsRepository.GetUnknownWords();
-
-            return unknownWords.Length;
-        }
-
-        public WordPair[] GetAllWords(bool shouldShuffle, string searchText = null)
-        {
-            WordPair[] words = _wordsRepository.GetAllWords(searchText);
+            WordPair[] words = _wordsRepository.GetAllWords(queryCriteria);
 
             if (shouldShuffle)
             {
@@ -79,7 +63,7 @@ namespace SilverLinguo.Services
             return words;
         }
 
-        public WordPair[] GetUnknownWords(bool shouldShuffle)
+        public WordPair[] GetUnknownWords(bool shouldShuffle, QueryCriteria queryCriteria = null)
         {
             WordPair[] unknownWords = _wordsRepository.GetUnknownWords();
 

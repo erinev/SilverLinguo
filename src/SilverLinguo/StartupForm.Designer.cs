@@ -45,8 +45,12 @@ namespace SilverLinguo
             this.RandomRadioButton = new System.Windows.Forms.RadioButton();
             this.ShouldCheckGrammarCheckBox = new System.Windows.Forms.CheckBox();
             this.AdminPanelButton = new System.Windows.Forms.Button();
+            this.LimitOfNewlyCreatedWordsLabel = new System.Windows.Forms.Label();
+            this.CreatedAtLimitNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.CreatedAtLimitEnablingCheckBox = new System.Windows.Forms.CheckBox();
             this.UnknownWordsPanel.SuspendLayout();
             this.AllWordsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CreatedAtLimitNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // TestSelectionLabel
@@ -156,7 +160,7 @@ namespace SilverLinguo
             this.EndProgramButton.TabIndex = 7;
             this.EndProgramButton.Text = "Uždaryti programą";
             this.EndProgramButton.UseVisualStyleBackColor = false;
-            this.EndProgramButton.MouseClick += new MouseEventHandler(this.EndProgramButton_MouseClick);
+            this.EndProgramButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.EndProgramButton_MouseClick);
             // 
             // LithuanianLanguageRadioButton
             // 
@@ -199,7 +203,7 @@ namespace SilverLinguo
             // ShouldCheckGrammarCheckBox
             // 
             this.ShouldCheckGrammarCheckBox.AutoSize = true;
-            this.ShouldCheckGrammarCheckBox.Location = new System.Drawing.Point(217, 98);
+            this.ShouldCheckGrammarCheckBox.Location = new System.Drawing.Point(84, 101);
             this.ShouldCheckGrammarCheckBox.Name = "ShouldCheckGrammarCheckBox";
             this.ShouldCheckGrammarCheckBox.Size = new System.Drawing.Size(145, 21);
             this.ShouldCheckGrammarCheckBox.TabIndex = 11;
@@ -219,13 +223,54 @@ namespace SilverLinguo
             this.AdminPanelButton.UseVisualStyleBackColor = false;
             this.AdminPanelButton.Click += new System.EventHandler(this.AdminPanelButton_Click);
             // 
+            // LimitOfNewlyCreatedWordsLabel
+            // 
+            this.LimitOfNewlyCreatedWordsLabel.AutoSize = true;
+            this.LimitOfNewlyCreatedWordsLabel.Location = new System.Drawing.Point(282, 103);
+            this.LimitOfNewlyCreatedWordsLabel.Name = "LimitOfNewlyCreatedWordsLabel";
+            this.LimitOfNewlyCreatedWordsLabel.Size = new System.Drawing.Size(0, 17);
+            this.LimitOfNewlyCreatedWordsLabel.TabIndex = 15;
+            // 
+            // CreatedAtLimitNumericUpDown
+            // 
+            this.CreatedAtLimitNumericUpDown.Enabled = false;
+            this.CreatedAtLimitNumericUpDown.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.CreatedAtLimitNumericUpDown.Location = new System.Drawing.Point(513, 99);
+            this.CreatedAtLimitNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.CreatedAtLimitNumericUpDown.Name = "CreatedAtLimitNumericUpDown";
+            this.CreatedAtLimitNumericUpDown.Size = new System.Drawing.Size(58, 23);
+            this.CreatedAtLimitNumericUpDown.TabIndex = 16;
+            this.CreatedAtLimitNumericUpDown.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // CreatedAtLimitEnablingCheckBox
+            // 
+            this.CreatedAtLimitEnablingCheckBox.AutoSize = true;
+            this.CreatedAtLimitEnablingCheckBox.Location = new System.Drawing.Point(263, 101);
+            this.CreatedAtLimitEnablingCheckBox.Name = "CreatedAtLimitEnablingCheckBox";
+            this.CreatedAtLimitEnablingCheckBox.Size = new System.Drawing.Size(250, 21);
+            this.CreatedAtLimitEnablingCheckBox.TabIndex = 17;
+            this.CreatedAtLimitEnablingCheckBox.Text = "Žodžių kiekis (pagal sukūrimo datą)";
+            this.CreatedAtLimitEnablingCheckBox.UseVisualStyleBackColor = true;
+            this.CreatedAtLimitEnablingCheckBox.CheckedChanged += new System.EventHandler(this.CreatedAtLimitEnablingCheckBox_CheckedChanged);
+            // 
             // StartupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.EndProgramButton;
-            this.ClientSize = new System.Drawing.Size(632, 301);
+            this.ClientSize = new System.Drawing.Size(634, 301);
             this.ControlBox = false;
+            this.Controls.Add(this.CreatedAtLimitEnablingCheckBox);
+            this.Controls.Add(this.CreatedAtLimitNumericUpDown);
+            this.Controls.Add(this.LimitOfNewlyCreatedWordsLabel);
             this.Controls.Add(this.AdminPanelButton);
             this.Controls.Add(this.ShouldCheckGrammarCheckBox);
             this.Controls.Add(this.RandomRadioButton);
@@ -244,6 +289,7 @@ namespace SilverLinguo
             this.UnknownWordsPanel.PerformLayout();
             this.AllWordsPanel.ResumeLayout(false);
             this.AllWordsPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CreatedAtLimitNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,5 +312,8 @@ namespace SilverLinguo
         private System.Windows.Forms.RadioButton RandomRadioButton;
         private System.Windows.Forms.CheckBox ShouldCheckGrammarCheckBox;
         private System.Windows.Forms.Button AdminPanelButton;
+        private Label LimitOfNewlyCreatedWordsLabel;
+        private NumericUpDown CreatedAtLimitNumericUpDown;
+        private CheckBox CreatedAtLimitEnablingCheckBox;
     }
 }

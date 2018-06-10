@@ -90,6 +90,7 @@
     <Compile Include="Forms\TestResults\TestResultsForUnknownWordsForm.Designer.cs">
       <DependentUpon>TestResultsForUnknownWordsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\Models\QueryCriteria.cs" />
     <Compile Include="Services\Form\CommonFormService.cs" />
     <Compile Include="Services\Form\GrammarFormService.cs" />
     <Compile Include="Services\Form\VerbalFormService.cs" />

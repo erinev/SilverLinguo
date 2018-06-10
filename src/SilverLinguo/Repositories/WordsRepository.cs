@@ -10,8 +10,8 @@ namespace SilverLinguo.Repositories
 {
     public interface IWordsRepository
     {
-        WordPair[] GetAllWords(string searchText = null);
-        WordPair[] GetUnknownWords();
+        WordPair[] GetAllWords(QueryCriteria criteria = null);
+        WordPair[] GetUnknownWords(QueryCriteria criteria = null);
         bool CheckIfUnknownWordAlreadyExist(int wordId);
         bool AddNewUnknownWord(int wordId);
         bool RemoveLearnedUnknownWord(int wordId);
@@ -34,27 +34,24 @@ namespace SilverLinguo.Repositories
             _connectionString = $"Data Source={_dbFile};Version=3;UseUTF16Encoding=True;Password=FJtkLXz2aBeBARdW;";
         }
 
-        public WordPair[] GetAllWords(string searchText)
+        public WordPair[] GetAllWords(QueryCriteria criteria = null)
         {
             using (var dbConnection = new SQLiteConnection(_connectionString))
             {
                 dbConnection.Open();
 
+                object queryParameters = new {};
+
                 string getAllWordsQuery =
-                    @"SELECT 
+                    @"SELECT  
                         AW.Id, AW.FirstLanguageWord, AW.SecondLanguageWord, 
                         AW.LanguagePair, AW.CreatedAt, AW.ModifiedAt
                       FROM AllWords AW";
 
-                if (!string.IsNullOrEmpty(searchText))
+                if (criteria != null)
                 {
-                    string searchCriteria = 
-                        " WHERE AW.FirstLanguageWord LIKE @SearchCriteria OR AW.SecondLanguageWord LIKE @SearchCriteria";
-
-                    getAllWordsQuery += searchCriteria;
+                    queryParameters = PrepareQueryCriteria(criteria, ref getAllWordsQuery);
                 }
-
-                var queryParameters = new {SearchCriteria = $"%{searchText}%"};
                 
                 WordPair[] allWords = dbConnection.Query<WordPair>(getAllWordsQuery, queryParameters).ToArray();
 
@@ -62,7 +59,45 @@ namespace SilverLinguo.Repositories
             }
         }
 
-        public WordPair[] GetUnknownWords()
+        private static object PrepareQueryCriteria(QueryCriteria criteria, ref string getAllWordsQuery)
+        {
+            if (criteria.SearchText != null)
+            {
+                string searchCriteria =
+                    " WHERE AW.FirstLanguageWord LIKE @SearchCriteria OR AW.SecondLanguageWord LIKE @SearchCriteria";
+
+                getAllWordsQuery += searchCriteria;
+            }
+
+            if (criteria.OrderByCriteria != null)
+            {
+                string orderByCriteria = string.Empty;
+
+                if (criteria.OrderByCriteria.OrderBy == OrderBy.CreatedAt)
+                {
+                    orderByCriteria = $" ORDER BY datetime(AW.CreatedAt) {criteria.OrderByCriteria.SortOrder.ToString()}";
+                }
+
+                getAllWordsQuery += orderByCriteria;
+            }
+
+            if (criteria.Limit.HasValue)
+            {
+                string limitCriteria = " LIMIT @Limit";
+
+                getAllWordsQuery += limitCriteria;
+            }
+
+            object queryParameters = new
+            {
+                SearchCriteria = $"%{criteria.SearchText}%",
+                Limit = criteria.Limit ?? int.MaxValue
+            };
+
+            return queryParameters;
+        }
+
+        public WordPair[] GetUnknownWords(QueryCriteria criteria = null)
         {
             using (var dbConnection = new SQLiteConnection(_connectionString))
             {

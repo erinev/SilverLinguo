@@ -280,8 +280,13 @@ namespace SilverLinguo.Forms.AdminPanel
                 {
                     ClearAllWordsSearchButton.Visible = true;
 
+                    var searchCriteria = new QueryCriteria
+                    {
+                        SearchText = searchText
+                    };
+
                     var allWordsThatMatchedSearchCriteria =
-                        _wordsService.GetAllWords(shouldShuffle: false, searchText: searchText).ToList();
+                        _wordsService.GetAllWords(shouldShuffle: false, queryCriteria: searchCriteria).ToList();
 
                     List<WordPairForDataGridView> allWordsForDataGridView =
                         MapToDataGridViewStructure(allWordsThatMatchedSearchCriteria);
