@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace SilverLinguo
 {
@@ -166,7 +167,7 @@ namespace SilverLinguo
             // 
             this.LithuanianLanguageRadioButton.Image = global::SilverLinguo.Properties.Resources.LithuanianFlag;
             this.LithuanianLanguageRadioButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.LithuanianLanguageRadioButton.Location = new System.Drawing.Point(84, 55);
+            this.LithuanianLanguageRadioButton.Location = new System.Drawing.Point(104, 50);
             this.LithuanianLanguageRadioButton.Name = "LithuanianLanguageRadioButton";
             this.LithuanianLanguageRadioButton.Size = new System.Drawing.Size(132, 21);
             this.LithuanianLanguageRadioButton.TabIndex = 8;
@@ -179,7 +180,7 @@ namespace SilverLinguo
             // 
             this.EnglishRadioButton.Image = global::SilverLinguo.Properties.Resources.EnglishFlag;
             this.EnglishRadioButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.EnglishRadioButton.Location = new System.Drawing.Point(247, 55);
+            this.EnglishRadioButton.Location = new System.Drawing.Point(267, 50);
             this.EnglishRadioButton.Name = "EnglishRadioButton";
             this.EnglishRadioButton.Size = new System.Drawing.Size(115, 21);
             this.EnglishRadioButton.TabIndex = 9;
@@ -191,7 +192,7 @@ namespace SilverLinguo
             // RandomRadioButton
             // 
             this.RandomRadioButton.AutoSize = true;
-            this.RandomRadioButton.Location = new System.Drawing.Point(385, 55);
+            this.RandomRadioButton.Location = new System.Drawing.Point(405, 50);
             this.RandomRadioButton.Name = "RandomRadioButton";
             this.RandomRadioButton.Size = new System.Drawing.Size(79, 21);
             this.RandomRadioButton.TabIndex = 10;
@@ -203,7 +204,7 @@ namespace SilverLinguo
             // ShouldCheckGrammarCheckBox
             // 
             this.ShouldCheckGrammarCheckBox.AutoSize = true;
-            this.ShouldCheckGrammarCheckBox.Location = new System.Drawing.Point(84, 101);
+            this.ShouldCheckGrammarCheckBox.Location = new System.Drawing.Point(88, 102);
             this.ShouldCheckGrammarCheckBox.Name = "ShouldCheckGrammarCheckBox";
             this.ShouldCheckGrammarCheckBox.Size = new System.Drawing.Size(145, 21);
             this.ShouldCheckGrammarCheckBox.TabIndex = 11;
@@ -226,7 +227,7 @@ namespace SilverLinguo
             // LimitOfNewlyCreatedWordsLabel
             // 
             this.LimitOfNewlyCreatedWordsLabel.AutoSize = true;
-            this.LimitOfNewlyCreatedWordsLabel.Location = new System.Drawing.Point(282, 103);
+            this.LimitOfNewlyCreatedWordsLabel.Location = new System.Drawing.Point(281, 100);
             this.LimitOfNewlyCreatedWordsLabel.Name = "LimitOfNewlyCreatedWordsLabel";
             this.LimitOfNewlyCreatedWordsLabel.Size = new System.Drawing.Size(0, 17);
             this.LimitOfNewlyCreatedWordsLabel.TabIndex = 15;
@@ -235,7 +236,7 @@ namespace SilverLinguo
             // 
             this.CreatedAtLimitNumericUpDown.Enabled = false;
             this.CreatedAtLimitNumericUpDown.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.CreatedAtLimitNumericUpDown.Location = new System.Drawing.Point(513, 99);
+            this.CreatedAtLimitNumericUpDown.Location = new System.Drawing.Point(503, 100);
             this.CreatedAtLimitNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
@@ -249,11 +250,12 @@ namespace SilverLinguo
             0,
             0,
             0});
+            this.CreatedAtLimitNumericUpDown.Leave += new System.EventHandler(this.CreatedAtLimitNumericUpDown_Leave);
             // 
             // CreatedAtLimitEnablingCheckBox
             // 
             this.CreatedAtLimitEnablingCheckBox.AutoSize = true;
-            this.CreatedAtLimitEnablingCheckBox.Location = new System.Drawing.Point(263, 101);
+            this.CreatedAtLimitEnablingCheckBox.Location = new System.Drawing.Point(253, 102);
             this.CreatedAtLimitEnablingCheckBox.Name = "CreatedAtLimitEnablingCheckBox";
             this.CreatedAtLimitEnablingCheckBox.Size = new System.Drawing.Size(250, 21);
             this.CreatedAtLimitEnablingCheckBox.TabIndex = 17;

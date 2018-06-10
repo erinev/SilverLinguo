@@ -32,23 +32,23 @@ namespace SilverLinguo.Forms.AdminPanel
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.AdminPanelTabControl = new System.Windows.Forms.TabControl();
             this.AllWordsTabPage = new System.Windows.Forms.TabPage();
+            this.ClearAllWordsSearchButton = new System.Windows.Forms.Button();
             this.SearchAllWordsButton = new System.Windows.Forms.Button();
             this.AllWordsSearchTextBox = new System.Windows.Forms.TextBox();
             this.SaveChangesButton = new System.Windows.Forms.Button();
             this.ReloadAllWordsGridViewButton = new System.Windows.Forms.Button();
             this.AllWordsDataGridView = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstLanguageWordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DirtyRowUuid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.secondLanguageWordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wordPairForDataGridViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.UnknownWordsTabPage = new System.Windows.Forms.TabPage();
             this.AdminTabPage = new System.Windows.Forms.TabPage();
             this.GoBackToStartupFormButton = new System.Windows.Forms.Button();
-            this.firstLanguageWordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.secondLanguageWordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.wordPairForDataGridViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ClearAllWordsSearchButton = new System.Windows.Forms.Button();
             this.AdminPanelTabControl.SuspendLayout();
             this.AllWordsTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AllWordsDataGridView)).BeginInit();
@@ -84,6 +84,20 @@ namespace SilverLinguo.Forms.AdminPanel
             this.AllWordsTabPage.Text = "Visi žodžiai";
             this.AllWordsTabPage.UseVisualStyleBackColor = true;
             // 
+            // ClearAllWordsSearchButton
+            // 
+            this.ClearAllWordsSearchButton.BackColor = System.Drawing.Color.DarkKhaki;
+            this.ClearAllWordsSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ClearAllWordsSearchButton.Location = new System.Drawing.Point(6, 7);
+            this.ClearAllWordsSearchButton.Name = "ClearAllWordsSearchButton";
+            this.ClearAllWordsSearchButton.Padding = new System.Windows.Forms.Padding(2);
+            this.ClearAllWordsSearchButton.Size = new System.Drawing.Size(105, 32);
+            this.ClearAllWordsSearchButton.TabIndex = 20;
+            this.ClearAllWordsSearchButton.Text = "Išvalyti paieška";
+            this.ClearAllWordsSearchButton.UseVisualStyleBackColor = false;
+            this.ClearAllWordsSearchButton.Visible = false;
+            this.ClearAllWordsSearchButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ClearAllWordsSearchButton_Click);
+            // 
             // SearchAllWordsButton
             // 
             this.SearchAllWordsButton.BackColor = System.Drawing.Color.CornflowerBlue;
@@ -95,7 +109,7 @@ namespace SilverLinguo.Forms.AdminPanel
             this.SearchAllWordsButton.TabIndex = 19;
             this.SearchAllWordsButton.Text = "Ieškoti";
             this.SearchAllWordsButton.UseVisualStyleBackColor = false;
-            this.SearchAllWordsButton.MouseClick += new MouseEventHandler(this.SearchAllWordsButton_Click);
+            this.SearchAllWordsButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SearchAllWordsButton_Click);
             // 
             // AllWordsSearchTextBox
             // 
@@ -110,34 +124,34 @@ namespace SilverLinguo.Forms.AdminPanel
             // 
             this.SaveChangesButton.BackColor = System.Drawing.Color.YellowGreen;
             this.SaveChangesButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SaveChangesButton.Location = new System.Drawing.Point(813, 6);
+            this.SaveChangesButton.Location = new System.Drawing.Point(707, 9);
             this.SaveChangesButton.Name = "SaveChangesButton";
             this.SaveChangesButton.Padding = new System.Windows.Forms.Padding(2);
             this.SaveChangesButton.Size = new System.Drawing.Size(100, 32);
             this.SaveChangesButton.TabIndex = 17;
             this.SaveChangesButton.Text = "Išsaugoti";
             this.SaveChangesButton.UseVisualStyleBackColor = false;
-            this.SaveChangesButton.MouseClick += new MouseEventHandler(this.SaveChangesButton_Click);
+            this.SaveChangesButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SaveChangesButton_Click);
             // 
             // ReloadAllWordsGridViewButton
             // 
             this.ReloadAllWordsGridViewButton.BackColor = System.Drawing.Color.Orange;
             this.ReloadAllWordsGridViewButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ReloadAllWordsGridViewButton.Location = new System.Drawing.Point(707, 7);
+            this.ReloadAllWordsGridViewButton.Location = new System.Drawing.Point(813, 9);
             this.ReloadAllWordsGridViewButton.Name = "ReloadAllWordsGridViewButton";
             this.ReloadAllWordsGridViewButton.Padding = new System.Windows.Forms.Padding(2);
             this.ReloadAllWordsGridViewButton.Size = new System.Drawing.Size(100, 32);
             this.ReloadAllWordsGridViewButton.TabIndex = 16;
             this.ReloadAllWordsGridViewButton.Text = "Atstatyti";
             this.ReloadAllWordsGridViewButton.UseVisualStyleBackColor = false;
-            this.ReloadAllWordsGridViewButton.MouseClick += new MouseEventHandler(this.ReloadAllWordsGridViewButton_Click);
+            this.ReloadAllWordsGridViewButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ReloadAllWordsGridViewButton_Click);
             // 
             // AllWordsDataGridView
             // 
             this.AllWordsDataGridView.AllowUserToResizeColumns = false;
             this.AllWordsDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LemonChiffon;
-            this.AllWordsDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LemonChiffon;
+            this.AllWordsDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.AllWordsDataGridView.AutoGenerateColumns = false;
             this.AllWordsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.AllWordsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -164,12 +178,34 @@ namespace SilverLinguo.Forms.AdminPanel
             this.Id.ReadOnly = true;
             this.Id.Visible = false;
             // 
+            // firstLanguageWordDataGridViewTextBoxColumn
+            // 
+            this.firstLanguageWordDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.firstLanguageWordDataGridViewTextBoxColumn.DataPropertyName = "FirstLanguageWord";
+            this.firstLanguageWordDataGridViewTextBoxColumn.HeaderText = "Lietuviškas žodis";
+            this.firstLanguageWordDataGridViewTextBoxColumn.MinimumWidth = 317;
+            this.firstLanguageWordDataGridViewTextBoxColumn.Name = "firstLanguageWordDataGridViewTextBoxColumn";
+            this.firstLanguageWordDataGridViewTextBoxColumn.Width = 317;
+            // 
             // DirtyRowUuid
             // 
             this.DirtyRowUuid.DataPropertyName = "DirtyRowUuid";
             this.DirtyRowUuid.HeaderText = "DirtyRowUuid";
             this.DirtyRowUuid.Name = "DirtyRowUuid";
             this.DirtyRowUuid.Visible = false;
+            // 
+            // secondLanguageWordDataGridViewTextBoxColumn
+            // 
+            this.secondLanguageWordDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.secondLanguageWordDataGridViewTextBoxColumn.DataPropertyName = "SecondLanguageWord";
+            this.secondLanguageWordDataGridViewTextBoxColumn.HeaderText = "Angliškas žodis";
+            this.secondLanguageWordDataGridViewTextBoxColumn.MinimumWidth = 317;
+            this.secondLanguageWordDataGridViewTextBoxColumn.Name = "secondLanguageWordDataGridViewTextBoxColumn";
+            this.secondLanguageWordDataGridViewTextBoxColumn.Width = 317;
+            // 
+            // wordPairForDataGridViewBindingSource
+            // 
+            this.wordPairForDataGridViewBindingSource.DataSource = typeof(SilverLinguo.Dto.WordPairForDataGridView);
             // 
             // UnknownWordsTabPage
             // 
@@ -197,50 +233,14 @@ namespace SilverLinguo.Forms.AdminPanel
             // 
             this.GoBackToStartupFormButton.BackColor = System.Drawing.Color.Yellow;
             this.GoBackToStartupFormButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.GoBackToStartupFormButton.Location = new System.Drawing.Point(819, 12);
+            this.GoBackToStartupFormButton.Location = new System.Drawing.Point(819, 10);
             this.GoBackToStartupFormButton.Name = "GoBackToStartupFormButton";
             this.GoBackToStartupFormButton.Padding = new System.Windows.Forms.Padding(2);
             this.GoBackToStartupFormButton.Size = new System.Drawing.Size(100, 32);
             this.GoBackToStartupFormButton.TabIndex = 15;
             this.GoBackToStartupFormButton.Text = "Grįžti atgal";
             this.GoBackToStartupFormButton.UseVisualStyleBackColor = false;
-            this.GoBackToStartupFormButton.MouseClick += new MouseEventHandler(this.GoBackToStartupFormButton_Click);
-            // 
-            // firstLanguageWordDataGridViewTextBoxColumn
-            // 
-            this.firstLanguageWordDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.firstLanguageWordDataGridViewTextBoxColumn.DataPropertyName = "FirstLanguageWord";
-            this.firstLanguageWordDataGridViewTextBoxColumn.HeaderText = "Lietuviškas žodis";
-            this.firstLanguageWordDataGridViewTextBoxColumn.MinimumWidth = 317;
-            this.firstLanguageWordDataGridViewTextBoxColumn.Name = "firstLanguageWordDataGridViewTextBoxColumn";
-            this.firstLanguageWordDataGridViewTextBoxColumn.Width = 317;
-            // 
-            // secondLanguageWordDataGridViewTextBoxColumn
-            // 
-            this.secondLanguageWordDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.secondLanguageWordDataGridViewTextBoxColumn.DataPropertyName = "SecondLanguageWord";
-            this.secondLanguageWordDataGridViewTextBoxColumn.HeaderText = "Angliškas žodis";
-            this.secondLanguageWordDataGridViewTextBoxColumn.MinimumWidth = 317;
-            this.secondLanguageWordDataGridViewTextBoxColumn.Name = "secondLanguageWordDataGridViewTextBoxColumn";
-            this.secondLanguageWordDataGridViewTextBoxColumn.Width = 317;
-            // 
-            // wordPairForDataGridViewBindingSource
-            // 
-            this.wordPairForDataGridViewBindingSource.DataSource = typeof(SilverLinguo.Dto.WordPairForDataGridView);
-            // 
-            // ClearAllWordsSearchButton
-            // 
-            this.ClearAllWordsSearchButton.BackColor = System.Drawing.Color.DarkKhaki;
-            this.ClearAllWordsSearchButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ClearAllWordsSearchButton.Location = new System.Drawing.Point(6, 7);
-            this.ClearAllWordsSearchButton.Name = "ClearAllWordsSearchButton";
-            this.ClearAllWordsSearchButton.Padding = new System.Windows.Forms.Padding(2);
-            this.ClearAllWordsSearchButton.Size = new System.Drawing.Size(105, 32);
-            this.ClearAllWordsSearchButton.TabIndex = 20;
-            this.ClearAllWordsSearchButton.Text = "Išvalyti paieška";
-            this.ClearAllWordsSearchButton.UseVisualStyleBackColor = false;
-            this.ClearAllWordsSearchButton.Visible = false;
-            this.ClearAllWordsSearchButton.MouseClick += new MouseEventHandler(this.ClearAllWordsSearchButton_Click);
+            this.GoBackToStartupFormButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GoBackToStartupFormButton_Click);
             // 
             // AdminPanelForm
             // 
@@ -258,7 +258,6 @@ namespace SilverLinguo.Forms.AdminPanel
             this.Text = "SilverLinguo™ - Redaktorius";
             this.Load += new System.EventHandler(this.AdminPanelForm_Load);
             this.Shown += new System.EventHandler(this.AdminPanelForm_Shown);
-            this.KeyPreview = true;
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AdminPanelForm_KeyUp);
             this.AdminPanelTabControl.ResumeLayout(false);
             this.AllWordsTabPage.ResumeLayout(false);

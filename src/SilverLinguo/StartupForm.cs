@@ -38,6 +38,8 @@ namespace SilverLinguo
             int allWordsCount = _allWords.Length;
             int unknownWordsCount = _unknownWords.Length;
 
+            CreatedAtLimitNumericUpDown.Maximum = allWordsCount;
+
             AllWordsPanel.Visible = allWordsCount > 0;
             UnknownWordsPanel.Visible = unknownWordsCount > 0;
 
@@ -123,6 +125,20 @@ namespace SilverLinguo
             passwordConfirmationForm.Show();
         }
 
+        private void CreatedAtLimitEnablingCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            CreatedAtLimitNumericUpDown.Enabled = CreatedAtLimitEnablingCheckBox.Checked;
+        }
+
+        private void CreatedAtLimitNumericUpDown_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(CreatedAtLimitNumericUpDown.Text))
+            {
+                CreatedAtLimitNumericUpDown.Text = @"1";
+                CreatedAtLimitNumericUpDown.Value = 1;
+            }
+        }
+
         private void EndProgramButton_MouseClick(object sender, EventArgs e)
         {
             CommonFormService.CloseProgram();
@@ -150,11 +166,6 @@ namespace SilverLinguo
             }
 
             return selectedLanguage;
-        }
-
-        private void CreatedAtLimitEnablingCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            CreatedAtLimitNumericUpDown.Enabled = CreatedAtLimitEnablingCheckBox.Checked;
         }
     }
 }
