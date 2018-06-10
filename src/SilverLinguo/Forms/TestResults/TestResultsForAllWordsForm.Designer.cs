@@ -155,9 +155,9 @@ namespace SilverLinguo.Forms.TestResults
             this.TestUnknownWordsButton.Enabled = false;
             this.TestUnknownWordsButton.Location = new System.Drawing.Point(522, 75);
             this.TestUnknownWordsButton.Name = "TestUnknownWordsButton";
-            this.TestUnknownWordsButton.Size = new System.Drawing.Size(40, 25);
+            this.TestUnknownWordsButton.Size = new System.Drawing.Size(69, 25);
             this.TestUnknownWordsButton.TabIndex = 85;
-            this.TestUnknownWordsButton.Text = "Test";
+            this.TestUnknownWordsButton.Text = "Testuoti";
             this.TestUnknownWordsButton.UseVisualStyleBackColor = false;
             this.TestUnknownWordsButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TestUnknownWordsButton_MouseClick);
             // 
@@ -168,9 +168,9 @@ namespace SilverLinguo.Forms.TestResults
             this.TestNewUnknownWordsButton.Enabled = false;
             this.TestNewUnknownWordsButton.Location = new System.Drawing.Point(522, 26);
             this.TestNewUnknownWordsButton.Name = "TestNewUnknownWordsButton";
-            this.TestNewUnknownWordsButton.Size = new System.Drawing.Size(40, 25);
+            this.TestNewUnknownWordsButton.Size = new System.Drawing.Size(69, 25);
             this.TestNewUnknownWordsButton.TabIndex = 86;
-            this.TestNewUnknownWordsButton.Text = "Test";
+            this.TestNewUnknownWordsButton.Text = "Testuoti";
             this.TestNewUnknownWordsButton.UseVisualStyleBackColor = false;
             this.TestNewUnknownWordsButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TestNewUnknownWordsButton_MouseClick);
             // 
