@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Forms;
 using SilverLinguo.Constants;
 using SilverLinguo.Dto;
-using SilverLinguo.Forms.Helper;
 using SilverLinguo.Repositories.Models;
 using SilverLinguo.Services;
 using SilverLinguo.Services.Form;
@@ -67,15 +66,29 @@ namespace SilverLinguo.Forms.AdminPanel
 
         private void AdminPanelForm_KeyUp(object sender, KeyEventArgs keyEventArgs)
         {
+            bool allWordsTabSelected = AdminPanelTabControl.SelectedTab.Tag.ToString() == _allWordsTabTagValue;
+
             if (keyEventArgs.KeyValue == KeyCodes.Enter)
             {
-                if (AdminPanelTabControl.SelectedTab.Tag.ToString() == _allWordsTabTagValue)
+                if (allWordsTabSelected)
                 {
                     HandleSearchAllWordsButtonClickedEvent();
 
                     keyEventArgs.Handled = true;
                 }
-            }
+            } 
+            /*else if (keyEventArgs.KeyValue == KeyCodes.SomeOtherKey) //TODO: Backspace is used for deleting while typing
+            {
+                if (allWordsTabSelected)
+                {
+                    if (ClearAllWordsSearchButton.Enabled)
+                    {
+                        HandleClearAllWordsSearchButtonClickedEvent();
+                    }
+                    
+                    keyEventArgs.Handled = true;
+                }
+            }*/
         }
 
         private void GoBackToStartupFormButton_Click(object sender, EventArgs e)
@@ -190,47 +203,9 @@ namespace SilverLinguo.Forms.AdminPanel
             HandleSearchAllWordsButtonClickedEvent();
         }
 
-        private void HandleSearchAllWordsButtonClickedEvent()
-        {
-            string searchText = AllWordsSearchTextBox.Text;
-
-            if (string.IsNullOrWhiteSpace(searchText)) return;
-
-            CommonFormService.ShowConfirmAction(
-                "Žodžio paieška",
-                "Ar tikrai norite ieškoti žodžio ? (neišaugoti pakeitimai bus atšaukti)",
-                () =>
-                {
-                    ClearAllWordsSearchButton.Visible = true;
-
-                    var allWordsThatMatchedSearchCriteria =
-                        _wordsService.GetAllWords(shouldShuffle: false, searchText: searchText).ToList();
-
-                    List<WordPairForDataGridView> allWordsForDataGridView =
-                        MapToDataGridViewStructure(allWordsThatMatchedSearchCriteria);
-
-                    _allWordsBindingSource.DataSource = allWordsForDataGridView;
-                });
-
-        }
-
         private void ClearAllWordsSearchButton_Click(object sender, EventArgs e)
         {
-            CommonFormService.ShowConfirmAction(
-                "Išvalyti paieška",
-                "Ar tikrai norite išvalyti paieška ir užkrauti visus žodžius ? (neišaugoti pakeitimai bus atšaukti)",
-                () =>
-                {
-                    var allWords = _wordsService.GetAllWords(shouldShuffle: false).ToList();
-
-                    List<WordPairForDataGridView> allWordsForDataGridView = MapToDataGridViewStructure(allWords);
-
-                    _allWordsBindingSource.DataSource = allWordsForDataGridView;
-
-                    AllWordsSearchTextBox.Text = string.Empty;
-
-                    ClearAllWordsSearchButton.Visible = false;
-                });
+            HandleClearAllWordsSearchButtonClickedEvent();
         }
 
         private void ReloadAllWordsGridViewButton_Click(object sender, EventArgs e)
@@ -289,6 +264,48 @@ namespace SilverLinguo.Forms.AdminPanel
                     {
                         ReloadAllWordsToDataGridView();
                     }
+                });
+        }
+
+        private void HandleSearchAllWordsButtonClickedEvent()
+        {
+            string searchText = AllWordsSearchTextBox.Text;
+
+            if (string.IsNullOrWhiteSpace(searchText)) return;
+
+            CommonFormService.ShowConfirmAction(
+                "Žodžio paieška",
+                "Ar tikrai norite ieškoti žodžio ? (neišaugoti pakeitimai bus atšaukti)",
+                () =>
+                {
+                    ClearAllWordsSearchButton.Visible = true;
+
+                    var allWordsThatMatchedSearchCriteria =
+                        _wordsService.GetAllWords(shouldShuffle: false, searchText: searchText).ToList();
+
+                    List<WordPairForDataGridView> allWordsForDataGridView =
+                        MapToDataGridViewStructure(allWordsThatMatchedSearchCriteria);
+
+                    _allWordsBindingSource.DataSource = allWordsForDataGridView;
+                });
+        }
+
+        private void HandleClearAllWordsSearchButtonClickedEvent()
+        {
+            CommonFormService.ShowConfirmAction(
+                "Atšaukti paieška",
+                "Ar tikrai norite atšaukti paieška ir užkrauti visus žodžius ? (neišaugoti pakeitimai bus atšaukti)",
+                () =>
+                {
+                    var allWords = _wordsService.GetAllWords(shouldShuffle: false).ToList();
+
+                    List<WordPairForDataGridView> allWordsForDataGridView = MapToDataGridViewStructure(allWords);
+
+                    _allWordsBindingSource.DataSource = allWordsForDataGridView;
+
+                    AllWordsSearchTextBox.Text = string.Empty;
+
+                    ClearAllWordsSearchButton.Visible = false;
                 });
         }
 
