@@ -51,6 +51,18 @@ namespace SilverLinguo.Services.Form
             progressLabel.Text = leftWordsCount.ToString();
         }
 
+        public static void CloseProgram()
+        {
+            if (Application.MessageLoop) 
+            {
+                Application.Exit();
+            }
+            else
+            {
+                Environment.Exit(1);
+            }
+        }
+
         private static void timer_Tick(object sender, EventArgs args, Label testTimerLabel, Stopwatch stopwatch)
         {
             testTimerLabel.Text = stopwatch.Elapsed.Hours.ToString("00") + @":" +

@@ -6,6 +6,7 @@ using SilverLinguo.Forms.AdminPanel;
 using SilverLinguo.Forms.Helper;
 using SilverLinguo.Repositories.Models;
 using SilverLinguo.Services;
+using SilverLinguo.Services.Form;
 
 namespace SilverLinguo
 {
@@ -110,9 +111,9 @@ namespace SilverLinguo
             passwordConfirmationForm.Show();
         }
 
-        private void EndProgramButton_Click(object sender, EventArgs e)
+        private void EndProgramButton_MouseClick(object sender, EventArgs e)
         {
-            this.Close();
+            CommonFormService.CloseProgram();
         }
 
         private SelectedLanguage GetSelectedLanguage()

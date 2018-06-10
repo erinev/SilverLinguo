@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 using SilverLinguo.Enums;
+using SilverLinguo.Services.Form;
 
 namespace SilverLinguo.Forms.TestResults
 {
@@ -73,7 +74,7 @@ namespace SilverLinguo.Forms.TestResults
 
         private void EndProgramButton_MouseClick(object sender, EventArgs e)
         {
-            this.Close();
+            CommonFormService.CloseProgram();
         }
     }
 }

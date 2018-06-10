@@ -1,4 +1,6 @@
-﻿namespace SilverLinguo
+﻿using System.Windows.Forms;
+
+namespace SilverLinguo
 {
     partial class StartupForm
     {
@@ -154,7 +156,7 @@
             this.EndProgramButton.TabIndex = 7;
             this.EndProgramButton.Text = "Uždaryti programą";
             this.EndProgramButton.UseVisualStyleBackColor = false;
-            this.EndProgramButton.Click += new System.EventHandler(this.EndProgramButton_Click);
+            this.EndProgramButton.MouseClick += new MouseEventHandler(this.EndProgramButton_MouseClick);
             // 
             // LithuanianLanguageRadioButton
             // 
