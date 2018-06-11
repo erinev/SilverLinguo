@@ -23,6 +23,9 @@ namespace SilverLinguo.Forms.AdminPanel
         private int _dirtyRowUuidCellIndex = 2;
         private int _secondLanguageWordCellIndex = 3;
 
+        private string[] _originalFirstLanguageAllWords;
+        private string[] _originalSecondLanguageAllWords;
+
         private readonly List<WordPairForDataGridView> _wordsToDeleteOnSave = new List<WordPairForDataGridView>();
 
         private InputLanguage _originalInputLanguage = InputLanguage.DefaultInputLanguage;
@@ -46,11 +49,45 @@ namespace SilverLinguo.Forms.AdminPanel
         {
             List<WordPair> allWords = _wordsService.GetAllWords(_orderByCreatedAtAscCriteria).ToList();
 
+            _originalFirstLanguageAllWords = allWords.Select(w => w.FirstLanguageWord).ToArray();
+            _originalSecondLanguageAllWords = allWords.Select(w => w.SecondLanguageWord).ToArray();
+
             List<WordPairForDataGridView> allWordsForDataGridView = MapToDataGridViewStructure(allWords);
 
             _allWordsBindingSource.DataSource = allWordsForDataGridView;
 
             AllWordsDataGridView.DataSource = _allWordsBindingSource;
+        }
+
+        private bool CheckIfAnyChangesMade()
+        {
+            var currentWords = (IEnumerable<WordPairForDataGridView>) _allWordsBindingSource.DataSource;
+            var currentWordsArray = currentWords.ToArray();
+
+            string[] currentFirstLanguageWords = currentWordsArray.Select(w => w.FirstLanguageWord).ToArray();
+            string[] currentSecondLanguageWords = currentWordsArray.Select(w => w.SecondLanguageWord).ToArray();
+
+            bool firstLanguageWordsNotChanged = ArraysEqual(_originalFirstLanguageAllWords, currentFirstLanguageWords);
+            bool secondLanguageWordsNotChanged = ArraysEqual(_originalSecondLanguageAllWords, currentSecondLanguageWords);
+
+            return !firstLanguageWordsNotChanged || !secondLanguageWordsNotChanged;
+        }
+
+        static bool ArraysEqual(string[] expectedArray, string[] currentArray)
+        {
+            string[] sortedExpectedArray = expectedArray
+                .Select(i => i.Trim().ToLowerInvariant())
+                .OrderBy(i => i)
+                .ToArray();
+
+            string[] sortedCurrentArray = currentArray
+                .Select(i => i.Trim().ToLowerInvariant())
+                .OrderBy(i => i)
+                .ToArray();
+
+            bool arraysIsEqual = sortedExpectedArray.SequenceEqual(sortedCurrentArray);
+
+            return arraysIsEqual;
         }
 
         private void AdminPanelForm_Shown(object sender, EventArgs e)
@@ -72,9 +109,9 @@ namespace SilverLinguo.Forms.AdminPanel
 
         private void AdminPanelForm_KeyUp(object sender, KeyEventArgs keyEventArgs)
         {
-            bool allWordsTabSelected = AdminPanelTabControl.SelectedTab.Tag.ToString() == _allWordsTabTagValue;
+            /*bool allWordsTabSelected = AdminPanelTabControl.SelectedTab.Tag.ToString() == _allWordsTabTagValue;
 
-            if (keyEventArgs.KeyValue == KeyCodes.Enter)
+            if (keyEventArgs.KeyValue == KeyCodes.SomeKey)
             {
                 if (allWordsTabSelected)
                 {
@@ -82,8 +119,8 @@ namespace SilverLinguo.Forms.AdminPanel
 
                     keyEventArgs.Handled = true;
                 }
-            } 
-            /*else if (keyEventArgs.KeyValue == KeyCodes.SomeOtherKey) //TODO: Backspace is used for deleting while typing
+            } */
+            /*else if (keyEventArgs.KeyValue == KeyCodes.SomeKey)
             {
                 if (allWordsTabSelected)
                 {
@@ -99,6 +136,8 @@ namespace SilverLinguo.Forms.AdminPanel
 
         private void GoBackToStartupFormButton_Click(object sender, EventArgs e)
         {
+            bool anyChangesMade = CheckIfAnyChangesMade();
+
             CommonFormService.ShowConfirmAction(
                 "Grįžti atgal",
                 "Ar tikrai norite grįžti į pradžios formą ? (neišaugoti pakeitimai bus atšaukti)",
@@ -140,15 +179,17 @@ namespace SilverLinguo.Forms.AdminPanel
 
                 var currentWords = (IEnumerable<WordPairForDataGridView>) _allWordsBindingSource.DataSource;
 
-                if (string.IsNullOrEmpty(firstLanguageWordCell.EditedFormattedValue.ToString()) &&
+                if (string.IsNullOrEmpty(firstLanguageWordCell.EditedFormattedValue.ToString()) ||
+                    firstLanguageWordCell.EditedFormattedValue.ToString() != initialFirstLanguageWord &&
                     !string.IsNullOrEmpty(initialFirstLanguageWord))
                 {
                     // somehow cell value is wiped after i set _dirtyRowUuidCell value in few lines above
                     // so restoring to initial entered value
                     firstLanguageWordCell.Value = initialFirstLanguageWord;
                 }
-                if (string.IsNullOrEmpty(secondLanguageWordCell.EditedFormattedValue.ToString()) && 
-                         !string.IsNullOrEmpty(initialSecondLanguageWord))
+                if (string.IsNullOrEmpty(secondLanguageWordCell.EditedFormattedValue.ToString()) ||
+                    secondLanguageWordCell.EditedFormattedValue.ToString() != initialSecondLanguageWord &&
+                    !string.IsNullOrEmpty(initialSecondLanguageWord))
                 {
                     // somehow cell value is wiped after i set _dirtyRowUuidCell value in few lines above
                     // so restoring to initial entered value
@@ -206,6 +247,8 @@ namespace SilverLinguo.Forms.AdminPanel
 
         private void SearchAllWordsButton_Click(object sender, EventArgs e)
         {
+            bool anyChangesMade = CheckIfAnyChangesMade();
+
             HandleSearchAllWordsButtonClickedEvent();
         }
 
@@ -216,6 +259,8 @@ namespace SilverLinguo.Forms.AdminPanel
 
         private void ReloadAllWordsGridViewButton_Click(object sender, EventArgs e)
         {
+            bool anyChangesMade = CheckIfAnyChangesMade();
+
             CommonFormService.ShowConfirmAction(
                 "Atstatyti žodžius",
                 "Ar tikrai norite atstatyti žodžius iš duomenų bazės ? (neišaugoti pakeitimai bus atšaukti)",
@@ -229,6 +274,8 @@ namespace SilverLinguo.Forms.AdminPanel
 
         private void SaveChangesButton_Click(object sender, EventArgs e)
         {
+            bool anyChangesMade = CheckIfAnyChangesMade();
+
             CommonFormService.ShowConfirmAction(
                 "Išsaugoti pakeitimus",
                 "Ar tikrai norite išsaugoti pakeitimus ? (ištrinti žodžiai nus pašalinti iš duomenų bazės)",
