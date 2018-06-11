@@ -32,7 +32,7 @@ namespace SilverLinguo.Forms.AdminPanel
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.AdminPanelTabControl = new System.Windows.Forms.TabControl();
             this.AllWordsTabPage = new System.Windows.Forms.TabPage();
             this.ClearAllWordsSearchButton = new System.Windows.Forms.Button();
@@ -124,6 +124,7 @@ namespace SilverLinguo.Forms.AdminPanel
             // 
             this.SaveChangesButton.BackColor = System.Drawing.Color.YellowGreen;
             this.SaveChangesButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SaveChangesButton.Enabled = false;
             this.SaveChangesButton.Location = new System.Drawing.Point(707, 9);
             this.SaveChangesButton.Name = "SaveChangesButton";
             this.SaveChangesButton.Padding = new System.Windows.Forms.Padding(2);
@@ -137,6 +138,7 @@ namespace SilverLinguo.Forms.AdminPanel
             // 
             this.ReloadAllWordsGridViewButton.BackColor = System.Drawing.Color.Orange;
             this.ReloadAllWordsGridViewButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ReloadAllWordsGridViewButton.Enabled = false;
             this.ReloadAllWordsGridViewButton.Location = new System.Drawing.Point(813, 9);
             this.ReloadAllWordsGridViewButton.Name = "ReloadAllWordsGridViewButton";
             this.ReloadAllWordsGridViewButton.Padding = new System.Windows.Forms.Padding(2);
@@ -150,8 +152,8 @@ namespace SilverLinguo.Forms.AdminPanel
             // 
             this.AllWordsDataGridView.AllowUserToResizeColumns = false;
             this.AllWordsDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LemonChiffon;
-            this.AllWordsDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LemonChiffon;
+            this.AllWordsDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.AllWordsDataGridView.AutoGenerateColumns = false;
             this.AllWordsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.AllWordsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {

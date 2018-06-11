@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-using SilverLinguo.Constants;
 using SilverLinguo.Dto;
 using SilverLinguo.Repositories.Models;
 using SilverLinguo.Services;
@@ -59,37 +58,6 @@ namespace SilverLinguo.Forms.AdminPanel
             AllWordsDataGridView.DataSource = _allWordsBindingSource;
         }
 
-        private bool CheckIfAnyChangesMade()
-        {
-            var currentWords = (IEnumerable<WordPairForDataGridView>) _allWordsBindingSource.DataSource;
-            var currentWordsArray = currentWords.ToArray();
-
-            string[] currentFirstLanguageWords = currentWordsArray.Select(w => w.FirstLanguageWord).ToArray();
-            string[] currentSecondLanguageWords = currentWordsArray.Select(w => w.SecondLanguageWord).ToArray();
-
-            bool firstLanguageWordsNotChanged = ArraysEqual(_originalFirstLanguageAllWords, currentFirstLanguageWords);
-            bool secondLanguageWordsNotChanged = ArraysEqual(_originalSecondLanguageAllWords, currentSecondLanguageWords);
-
-            return !firstLanguageWordsNotChanged || !secondLanguageWordsNotChanged;
-        }
-
-        static bool ArraysEqual(string[] expectedArray, string[] currentArray)
-        {
-            string[] sortedExpectedArray = expectedArray
-                .Select(i => i.Trim().ToLowerInvariant())
-                .OrderBy(i => i)
-                .ToArray();
-
-            string[] sortedCurrentArray = currentArray
-                .Select(i => i.Trim().ToLowerInvariant())
-                .OrderBy(i => i)
-                .ToArray();
-
-            bool arraysIsEqual = sortedExpectedArray.SequenceEqual(sortedCurrentArray);
-
-            return arraysIsEqual;
-        }
-
         private void AdminPanelForm_Shown(object sender, EventArgs e)
         {
             ConfigureInputLanguageForTest();
@@ -136,21 +104,31 @@ namespace SilverLinguo.Forms.AdminPanel
 
         private void GoBackToStartupFormButton_Click(object sender, EventArgs e)
         {
+            void OpenStartupForm()
+            {
+                this.Hide();
+
+                var startupForm = new StartupForm();
+
+                startupForm.Closed += (s, args) => this.Close();
+
+                startupForm.Show();
+            }
+
             bool anyChangesMade = CheckIfAnyChangesMade();
 
-            CommonFormService.ShowConfirmAction(
-                "Grįžti atgal",
-                "Ar tikrai norite grįžti į pradžios formą ? (neišaugoti pakeitimai bus atšaukti)",
-                () =>
-                {
-                    this.Hide();
-
-                    var startupForm = new StartupForm();
-
-                    startupForm.Closed += (s, args) => this.Close();
-
-                    startupForm.Show();
-                });
+            if (anyChangesMade)
+            {
+                CommonFormService.ShowConfirmAction(
+                    "Grįžti atgal",
+                    "Ar tikrai norite grįžti į pradžios formą ? (neišaugoti pakeitimai bus atšaukti)",
+                    OpenStartupForm);
+            }
+            else
+            {
+                OpenStartupForm();
+            }
+            
         }
 
         private void AllWordsDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -213,6 +191,8 @@ namespace SilverLinguo.Forms.AdminPanel
         private void AllWordsDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             AllWordsDataGridView.Rows[e.RowIndex].ErrorText = String.Empty;
+
+            EnableSaveAllWordsActionsIfNeeded();
         }
 
         private void AllWordsDataGridView_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
@@ -243,12 +223,12 @@ namespace SilverLinguo.Forms.AdminPanel
 
                 _wordsToDeleteOnSave.Add(currentWords.First(w => w.Id == deletedWordPairId));
             }
+
+            EnableSaveAllWordsActionsIfNeeded();
         }
 
         private void SearchAllWordsButton_Click(object sender, EventArgs e)
         {
-            bool anyChangesMade = CheckIfAnyChangesMade();
-
             HandleSearchAllWordsButtonClickedEvent();
         }
 
@@ -259,113 +239,204 @@ namespace SilverLinguo.Forms.AdminPanel
 
         private void ReloadAllWordsGridViewButton_Click(object sender, EventArgs e)
         {
+            void PerformResetSearchAction()
+            {
+                ReloadAllWordsToDataGridView();
+
+                _wordsToDeleteOnSave.Clear();
+            }
+
             bool anyChangesMade = CheckIfAnyChangesMade();
 
-            CommonFormService.ShowConfirmAction(
-                "Atstatyti žodžius",
-                "Ar tikrai norite atstatyti žodžius iš duomenų bazės ? (neišaugoti pakeitimai bus atšaukti)",
-                () =>
-                {
-                    ReloadAllWordsToDataGridView();
-
-                    _wordsToDeleteOnSave.Clear();
-                });
+            if (anyChangesMade)
+            {
+                CommonFormService.ShowConfirmAction(
+                    "Atstatyti žodžius",
+                    "Ar tikrai norite atstatyti žodžius iš duomenų bazės ? (neišaugoti pakeitimai bus atšaukti)",
+                    PerformResetSearchAction);
+            }
+            else
+            {
+                PerformResetSearchAction();
+            }
         }
 
         private void SaveChangesButton_Click(object sender, EventArgs e)
         {
+            void PerformSaveAction()
+            {
+                bool anyChangesPerssisted = false;
+
+                DateTime currentDateTime = DateTime.Now;
+
+                var currentWords = (IEnumerable<WordPairForDataGridView>) _allWordsBindingSource.DataSource;
+                List<WordPairForDataGridView> currentWordsList = currentWords.ToList();
+
+                List<WordPairForDataGridView> wordsToDelete = _wordsToDeleteOnSave;
+                if (wordsToDelete.Any())
+                {
+                    _wordsService.RemoveWordsDeletedInAdminPanel(wordsToDelete);
+                    anyChangesPerssisted = true;
+                    _wordsToDeleteOnSave.Clear();
+                }
+
+                List<WordPairForDataGridView> modifiedWordPairs =
+                    currentWordsList.Where(w => w.DirtyRowUuid != Guid.Empty && w.Id > 0).ToList();
+                if (modifiedWordPairs.Any())
+                {
+                    _wordsService.UpdatedWordsChangedInAdminPanel(modifiedWordPairs, currentDateTime);
+                    anyChangesPerssisted = true;
+                }
+
+                List<WordPairForDataGridView> newWords =
+                    currentWordsList.Where(w => w.DirtyRowUuid != Guid.Empty && w.Id <= 0).ToList();
+                if (newWords.Any())
+                {
+                    _wordsService.SaveWordsNewlyAddedInAdminPanel(newWords, currentDateTime);
+                    anyChangesPerssisted = true;
+                }
+
+                if (anyChangesPerssisted)
+                {
+                    ReloadAllWordsToDataGridView();
+                }
+            }
+
             bool anyChangesMade = CheckIfAnyChangesMade();
 
-            CommonFormService.ShowConfirmAction(
-                "Išsaugoti pakeitimus",
-                "Ar tikrai norite išsaugoti pakeitimus ? (ištrinti žodžiai nus pašalinti iš duomenų bazės)",
-                () =>
+            if (anyChangesMade)
+            {
+                if (_wordsToDeleteOnSave.Count > 0)
                 {
-                    bool anyChangesPerssisted = false;
+                    CommonFormService.ShowConfirmAction(
+                        "Išsaugoti pakeitimus",
+                        "Ar tikrai norite išsaugoti pakeitimus ? (ištrinti žodžiai nus pašalinti iš duomenų bazės)",
+                        PerformSaveAction);
+                }
+                else
+                {
+                    PerformSaveAction();
+                }
+            }
+        }
 
-                    DateTime currentDateTime = DateTime.Now;
+        private void EnableSaveAllWordsActionsIfNeeded()
+        {
+            bool anyChangesMade = CheckIfAnyChangesMade();
 
-                    var currentWords = (IEnumerable<WordPairForDataGridView>) _allWordsBindingSource.DataSource;
-                    List<WordPairForDataGridView> currentWordsList = currentWords.ToList();
+            if (anyChangesMade && !SaveChangesButton.Enabled)
+            {
+                SaveChangesButton.Enabled = true;
+            }
 
-                    List<WordPairForDataGridView> wordsToDelete = _wordsToDeleteOnSave;
-                    if (wordsToDelete.Any())
-                    {
-                        _wordsService.RemoveWordsDeletedInAdminPanel(wordsToDelete);
-                        anyChangesPerssisted = true;
-                        _wordsToDeleteOnSave.Clear();
-                    }
-                    
-                    List<WordPairForDataGridView> modifiedWordPairs = 
-                        currentWordsList.Where(w => w.DirtyRowUuid != Guid.Empty && w.Id > 0).ToList();
-                    if (modifiedWordPairs.Any())
-                    {
-                        _wordsService.UpdatedWordsChangedInAdminPanel(modifiedWordPairs, currentDateTime);
-                        anyChangesPerssisted = true;
+            if (anyChangesMade && !ReloadAllWordsGridViewButton.Enabled)
+            {
+                ReloadAllWordsGridViewButton.Enabled = true;
+            }
+        }
 
-                    }
-                    
-                    List<WordPairForDataGridView> newWords = 
-                        currentWordsList.Where(w => w.DirtyRowUuid != Guid.Empty && w.Id <= 0).ToList();
-                    if (newWords.Any())
-                    {
-                        _wordsService.SaveWordsNewlyAddedInAdminPanel(newWords, currentDateTime);
-                        anyChangesPerssisted = true;
-                    }
+        private void DisableSaveAllWordsActions()
+        {
+            SaveChangesButton.Enabled = false;
+            ReloadAllWordsGridViewButton.Enabled = false;
+        }
 
-                    if (anyChangesPerssisted)
-                    {
-                        ReloadAllWordsToDataGridView();
-                    }
-                });
+        private void UpdateOriginalAllWordsValues(List<WordPair> allWords)
+        {
+            _originalFirstLanguageAllWords = allWords.Select(w => w.FirstLanguageWord).ToArray();
+            _originalSecondLanguageAllWords = allWords.Select(w => w.SecondLanguageWord).ToArray();
+        }
+
+        private bool CheckIfAnyChangesMade()
+        {
+            var currentWords = (IEnumerable<WordPairForDataGridView>) _allWordsBindingSource.DataSource;
+            var currentWordsArray = currentWords.ToArray();
+
+            string[] currentFirstLanguageWords = currentWordsArray.Select(w => w.FirstLanguageWord).ToArray();
+            string[] currentSecondLanguageWords = currentWordsArray.Select(w => w.SecondLanguageWord).ToArray();
+
+            bool firstLanguageWordsNotChanged = ArraysEqual(_originalFirstLanguageAllWords, currentFirstLanguageWords);
+            bool secondLanguageWordsNotChanged = ArraysEqual(_originalSecondLanguageAllWords, currentSecondLanguageWords);
+
+            return !firstLanguageWordsNotChanged || !secondLanguageWordsNotChanged || _wordsToDeleteOnSave.Count > 0;
+        }
+
+        static bool ArraysEqual(string[] expectedArray, string[] currentArray) //Move to extensions or other class
+        {
+            string[] sortedExpectedArray = expectedArray
+                .Select(i => i.Trim().ToLowerInvariant())
+                .OrderBy(i => i)
+                .ToArray();
+
+            string[] sortedCurrentArray = currentArray
+                .Select(i => i.Trim().ToLowerInvariant())
+                .OrderBy(i => i)
+                .ToArray();
+
+            bool arraysIsEqual = sortedExpectedArray.SequenceEqual(sortedCurrentArray);
+
+            return arraysIsEqual;
         }
 
         private void HandleSearchAllWordsButtonClickedEvent()
         {
+            void PerformSearchAction(string searchTextValue)
+            {
+                ClearAllWordsSearchButton.Visible = true;
+
+                var searchCriteria = new QueryCriteria
+                {
+                    SearchText = searchTextValue,
+                    OrderByCriteria = _orderByCreatedAtAscCriteria.OrderByCriteria
+                };
+
+                var allWordsThatMatchedSearchCriteria =
+                    _wordsService.GetAllWords(searchCriteria).ToList();
+
+                UpdateOriginalAllWordsValues(allWordsThatMatchedSearchCriteria);
+
+                List<WordPairForDataGridView> allWordsForDataGridView =
+                    MapToDataGridViewStructure(allWordsThatMatchedSearchCriteria);
+
+                _allWordsBindingSource.DataSource = allWordsForDataGridView;
+
+                DisableSaveAllWordsActions();
+            }
+
             string searchText = AllWordsSearchTextBox.Text;
 
             if (string.IsNullOrWhiteSpace(searchText)) return;
 
-            CommonFormService.ShowConfirmAction(
-                "Žodžio paieška",
-                "Ar tikrai norite ieškoti žodžio ? (neišaugoti pakeitimai bus atšaukti)",
-                () =>
-                {
-                    ClearAllWordsSearchButton.Visible = true;
+            bool anyChangesMade = CheckIfAnyChangesMade();
 
-                    var searchCriteria = new QueryCriteria
-                    {
-                        SearchText = searchText,
-                        OrderByCriteria = _orderByCreatedAtAscCriteria.OrderByCriteria
-                    };
-
-                    var allWordsThatMatchedSearchCriteria =
-                        _wordsService.GetAllWords(searchCriteria).ToList();
-
-                    List<WordPairForDataGridView> allWordsForDataGridView =
-                        MapToDataGridViewStructure(allWordsThatMatchedSearchCriteria);
-
-                    _allWordsBindingSource.DataSource = allWordsForDataGridView;
-                });
+            if (anyChangesMade)
+            {
+                CommonFormService.ShowConfirmAction(
+                    "Žodžio paieška",
+                    "Ar tikrai norite ieškoti žodžio ? (neišaugoti pakeitimai bus atšaukti)",
+                    () => { PerformSearchAction(searchText); });
+            }
+            else
+            {
+                PerformSearchAction(searchText);
+            }
         }
 
         private void HandleClearAllWordsSearchButtonClickedEvent()
         {
-            CommonFormService.ShowConfirmAction(
-                "Atšaukti paieška",
-                "Ar tikrai norite atšaukti paieška ir užkrauti visus žodžius ? (neišaugoti pakeitimai bus atšaukti)",
-                () =>
-                {
-                    var allWords = _wordsService.GetAllWords(_orderByCreatedAtAscCriteria).ToList();
+            bool anyChangesMade = CheckIfAnyChangesMade();
 
-                    List<WordPairForDataGridView> allWordsForDataGridView = MapToDataGridViewStructure(allWords);
-
-                    _allWordsBindingSource.DataSource = allWordsForDataGridView;
-
-                    AllWordsSearchTextBox.Text = string.Empty;
-
-                    ClearAllWordsSearchButton.Visible = false;
-                });
+            if (anyChangesMade)
+            {
+                CommonFormService.ShowConfirmAction(
+                    "Atšaukti paieška",
+                    "Ar tikrai norite atšaukti paieška ir užkrauti visus žodžius ? (neišaugoti pakeitimai bus atšaukti)",
+                    ReloadAllWordsToDataGridView);
+            }
+            else
+            {
+                ReloadAllWordsToDataGridView();
+            }
         }
 
         private void ReloadAllWordsToDataGridView()
@@ -375,6 +446,13 @@ namespace SilverLinguo.Forms.AdminPanel
             List<WordPairForDataGridView> allWordsForDataGridView = MapToDataGridViewStructure(allWords);
 
             _allWordsBindingSource.DataSource = allWordsForDataGridView;
+
+            UpdateOriginalAllWordsValues(allWords);
+
+            AllWordsSearchTextBox.Text = string.Empty;
+            ClearAllWordsSearchButton.Visible = false;
+
+            DisableSaveAllWordsActions();
         }
 
         private void ConfigureInputLanguageForTest()
