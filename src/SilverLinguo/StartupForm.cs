@@ -7,7 +7,6 @@ using SilverLinguo.Forms.Helper;
 using SilverLinguo.Repositories.Models;
 using SilverLinguo.Services;
 using SilverLinguo.Services.Form;
-using SortOrder = SilverLinguo.Repositories.Models.SortOrder;
 
 namespace SilverLinguo
 {
@@ -32,8 +31,8 @@ namespace SilverLinguo
 
         private void SetWordsCountForTestSelection()
         {
-            _allWords = _wordsService.GetAllWords(shouldShuffle: false);
-            _unknownWords = _wordsService.GetUnknownWords(shouldShuffle: false);
+            _allWords = _wordsService.GetAllWords();
+            _unknownWords = _wordsService.GetUnknownWords();
 
             int allWordsCount = _allWords.Length;
             int unknownWordsCount = _unknownWords.Length;
@@ -58,11 +57,10 @@ namespace SilverLinguo
             {
                 var limitCriteria = new QueryCriteria
                 {
-                    OrderByCriteria = new OrderByCriteria { OrderBy = OrderBy.CreatedAt, SortOrder = SortOrder.DESC },
                     Limit = (int?) CreatedAtLimitNumericUpDown.Value
                 };
 
-                _allWords = _wordsService.GetAllWords(shouldShuffle: false, queryCriteria: limitCriteria);
+                _allWords = _wordsService.GetAllWords(limitCriteria);
             }
 
             SelectedLanguage selectedLanguage = GetSelectedLanguage();

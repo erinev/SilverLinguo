@@ -8,6 +8,7 @@ using SilverLinguo.Dto;
 using SilverLinguo.Repositories.Models;
 using SilverLinguo.Services;
 using SilverLinguo.Services.Form;
+using SortOrder = SilverLinguo.Repositories.Models.SortOrder;
 
 namespace SilverLinguo.Forms.AdminPanel
 {
@@ -27,6 +28,11 @@ namespace SilverLinguo.Forms.AdminPanel
         private InputLanguage _originalInputLanguage = InputLanguage.DefaultInputLanguage;
         private readonly string _allWordsTabTagValue = "1";
 
+        private readonly QueryCriteria _orderByCreatedAtAscCriteria = new QueryCriteria
+        {
+            OrderByCriteria = new OrderByCriteria { OrderBy = OrderBy.CreatedAt, SortOrder = SortOrder.ASC }
+        };
+
         public AdminPanelForm()
         {
             _wordsService = new WordsService();
@@ -38,7 +44,7 @@ namespace SilverLinguo.Forms.AdminPanel
 
         private void AdminPanelForm_Load(object sender, EventArgs e)
         {
-            List<WordPair> allWords = _wordsService.GetAllWords(shouldShuffle: false).ToList();
+            List<WordPair> allWords = _wordsService.GetAllWords(_orderByCreatedAtAscCriteria).ToList();
 
             List<WordPairForDataGridView> allWordsForDataGridView = MapToDataGridViewStructure(allWords);
 
@@ -282,11 +288,12 @@ namespace SilverLinguo.Forms.AdminPanel
 
                     var searchCriteria = new QueryCriteria
                     {
-                        SearchText = searchText
+                        SearchText = searchText,
+                        OrderByCriteria = _orderByCreatedAtAscCriteria.OrderByCriteria
                     };
 
                     var allWordsThatMatchedSearchCriteria =
-                        _wordsService.GetAllWords(shouldShuffle: false, queryCriteria: searchCriteria).ToList();
+                        _wordsService.GetAllWords(searchCriteria).ToList();
 
                     List<WordPairForDataGridView> allWordsForDataGridView =
                         MapToDataGridViewStructure(allWordsThatMatchedSearchCriteria);
@@ -302,7 +309,7 @@ namespace SilverLinguo.Forms.AdminPanel
                 "Ar tikrai norite atšaukti paieška ir užkrauti visus žodžius ? (neišaugoti pakeitimai bus atšaukti)",
                 () =>
                 {
-                    var allWords = _wordsService.GetAllWords(shouldShuffle: false).ToList();
+                    var allWords = _wordsService.GetAllWords(_orderByCreatedAtAscCriteria).ToList();
 
                     List<WordPairForDataGridView> allWordsForDataGridView = MapToDataGridViewStructure(allWords);
 
@@ -316,7 +323,7 @@ namespace SilverLinguo.Forms.AdminPanel
 
         private void ReloadAllWordsToDataGridView()
         {
-            List<WordPair> allWords = _wordsService.GetAllWords(shouldShuffle: false).ToList();
+            List<WordPair> allWords = _wordsService.GetAllWords(_orderByCreatedAtAscCriteria).ToList();
 
             List<WordPairForDataGridView> allWordsForDataGridView = MapToDataGridViewStructure(allWords);
 
