@@ -246,7 +246,7 @@ namespace SilverLinguo
             this.CreatedAtLimitNumericUpDown.Size = new System.Drawing.Size(58, 23);
             this.CreatedAtLimitNumericUpDown.TabIndex = 16;
             this.CreatedAtLimitNumericUpDown.Value = new decimal(new int[] {
-            10,
+            1,
             0,
             0,
             0});

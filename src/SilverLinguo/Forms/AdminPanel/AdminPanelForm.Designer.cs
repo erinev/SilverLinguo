@@ -42,13 +42,13 @@ namespace SilverLinguo.Forms.AdminPanel
             this.ReloadAllWordsGridViewButton = new System.Windows.Forms.Button();
             this.AllWordsDataGridView = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.firstLanguageWordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DirtyRowUuid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.secondLanguageWordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.wordPairForDataGridViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.UnknownWordsTabPage = new System.Windows.Forms.TabPage();
             this.AdminTabPage = new System.Windows.Forms.TabPage();
             this.GoBackToStartupFormButton = new System.Windows.Forms.Button();
+            this.firstLanguageWordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.secondLanguageWordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wordPairForDataGridViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.AdminPanelTabControl.SuspendLayout();
             this.AllWordsTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AllWordsDataGridView)).BeginInit();
@@ -163,7 +163,6 @@ namespace SilverLinguo.Forms.AdminPanel
             this.secondLanguageWordDataGridViewTextBoxColumn});
             this.AllWordsDataGridView.DataSource = this.wordPairForDataGridViewBindingSource;
             this.AllWordsDataGridView.Location = new System.Drawing.Point(7, 47);
-            this.AllWordsDataGridView.MultiSelect = false;
             this.AllWordsDataGridView.Name = "AllWordsDataGridView";
             this.AllWordsDataGridView.Size = new System.Drawing.Size(694, 403);
             this.AllWordsDataGridView.TabIndex = 0;
@@ -180,34 +179,12 @@ namespace SilverLinguo.Forms.AdminPanel
             this.Id.ReadOnly = true;
             this.Id.Visible = false;
             // 
-            // firstLanguageWordDataGridViewTextBoxColumn
-            // 
-            this.firstLanguageWordDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.firstLanguageWordDataGridViewTextBoxColumn.DataPropertyName = "FirstLanguageWord";
-            this.firstLanguageWordDataGridViewTextBoxColumn.HeaderText = "Lietuviškas žodis";
-            this.firstLanguageWordDataGridViewTextBoxColumn.MinimumWidth = 317;
-            this.firstLanguageWordDataGridViewTextBoxColumn.Name = "firstLanguageWordDataGridViewTextBoxColumn";
-            this.firstLanguageWordDataGridViewTextBoxColumn.Width = 317;
-            // 
             // DirtyRowUuid
             // 
             this.DirtyRowUuid.DataPropertyName = "DirtyRowUuid";
             this.DirtyRowUuid.HeaderText = "DirtyRowUuid";
             this.DirtyRowUuid.Name = "DirtyRowUuid";
             this.DirtyRowUuid.Visible = false;
-            // 
-            // secondLanguageWordDataGridViewTextBoxColumn
-            // 
-            this.secondLanguageWordDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.secondLanguageWordDataGridViewTextBoxColumn.DataPropertyName = "SecondLanguageWord";
-            this.secondLanguageWordDataGridViewTextBoxColumn.HeaderText = "Angliškas žodis";
-            this.secondLanguageWordDataGridViewTextBoxColumn.MinimumWidth = 317;
-            this.secondLanguageWordDataGridViewTextBoxColumn.Name = "secondLanguageWordDataGridViewTextBoxColumn";
-            this.secondLanguageWordDataGridViewTextBoxColumn.Width = 317;
-            // 
-            // wordPairForDataGridViewBindingSource
-            // 
-            this.wordPairForDataGridViewBindingSource.DataSource = typeof(SilverLinguo.Dto.WordPairForDataGridView);
             // 
             // UnknownWordsTabPage
             // 
@@ -243,6 +220,28 @@ namespace SilverLinguo.Forms.AdminPanel
             this.GoBackToStartupFormButton.Text = "Grįžti atgal";
             this.GoBackToStartupFormButton.UseVisualStyleBackColor = false;
             this.GoBackToStartupFormButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GoBackToStartupFormButton_Click);
+            // 
+            // firstLanguageWordDataGridViewTextBoxColumn
+            // 
+            this.firstLanguageWordDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.firstLanguageWordDataGridViewTextBoxColumn.DataPropertyName = "FirstLanguageWord";
+            this.firstLanguageWordDataGridViewTextBoxColumn.HeaderText = "Lietuviškas žodis";
+            this.firstLanguageWordDataGridViewTextBoxColumn.MinimumWidth = 317;
+            this.firstLanguageWordDataGridViewTextBoxColumn.Name = "firstLanguageWordDataGridViewTextBoxColumn";
+            this.firstLanguageWordDataGridViewTextBoxColumn.Width = 317;
+            // 
+            // secondLanguageWordDataGridViewTextBoxColumn
+            // 
+            this.secondLanguageWordDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.secondLanguageWordDataGridViewTextBoxColumn.DataPropertyName = "SecondLanguageWord";
+            this.secondLanguageWordDataGridViewTextBoxColumn.HeaderText = "Angliškas žodis";
+            this.secondLanguageWordDataGridViewTextBoxColumn.MinimumWidth = 317;
+            this.secondLanguageWordDataGridViewTextBoxColumn.Name = "secondLanguageWordDataGridViewTextBoxColumn";
+            this.secondLanguageWordDataGridViewTextBoxColumn.Width = 317;
+            // 
+            // wordPairForDataGridViewBindingSource
+            // 
+            this.wordPairForDataGridViewBindingSource.DataSource = typeof(SilverLinguo.Dto.WordPairForDataGridView);
             // 
             // AdminPanelForm
             // 

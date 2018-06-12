@@ -39,6 +39,12 @@ namespace SilverLinguo
 
             CreatedAtLimitNumericUpDown.Maximum = allWordsCount;
 
+            LithuanianLanguageRadioButton.Enabled = allWordsCount > 0;
+            EnglishRadioButton.Enabled = allWordsCount > 0;
+            RandomRadioButton.Enabled = allWordsCount > 0;
+            ShouldCheckGrammarCheckBox.Enabled = allWordsCount > 0;
+            CreatedAtLimitEnablingCheckBox.Enabled = allWordsCount > 0;
+
             AllWordsPanel.Visible = allWordsCount > 0;
             UnknownWordsPanel.Visible = unknownWordsCount > 0;
 
