@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using SilverLinguo.Repositories.Models;
 
 namespace SilverLinguo.Forms.Helper
 {
     public partial class ShowWordsListByTypeForm : Form
     {
-        private readonly List<string> _words;
         private readonly string _wordsListFormName;
+        private readonly List<string> _wordsToDisplay;
+        //private readonly Action<Form> _initializeTestAction;
 
-        public ShowWordsListByTypeForm(string wordsListFormName, List<string> words)
+        public ShowWordsListByTypeForm(string wordsListFormName, IEnumerable<WordPair> words/*, Action<Form> initializeTestAction = null*/)
         {
-            _words = words ?? Enumerable.Empty<string>().ToList();
             _wordsListFormName = wordsListFormName;
+            _wordsToDisplay = words.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
+            //_initializeTestAction = initializeTestAction;
 
             InitializeComponent();
         }
@@ -22,7 +25,20 @@ namespace SilverLinguo.Forms.Helper
         {
             this.Text = _wordsListFormName;
 
-            WordsListBox.DataSource = _words;
+            WordsListBox.DataSource = _wordsToDisplay;
+            
+            /*if (_initializeTestAction != null)
+            {
+                TestShownWordsButton.MouseClick += TestShownWordsButton_MouseClick;
+                TestShownWordsButton.Visible = true;
+            }*/
         }
+
+        /*private void TestShownWordsButton_MouseClick(object sender, EventArgs e)
+        {
+            _initializeTestAction(this.Owner);
+
+            this.Close();
+        }*/
     }
 }

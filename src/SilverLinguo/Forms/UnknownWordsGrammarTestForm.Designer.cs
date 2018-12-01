@@ -116,7 +116,7 @@ namespace SilverLinguo.Forms
             this.EndTestButton.TabIndex = 30;
             this.EndTestButton.Text = "Baigtį testą";
             this.EndTestButton.UseVisualStyleBackColor = false;
-            this.EndTestButton.Click += new System.EventHandler(this.EndTestButton_Click);
+            this.EndTestButton.MouseClick += new MouseEventHandler(this.EndTestButton_MouseClick);
             // 
             // EnHeaderLabel
             // 
@@ -151,7 +151,7 @@ namespace SilverLinguo.Forms
             this.NextWordButton.Text = "Kitas žodis";
             this.NextWordButton.UseVisualStyleBackColor = false;
             this.NextWordButton.Visible = false;
-            this.NextWordButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NextWordButton_MouseClick);
+            this.NextWordButton.MouseClick += new MouseEventHandler(this.NextWordButton_MouseClick);
             // 
             // TestTimerLabel
             // 
@@ -173,7 +173,7 @@ namespace SilverLinguo.Forms
             this.LearnedWordsCountLinkLabel.TabIndex = 43;
             this.LearnedWordsCountLinkLabel.TabStop = true;
             this.LearnedWordsCountLinkLabel.Text = "0";
-            this.LearnedWordsCountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LearnedWordsCountLinkLabel_LinkClicked);
+            this.LearnedWordsCountLinkLabel.MouseClick += new MouseEventHandler(this.LearnedWordsCountLinkLabel_LinkMouseClicke);
             // 
             // CorrectWordTextBox
             // 
@@ -201,7 +201,7 @@ namespace SilverLinguo.Forms
             this.ValidateWordButton.TabIndex = 45;
             this.ValidateWordButton.Text = "Tikrinti";
             this.ValidateWordButton.UseVisualStyleBackColor = false;
-            this.ValidateWordButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ValidateWordButton_MouseClick);
+            this.ValidateWordButton.MouseClick += new MouseEventHandler(this.ValidateWordButton_MouseClick);
             // 
             // UnknownWordsGrammarTestForm
             // 

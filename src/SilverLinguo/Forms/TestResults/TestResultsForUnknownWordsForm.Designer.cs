@@ -1,4 +1,6 @@
-﻿namespace SilverLinguo.Forms.TestResults
+﻿using System.Windows.Forms;
+
+namespace SilverLinguo.Forms.TestResults
 {
     partial class TestResultsForUnknownWordsForm
     {
@@ -35,7 +37,7 @@
             // LearnedWordsStatsHeaderLabel
             // 
             this.LearnedWordsStatsHeaderLabel.AutoSize = true;
-            this.LearnedWordsStatsHeaderLabel.Location = new System.Drawing.Point(519, 40);
+            this.LearnedWordsStatsHeaderLabel.Location = new System.Drawing.Point(519, 7);
             this.LearnedWordsStatsHeaderLabel.Name = "LearnedWordsStatsHeaderLabel";
             this.LearnedWordsStatsHeaderLabel.Size = new System.Drawing.Size(95, 16);
             this.LearnedWordsStatsHeaderLabel.TabIndex = 6;
@@ -44,19 +46,19 @@
             // LearnedWordsStatsLinkLabel
             // 
             this.LearnedWordsStatsLinkLabel.AutoSize = true;
-            this.LearnedWordsStatsLinkLabel.Location = new System.Drawing.Point(611, 40);
+            this.LearnedWordsStatsLinkLabel.Location = new System.Drawing.Point(611, 7);
             this.LearnedWordsStatsLinkLabel.Name = "LearnedWordsStatsLinkLabel";
             this.LearnedWordsStatsLinkLabel.Size = new System.Drawing.Size(55, 16);
             this.LearnedWordsStatsLinkLabel.TabIndex = 8;
             this.LearnedWordsStatsLinkLabel.TabStop = true;
             this.LearnedWordsStatsLinkLabel.Text = "95 / 100";
-            this.LearnedWordsStatsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LearnedWordsStatsLabel_LinkClicked);
+            this.LearnedWordsStatsLinkLabel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LearnedWordsStatsLabel_LinkMouseClicke);
             // 
             // TestResultsForUnknownWordsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(670, 243);
+            this.ClientSize = new System.Drawing.Size(739, 243);
             this.ControlBox = false;
             this.Controls.Add(this.LearnedWordsStatsLinkLabel);
             this.Controls.Add(this.LearnedWordsStatsHeaderLabel);

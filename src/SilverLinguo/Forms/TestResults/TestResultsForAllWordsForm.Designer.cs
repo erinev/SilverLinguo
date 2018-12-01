@@ -1,4 +1,6 @@
-﻿namespace SilverLinguo.Forms.TestResults
+﻿using System.Windows.Forms;
+
+namespace SilverLinguo.Forms.TestResults
 {
     partial class TestResultsForAllWordsForm
     {
@@ -38,12 +40,14 @@
             this.NewUnknownWordsCountHeaderLabel = new System.Windows.Forms.Label();
             this.TestProgressHeaderLabel = new System.Windows.Forms.Label();
             this.TestProgressLabel = new System.Windows.Forms.Label();
+            this.TestUnknownWordsButton = new System.Windows.Forms.Button();
+            this.TestNewUnknownWordsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // KnownWordsCountLinkLabel
             // 
             this.KnownWordsCountLinkLabel.AutoSize = true;
-            this.KnownWordsCountLinkLabel.Location = new System.Drawing.Point(608, 118);
+            this.KnownWordsCountLinkLabel.Location = new System.Drawing.Point(608, 132);
             this.KnownWordsCountLinkLabel.Name = "KnownWordsCountLinkLabel";
             this.KnownWordsCountLinkLabel.Size = new System.Drawing.Size(55, 16);
             this.KnownWordsCountLinkLabel.TabIndex = 81;
@@ -55,7 +59,7 @@
             // 
             this.KnownWordsCountHeaderLabel.AutoSize = true;
             this.KnownWordsCountHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.KnownWordsCountHeaderLabel.Location = new System.Drawing.Point(519, 118);
+            this.KnownWordsCountHeaderLabel.Location = new System.Drawing.Point(519, 132);
             this.KnownWordsCountHeaderLabel.Name = "KnownWordsCountHeaderLabel";
             this.KnownWordsCountHeaderLabel.Size = new System.Drawing.Size(96, 16);
             this.KnownWordsCountHeaderLabel.TabIndex = 80;
@@ -64,7 +68,7 @@
             // LearnedWordsCountLinkLabel
             // 
             this.LearnedWordsCountLinkLabel.AutoSize = true;
-            this.LearnedWordsCountLinkLabel.Location = new System.Drawing.Point(642, 92);
+            this.LearnedWordsCountLinkLabel.Location = new System.Drawing.Point(642, 106);
             this.LearnedWordsCountLinkLabel.Name = "LearnedWordsCountLinkLabel";
             this.LearnedWordsCountLinkLabel.Size = new System.Drawing.Size(55, 16);
             this.LearnedWordsCountLinkLabel.TabIndex = 79;
@@ -76,7 +80,7 @@
             // 
             this.LearnedWordsCountHeaderLabel.AutoSize = true;
             this.LearnedWordsCountHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.LearnedWordsCountHeaderLabel.Location = new System.Drawing.Point(519, 92);
+            this.LearnedWordsCountHeaderLabel.Location = new System.Drawing.Point(519, 106);
             this.LearnedWordsCountHeaderLabel.Name = "LearnedWordsCountHeaderLabel";
             this.LearnedWordsCountHeaderLabel.Size = new System.Drawing.Size(130, 16);
             this.LearnedWordsCountHeaderLabel.TabIndex = 78;
@@ -85,7 +89,7 @@
             // UnknownWordsCountLinkLabel
             // 
             this.UnknownWordsCountLinkLabel.AutoSize = true;
-            this.UnknownWordsCountLinkLabel.Location = new System.Drawing.Point(663, 66);
+            this.UnknownWordsCountLinkLabel.Location = new System.Drawing.Point(663, 56);
             this.UnknownWordsCountLinkLabel.Name = "UnknownWordsCountLinkLabel";
             this.UnknownWordsCountLinkLabel.Size = new System.Drawing.Size(48, 16);
             this.UnknownWordsCountLinkLabel.TabIndex = 77;
@@ -97,7 +101,7 @@
             // 
             this.UnknownWordsCountHeaderLabel.AutoSize = true;
             this.UnknownWordsCountHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.UnknownWordsCountHeaderLabel.Location = new System.Drawing.Point(519, 66);
+            this.UnknownWordsCountHeaderLabel.Location = new System.Drawing.Point(519, 56);
             this.UnknownWordsCountHeaderLabel.Name = "UnknownWordsCountHeaderLabel";
             this.UnknownWordsCountHeaderLabel.Size = new System.Drawing.Size(150, 16);
             this.UnknownWordsCountHeaderLabel.TabIndex = 76;
@@ -106,7 +110,7 @@
             // NewUnknownWordsCountLinkLabel
             // 
             this.NewUnknownWordsCountLinkLabel.AutoSize = true;
-            this.NewUnknownWordsCountLinkLabel.Location = new System.Drawing.Point(652, 40);
+            this.NewUnknownWordsCountLinkLabel.Location = new System.Drawing.Point(652, 7);
             this.NewUnknownWordsCountLinkLabel.Name = "NewUnknownWordsCountLinkLabel";
             this.NewUnknownWordsCountLinkLabel.Size = new System.Drawing.Size(48, 16);
             this.NewUnknownWordsCountLinkLabel.TabIndex = 75;
@@ -118,7 +122,7 @@
             // 
             this.NewUnknownWordsCountHeaderLabel.AutoSize = true;
             this.NewUnknownWordsCountHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.NewUnknownWordsCountHeaderLabel.Location = new System.Drawing.Point(519, 40);
+            this.NewUnknownWordsCountHeaderLabel.Location = new System.Drawing.Point(519, 7);
             this.NewUnknownWordsCountHeaderLabel.Name = "NewUnknownWordsCountHeaderLabel";
             this.NewUnknownWordsCountHeaderLabel.Size = new System.Drawing.Size(140, 16);
             this.NewUnknownWordsCountHeaderLabel.TabIndex = 74;
@@ -128,7 +132,7 @@
             // 
             this.TestProgressHeaderLabel.AutoSize = true;
             this.TestProgressHeaderLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.TestProgressHeaderLabel.Location = new System.Drawing.Point(519, 144);
+            this.TestProgressHeaderLabel.Location = new System.Drawing.Point(519, 158);
             this.TestProgressHeaderLabel.Name = "TestProgressHeaderLabel";
             this.TestProgressHeaderLabel.Size = new System.Drawing.Size(101, 16);
             this.TestProgressHeaderLabel.TabIndex = 82;
@@ -138,18 +142,46 @@
             // 
             this.TestProgressLabel.AutoSize = true;
             this.TestProgressLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.TestProgressLabel.Location = new System.Drawing.Point(617, 144);
+            this.TestProgressLabel.Location = new System.Drawing.Point(617, 158);
             this.TestProgressLabel.Name = "TestProgressLabel";
             this.TestProgressLabel.Size = new System.Drawing.Size(62, 16);
             this.TestProgressLabel.TabIndex = 84;
             this.TestProgressLabel.Text = "100 / 100";
             // 
+            // TestUnknownWordsButton
+            // 
+            this.TestUnknownWordsButton.BackColor = System.Drawing.Color.Yellow;
+            this.TestUnknownWordsButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.TestUnknownWordsButton.Enabled = false;
+            this.TestUnknownWordsButton.Location = new System.Drawing.Point(522, 75);
+            this.TestUnknownWordsButton.Name = "TestUnknownWordsButton";
+            this.TestUnknownWordsButton.Size = new System.Drawing.Size(69, 25);
+            this.TestUnknownWordsButton.TabIndex = 85;
+            this.TestUnknownWordsButton.Text = "Testuoti";
+            this.TestUnknownWordsButton.UseVisualStyleBackColor = false;
+            this.TestUnknownWordsButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TestUnknownWordsButton_MouseClick);
+            // 
+            // TestNewUnknownWordsButton
+            // 
+            this.TestNewUnknownWordsButton.BackColor = System.Drawing.Color.YellowGreen;
+            this.TestNewUnknownWordsButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.TestNewUnknownWordsButton.Enabled = false;
+            this.TestNewUnknownWordsButton.Location = new System.Drawing.Point(522, 26);
+            this.TestNewUnknownWordsButton.Name = "TestNewUnknownWordsButton";
+            this.TestNewUnknownWordsButton.Size = new System.Drawing.Size(69, 25);
+            this.TestNewUnknownWordsButton.TabIndex = 86;
+            this.TestNewUnknownWordsButton.Text = "Testuoti";
+            this.TestNewUnknownWordsButton.UseVisualStyleBackColor = false;
+            this.TestNewUnknownWordsButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TestNewUnknownWordsButton_MouseClick);
+            // 
             // TestResultsForAllWordsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(729, 243);
+            this.ClientSize = new System.Drawing.Size(739, 243);
             this.ControlBox = false;
+            this.Controls.Add(this.TestNewUnknownWordsButton);
+            this.Controls.Add(this.TestUnknownWordsButton);
             this.Controls.Add(this.TestProgressLabel);
             this.Controls.Add(this.TestProgressHeaderLabel);
             this.Controls.Add(this.KnownWordsCountLinkLabel);
@@ -183,5 +215,7 @@
         private System.Windows.Forms.Label NewUnknownWordsCountHeaderLabel;
         private System.Windows.Forms.Label TestProgressHeaderLabel;
         private System.Windows.Forms.Label TestProgressLabel;
+        private System.Windows.Forms.Button TestUnknownWordsButton;
+        private System.Windows.Forms.Button TestNewUnknownWordsButton;
     }
 }

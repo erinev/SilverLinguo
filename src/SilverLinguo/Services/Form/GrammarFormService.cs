@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using SilverLinguo.Enums;
+using SilverLinguo.Extensions;
 using SilverLinguo.Repositories.Models;
 
 namespace SilverLinguo.Services.Form
@@ -40,12 +41,10 @@ namespace SilverLinguo.Services.Form
         }
 
         public static void HanldeVerbalFormLoadedEvent(
-            out WordPair[] wordsArray, Func<WordPair[]> wordsArrayLoadFunc,
-            out int startingCountOfWords, out int currentWordPairId, Label progressLabel,
+            WordPair[] wordsArray, out int currentWordPairId, Label progressLabel,
             TextBox firstLanguageWordTextBox, TextBox secondLanguageWordTextBox)
         {
-            wordsArray = wordsArrayLoadFunc();
-            startingCountOfWords = wordsArray.Length;
+            new Random().Shuffle(wordsArray);
 
             currentWordPairId = wordsArray[0].Id;
 
@@ -71,7 +70,7 @@ namespace SilverLinguo.Services.Form
                         // ReSharper disable once AssignNullToNotNullAttribute
                         InputLanguage.InstalledInputLanguages.IndexOf(lithuanianLanguage) >= 0
                             ? lithuanianLanguage
-                            : InputLanguage.DefaultInputLanguage;
+                            : originalInputLanguage;
                 }
             }
             catch (Exception)

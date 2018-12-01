@@ -10,8 +10,8 @@ namespace SilverLinguo.Repositories
 {
     public interface IWordsRepository
     {
-        WordPair[] GetAllWords();
-        WordPair[] GetUnknownWords();
+        WordPair[] GetAllWords(QueryCriteria criteria = null);
+        WordPair[] GetUnknownWords(QueryCriteria criteria = null);
         bool CheckIfUnknownWordAlreadyExist(int wordId);
         bool AddNewUnknownWord(int wordId);
         bool RemoveLearnedUnknownWord(int wordId);
@@ -28,30 +28,76 @@ namespace SilverLinguo.Repositories
 
         public WordsRepository()
         {
-            _dbFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\SilverWords";
-            _dbFile = $"{_dbFolder}\\Vocabulary.db";
+            string databaseName = "SilverLinguo";
+            _dbFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\SilverLinguo-75d4fcd7-4e68-47ba-9d46-8aad90575c09";
+            _dbFile = $"{_dbFolder}\\{databaseName}.db";
             _connectionString = $"Data Source={_dbFile};Version=3;UseUTF16Encoding=True;Password=FJtkLXz2aBeBARdW;";
         }
 
-        public WordPair[] GetAllWords()
+        public WordPair[] GetAllWords(QueryCriteria criteria = null)
         {
             using (var dbConnection = new SQLiteConnection(_connectionString))
             {
                 dbConnection.Open();
 
-                const string getAllWordsQuery =
-                    @"SELECT 
+                object queryParameters = new {};
+
+                string getAllWordsQuery =
+                    @"SELECT  
                         AW.Id, AW.FirstLanguageWord, AW.SecondLanguageWord, 
                         AW.LanguagePair, AW.CreatedAt, AW.ModifiedAt
                       FROM AllWords AW";
 
-                WordPair[] allWords = dbConnection.Query<WordPair>(getAllWordsQuery).ToArray();
+                if (criteria != null)
+                {
+                    queryParameters = PrepareQueryCriteria(criteria, ref getAllWordsQuery);
+                }
+                
+                WordPair[] allWords = dbConnection.Query<WordPair>(getAllWordsQuery, queryParameters).ToArray();
 
                 return allWords;
             }
         }
 
-        public WordPair[] GetUnknownWords()
+        private static object PrepareQueryCriteria(QueryCriteria criteria, ref string getAllWordsQuery)
+        {
+            if (criteria.SearchText != null)
+            {
+                string searchCriteria =
+                    " WHERE AW.FirstLanguageWord LIKE @SearchCriteria OR AW.SecondLanguageWord LIKE @SearchCriteria";
+
+                getAllWordsQuery += searchCriteria;
+            }
+
+            if (criteria.OrderByCriteria != null)
+            {
+                string orderByCriteria = string.Empty;
+
+                if (criteria.OrderByCriteria.OrderBy == OrderBy.CreatedAt)
+                {
+                    orderByCriteria = $" ORDER BY datetime(AW.CreatedAt) {criteria.OrderByCriteria.SortOrder.ToString()}";
+                }
+
+                getAllWordsQuery += orderByCriteria;
+            }
+
+            if (criteria.Limit.HasValue)
+            {
+                string limitCriteria = " LIMIT @Limit";
+
+                getAllWordsQuery += limitCriteria;
+            }
+
+            object queryParameters = new
+            {
+                SearchCriteria = $"%{criteria.SearchText}%",
+                Limit = criteria.Limit ?? int.MaxValue
+            };
+
+            return queryParameters;
+        }
+
+        public WordPair[] GetUnknownWords(QueryCriteria criteria = null)
         {
             using (var dbConnection = new SQLiteConnection(_connectionString))
             {
@@ -226,25 +272,19 @@ namespace SilverLinguo.Repositories
             return insertedWordPairsCount;
         }
 
-        /*public void ReinitializeAllTables()
-        {
-            if (!File.Exists(_dbFile)) return;
-
-            using (var dbConnection = new SQLiteConnection(_connectionString))
-            {
-                dbConnection.Open();
-
-                CreateAllTables(dbConnection);
-
-                FillAllWordsTable(dbConnection);
-            }
-        }*/
-
         public void InitializeDatabaseIfNotExist()
         {
             if (File.Exists(_dbFile)) return;
 
-            Directory.CreateDirectory(_dbFolder);
+            if (!Directory.Exists(_dbFolder))
+            {
+                Directory.CreateDirectory(_dbFolder);
+            }
+            else
+            {
+                DeleteLeftoverFilesAndFoldersBeforeDbCreate();
+            }
+            
             SQLiteConnection.CreateFile(_dbFile);
 
             using (var dbConnection = new SQLiteConnection(_connectionString))
@@ -254,6 +294,21 @@ namespace SilverLinguo.Repositories
                 CreateAllTables(dbConnection);
 
                 FillAllWordsTable(dbConnection);
+            }
+        }
+
+        private void DeleteLeftoverFilesAndFoldersBeforeDbCreate()
+        {
+            var directory = new DirectoryInfo(_dbFolder);
+
+            foreach (FileInfo file in directory.GetFiles())
+            {
+                file.Delete();
+            }
+
+            foreach (DirectoryInfo subdirectory in directory.GetDirectories())
+            {
+                subdirectory.Delete(true);
             }
         }
 
@@ -348,7 +403,7 @@ namespace SilverLinguo.Repositories
             INSERT INTO 'AllWords' VALUES (NULL, 'Lėktuvas', 'Airplane, Plane, Aircraft', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Ranka', 'Arm', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Pirmyn', 'Forward, Ahead', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Atgal', 'Backwards', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Atgal', 'Backward', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Nugara', 'Back', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Peilis', 'Knife', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Aštrus', 'Sharp, Spicy', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
@@ -361,7 +416,7 @@ namespace SilverLinguo.Repositories
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Suknelė', 'Dress', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Praeitis', 'Past', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Grindys', 'Floor', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Apie ką tu kalbi?', 'What you talking about?', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Apie ką tu kalbi?', 'What are you talking about?', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Man patinka mėlynas dangus', 'I like blue sky', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
                 COMMIT;";
             SQLiteCommand createTestResultsTableCommand = new SQLiteCommand(fillAllWordsTableCommand, dbConnection);

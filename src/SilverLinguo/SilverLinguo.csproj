@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\KeyCodes.cs" />
+    <Compile Include="Dto\DuplicateWord.cs" />
     <Compile Include="Dto\WordPairForDataGridView.cs" />
     <Compile Include="Enums\LanguagePair.cs" />
     <Compile Include="Enums\SelectedLanguage.cs" />
@@ -58,6 +59,12 @@
     </Compile>
     <Compile Include="Forms\AllWordsGrammarTestForm.Designer.cs">
       <DependentUpon>AllWordsGrammarTestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Helper\CustomizableDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Helper\CustomizableDialog.Designer.cs">
+      <DependentUpon>CustomizableDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Helper\PasswordConfirmationForm.cs">
       <SubType>Form</SubType>
@@ -83,6 +90,7 @@
     <Compile Include="Forms\TestResults\TestResultsForUnknownWordsForm.Designer.cs">
       <DependentUpon>TestResultsForUnknownWordsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\Models\QueryCriteria.cs" />
     <Compile Include="Services\Form\CommonFormService.cs" />
     <Compile Include="Services\Form\GrammarFormService.cs" />
     <Compile Include="Services\Form\VerbalFormService.cs" />
@@ -127,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AllWordsGrammarTestForm.resx">
       <DependentUpon>AllWordsGrammarTestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Helper\CustomizableDialog.resx">
+      <DependentUpon>CustomizableDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Helper\PasswordConfirmationForm.resx">
       <DependentUpon>PasswordConfirmationForm.cs</DependentUpon>
@@ -196,7 +207,9 @@
       <Version>1.0.108</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Warning_Icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions />
 </Project>

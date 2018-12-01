@@ -1,25 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Windows.Forms;
 using SilverLinguo.Enums;
 using SilverLinguo.Forms.Helper;
+using SilverLinguo.Repositories.Models;
 
 namespace SilverLinguo.Forms.TestResults
 {
     public partial class TestResultsForAllWordsForm : BaseTestResultsForm
     {
+        private readonly SelectedLanguage _selectedLanguage;
+        private readonly TestType _testType;
         private readonly int _totalWordsCountInTest;
-        private readonly List<string> _learnedWordsForStats;
-        private readonly List<string> _knownWords;
-        private readonly List<string> _newUnknownWords;
-        private readonly List<string> _unknownWords;
+        private readonly List<WordPair> _learnedWordsForStats;
+        private readonly List<WordPair> _knownWords;
+        private readonly List<WordPair> _newUnknownWords;
+        private readonly List<WordPair> _unknownWords;
 
         public TestResultsForAllWordsForm(
             SelectedLanguage selectedLanguage, TestType testType, Stopwatch elapsedTimeStopwatch,
-            int totalWordsCountInTest, List<string> learnedWordsForStats, List<string> knownWords, 
-            List<string> newUnknownWords, List<string> unknownWords) 
+            int totalWordsCountInTest, List<WordPair> learnedWordsForStats, List<WordPair> knownWords, 
+            List<WordPair> newUnknownWords, List<WordPair> unknownWords) 
             : base(selectedLanguage, testType, elapsedTimeStopwatch)
         {
+            _selectedLanguage = selectedLanguage;
+            _testType = testType;
             _totalWordsCountInTest = totalWordsCountInTest;
             _learnedWordsForStats = learnedWordsForStats;
             _knownWords = knownWords;
@@ -54,6 +61,7 @@ namespace SilverLinguo.Forms.TestResults
                 wordsProgressCount += _newUnknownWords.Count;
                 NewUnknownWordsCountLinkLabel.Enabled = _newUnknownWords.Count > 0;
                 NewUnknownWordsCountLinkLabel.Text = $@"{_newUnknownWords.Count} / {_totalWordsCountInTest}";
+                TestNewUnknownWordsButton.Enabled = _newUnknownWords.Count > 0;
             }
             
             if (_unknownWords != null)
@@ -61,12 +69,13 @@ namespace SilverLinguo.Forms.TestResults
                 wordsProgressCount += _unknownWords.Count;
                 UnknownWordsCountLinkLabel.Enabled = _unknownWords.Count > 0;
                 UnknownWordsCountLinkLabel.Text = $@"{_unknownWords.Count} / {_totalWordsCountInTest}";
+                TestUnknownWordsButton.Enabled = _unknownWords.Count > 0;
             }
 
             TestProgressLabel.Text = $@"{wordsProgressCount} / {_totalWordsCountInTest}";
         }
         
-        private void LearnedWordsCountLinkLabel_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
+        private void LearnedWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string showWordsFormName = "Nauji išmokti žodžiai:";
             var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _learnedWordsForStats);
@@ -75,7 +84,7 @@ namespace SilverLinguo.Forms.TestResults
             showWordsListByTypeForm.ShowDialog(this);
         }
 
-        private void KnownWordsCountLinkLabel_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
+        private void KnownWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string showWordsFormName = "Žinomi žodžiai:";
             var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _knownWords);
@@ -84,7 +93,7 @@ namespace SilverLinguo.Forms.TestResults
             showWordsListByTypeForm.ShowDialog(this);
         }
 
-        private void NewUnknownWordsCountLinkLabel_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
+        private void NewUnknownWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string showWordsFormName = "Nauji nežinomi žodžiai:";
             var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _newUnknownWords);
@@ -93,13 +102,50 @@ namespace SilverLinguo.Forms.TestResults
             showWordsListByTypeForm.ShowDialog(this);
         }
 
-        private void UnknownWordsCountLinkLabel_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
+        private void UnknownWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string showWordsFormName = "Vis dar nežinomi žodžiai:";
-            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _unknownWords);
+            var showWordsListByTypeForm =
+                new ShowWordsListByTypeForm(showWordsFormName, _unknownWords);
 
             showWordsListByTypeForm.Activate();
             showWordsListByTypeForm.ShowDialog(this);
+        }
+
+        private void TestNewUnknownWordsButton_MouseClick(object sender, EventArgs e)
+        {
+            StartTemporaryTestForSelectedResultWords(_newUnknownWords);
+        }
+
+        private void TestUnknownWordsButton_MouseClick(object sender, EventArgs e)
+        {
+            StartTemporaryTestForSelectedResultWords(_unknownWords);
+        }
+
+        private void StartTemporaryTestForSelectedResultWords(IEnumerable<WordPair> wordsToTest)
+        {
+            var wordsToTestArray = wordsToTest.ToArray();
+
+            this.Hide();
+
+            switch (_testType)
+            {
+                case TestType.Grammar:
+                    var unknownWordsGrammarTestForm =
+                        new UnknownWordsGrammarTestForm(_selectedLanguage, wordsToTestArray);
+                    unknownWordsGrammarTestForm.Closed += (s, args) => this.Close();
+
+                    unknownWordsGrammarTestForm.Show();
+                    break;
+                case TestType.Verbal:
+                    var unknownWordsVerbalTestForm = new UnknownWordsVerbalTestForm(_selectedLanguage, wordsToTestArray);
+                    unknownWordsVerbalTestForm.Closed += (s, args) => this.Close();
+
+                    unknownWordsVerbalTestForm.Show();
+                    break;
+                default:
+                    throw new Exception($"Unknown TestType: '{_testType}' detected");
+            }
         }
     }
 }

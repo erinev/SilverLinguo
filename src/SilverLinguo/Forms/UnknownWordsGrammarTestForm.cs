@@ -22,14 +22,17 @@ namespace SilverLinguo.Forms
         private int _currentUnknownWordPairId;
 
         private WordPair[] _unknownWords;
-        private readonly IList<WordPair> _learnedWords = new List<WordPair>();
-        private int _startingCountOfUnknownWords;
+        private readonly List<WordPair> _learnedWords = new List<WordPair>();
+        private readonly int _startingCountOfUnknownWords;
 
         private readonly Stopwatch _stopWatch = new Stopwatch();
 
-        public UnknownWordsGrammarTestForm(SelectedLanguage selectedLanguage)
+        public UnknownWordsGrammarTestForm(SelectedLanguage selectedLanguage, WordPair[] uknownWords)
         {
             _wordsService = new WordsService();
+
+            _unknownWords = uknownWords;
+            _startingCountOfUnknownWords = _unknownWords.Length;
 
             _selectedLanguage = selectedLanguage;
 
@@ -42,9 +45,8 @@ namespace SilverLinguo.Forms
 
             GrammarFormService.ConfigureSelectedLanguage(_selectedLanguage, FirstLanguageWordTextBox, SecondLanguageWordTextBox, ValidateWordButton, NextWordButton);
 
-            GrammarFormService.HanldeVerbalFormLoadedEvent(out _unknownWords, 
-                () => _wordsService.GetUnknownWords(shouldShuffle: true), out _startingCountOfUnknownWords, 
-                out _currentUnknownWordPairId, ProgressLabel, FirstLanguageWordTextBox, SecondLanguageWordTextBox);
+            GrammarFormService.HanldeVerbalFormLoadedEvent(_unknownWords, out _currentUnknownWordPairId, ProgressLabel,
+                FirstLanguageWordTextBox, SecondLanguageWordTextBox);
 
             LearnedWordsCountLinkLabel.Enabled = false;
         }
@@ -157,19 +159,16 @@ namespace SilverLinguo.Forms
                 _unknownWords);
         }
 
-        private void LearnedWordsCountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LearnedWordsCountLinkLabel_LinkMouseClicke(object sender, MouseEventArgs mouseEventArgs)
         {
-            List<string> learnedWordsToDisplay =
-                _learnedWords.Select(learnedWord => learnedWord.FirstLanguageWord + " - " + learnedWord.SecondLanguageWord).ToList();
-
             string showWordsFormName = "Išmokti žodžiai:";
-            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, learnedWordsToDisplay);
+            var showWordsListByTypeForm = new ShowWordsListByTypeForm(showWordsFormName, _learnedWords);
 
             showWordsListByTypeForm.Activate();
             showWordsListByTypeForm.ShowDialog(this);
         }
 
-        private void EndTestButton_Click(object sender, EventArgs e)
+        private void EndTestButton_MouseClick(object sender, EventArgs e)
         {
             CommonFormService.HandelEndTestButtonPressedEvent(_unknownWords, HandleFinishedTest);
         }
@@ -182,10 +181,7 @@ namespace SilverLinguo.Forms
 
             this.Hide();
             
-            List<string> learnedWordsToDisplay =
-                _learnedWords.Select(w => w.FirstLanguageWord + " - " + w.SecondLanguageWord).ToList();
-
-            var testResultsForm = new TestResultsForUnknownWordsForm(_selectedLanguage, TestType.Grammar, _stopWatch, _startingCountOfUnknownWords, learnedWordsToDisplay);
+            var testResultsForm = new TestResultsForUnknownWordsForm(_selectedLanguage, TestType.Grammar, _stopWatch, _startingCountOfUnknownWords, _learnedWords);
             testResultsForm.Closed += (s, args) => this.Close();
 
             testResultsForm.Show();

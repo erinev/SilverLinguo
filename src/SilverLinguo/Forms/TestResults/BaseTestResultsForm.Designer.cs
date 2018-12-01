@@ -1,4 +1,6 @@
-﻿namespace SilverLinguo.Forms.TestResults
+﻿using System.Windows.Forms;
+
+namespace SilverLinguo.Forms.TestResults
 {
     partial class BaseTestResultsForm
     {
@@ -43,7 +45,7 @@
             // WordsTypeLabel
             // 
             this.WordsTypeLabel.AutoSize = true;
-            this.WordsTypeLabel.Location = new System.Drawing.Point(344, 72);
+            this.WordsTypeLabel.Location = new System.Drawing.Point(344, 37);
             this.WordsTypeLabel.Name = "WordsTypeLabel";
             this.WordsTypeLabel.Size = new System.Drawing.Size(61, 16);
             this.WordsTypeLabel.TabIndex = 28;
@@ -52,7 +54,7 @@
             // WordsTypeHeaderLabel
             // 
             this.WordsTypeHeaderLabel.AutoSize = true;
-            this.WordsTypeHeaderLabel.Location = new System.Drawing.Point(268, 72);
+            this.WordsTypeHeaderLabel.Location = new System.Drawing.Point(268, 37);
             this.WordsTypeHeaderLabel.Name = "WordsTypeHeaderLabel";
             this.WordsTypeHeaderLabel.Size = new System.Drawing.Size(83, 16);
             this.WordsTypeHeaderLabel.TabIndex = 27;
@@ -69,7 +71,7 @@
             this.EndProgramButton.TabIndex = 24;
             this.EndProgramButton.Text = "Uždaryti programą";
             this.EndProgramButton.UseVisualStyleBackColor = false;
-            this.EndProgramButton.Click += new System.EventHandler(this.EndProgramButton_Click_1);
+            this.EndProgramButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.EndProgramButton_MouseClick);
             // 
             // StartDifferentTestButton
             // 
@@ -82,12 +84,12 @@
             this.StartDifferentTestButton.TabIndex = 23;
             this.StartDifferentTestButton.Text = "Pasirinkti kitą testą";
             this.StartDifferentTestButton.UseVisualStyleBackColor = false;
-            this.StartDifferentTestButton.Click += new System.EventHandler(this.StartDifferentTestButton_Click_1);
+            this.StartDifferentTestButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.StartDifferentTestButton_Click);
             // 
             // SelectedTestTypeLabel
             // 
             this.SelectedTestTypeLabel.AutoSize = true;
-            this.SelectedTestTypeLabel.Location = new System.Drawing.Point(91, 72);
+            this.SelectedTestTypeLabel.Location = new System.Drawing.Point(91, 37);
             this.SelectedTestTypeLabel.Name = "SelectedTestTypeLabel";
             this.SelectedTestTypeLabel.Size = new System.Drawing.Size(39, 16);
             this.SelectedTestTypeLabel.TabIndex = 20;
@@ -96,7 +98,7 @@
             // SelectedTestTypeHeaderLabel
             // 
             this.SelectedTestTypeHeaderLabel.AutoSize = true;
-            this.SelectedTestTypeHeaderLabel.Location = new System.Drawing.Point(22, 72);
+            this.SelectedTestTypeHeaderLabel.Location = new System.Drawing.Point(22, 37);
             this.SelectedTestTypeHeaderLabel.Name = "SelectedTestTypeHeaderLabel";
             this.SelectedTestTypeHeaderLabel.Size = new System.Drawing.Size(76, 16);
             this.SelectedTestTypeHeaderLabel.TabIndex = 19;
@@ -105,7 +107,7 @@
             // SelectedLanguageLabel
             // 
             this.SelectedLanguageLabel.AutoSize = true;
-            this.SelectedLanguageLabel.Location = new System.Drawing.Point(116, 42);
+            this.SelectedLanguageLabel.Location = new System.Drawing.Point(116, 7);
             this.SelectedLanguageLabel.Name = "SelectedLanguageLabel";
             this.SelectedLanguageLabel.Size = new System.Drawing.Size(53, 16);
             this.SelectedLanguageLabel.TabIndex = 18;
@@ -114,7 +116,7 @@
             // SelectedLanguageHeaderLabel
             // 
             this.SelectedLanguageHeaderLabel.AutoSize = true;
-            this.SelectedLanguageHeaderLabel.Location = new System.Drawing.Point(22, 42);
+            this.SelectedLanguageHeaderLabel.Location = new System.Drawing.Point(22, 7);
             this.SelectedLanguageHeaderLabel.Name = "SelectedLanguageHeaderLabel";
             this.SelectedLanguageHeaderLabel.Size = new System.Drawing.Size(100, 16);
             this.SelectedLanguageHeaderLabel.TabIndex = 17;
@@ -123,7 +125,7 @@
             // ElapsedTimeLabel
             // 
             this.ElapsedTimeLabel.AutoSize = true;
-            this.ElapsedTimeLabel.Location = new System.Drawing.Point(351, 42);
+            this.ElapsedTimeLabel.Location = new System.Drawing.Point(351, 7);
             this.ElapsedTimeLabel.Name = "ElapsedTimeLabel";
             this.ElapsedTimeLabel.Size = new System.Drawing.Size(75, 16);
             this.ElapsedTimeLabel.TabIndex = 16;
@@ -132,7 +134,7 @@
             // ElapsedTimeHeaderLabel
             // 
             this.ElapsedTimeHeaderLabel.AutoSize = true;
-            this.ElapsedTimeHeaderLabel.Location = new System.Drawing.Point(268, 42);
+            this.ElapsedTimeHeaderLabel.Location = new System.Drawing.Point(268, 7);
             this.ElapsedTimeHeaderLabel.Name = "ElapsedTimeHeaderLabel";
             this.ElapsedTimeHeaderLabel.Size = new System.Drawing.Size(86, 16);
             this.ElapsedTimeHeaderLabel.TabIndex = 15;
@@ -142,7 +144,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 243);
+            this.ClientSize = new System.Drawing.Size(739, 243);
             this.ControlBox = false;
             this.Controls.Add(this.WordsTypeLabel);
             this.Controls.Add(this.WordsTypeHeaderLabel);

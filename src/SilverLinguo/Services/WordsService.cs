@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using SilverLinguo.Dto;
 using SilverLinguo.Enums;
-using SilverLinguo.Extensions;
 using SilverLinguo.Repositories;
 using SilverLinguo.Repositories.Models;
 
@@ -13,10 +11,8 @@ namespace SilverLinguo.Services
     public interface IWordsService
     {
         bool CheckIfWordsMatches(string suppliedWord, string expectedWord);
-        int GetAllWordsCount();
-        int GetUnknownWordsCount();
-        WordPair[] GetAllWords(bool shouldShuffle);
-        WordPair[] GetUnknownWords(bool shouldShuffle);
+        WordPair[] GetAllWords(QueryCriteria queryCriteria = null);
+        WordPair[] GetUnknownWords(QueryCriteria queryCriteria = null);
         bool InsertNewUnknownWordIfDoesntExist(WordPair newUnknownWordCandidate);
         bool RemoveLearnedUnknownWordIfExist(WordPair learnedWord);
 
@@ -54,40 +50,44 @@ namespace SilverLinguo.Services
             return isEnteredValueIsEqualToExpectedValue;
         }
 
-        public int GetAllWordsCount()
+        public WordPair[] GetAllWords(QueryCriteria queryCriteria = null)
         {
-            WordPair[] words = _wordsRepository.GetAllWords();
-
-            return words.Length;
-        }
-
-        public int GetUnknownWordsCount()
-        {
-            WordPair[] unknownWords = _wordsRepository.GetUnknownWords();
-
-            return unknownWords.Length;
-        }
-
-        public WordPair[] GetAllWords(bool shouldShuffle)
-        {
-            WordPair[] words = _wordsRepository.GetAllWords();
-
-            if (shouldShuffle)
+            var orderByCreatedAtDescCriteria = new QueryCriteria
             {
-                new Random().Shuffle(words);
+                OrderByCriteria = new OrderByCriteria { OrderBy = OrderBy.CreatedAt, SortOrder = SortOrder.DESC }
+            };
+
+            if (queryCriteria == null)
+            {
+                queryCriteria = orderByCreatedAtDescCriteria;
             }
+            else if (queryCriteria.OrderByCriteria == null)
+            {
+                queryCriteria.OrderByCriteria = orderByCreatedAtDescCriteria.OrderByCriteria;
+            }
+
+            WordPair[] words = _wordsRepository.GetAllWords(queryCriteria);
 
             return words;
         }
 
-        public WordPair[] GetUnknownWords(bool shouldShuffle)
+        public WordPair[] GetUnknownWords(QueryCriteria queryCriteria = null)
         {
-            WordPair[] unknownWords = _wordsRepository.GetUnknownWords();
-
-            if (shouldShuffle)
+            var orderByCreatedAtDescCriteria = new QueryCriteria
             {
-                new Random().Shuffle(unknownWords);
+                OrderByCriteria = new OrderByCriteria { OrderBy = OrderBy.CreatedAt, SortOrder = SortOrder.DESC }
+            };
+
+            if (queryCriteria == null)
+            {
+                queryCriteria = orderByCreatedAtDescCriteria;
             }
+            else if (queryCriteria.OrderByCriteria == null)
+            {
+                queryCriteria.OrderByCriteria = orderByCreatedAtDescCriteria.OrderByCriteria;
+            }
+
+            WordPair[] unknownWords = _wordsRepository.GetUnknownWords(queryCriteria);
 
             return unknownWords;
         }

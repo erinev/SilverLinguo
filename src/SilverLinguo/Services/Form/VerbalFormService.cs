@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using SilverLinguo.Enums;
+using SilverLinguo.Extensions;
 using SilverLinguo.Repositories.Models;
 
 namespace SilverLinguo.Services.Form
@@ -27,15 +28,12 @@ namespace SilverLinguo.Services.Form
             }
         }
 
-        public static void HanldeVerbalFormLoadedEvent(
-            Button nextWordButton, out WordPair[] wordsArray, Func<WordPair[]> wordsArrayLoadFunc,
-            out int startingCountOfWords, out int currentWordPairId, Label progressLabel,
-            TextBox firstLanguageWordTextBox, TextBox secondLanguageWordTextBox)
+        public static void HanldeVerbalFormLoadedEvent(Button nextWordButton, WordPair[] wordsArray, out int currentWordPairId, 
+            Label progressLabel, TextBox firstLanguageWordTextBox, TextBox secondLanguageWordTextBox)
         {
-            nextWordButton.Select();
+            new Random().Shuffle(wordsArray);
 
-            wordsArray = wordsArrayLoadFunc();
-            startingCountOfWords = wordsArray.Length;
+            nextWordButton.Select();
 
             currentWordPairId = wordsArray[0].Id;
 

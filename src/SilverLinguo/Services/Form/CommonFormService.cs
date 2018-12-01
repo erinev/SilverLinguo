@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using SilverLinguo.Forms.Helper;
 using SilverLinguo.Repositories.Models;
 
 namespace SilverLinguo.Services.Form
@@ -25,21 +26,20 @@ namespace SilverLinguo.Services.Form
             }
             else
             {
-                DialogResult dialogResult = MessageBox.Show("Ne visi žodžiai išspręsti ar tikrai norite baigti testą ?", "Testo pabaiga",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (dialogResult == DialogResult.Yes)
-                {
-                    endTestConfirmedAction();
-                }
+                ShowConfirmAction(
+                    "Testo pabaiga",
+                    "Ne visi žodžiai išspręsti ar tikrai norite baigti testą ?",
+                    endTestConfirmedAction);
             }
         }
 
         public static void ShowConfirmAction(string dialogCaption, string dialogText, Action userConfirmedAction)
         {
-            DialogResult dialogResult = MessageBox.Show(dialogText, dialogCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var customizableDialog = new CustomizableDialog(dialogCaption, dialogText);
 
-            if (dialogResult == DialogResult.Yes)
+            var customizableDialogResult = customizableDialog.ShowDialog();
+
+            if (customizableDialogResult == DialogResult.Yes)
             {
                 userConfirmedAction();
             }
@@ -49,6 +49,18 @@ namespace SilverLinguo.Services.Form
         {
             int leftWordsCount = wordsForProgress.Length - 1;
             progressLabel.Text = leftWordsCount.ToString();
+        }
+
+        public static void CloseProgram()
+        {
+            if (Application.MessageLoop) 
+            {
+                Application.Exit();
+            }
+            else
+            {
+                Environment.Exit(1);
+            }
         }
 
         private static void timer_Tick(object sender, EventArgs args, Label testTimerLabel, Stopwatch stopwatch)
