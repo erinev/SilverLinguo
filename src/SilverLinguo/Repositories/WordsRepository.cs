@@ -330,7 +330,7 @@ namespace SilverLinguo.Repositories
             const string createAllWordsTableSql =
                 @"                  
                   CREATE TABLE [AllWords] (
-                    [Id] INTEGER NOT NULL
+                      [Id] INTEGER NOT NULL
                     , [FirstLanguageWord] TEXT NOT NULL
                     , [SecondLanguageWord] TEXT NOT NULL
                     , [LanguagePair] INTEGER NOT NULL
@@ -407,17 +407,16 @@ namespace SilverLinguo.Repositories
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Nugara', 'Back', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Peilis', 'Knife', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Aštrus', 'Sharp, Spicy', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Mes', 'We', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Jų', 'Theirs', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Gegutė', 'Cuckoo', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Tamsus, Tamsa', 'Dark', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
-	        INSERT INTO 'AllWords' VALUES (NULL, 'Vienišas', 'Lonely', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Megztinis', 'Sweater', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Suknelė', 'Dress', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Praeitis', 'Past', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Grindys', 'Floor', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Apie ką tu kalbi?', 'What are you talking about?', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
 	        INSERT INTO 'AllWords' VALUES (NULL, 'Man patinka mėlynas dangus', 'I like blue sky', 1, '2018-03-24 10:09:03', '2018-03-24 10:09:03');
+	        INSERT INTO 'AllWords' VALUES (NULL, 'Žemė', 'Ground', 1, '2018-12-01 11:38:03', '2018-12-01 11:38:03');
                 COMMIT;";
             SQLiteCommand createTestResultsTableCommand = new SQLiteCommand(fillAllWordsTableCommand, dbConnection);
             createTestResultsTableCommand.ExecuteNonQuery();
