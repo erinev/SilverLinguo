@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
+using SilverLinguo.Configuration;
 using SilverLinguo.Repositories;
 
 namespace SilverLinguo
 {
     static class Program
     {
-        private const string AppUuid = "e7b565a1-8d49-40ea-a2d4-ab0bcbbc2131";
-
         [STAThread]
         static void Main()
         {
-            using(Mutex mutex = new Mutex(false, "Global\\" + AppUuid))
+            using(Mutex mutex = new Mutex(false, "Global\\" + AppConfig.AppUuid))
             {
                 if(!mutex.WaitOne(0, false))
                 {
@@ -20,8 +19,9 @@ namespace SilverLinguo
                     return;
                 }
 
-                var wordsRepository = new WordsRepository();
-                wordsRepository.InitializeDatabaseIfNotExist();
+                var setupRepository = new ApplicationSetupRepository();
+
+                setupRepository.InitializeDatabaseIfNotExist();
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);

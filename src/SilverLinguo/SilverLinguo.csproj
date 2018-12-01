@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\AppConfig.cs" />
     <Compile Include="Constants\KeyCodes.cs" />
     <Compile Include="Dto\DuplicateWord.cs" />
     <Compile Include="Dto\WordPairForDataGridView.cs" />
@@ -90,6 +91,8 @@
     <Compile Include="Forms\TestResults\TestResultsForUnknownWordsForm.Designer.cs">
       <DependentUpon>TestResultsForUnknownWordsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\ApplicationSetupRepository.cs" />
+    <Compile Include="Repositories\Functions\CustomToLowerFunction.cs" />
     <Compile Include="Repositories\Models\QueryCriteria.cs" />
     <Compile Include="Services\Form\CommonFormService.cs" />
     <Compile Include="Services\Form\GrammarFormService.cs" />
