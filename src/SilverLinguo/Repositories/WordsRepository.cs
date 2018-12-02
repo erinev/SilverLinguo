@@ -207,14 +207,21 @@ namespace SilverLinguo.Repositories
                     {
                         const string updateWordPairCommand =
                             @"UPDATE AllWords
-                              SET FirstLanguageWord = @FirstLanguageWord, SecondLanguageWord = @SecondLanguageWord, ModifiedAt = @ModifiedAt
+                              SET 
+                                FirstLanguageWord = @FirstLanguageWord, 
+                                SecondLanguageWord = @SecondLanguageWord, 
+                                ModifiedAt = @ModifiedAt,
+                                LowercasedFirstLanguageWord = @LowercasedFirstLanguageWord,
+                                LowercasedSecondLanguageWord = @LowercasedSecondLanguageWord
                               WHERE Id = @Id";
                         var queryParameters = new
                         {
                             FirstLanguageWord = updatedWordPair.FirstLanguageWord,
                             SecondLanguageWord = updatedWordPair.SecondLanguageWord,
                             ModifiedAt = updatedWordPair.ModifiedAt,
-                            Id = updatedWordPair.Id
+                            Id = updatedWordPair.Id,
+                            LowercasedFirstLanguageWord = updatedWordPair.FirstLanguageWord.ToLowerInvariant(),
+                            LowercasedSecondLanguageWord = updatedWordPair.SecondLanguageWord.ToLowerInvariant()
                         };
 
                         int affectedRows = dbConnection.Execute(updateWordPairCommand, queryParameters);
@@ -232,7 +239,7 @@ namespace SilverLinguo.Repositories
         public int InsertMultipleWordPairs(IEnumerable<WordPair> addedWordPairs)
         {
             int insertedWordPairsCount = 0;
-
+                
             using (var dbConnection = new SQLiteConnection(AppConfig.DatabaseConnectionString))
             {
                 dbConnection.Open();
@@ -243,14 +250,19 @@ namespace SilverLinguo.Repositories
                     {
                         const string insertNewWordPairCommand =
                             @"INSERT INTO AllWords
-                              VALUES(NULL, @FirstLanguageWord, @SecondLanguageWord, @LanguagePair, @CreatedAt, @ModifiedAt)";
+                              VALUES(
+                                NULL, @FirstLanguageWord, @SecondLanguageWord, @LanguagePair, @CreatedAt, 
+                                @ModifiedAt, @LowercasedFirstLanguageWord, @LowercasedSecondLanguageWord
+                              )";
                         var queryParameters = new
                         {
                             FirstLanguageWord = addedWordPair.FirstLanguageWord,
                             SecondLanguageWord = addedWordPair.SecondLanguageWord,
                             LanguagePair = addedWordPair.LanguagePair,
                             CreatedAt = addedWordPair.CreatedAt,
-                            ModifiedAt = addedWordPair.ModifiedAt
+                            ModifiedAt = addedWordPair.ModifiedAt,
+                            LowercasedFirstLanguageWord = addedWordPair.FirstLanguageWord.ToLowerInvariant(),
+                            LowercasedSecondLanguageWord = addedWordPair.SecondLanguageWord.ToLowerInvariant()
                         };
 
                         int affectedRows = dbConnection.Execute(insertNewWordPairCommand, queryParameters);
